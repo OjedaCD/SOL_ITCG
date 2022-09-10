@@ -1,0 +1,27 @@
+.modPromCen{
+    margin-top: 2rem;
+    form{
+        .numFicha, .nomAlumno,.prom{
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        input:not(input[type="submit"]){
+            width: 35%;
+        }
+        label{
+            width: 15%;
+            display: inline;
+        }
+        .but{
+            display: flex;
+            justify-content: right;
+            margin-right: 5rem;
+            input{
+                width: 15%;
+                background-color: $verde;
+                color: $blanco;
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+.RespaldoBDD{
+    margin-top: 2rem;
+    text-align: center;
+    button{
+        background-color: $verde;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        width: 20%;
+        color: $blanco;
+    }
+    button:hover{
+        cursor: pointer;
+        background-color: $verdeOscuro;
+    }
+}

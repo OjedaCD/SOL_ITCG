@@ -1,0 +1,40 @@
+@import 'base/normalize';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/globales';
+@import 'base/utilidades';
+//Layout
+@import 'layout/login';
+@import 'layout/admin';
+//Importar Datos
+@import 'layout/Importar/importar';
+@import 'layout/Importar/importarDatos';
+//Gestionar Grupos
+@import 'layout/Grupos/gestionarMenu';
+@import 'layout/Grupos/generarGrupos';
+@import 'layout/Grupos/asignarMaestros';
+@import 'layout/Grupos/verGrupos';
+//Generar Listas
+@import 'layout/Listas/listaContenidoOculto';
+@import 'layout/Listas//listaMenu_Y_Botones';
+@import 'layout/Listas/listaAceptados';
+@import 'layout/Listas/listaModal';
+//Gestionar Calificaciones
+@import 'layout/Calificaciones/gestionarCalMenu';
+@import 'layout/Calificaciones/calificaciones';
+//Gestionar Configuraciones
+@import 'layout/Configuraciones/RConfiguraciones';
+@import 'layout/Configuraciones/ModificarConfig';
+@import 'layout/Configuraciones/VerConfig';
+//Gestionar Materias
+@import 'layout/Materias/gestionarMat';
+@import 'layout/Materias/registrarMat';
+@import 'layout/Materias/modificarMat';
+//Fuciones Secundarias
+@import 'layout/Fuciones Secundarias/ModPromCen';
+@import 'layout/Fuciones Secundarias/funcionesSecMenu';
+@import 'layout/Fuciones Secundarias/nuevoProceso';
+@import 'layout/Fuciones Secundarias/RegistroNuevoUsuario';
+//Internas
+@import 'internas/footer';
+@import 'internas/header';

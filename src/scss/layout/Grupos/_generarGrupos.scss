@@ -1,0 +1,16 @@
+.c_grupos{
+    display: block;
+    text-align: center;
+    margin-top: 3rem;
+    button{
+        background-color: $azulMarino;
+        padding: 1rem;
+        border-radius: 0.8rem;
+        border-color: $azulOscuro;
+        margin-bottom: 5rem;
+        color: $blanco;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+}

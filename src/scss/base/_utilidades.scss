@@ -1,0 +1,18 @@
+.seccion {
+    margin-top: calc($separacion / 2);
+    margin-bottom: calc($separacion / 2);
+}
+.contenido-centrado {
+    max-width: 800px;
+}
+.size3{
+    font-size: 3rem;
+}
+
+.black{
+    font-weight: $black;
+}
+
+.w80{
+    width: 80%;
+}

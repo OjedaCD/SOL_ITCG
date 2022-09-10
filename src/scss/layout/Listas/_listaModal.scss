@@ -1,0 +1,16 @@
+.modal{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 0rem;
+    position: relative;
+    input{
+        width: 10%;
+        background-color: $verdeVariante;
+        color: $blanco;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        text-align: center;
+    } 
+}

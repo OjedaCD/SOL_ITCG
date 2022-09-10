@@ -1,0 +1,35 @@
+footer{
+    margin-top: 2rem;
+    background-color: $azulMarino;
+    padding-top: 4rem;
+    section{
+        background-color: $verde;
+        @include grid(3, 1fr);
+        align-items: center;
+        border-radius: 0.8rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        .sep{
+            margin-left: 10rem;
+        }
+        .sep, .tecnm{
+            width: 20rem;
+        }
+        .datos{
+            width: 60rem;
+            .derechos{
+                margin-right: 10rem;
+            }
+            .direccion{
+                margin-right: 10rem;
+                span{
+                    font-weight: $bold;
+                }
+                p{
+                    margin: 0;
+                }
+            }
+        }
+    }
+    
+}

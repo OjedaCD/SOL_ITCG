@@ -1,0 +1,22 @@
+.buscarC{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    label{
+        width: 20%;
+    }
+    select{
+        margin-left: -10rem;
+        width: 35%;
+        border: .1rem solid $azulMarino;
+        border-radius: 0.8rem;
+        height: 3rem;
+    }
+    input{
+        width: 10%;
+        background-color: $azulMarino;
+        color: $blanco;
+        border-radius: 0.8rem;
+    }
+}

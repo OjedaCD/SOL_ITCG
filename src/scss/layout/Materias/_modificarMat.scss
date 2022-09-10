@@ -1,0 +1,36 @@
+.ModificarMat{
+    margin-top: 2rem;
+    .Materia{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        label{
+            width: 15%;
+        }
+        select{
+            width: 25%;
+        }
+    }
+    .MateriaN{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        label{
+            width: 15%;
+        }
+        input{
+            width: 25%;
+            height: 3rem;
+        }
+    }
+    .button{
+        display: flex;
+        justify-content: right;
+        input[type="submit"]{
+            width: 10rem;
+            margin-right: 20rem;
+            background-color: $azulMarino;
+            color: $blanco;
+        }
+    }
+}

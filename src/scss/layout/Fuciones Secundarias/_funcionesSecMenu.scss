@@ -1,0 +1,6 @@
+.funcionesSec{
+    margin-top: 2rem;
+    .butts{
+        @include menu(4, 22rem);
+    }
+}

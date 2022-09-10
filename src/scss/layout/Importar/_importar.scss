@@ -1,0 +1,98 @@
+.contenedor {
+	background: $blanco;
+	font-family: $fuente_principal;
+	font-size: 62.5%;
+	width: 90%;
+	max-width: 80rem;
+	margin: 5rem auto;
+	height: 30rem;
+	padding: 0rem 0rem 0 0rem 0rem;
+	border-radius: .5rem;
+	border: .1rem solid $azulOscuro;
+	box-shadow: .1rem .2rem .3rem  $azulMarino;
+	p {
+		margin-top: 0rem;
+		margin-left: 2rem;
+		margin-bottom: 0rem;
+	}
+}
+.enunciado {
+	max-width: 80rem;
+	border-radius: 0rem;
+	padding: .1rem .5rem 0rem .5rem;
+	height: 4rem;
+	text-align:center;
+	font-size: 2rem;
+	margin-bottom: .5rem;
+	background-color: $azulMarino;
+	p {
+		color: $blanco;
+		font-weight: bold;
+	}
+}
+
+.funciones {
+	margin-top: 12rem;
+	max-width: 95%;
+	border-radius: .5rem;
+	padding: 1.5rem 1rem 1rem 1rem;
+	height: 16rem;
+	text-align: left;
+	border: .3rem solid $azulMarino;
+	margin: 2rem 2rem 2rem 2rem;
+	position: relative;
+	input {
+		display: none;
+	}
+	label {
+		font-size: 1.6em;
+		display: block;
+		padding: .6rem 2rem;
+		border: none;
+		background: $azulMarino;
+		color: $blanco;
+		cursor: pointer;
+		max-width: 21rem;
+		border-radius: .5rem;
+		box-shadow: .2rem .3rem .4rem $azulMarino;
+		position: absolute;
+		&:hover {
+			background: $azulOscuro;
+			transition: 0.5s;
+		}
+	}
+	h4 {
+		margin-top: 1rem;
+		margin-bottom: 0rem;
+		padding: 0rem;
+		position: relative;
+		font-size: 1.6em;
+		left: 20rem;
+	}
+
+	div {
+		position: absolute;
+		bottom: 3rem;
+		left: 1rem;
+		input {
+			display: none;
+		}
+		button {
+			font-size: 1.6em;	
+			padding: 1rem 2rem;
+			border: none;
+			cursor: pointer;
+			background: $azulMarino;
+			color: $blanco;
+			border-radius: .5rem;
+			box-shadow: .2rem .3rem .4rem $azulOscuro;
+			&:hover {
+				background: $azulOscuro;
+				transition: 0.5s;
+			}
+		}
+	}
+}
+
+
+

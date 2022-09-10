@@ -1,0 +1,38 @@
+.tabla {
+	margin: 2rem auto;
+	text-align: center;
+	padding: 1rem;
+	border-spacing: 1px;
+	width: 70%;
+	border-width: .5rem;
+	border-radius: 0rem 0rem 1rem 1rem;
+	--overflow: hidden;
+	tr {
+		transition: all .5s;
+		th {
+			font-weight: normal;
+			font-size: 2rem;
+		}
+		&:nth-child(odd) {
+			background-color: ghostwhite;
+		}
+		&:nth-child(even) {
+			background-color: rgb(240, 223, 223);
+		}
+		&:hover {
+			background-color: $azulMarino;
+			transition: all .5s;
+			color: white;
+			--transform: scale(1.1);
+			cursor: pointer;
+		}
+        button{
+            width: 15rem;
+            background-color: $azulVariante;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+        }
+    }
+	
+}

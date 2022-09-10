@@ -1,0 +1,96 @@
+.config{
+    margin-top: 2rem;
+}
+.buttConfig{
+    @include menu(3, 25rem);
+}
+.g_config{
+    display: block;
+    text-align: center;
+    margin-top: 3rem;
+    
+}
+.descripcion{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    label{
+        width: 15rem;
+        text-align: center;
+
+    }
+    textarea{
+        resize: none;
+        width: 50rem;
+        height: 12rem;
+        display: inline;
+        background-color: $blanco;
+        color: black;
+        border: .2rem solid black;
+        border-radius: 0.8rem;
+    }
+}
+.nombre{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    label{
+        width: 15rem;
+        text-align: center;
+
+    }
+    input{
+        width: 50rem;
+        display: inline;
+        background-color: $blanco;
+        color: black;
+    }
+}
+.parametros{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    .carrera, .cantidadG, .cantidadXG{
+        label{
+            width: 25rem;
+            text-align: center;
+
+        }
+        select{
+            width: 30rem;
+            border: .1rem solid $azulMarino;
+            border-radius: 0.8rem;
+            height: 4rem;
+            cursor: pointer;
+            text-align: center;
+            display: inline;
+            
+        }
+        input{
+            width: 25rem;
+            display: inline;
+            background-color: $blanco;
+            color: black;
+        }
+    }
+    .btnAgregar{
+        position: relative;
+        input{
+            position: absolute;
+            width: 9rem;
+            background-color: $verde;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            top: .5rem;
+        }
+    }
+
+
+}

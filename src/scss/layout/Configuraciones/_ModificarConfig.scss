@@ -1,0 +1,117 @@
+.nombreCo{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    label{
+        width: 20rem;
+        text-align: center;
+        display: inline;
+
+    }
+    input{
+        width: 10%;
+        background-color: $azulMarino;
+        color: $blanco;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        display: inline;
+    }
+    select{
+        width: 20%;
+        border: .1rem solid $azulMarino;
+        border-radius: 0.8rem;
+        height: 4rem;
+        cursor: pointer;
+        text-align: center;
+        display: inline;
+        
+    }
+}
+
+.modificarC{
+    display: flex;
+    width: 125rem;
+    margin-top: 2rem;
+    margin-bottom: 15rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    .id{
+        label{
+            width: 25rem;
+            text-align: center;
+            position: absolute;
+            top: 0rem;
+            left: 24rem;
+        }
+        input{
+            width: 25rem;
+            background-color: $blanco;
+            color: black;
+            position: absolute;
+            top: 5rem;
+            left: 25rem;
+            
+        }
+    }
+    .nameConfig{
+        label{
+            width: 25rem;
+            text-align: center;
+            position: absolute;
+            top: 0rem;
+            left: 54rem;
+
+        }
+        input{
+            width: 25rem;
+            background-color: $blanco;
+            color: black;
+            position: absolute;
+            top: 5rem;
+            left: 55rem;
+        }
+    }
+    .des{
+        label{
+            width: 25rem;
+            text-align: center;
+            position: absolute;
+            top: 0rem;
+            left: 97rem;
+        }
+        textarea{
+            position: absolute;
+            resize: none;
+            width: 50rem;
+            height: 12rem;
+            background-color: $blanco;
+            color: black;
+            border: .2rem solid black;
+            border-radius: 0.8rem;
+            top: 5rem;
+            left: 85rem;
+        }
+    }
+    
+}
+.modificarConfig{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    input{
+        margin-top: 5rem;
+        width: 20rem;
+        background-color: $verdeVariante;
+        color: $blanco;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        top: .5rem;
+    }
+
+}

@@ -1,0 +1,27 @@
+.registrarCal{
+    margin-top: 2rem;
+    .linea{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        .carrera, .materia, .grupo{
+            label{
+                width: 30rem;
+            }
+            select{
+                width: 30rem;
+                border: .1rem solid $azulMarino;
+                border-radius: 0.8rem;
+                height: 3rem;
+            }
+        }
+        input{
+            width: 30%;
+            margin-top: 3rem;
+            background-color: $verde;
+            color: $blanco;
+            border-radius: 0.8rem;
+        }
+    }
+}

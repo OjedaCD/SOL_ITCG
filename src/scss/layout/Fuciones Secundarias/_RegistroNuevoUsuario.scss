@@ -1,0 +1,32 @@
+.RegistroNuevoUsuario{
+    margin-top: 2rem;
+    .email, .nombre, .apellido, .tipoUsuario, .password, .passwordCon{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .password{
+        margin-top: 1rem;
+    }
+    input:not(input[type="submit"]), select{
+        width: 35%;
+    }
+    select{
+        border-radius: 0.5rem;
+        margin: 1.5rem, 0;
+    }
+    label{
+        width: 15%;
+        display: inline;
+    }
+    .but{
+        display: flex;
+        justify-content: right;
+        margin-right: 10rem;
+        input{
+            width: 15%;
+            background-color: $verde;
+            color: $blanco;
+        }
+    }
+}
