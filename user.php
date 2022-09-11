@@ -5,7 +5,7 @@ $db = conectarDB();
 
 //crear un email y password
 $email ="fer-410@live.com.mx";
-$password = "123456";
+$password = "43254325";
 
 $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 //Query para crear el usuario 

@@ -1,13 +1,13 @@
 {
-  "name": "Sisani",
+  "name": "solitcg",
   "version": "1.0.0",
-  "description": "Sitio para Admisitración de cursos de inducción",
+  "description": "Sitio para Admisitración de solicitudes del mantenimiento del ITCG",
   "main": "gulpfile.js",
   "scripts": {
     "dev": "gulp"
   },
-  "author": "Juan Fernando Brambila Rivera",
-  "license": "ISC",
+  "author": "David Ojeda Cortés, Gerardo Montelongo Contreras",
+  "license": "TECNM ITCG ISC",
   "devDependencies": {
     "cssnano": "^5.1.0",
     "gulp": "^4.0.2",
