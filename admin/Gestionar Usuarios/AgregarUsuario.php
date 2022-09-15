@@ -1,52 +1,9 @@
 <?php  
     require "../../includes/funciones.php";  $auth = estaAutenticado();
-    require "../../includes/config/database.php";
     if (!$auth) {
-       header('location: /'); die();
-    }
-    if ($_SESSION['role']!="admin") {
-        header('location: /admin/index.php'); 
-        die();
+        header('location: /');
     }
     inlcuirTemplate('header');
-    $db = conectarDB();
-
-    $email ="";
-    $rfc="";
-    $nombre="";
-    $apellidoP="";
-    $apellidoM="";
-    $tipoUser="";
-    $password ="";
-    $passwordCon="";
-    $errores =[];
-    $ban = true;
-    if ($_SERVER['REQUEST_METHOD']==="POST") {
-        $email =mysqli_real_escape_string($db, $_POST['email']);
-        $nombre=mysqli_real_escape_string($db, $_POST['nombre']);
-        $apellidoP=mysqli_real_escape_string($db, $_POST['apellidoP']);
-        $apellidoM=mysqli_real_escape_string($db, $_POST['apellidoM']);
-        $rfc=mysqli_real_escape_string($db, $_POST['rfc']);
-        $tipoUser=$_POST['tipoUsuario'];
-        $password =mysqli_real_escape_string($db, $_POST['password']);
-        $passwordCon=mysqli_real_escape_string($db, $_POST['passwordCon']);
-        if ($password != $passwordCon) {
-            $errores[] ="No Coincidaden las contraseñas";
-        }
-        if (empty($errores)) {
-            $fecha = date('Y-m-d');
-            if ($tipoUser ==="maestro") {
-                $nombreMaestro = $nombre. " ".$apellidoP ." ".$apellidoM;
-                $query = "INSERT INTO `maestros`(`nombreMaestro`, `rfc`) VALUES ('{$nombreMaestro}','{$rfc}')";
-                $resultadoMaes = mysqli_query($db, $query);
-            }
-            $password = password_hash($password, PASSWORD_DEFAULT);
-            $query ="INSERT INTO users(`email`, `password`, `create`, `role`, 'rfc') VALUES ('{$email}','{$password}','{$fecha}','$tipoUser', '{$rfc}')";
-            $resultado = mysqli_query($db, $query);
-        }else{
-            $ban = false;
-        }
-    }
 ?>
 <main class="RegistroNuevoUsuario">
     <section class="w80">
@@ -96,7 +53,4 @@
 </main>
 <?php 
     inlcuirTemplate('footer');
-    if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {
-        echo "<script>exito('Usuario Registrado');</script>";
-    }
 ?>

@@ -22,7 +22,7 @@
     <div class="text_header">
         <h1>TECNOLÓGICO NACIONAL DE MÉXICO</h1>
         <h2>INSTITUTO TECNOLÓGICO DE CIUDAD GUZMÁN</h2>
-        <H3>Sistema de Selección de Nuevo Ingreso</H3>
+        <H3>Sistema de Solicitudes de Mantenimiento</H3>
     </div>
     <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
     <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
@@ -38,6 +38,7 @@
                 <li><a href="/admin/Gestionar Usuarios/EliminarUsuario.php">Eliminar Usuario</a></li>
             </ul>
         </li>
+        
         <li><a href="">Opciones</a>
             <ul>
                 <li><?php if ($auth): ?>

@@ -7,6 +7,10 @@
 @import 'layout/login';
 @import 'layout/admin';
 
+//Gestionar Usuarios
+@import 'layout/FucionesSecundarias/funcionesSecMenu';
+@import 'layout/FucionesSecundarias/RegistroNuevoUsuario';
+
 //Internas
 @import 'internas/footer';
 @import 'internas/header';
