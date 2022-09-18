@@ -1,0 +1,67 @@
+.RegistroNuevoUsuario{
+    margin-top: 2rem;
+    .email, .nombreUser, .apellidoP, .apellidoS, .tel, .rolUsuario, .departamento, .password {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+   
+    input:not(input[type="submit"]), select{
+        width: 35%;
+    }
+    select {
+        border-radius: 0.5rem;
+        margin: 1.5rem, 0;
+        height: 4rem;
+        
+    }
+    label{
+        width: 15%;
+        display: inline;
+    }
+    .btnRU{
+        display: flex;
+        justify-content: right;
+        margin-right: 27rem;
+        input{
+            width: 20%;
+            background-color: $verde;
+            color: $blanco;
+        }
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        align-items: center;
+        height: 4rem;
+        width: 35%;
+        background-color: white;
+        position: relative;
+    
+        .passw{
+            display: flex;
+            justify-content: center;
+            height: 4rem;
+            width: 100%;
+            gap: 2rem;
+        }
+        .icon {
+            position: absolute;
+            height: 50%;
+            width: 7%;
+            position: absolute;
+            top: 30%;
+            right: 2rem;
+            opacity: 0.3;
+            cursor: pointer;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+    
+}
+
+
+

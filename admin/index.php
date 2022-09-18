@@ -12,7 +12,7 @@
         <h1>Bienvenido a Admin</h1>
         <div class="botones">
             <a href="/admin/Gestionar Usuarios/GestionarUsuarios.php">
-                <ion-icon name="people-outline"></ion-icon>
+                <ion-icon name="person-circle-sharp"></ion-icon>
                 Gestionar Usuarios
             </a>
         </div>

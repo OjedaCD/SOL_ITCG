@@ -4,7 +4,7 @@ require 'includes/config/database.php';
 $db = conectarDB();
 
 //crear un email y password
-$email ="fer-410@live.com.mx";
+$email ="live.com.mx";
 $password = "43254325";
 
 $passwordhash = password_hash($password, PASSWORD_DEFAULT);

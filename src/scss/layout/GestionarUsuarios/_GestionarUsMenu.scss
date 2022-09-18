@@ -1,0 +1,6 @@
+.GestionarUsuarios{
+    margin-top: 2rem;
+    .GU{
+        @include menu(4, 22rem);// Es un mixin para la cantidad de modulos
+    }
+}

@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/build/css/app.css">
-    <title>Siseni</title>
+    <title>SOL_ITCG</title>
 </head>
 
 <header>   
@@ -32,10 +32,10 @@
         <li><a href="/admin/index.php">Inicio</a></li>
         <li><a href="/admin//Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
-                <li><a href="/admin/Gestionar Usuarios/AgregarUsuario.php">Agregar Usuario</a></li>
+                <li><a href="/admin/Gestionar Usuarios/RegistrarUsuarios.php">Registrar Usuarios</a></li>
                 <li><a href="/admin/Gestionar Usuarios/ConsultarUsuarios.php">Consultar Usuarios</a></li>
-                <li><a href="/admin/Gestionar Usuarios/ModificarUsuario.php">Modificar Usuario</a></li>
-                <li><a href="/admin/Gestionar Usuarios/EliminarUsuario.php">Eliminar Usuario</a></li>
+                <li><a href="/admin/Gestionar Usuarios/ModificarUsuarios.php">Modificar Usuarios</a></li>
+                <li><a href="/admin/Gestionar Usuarios/CancelarUsuarios.php">Cancelar Usuarios</a></li>
             </ul>
         </li>
         
