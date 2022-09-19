@@ -1,9 +1,49 @@
 <?php  
     require "../../includes/funciones.php";  $auth = estaAutenticado();
+    require "../../includes/config/database.php";
     if (!$auth) {
-        header('location: /');
+       header('location: /'); die();
+    }
+    if ($_SESSION['role']!="superAdmin") {
+        header('location: /admin/index.php'); 
+        die();
     }
     inlcuirTemplate('header');
+    $db = conectarDB();
+    
+    $idUser="";//Poner el id Autoincrementable a partir del ultimo id
+    $email ="";
+    $token = "";
+    $nombre="";
+    $apellidoP="";
+    $apellidoS="";
+    $telefono = "";
+    $idRole = "";
+    $errores =[];
+    $ban = true;
+    if ($_SERVER['REQUEST_METHOD']==="POST") {
+        $email =mysqli_real_escape_string($db, $_POST['email']);
+        $token =mysqli_real_escape_string($db, $_POST['password']);
+        $nombre=mysqli_real_escape_string($db, $_POST['nombre']);
+        $apellidoP=mysqli_real_escape_string($db, $_POST['apellidoP']);
+        $apellidoS=mysqli_real_escape_string($db, $_POST['apellidoS']);
+        $telefono =mysqli_real_escape_string($db, $_POST['telefono']);
+        $idRole =mysqli_real_escape_string($db, $_POST['telefono']);
+
+        if (empty($errores)) {
+            $fecha = date('Y-m-d');
+            if ($tipoUser ==="maestro") {
+                $nombreMaestro = $nombre. " ".$apellidoP ." ".$apellidoM;
+                $query = "INSERT INTO `maestros`(`nombreMaestro`, `rfc`) VALUES ('{$nombreMaestro}','{$rfc}')";
+                $resultadoMaes = mysqli_query($db, $query);
+            }
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $query ="INSERT INTO users(`email`, `password`, `create`, `role`, 'rfc') VALUES ('{$email}','{$password}','{$fecha}','$tipoUser', '{$rfc}')";
+            $resultado = mysqli_query($db, $query);
+        }else{
+            $ban = false;
+        }
+    }
 ?>
 <main class="RegistroNuevoUsuario">
     <section class="w80">
