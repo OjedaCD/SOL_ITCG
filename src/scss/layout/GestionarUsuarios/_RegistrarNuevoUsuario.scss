@@ -1,6 +1,6 @@
 .RegistroNuevoUsuario{
     margin-top: 2rem;
-    .email, .nombreUser, .apellidoP, .apellidoS, .tel, .rolUsuario, .departamento, .password {
+    .email, .nombreUser, .apellidoP, .apellidoS, .tel, .rolUsuario, .departamento {
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -13,7 +13,6 @@
         border-radius: 0.5rem;
         margin: 1.5rem, 0;
         height: 4rem;
-        
     }
     label{
         width: 15%;
@@ -29,30 +28,29 @@
             color: $blanco;
         }
     }
-    .container {
+    .eye {
         display: flex;
         justify-content: center;
         gap: 2rem;
         align-items: center;
         height: 4rem;
-        width: 35%;
+        width: 100%;
         background-color: white;
         position: relative;
-    
-        .passw{
+        margin-bottom: 2rem;
+        
+        .password{
             display: flex;
+            position: relative;
             justify-content: center;
             height: 4rem;
-            width: 100%;
+            width: 100rem;
             gap: 2rem;
         }
         .icon {
             position: absolute;
-            height: 50%;
-            width: 7%;
-            position: absolute;
-            top: 30%;
-            right: 2rem;
+            width: 2%;
+            right: 25%;
             opacity: 0.3;
             cursor: pointer;
             &:hover {

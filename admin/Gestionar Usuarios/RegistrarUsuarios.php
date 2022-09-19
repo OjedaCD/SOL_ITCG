@@ -31,7 +31,7 @@
             </div>
             <div class="rolUsuario">
                 <label for="rolUsuario">Rol de Usuario</label>
-                <select name="rolUsuario" id="rolUsuario" required>
+                <select required name="rolUsuario" id="rolUsuario" >
                     <option disabled selected>--Seleccione un rol--</option>
                     <option value="administrador">Administrador</option>
                     <option value="solicitante">Solicitante</option>
@@ -39,21 +39,16 @@
             </div>
             <div class="departamento">
                 <label for="departamento">Departamento</label>
-                <select name="departamento" id="departamento" required>
+                <select required name="departamento" id="departamento" >
                     <option disabled selected>--Seleccione un departamento--</option>
                     <option value="Centro de Cómputo">Centro de Cómputo</option>
                     <option value="Mantenimiento">Mantenimiento</option>
                 </select>           
             </div>
-            <div class="password">
+            <div class="eye">
                 <label for="password">Contraseña</label>
-                <input required type="password" name="password" id="password" required>           
-                
-            </div>
-
-            <div class="container">
-                <input type="password" class="passw" id="Input"> 
-                <img src="/src/img/Show.png" alt="" class="icon" id="Eye">
+                <input required type="password" name="password" id="password"> 
+                <img src="/src/img/Show.png" alt="" class="icon" id="ojo">
             </div>
             <div class="btnRU">
                 <input type="submit" value="Registrar Usuario">

@@ -9,42 +9,43 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
     $password = mysqli_real_escape_string($db,$_POST['pass']);
 
     if (!$email) {
-        $errores[] = "El Correo  es obligatorio o no es valido";
+        $errores[0] = "El Correo  es obligatorio o no es valido";
     }
-
     if (!$password) {
-        $errores[] = "La contraseña es obligatoria";
+        $errores[0] = "La contraseña es obligatoria";
     }
 
     if (empty($errores)) {
         //revisar si el usuario existe
         $query = "SELECT * FROM users";
         $resultado = mysqli_query($db, $query);
-        if ($resultado->num_rows) {
+        if ($resultado->num_rows) {//Si tiene n filas dentro de la tabla
             //revisar el password
-            $usuario = mysqli_fetch_assoc($resultado);   
-            //var_dump($usuario); 
-
+            while($usuario = mysqli_fetch_assoc($resultado)){
             //verificar si el password es correcto o no 
-            $auth = password_verify($password, $usuario['password']);
-            echo $usuario['password'];
-            //var_dump($auth);
-            if ($auth) {
-                //Usuario Autentificado
-                session_start();
-                //llenar arreglo de sesion
-                $_SESSION['usuario'] = $usuario['email'];
-                $_SESSION['login'] = true;
-
-                header('location: /admin');
-            }
-            else {
-                $errores[] = 'La contraseña es incorrecta';
+                if( $email == $usuario['email']) {
+                    # code...
+                    $auth = password_verify($password, $usuario['token']);//Compara la contraseña en la BD
+                    if ($auth) {
+                        //Usuario Autentificado
+                        session_start();
+                        // //llenar arreglo de sesion
+                        $_SESSION['usuario'] = $usuario['email'];//Se identifica al usario en el sistema 
+                        $_SESSION['login'] = true;
+                        $_SESSION['role'] = $usuario['role'];
+                        $_SESSION['idUser'] = $usuario['idUser'];//Aquí será el id
+                        header('location: /admin');//Accede a los modulos
+                    }
+                    else {
+                        $errores[0] = 'La contraseña es incorrecta';
+                    }
+                    break;
+                }else{
+                    $errores[0] ="El ususario no existe";  
+                }
             }
         }
-        else {
-            $errores[] ="El ususario no existe";
-        }
+        
     }
 }
 
@@ -56,22 +57,26 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/build/css/app.css">
-    <title>Siseni</title>
+    <title>SOL_ITCG</title>
 </head>
 <body class="bg-Azul">
     <main>
         <section>
             <h1>Iniciar Sesión</h1>
+            <?php foreach($errores as $error): ?>
+                <div class="alerta error">
+                    <?php  echo $error; ?>
+                </div>
+            <?php    endforeach;?>
             <form method="POST">
                 <div class="email">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="email" name="email" id="email" placeholder="Email" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">
                 </div>
                 <div class="pass">
                     <label for="pass">Contraseña</label>
                     <input type="password" name="pass" id="pass" placeholder="Contraseña">
                 </div>
-                <a href="/">Olvidaste Contraseña?</a>
                 <div class="iniciar">
                     <button>
                         <ion-icon name="enter-outline" class="size3"></ion-icon>

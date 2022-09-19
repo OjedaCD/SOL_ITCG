@@ -4,13 +4,12 @@ require 'includes/config/database.php';
 $db = conectarDB();
 
 //crear un email y password
-$email ="live.com.mx";
-$password = "43254325";
+$email ="L18290915@cdguzman.tecnm.mx";
+$password = "12345678";
 
 $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 //Query para crear el usuario 
-$date = date('d-m-Y');
-$query ="INSERT INTO users(email, role, password, created_at) VALUES ('{$email}','admin','{$passwordhash}','{$date}')";
+$query ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono, idRole) VALUES ('1','{$email}','{$passwordhash}','David','Ojeda Cortes','3421080534','1')";
 echo $query;
 
 //exit;

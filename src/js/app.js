@@ -1,5 +1,5 @@
-var eye = document.getElementById('Eye');
-var input = document.getElementById('Input');
+var eye = document.getElementById('ojo');
+var input = document.getElementById('password');
 eye.addEventListener("click", function(){
     if (input.type === "password") {
         input.type = "text";
