@@ -32,9 +32,10 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                         // //llenar arreglo de sesion
                         $_SESSION['usuario'] = $usuario['email'];//Se identifica al usario en el sistema 
                         $_SESSION['login'] = true;
-                        $_SESSION['role'] = $usuario['role'];
+                        $_SESSION['idRole'] = $usuario['idRole'];
                         $_SESSION['idUser'] = $usuario['idUser'];//Aquí será el id
                         header('location: /admin');//Accede a los modulos
+                        
                     }
                     else {
                         $errores[0] = 'La contraseña es incorrecta';
@@ -75,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                 </div>
                 <div class="pass">
                     <label for="pass">Contraseña</label>
-                    <input type="password" name="pass" id="pass" placeholder="Contraseña">
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña" maxlength="8" >
                 </div>
                 <div class="iniciar">
                     <button>

@@ -4,44 +4,64 @@
     if (!$auth) {
        header('location: /'); die();
     }
-    if ($_SESSION['role']!="superAdmin") {
+    if ($_SESSION['idRole'] != '1') {
         header('location: /admin/index.php'); 
         die();
     }
     inlcuirTemplate('header');
     $db = conectarDB();
+    $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
+    $resultadoDep= mysqli_query($db, $queryDep);
     
-    $idUser="";//Poner el id Autoincrementable a partir del ultimo id
+    $queryId = "SELECT MAX(idUser)+1 FROM users ";//Query para obtener el último id de la la tabla users + 1
+    $resultadoId =mysqli_query($db, $queryId);
+    
     $email ="";
     $token = "";
     $nombre="";
     $apellidoP="";
     $apellidoS="";
-    $telefono = "";
-    $idRole = "";
-    $errores =[];
+    $rolUsuario = "";
+    $departamento = "";
+    $password = "";
     $ban = true;
     if ($_SERVER['REQUEST_METHOD']==="POST") {
-        $email =mysqli_real_escape_string($db, $_POST['email']);
-        $token =mysqli_real_escape_string($db, $_POST['password']);
-        $nombre=mysqli_real_escape_string($db, $_POST['nombre']);
-        $apellidoP=mysqli_real_escape_string($db, $_POST['apellidoP']);
-        $apellidoS=mysqli_real_escape_string($db, $_POST['apellidoS']);
-        $telefono =mysqli_real_escape_string($db, $_POST['telefono']);
-        $idRole =mysqli_real_escape_string($db, $_POST['telefono']);
+        //Obtengo los datos del form
+        
+        $idUser = mysqli_fetch_assoc($resultadoId);//Guarda el id
+        $email = $_POST['email'];
+        $token = $_POST['password'];
+        $nombre = $_POST['nombre'];
+        $apellidoP = $_POST['apellidoP'];
+        $apellidoS = $_POST['apellidoS'];
+        $telefono = $_POST['telefono'];
+        $rolUsuario =$_POST['rolUsuario'];
+        $departamento =$_POST['departamento'];
+        $password =$_POST['password'];
 
-        if (empty($errores)) {
-            $fecha = date('Y-m-d');
-            if ($tipoUser ==="maestro") {
-                $nombreMaestro = $nombre. " ".$apellidoP ." ".$apellidoM;
-                $query = "INSERT INTO `maestros`(`nombreMaestro`, `rfc`) VALUES ('{$nombreMaestro}','{$rfc}')";
-                $resultadoMaes = mysqli_query($db, $query);
+        $query = "SELECT * FROM users";
+        $resultado = mysqli_query($db, $query);
+        while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
+            if( $email == $usuario['email']) {
+                $ban = false;
+                break;
             }
-            $password = password_hash($password, PASSWORD_DEFAULT);
-            $query ="INSERT INTO users(`email`, `password`, `create`, `role`, 'rfc') VALUES ('{$email}','{$password}','{$fecha}','$tipoUser', '{$rfc}')";
-            $resultado = mysqli_query($db, $query);
-        }else{
-            $ban = false;
+        }
+        if ($ban != false){
+            foreach($idUser as $value){//Recorro una vez y lo inserto en users y accesos
+                if($value < 1){
+                    $value += 1;
+                }
+                if(empty($telefono)){//Valida que no sea nulo
+                    $telefono = 0;
+                }
+                $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
+                $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
+                $queryUs ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono, idRole) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$rolUsuario}')";
+                $resultadoUs =mysqli_query($db, $queryUs);
+                $queryAcc = "INSERT INTO accesos(idUser, idRole, idDpto) VALUES ('{$value}','{$rolUsuario}','{$departamento}')";
+                $resultadoAcc =mysqli_query($db, $queryAcc);
+            }
         }
     }
 ?>
@@ -67,27 +87,30 @@
             </div>
             <div class="tel">
                 <label for="tel">Teléfono</label>
-                <input type="tel" name="telefono" placeholder="Introduce tú número de teléfono" minlength="0" maxlength="10">
+                <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">
             </div>
             <div class="rolUsuario">
                 <label for="rolUsuario">Rol de Usuario</label>
-                <select required name="rolUsuario" id="rolUsuario" >
+                <select name="rolUsuario" id="rolUsuario" required>
                     <option disabled selected>--Seleccione un rol--</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="solicitante">Solicitante</option>
-                </select>           
+                    <option value="2">Administrador</option>
+                    <option value="3">Solicitante</option>
+                </select>
             </div>
             <div class="departamento">
-                <label for="departamento">Departamento</label>
-                <select required name="departamento" id="departamento" >
-                    <option disabled selected>--Seleccione un departamento--</option>
-                    <option value="Centro de Cómputo">Centro de Cómputo</option>
-                    <option value="Mantenimiento">Mantenimiento</option>
-                </select>           
+            <label for="departamento">Departamento</label>
+                <select name="departamento" id="departamento" required>
+                    <option value=""disabled selected>--Seleccione Departamento--</option>  
+                    <?php while($dpto = mysqli_fetch_assoc($resultadoDep)):?>
+                        <option value="<?php echo $dpto['idDpto'];?>">
+                            <?php echo $dpto['nomDpto'];?>
+                        </option>
+                    <?php endwhile;?>  
+                </select>         
             </div>
             <div class="eye">
                 <label for="password">Contraseña</label>
-                <input required type="password" name="password" id="password"> 
+                <input required type="password" name="password" id="password" maxlength="8" minlength="8" placeholder="Ingrese una contraseña de 8 caracteres"> 
                 <img src="/src/img/Show.png" alt="" class="icon" id="ojo">
             </div>
             <div class="btnRU">
@@ -98,4 +121,9 @@
 </main>
 <?php 
     inlcuirTemplate('footer');
+    if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {
+        echo "<script>exito('Usuario Registrado');</script>";
+    }elseif($ban == false && $_SERVER['REQUEST_METHOD']==="POST"){
+        echo "<script>fracaso('Error! El email ya existe');</script>";
+    }
 ?>

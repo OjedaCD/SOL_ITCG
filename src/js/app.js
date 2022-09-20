@@ -9,3 +9,24 @@ eye.addEventListener("click", function(){
         eye.style.opacity = 0.2;
     }
 })
+
+
+function exito(mensaje) {
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 2000
+      })
+}
+
+function fracaso(mensaje) {
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 2000
+      })
+}

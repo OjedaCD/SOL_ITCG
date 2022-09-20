@@ -2,8 +2,8 @@
     if (!isset($_SESSION)) {
         session_start();
     }
-
     $auth = $_SESSION['login'] ?? false;
+    ob_start();
 ?>
 
 
@@ -27,8 +27,12 @@
     <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
     <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
 </header>
+<?php 
+    $rol = $_SESSION['idRole'];
+?>
 <div class="header">
     <ul class="nav">
+        <?php if($rol == 1 || $rol == 2):?>
         <li><a href="/admin/index.php">Inicio</a></li>
         <li><a href="/admin//Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
@@ -38,7 +42,7 @@
                 <li><a href="/admin/Gestionar Usuarios/CancelarUsuarios.php">Cancelar Usuarios</a></li>
             </ul>
         </li>
-        
+        <?php endif;?>
         <li><a href="">Opciones</a>
             <ul>
                 <li><?php if ($auth): ?>
