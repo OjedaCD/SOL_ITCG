@@ -4,12 +4,16 @@
     if (!$auth) {
        header('location: /'); die();
     }
+    inlcuirTemplate('header');
     if ($_SESSION['idRole'] != '1') {
         header('location: /admin/index.php'); 
         die();
     }
-    inlcuirTemplate('header');
     $db = conectarDB();
+
+    $queryRol ="SELECT * FROM roles WHERE idRole != 1";
+    $resultadoRol=mysqli_query($db, $queryRol);
+
     $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
     
@@ -29,7 +33,7 @@
         //Obtengo los datos del form
         
         $idUser = mysqli_fetch_assoc($resultadoId);//Guarda el id
-        $email = $_POST['email'];
+        $email = $_POST['emailS'];
         $token = $_POST['password'];
         $nombre = $_POST['nombre'];
         $apellidoP = $_POST['apellidoP'];
@@ -39,6 +43,7 @@
         $departamento =$_POST['departamento'];
         $password =$_POST['password'];
 
+        $email = "".trim($email)."@cdguzman.tecnm.mx";
         $query = "SELECT * FROM users";
         $resultado = mysqli_query($db, $query);
         while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
@@ -69,10 +74,13 @@
     <section class="w80">
         <h1>Registrar Nuevo Usuario</h1>
         <form method="POST">
-            <div class="email">
-                <label for="email">Email</label>
-                <input required type="email" name="email" id="email"  value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-            </div>
+            <div class="emailS">
+                <label for="emailS">Email</label>
+                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+           </div>
+           <div class="emailD">
+                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
+           </div>
             <div class="nombreUser">
                 <label for="nombre">Nombre</label>
                 <input required type="text" name="nombre" id="nombre" maxlength="50" required pattern="[A-Za-z]+">           
@@ -92,9 +100,12 @@
             <div class="rolUsuario">
                 <label for="rolUsuario">Rol de Usuario</label>
                 <select name="rolUsuario" id="rolUsuario" required>
-                    <option disabled selected>--Seleccione un rol--</option>
-                    <option value="2">Administrador</option>
-                    <option value="3">Solicitante</option>
+                    <option value=""disabled selected>--Seleccione Rol--</option>  
+                    <?php while($rol = mysqli_fetch_assoc($resultadoRol)):?>
+                        <option value="<?php echo $rol['idRole'];?>">
+                            <?php echo $rol['nomRole'];?>
+                        </option>
+                    <?php endwhile;?>  
                 </select>
             </div>
             <div class="departamento">
