@@ -1,0 +1,33 @@
+.ConsultarUsuario{
+    margin-top: 2rem;
+    .btnsLista{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
+        .btnChoseC{
+            width: 20%;
+            padding: 1rem;
+            background-color: $azulMarino;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+        }
+        .btnChoseD{
+            width: 25%;
+            padding: 1rem;
+            background-color: $verde;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+        }
+    }
+    #content1{
+        display: none;
+
+    }
+    #content2{
+        display: none;
+        
+    }
+}

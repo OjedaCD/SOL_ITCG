@@ -30,3 +30,23 @@ function fracaso(mensaje) {
         timer: 2000
       })
 }
+
+function advertencia(mensaje) {
+    Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: mensaje,
+        showConfirmButton: false,
+        timer: 2000
+      })
+}
+
+function mostrarContenido(){
+	document.getElementById('content1').style.display ='flex';
+	document.getElementById('content2').style.display ='none';
+}
+
+function mostrarContenido2(){
+	document.getElementById('content2').style.display ='flex';
+	document.getElementById('content1').style.display ='none';
+}
