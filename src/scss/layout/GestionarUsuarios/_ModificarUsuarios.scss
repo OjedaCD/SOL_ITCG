@@ -1,0 +1,43 @@
+.ModificarUsuario{
+    
+    margin-top: 2rem;
+    .email, .nombreUser, .departamento, .rolUsuario{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .btnBCU{
+        position: relative;
+        input{
+            position: absolute;
+            right: 8rem;
+            width: 15%;
+            background-color: $verdeVariante;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            text-align: center;
+        }
+    }
+    input:not(input[type="submit"]){
+        width: 35%;
+    }
+    label{
+        width: 15%;
+        display: inline;
+    }
+   
+    .btnCU{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: right;
+        margin-right: 27rem;
+        input{
+            width: 20%;
+            background-color: $verde;
+            color: $blanco;
+        }
+    }
+
+    
+}
