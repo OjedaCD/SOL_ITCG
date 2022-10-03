@@ -49,4 +49,5 @@ function mostrarContenido(){
 function mostrarContenido2(){
 	document.getElementById('content2').style.display ='flex';
 	document.getElementById('content1').style.display ='none';
+    
 }
