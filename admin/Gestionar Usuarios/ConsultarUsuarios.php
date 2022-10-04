@@ -130,16 +130,20 @@
                         echo ('<div class="table__header">Nombre</div>');
                         echo ('<div class="table__header">Rol</div>');
                         echo ('<div class="table__header">Teléfono</div>');
-
+                        
 
                         $queryDpto2 = ("SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN accesos as ac ON ac.idUser = u.idUser WHERE ac.idDpto = $dpto");                       
                         $resultadoDpto2 =mysqli_query($db, $queryDpto2);
-                        while($row4 = mysqli_fetch_assoc($resultadoDpto2)){ 
-                            echo ('<div class="table__item">'.$row4["email"].'</div>');
-                            echo ('<div class="table__item">'.$row4["nomUsuario"]." ".$row4["apellidoUsuario"].'</div>');
-                            echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
-                            echo ('<div class="table__item">'.$row4["telefono"].'</div>');
-
+                        while($row4 = mysqli_fetch_assoc($resultadoDpto2)){
+                            if($row4['email']) { 
+                                echo ('<div class="table__item">'.$row4["email"].'</div>');
+                                echo ('<div class="table__item">'.$row4["nomUsuario"]." ".$row4["apellidoUsuario"].'</div>');
+                                echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
+                                echo ('<div class="table__item">'.$row4["telefono"].'</div>');
+                                $ban = true;
+                            }else{
+                                $ban = false;
+                            }
                         }
                 }?>
             </div>
@@ -148,9 +152,13 @@
 </main>
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true) {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && $_POST['tipoForm']=="correo") {
         echo "<script>exito('Usuario Encontrado');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false){
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && $_POST['tipoForm']=="correo"){
         echo "<script>fracaso('Error! El email no existe');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && $_POST['tipoForm']=="departamento"){
+        echo "<script>exito('Usuarios Encontrados');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && $_POST['tipoForm']=="departamento"){
+        echo "<script>fracaso('Error! No hay usuarios registrados');</script>";
     }
 ?>
