@@ -1,6 +1,17 @@
 <?php  
     require "../../includes/funciones.php";  $auth = estaAutenticado();
     require "../../includes/config/database.php";
+    
+    //Import PHPMailer classes into the global namespace
+    //These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    require '../../includes/PHPMailer/Exception.php';
+    require '../../includes/PHPMailer/PHPMailer.php';
+    require '../../includes/PHPMailer/SMTP.php';
+    
     if (!$auth) {
        header('location: /'); die();
     }
@@ -13,17 +24,43 @@
     
     $email ="";
     $ban = null;
-   
+
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
         $razon = $_POST['razon'];
-        
+        $id = $_POST['tipoForm'];
+
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
-        $ban = true;
-        foreach ($_POST as $key => $value) {
-            
-            $queryCancelar = "DELETE FROM `users` WHERE `users`.`idUser` = '{$value}'";
+        
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'L18290915@cdguzman.tecnm.mx';                     //SMTP username
+            $mail->Password   = 'MaxBarrigon1';                               //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('L18290915@cdguzman.tecnm.mx', 'David Ojeda');//correo del superAdmin
+            $mail->addAddress('L18290915@cdguzman.tecnm.mx'); //correo a eliminar            //Name is optional
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Se ha eliminado tu cuenta del sistema de solicitudes SOL_ITCG';
+            $mail->Body    = $razon;
+            $mail->CharSet = 'UTF-8';
+        
+            $mail->send();
+            $ban = true;
+            $queryCancelar = "DELETE FROM `users` WHERE `users`.`idUser` = '{$id}'";
             $resultadoLlave0 = mysqli_query($db, $queryCancelar);
+        } catch (Exception $e) {
+            $ban = false;
         }
         $query1 = "SET FOREIGN_KEY_CHECKS=1";
         $resultadoLlave0 = mysqli_query($db, $query1);
@@ -120,5 +157,7 @@
         echo "<script>fracaso('Error! El email no existe');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true){
         echo "<script>advertencia('El usuario se ha cancelado');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false){
+        echo "<script>fracaso('No se ha podido cancelar el usuario');</script>";
     }
 ?>
