@@ -114,7 +114,7 @@
         </div>
         
         <div class="departamento">
-        <div class = "container-table">
+            <div class = "container-table">
                 <?php if ($_SERVER['REQUEST_METHOD']=="POST" && $_POST['tipoForm']=="departamento") {          
                         $dpto=$_POST['departamento'];//Guarda el id del departamento seleccionado 
                         $queryDpto1 ="SELECT nomDpto FROM departamentos WHERE idDpto = $dpto";
@@ -132,7 +132,7 @@
                         echo ('<div class="table__header">Teléfono</div>');
                         
 
-                        $queryDpto2 = ("SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN accesos as ac ON ac.idUser = u.idUser WHERE ac.idDpto = $dpto");                       
+                        $queryDpto2 = ("SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN accesos as ac ON ac.idUser = u.idUser WHERE ac.idDpto = $dpto ORDER BY u.apellidoUsuario DESC");                       
                         $resultadoDpto2 =mysqli_query($db, $queryDpto2);
                         while($row4 = mysqli_fetch_assoc($resultadoDpto2)){
                             if($row4['email']) { 

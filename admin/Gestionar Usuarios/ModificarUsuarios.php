@@ -2,12 +2,11 @@
     require "../../includes/funciones.php";  $auth = estaAutenticado();
     require "../../includes/config/database.php";
     
-    
     if (!$auth) {
        header('location: /'); die();
     }
     inlcuirTemplate('header');
-   if ($_SESSION['idRole'] != '1') {
+    if ($_SESSION['idRole'] != '1') {
         header('location: /admin/index.php'); 
         die();
     }
@@ -19,7 +18,6 @@
     $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
     
-    $email ="";
     $ban = null;
 
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
@@ -31,38 +29,29 @@
         $departamento = $_POST['departamento'];
         $rolU = $_POST['rolUsuario'];
         $id = $_POST['tipoForm'];
-        
 
-        foreach ($_POST as $key => $value) {
-            var_dump($value);
-        }
+        $email = "".trim($email)."@cdguzman.tecnm.mx";
 
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
         
-        //Create an instance; passing `true` enables exceptions
-        $ban = true;
+        $queryModificar= "UPDATE users u INNER JOIN accesos a on u.idUser = a.idUser SET `email`='$email',`nomUsuario`='$nombre', `apellidoUsuario`='$apellidos',`telefono`='$telefono',u.idRole='$rolU', a.idRole = u.idRole, a.idDpto ='$departamento' WHERE u.idUser = '$id'";
+        $resultadoModificar = mysqli_query($db, $queryModificar);
 
-        //$queryModificar = "DELETE FROM `users` WHERE `users`.`idUser` = '{$id}'";
-        //$resultadoLlave0 = mysqli_query($db, $queryModificar);
-        $queryActualizar = "UPDATE users u INNER JOIN accesos a on u.idUser = a.idUser SET `email`='$email',`nomUsuario`='$nombre',
-        `apellidoUsuario`='$apellidos',`telefono`='$telefono',u.idRole='$rolU', a.idRole = u.idRole,
-        a.idDpto ='$departamento' WHERE u.idUser = '$id'";
-        $resultadoModificar = mysqli_query($db, $queryActualizar);
-
+        if($resultadoModificar) {
+            $ban = true;
+        } else{
+            $ban = false;
+        }
         $query1 = "SET FOREIGN_KEY_CHECKS=1";
         $resultadoLlave0 = mysqli_query($db, $query1);
     }
-
 ?>
 <main class="ModificarUsuarios">
     <section class="w80">
         <h1>Modificar Usuarios</h1>
         <!--Es un tipo de formulario -->
         <form method="GET" >
-            <!--va el nombre del scss -->
-            
-            
             
             <div class="emailS">
                 <label for="emailS">Email</label>
@@ -71,11 +60,10 @@
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
            </div>
-           <input type="hidden" name="tipoForm" value="bandera">
-
            <div class="btnBus">
                 <input type="submit" value="Buscar Usuario">
             </div>
+           <input type="hidden" name="tipoForm" value="bandera">
         </form>
         <!--Es un tipo de formulario -->
         <form method="POST">
@@ -107,53 +95,52 @@
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.$row["email"].'">           
+                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" pattern="[A-Za-z 0-9]+" required >           
                             </div>');
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" >           
+                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" maxlength="50" pattern="[A-Za-z]+" required >           
                             </div>');
                             echo('
                             <div class="apellidoUser">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" >           
+                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" maxlength="50" pattern="[a-zA-Z\s]+" required>           
                             </div>');
                              
                             echo('
                             <div class="telefono">
                                 <label for="telefono">Telefono</label>
-                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'">           
+                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">           
                             </div>');
-                        
-
                             echo('
                             <div class="departamento">
-                            <label for="departamento">Departamento</label>
+                                <label for="departamento">Departamento</label>
                                 <select name="departamento" id="departamento" required>
-                                    <option value=""disabled selected>--Seleccione Departamento--</option>  ');
-                                    
+                                    <option value=""disabled selected>--Seleccione Departamento--</option>');
                                      while($dpto = mysqli_fetch_assoc($resultadoDep)){
                                         echo('<option value="'.$dpto['idDpto'].'">');
                                         echo $dpto['nomDpto'];
                                         echo ('</option>');
-                                     }                                                                                               
-                                     echo('</select> </div>');
-                                        
+                                     }
+                                echo('
+                                </select> 
+                            </div>');  
+                            
+                            
                             echo('
                             <div class="rolUsuario">
                                 <label for="rolUsuario">Rol de Usuario</label>
                                 <select name="rolUsuario" id="rolUsuario" required>
-                                    <option value=""disabled selected>--Seleccione Rol--</option>  ');
-
+                                    <option value=""disabled selected>--Seleccione Rol--</option>');
                                     while($rol = mysqli_fetch_assoc($resultadoRol)){
-                                        echo('option value="'.$rol['idRole'].'">');
+                                        echo('<option value="'.$rol['idRole'].'">');
                                         echo $rol['nomRole'];
                                         echo ('</option>');
                                     }
-                                    echo('</select> </div>');
-                                        
-                                                           
+                                    echo('
+                                </select> 
+                            </div>');                           
                             echo('
                             <div class="btnMU">
                                 <input type="submit" value="Modificar Usuario">
@@ -165,8 +152,6 @@
                     }
                 }
             ?>
-            
-            
         </form>
     </section>
 </main>
@@ -177,8 +162,8 @@
     }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
         echo "<script>fracaso('Error! El email no existe');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true){
-        echo "<script>advertencia('El usuario se ha cancelado');</script>";
+        echo "<script>exito('El usuario se ha modificado');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false){
-        echo "<script>fracaso('No se ha podido cancelar el usuario');</script>";
+        echo "<script>fracaso('No se ha podido modificar el usuario');</script>";
     }
 ?>
