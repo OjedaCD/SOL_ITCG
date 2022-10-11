@@ -14,7 +14,9 @@
 @import 'layout/GestionarUsuarios/ModificarUsuarios';
 @import 'layout/GestionarUsuarios/Consultarusuario';
 
-
+//Procesar Solicitudes
+@import 'layout/ProcesarSolicitudes/ProcesarSolicitudesMenu';
+@import 'layout/ProcesarSolicitudes/CrearNuevaSolicitud';
 //Internas
 @import 'internas/footer';
 @import 'internas/header';

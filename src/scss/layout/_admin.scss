@@ -2,5 +2,6 @@
     margin-top: 2rem;
 }
 .botones{
-    @include menu(4, 20rem);
+    @include menu(2, 20rem);
+    
 }

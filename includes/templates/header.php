@@ -43,6 +43,14 @@
             </ul>
         </li>
         <?php endif;?>
+        <li><a href="/admin//Procesar Solicitudes/ProcesarSolicitud.php">Procesar Solicitudes</a>
+            <ul>
+                <li><a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">Crear Nueva Solicitud</a></li>
+                <li><a href="/admin/Procesar Solicitudes/VerEstadoSolicitud.php">Ver el Estado de la Solicitud</a></li>
+                <li><a href="/admin/Procesar Solicitudes/ModificarSolicitud.php">Modificar Solicitud</a></li>
+                <li><a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">Cancelar Solicitud Pendiente</a></li>
+            </ul>
+        </li>
         <li><a href="">Opciones</a>
             <ul>
                 <li><?php if ($auth): ?>
