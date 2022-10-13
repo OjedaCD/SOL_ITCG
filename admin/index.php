@@ -15,10 +15,8 @@
                 <ion-icon name="person-circle-sharp"></ion-icon>
                 Gestionar Usuarios
             </a>
-        </div>
-        <div class="botones">
             <a href="/admin/Procesar Solicitudes/ProcesarSolicitudes.php">
-                <ion-icon name="person-circle-sharp"></ion-icon>
+                <ion-icon name="clipboard"></ion-icon>
                 Procesar Solicitudes
             </a>
         </div>

@@ -34,7 +34,7 @@
     <ul class="nav">
         <?php if($rol == 1 || $rol == 2):?>
         <li><a href="/admin/index.php">Inicio</a></li>
-        <li><a href="/admin//Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
+        <li><a href="/admin/Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
                 <li><a href="/admin/Gestionar Usuarios/RegistrarUsuarios.php">Registrar Usuarios</a></li>
                 <li><a href="/admin/Gestionar Usuarios/ConsultarUsuarios.php">Consultar Usuarios</a></li>
@@ -43,7 +43,7 @@
             </ul>
         </li>
         <?php endif;?>
-        <li><a href="/admin//Procesar Solicitudes/ProcesarSolicitud.php">Procesar Solicitudes</a>
+        <li><a href="/admin/Procesar Solicitudes/ProcesarSolicitudes.php">Procesar Solicitudes</a>
             <ul>
                 <li><a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">Crear Nueva Solicitud</a></li>
                 <li><a href="/admin/Procesar Solicitudes/VerEstadoSolicitud.php">Ver el Estado de la Solicitud</a></li>

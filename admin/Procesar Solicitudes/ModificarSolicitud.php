@@ -1,6 +1,7 @@
 <?php  
     require "../../includes/funciones.php";  $auth = estaAutenticado();
     require "../../includes/config/database.php";
+    
     if (!$auth) {
        header('location: /'); die();
     }
@@ -14,104 +15,49 @@
     $queryRol ="SELECT * FROM roles WHERE idRole != 1";
     $resultadoRol=mysqli_query($db, $queryRol);
 
-    $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
+    $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
     
-    $queryId = "SELECT MAX(idUser)+1 FROM users ";//Query para obtener el último id de la la tabla users + 1
-    $resultadoId =mysqli_query($db, $queryId);
-    
-    $email ="";
-    $token = "";
-    $nombre="";
-    $apellidoP="";
-    $apellidoS="";
-    $rolUsuario = "";
-    $departamento = "";
-    $password = "";
-    $ban = true;
-    if ($_SERVER['REQUEST_METHOD']==="POST") {
-        //Obtengo los datos del form
+    $ban = null;
+
+    if ($_SERVER['REQUEST_METHOD']==="POST" ){
         
-        $idUser = mysqli_fetch_assoc($resultadoId);//Guarda el id
-        $email = $_POST['emailS'];
-        $token = $_POST['password'];
+        $email = $_POST['email'];
         $nombre = $_POST['nombre'];
-        $apellidoP = $_POST['apellidoP'];
-        $apellidoS = $_POST['apellidoS'];
+        $apellidos = $_POST['apellidos'];
         $telefono = $_POST['telefono'];
-        $rolUsuario =$_POST['rolUsuario'];
-        $departamento =$_POST['departamento'];
-        $password =$_POST['password'];
+        $departamento = $_POST['departamento'];
+        $rolU = $_POST['rolUsuario'];
+        $id = $_POST['tipoForm'];
 
         $email = "".trim($email)."@cdguzman.tecnm.mx";
-        $query = "SELECT * FROM users";
-        $resultado = mysqli_query($db, $query);
-        while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
-            if( $email == $usuario['email']) {
-                $ban = false;
-                break;
-            }
+
+        $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
+        $resultadoLlave0 = mysqli_query($db, $query0);
+        
+        $queryModificar= "UPDATE users u INNER JOIN accesos a on u.idUser = a.idUser SET `email`='$email',`nomUsuario`='$nombre', `apellidoUsuario`='$apellidos',`telefono`='$telefono',u.idRole='$rolU', a.idRole = u.idRole, a.idDpto ='$departamento' WHERE u.idUser = '$id'";
+        $resultadoModificar = mysqli_query($db, $queryModificar);
+
+        if($resultadoModificar) {
+            $ban = true;
+        } else{
+            $ban = false;
         }
-        if ($ban != false){
-            foreach($idUser as $value){//Recorro una vez y lo inserto en users y accesos
-                if($value < 1){
-                    $value += 1;
-                }
-                if(empty($telefono)){//Valida que no sea nulo
-                    $telefono = 0;
-                }
-                $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
-                $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-                $queryUs ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono, idRole) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$rolUsuario}')";
-                $resultadoUs =mysqli_query($db, $queryUs);
-                $queryAcc = "INSERT INTO accesos(idUser, idRole, idDpto) VALUES ('{$value}','{$rolUsuario}','{$departamento}')";
-                $resultadoAcc =mysqli_query($db, $queryAcc);
-            }
-        }
+        $query1 = "SET FOREIGN_KEY_CHECKS=1";
+        $resultadoLlave0 = mysqli_query($db, $query1);
     }
 ?>
-<main class="RegistroNuevoUsuario">
+<main class="CrearNuevaSolicitud">
     <section class="w80">
-        <h1>Registrar Nuevo Usuario</h1>
-        <form method="POST">
-            <div class="emailS">
-                <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
-           </div>
-           <div class="emailD">
-                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-           </div>
-            <div class="nombreUser">
-                <label for="nombre">Nombre</label>
-                <input required type="text" name="nombre" id="nombre" maxlength="50" required pattern="[A-Za-z]+">           
-            </div>
-            <div class="apellidoP">
-                <label for="apellido">Primer Apellido</label>
-                <input required type="text" name="apellidoP" id="apellidoP"maxlength="50" required pattern="[A-Za-z]+">           
-            </div>
-            <div class="apellidoS">
-                <label for="apellido">Segundo Apellido</label>
-                <input required type="text" name="apellidoS" id="apellidoS"maxlength="50" required pattern="[A-Za-z]+">           
-            </div>
-            <div class="tel">
-                <label for="tel">Teléfono</label>
-                <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">
-            </div>
-            <div class="rolUsuario">
-                <label for="rolUsuario">Rol de Usuario</label>
-                <select name="rolUsuario" id="rolUsuario" required>
-                    <option value=""disabled selected>--Seleccione Rol--</option>  
-                    <?php while($rol = mysqli_fetch_assoc($resultadoRol)):?>
-                        <option value="<?php echo $rol['idRole'];?>">
-                            <?php echo $rol['nomRole'];?>
-                        </option>
-                    <?php endwhile;?>  
-                </select>
-            </div>
-            <div class="departamento">
-            <label for="departamento">Departamento</label>
-                <select name="departamento" id="departamento" required>
-                    <option value=""disabled selected>--Seleccione Departamento--</option>  
+        <h1>Modificar Solicitud</h1>
+        <!--Es un tipo de formulario -->
+        <form method="GET" class="tipoSol" >
+           
+
+            <div class="area">
+            <label for="area">Area</label>
+                <select name="area" id="area" required>
+                    <option value=""disabled selected>--Seleccione Área Solicitante--</option>  
                     <?php while($dpto = mysqli_fetch_assoc($resultadoDep)):?>
                         <option value="<?php echo $dpto['idDpto'];?>">
                             <?php echo $dpto['nomDpto'];?>
@@ -119,22 +65,99 @@
                     <?php endwhile;?>  
                 </select>         
             </div>
-            <div class="eye">
-                <label for="password">Contraseña</label>
-                <input required type="password" name="password" id="password" maxlength="8" minlength="8" placeholder="Ingrese una contraseña de 8 caracteres"> 
-                <img src="/src/img/Show.png" alt="" class="icon" id="ojo">
+             
+            <div class="emailS">
+                <label for="emailS">Email</label>
+                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+           </div>
+           <div class="emailD">
+                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
+           </div>
+           <div class="btnBus">
+                <input type="submit" value="Buscar Usuario">
             </div>
-            <div class="btnRU">
-                <input type="submit" value="Registrar Usuario">
-            </div>
+            <input type="hidden" name="tipoForm" value="bandera">
+        </form>
+        <!--Es un tipo de formulario -->
+        <form method="POST">
+            <?php 
+                if ($_SERVER['REQUEST_METHOD']==="GET" && isset($_GET['tipoForm'])) {
+                    //Obtengo los datos del form
+                    $email = $_GET['emailS']?? null;;
+                    $email = "".trim($email)."@cdguzman.tecnm.mx";
+                    $query = "SELECT * FROM users";
+                    $resultado = mysqli_query($db, $query);
+                    while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
+                        if( $email == $usuario['email']) {
+                            $ban = true;
+                            //Aquí va el envia el codigo a los inputs
+                            $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario,u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
+                            $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
+                            $queryId = "SELECT u.idUser FROM users as u WHERE u.email = '{$email}'";//se necesita el id del usuario para relacionarlo con accesos
+                            $resultadoId = mysqli_query($db, $queryId);
+                            //Recorre un arregelo el foreach, y el value as key es para utilizar la llave principal
+                            foreach ($resultadoId as $value) {
+                                foreach ($value as $key) {
+                                    $queryDpto = "SELECT  d.nomDpto FROM departamentos as d INNER JOIN accesos as ac ON ac.idDpto = d.idDpto WHERE ac.idUser = '{$key}'";
+                                    $resultadoDpto = mysqli_query($db, $queryDpto);
+                                    echo ('<input type="hidden" name="tipoForm" value="'.$key.'">');
+                                }
+                            }
+                            $row = mysqli_fetch_assoc($resultadoDatos);//Toma los datos de usuarios y roles
+                            $row2 = mysqli_fetch_assoc($resultadoDpto);//Toma los datos de accesos y departamentos
+                            echo ('
+                            <div class="email">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" id="email" value = "'.$row["email"].'" pattern="[A-Za-z 0-9]+" disabled>           
+                            </div>');
+                            echo ('
+                            <div class="folio">
+                                <label for="folio">Folio</label>
+                                <input type="text" name="folio" id="folio" value = "" disabled>           
+                            </div>');
+                            echo('
+                            <div class="nombreUser">
+                                <label for="nombre">Nombre del Solicitante</label>
+                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].$row["apellidoUsuario"].'" maxlength="50" pattern="[A-Za-z]+" disabled >           
+                            </div>');
+                            echo('
+                            <div class="fecha">
+                                <label for="fecha">Fecha de elaboración</label>
+                                <input type="date"  name="fecha" id"fecha">           
+                            </div>');
+                            echo('
+                            <div class="falla">
+                            <label><input type="checkbox" id="cbox1" value="first_checkbox"> Este es mi primer checkbox</label><br>
+
+                            </div>');
+
+                            echo('
+                            <div class="descripcion">
+                                <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción de la falla lo más detallada posible."></textarea>
+                            </div>'); 
+                            echo('
+                            <div class="descripcion">
+                                <textarea id ="descripcion" name ="descripcion" placeholder="Observaciones hechas en su solicitud"></textarea>
+                            </div>');              
+                            echo('
+                            <div class="btnCS">
+                                <input type="submit" value="Modificar Solicitud">
+                            </div>');
+                            break;
+                        }else{
+                            $ban = false;
+                        }
+                    }
+                }
+            ?>
         </form>
     </section>
 </main>
 <?php 
     inlcuirTemplate('footer');
-    if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {
-        echo "<script>exito('Usuario Registrado');</script>";
-    }elseif($ban == false && $_SERVER['REQUEST_METHOD']==="POST"){
-        echo "<script>fracaso('Error! El email ya existe');</script>";
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm'])) {
+        echo "<script>exito('Usuario Encontrado');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
+        echo "<script>fracaso('Error! El email no existe');</script>";
     }
 ?>

@@ -52,18 +52,7 @@
         <h1>Crear Nueva Solicitud</h1>
         <!--Es un tipo de formulario -->
         <form method="GET" class="tipoSol" >
-            
-            <div class="emailS">
-                <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
-           </div>
-           <div class="emailD">
-                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-           </div>
-           <div class="btnBus">
-                <input type="submit" value="Buscar Usuario">
-            </div>
-            <input type="hidden" name="tipoForm" value="bandera">
+           
 
             <div class="area">
             <label for="area">Area</label>
@@ -76,7 +65,18 @@
                     <?php endwhile;?>  
                 </select>         
             </div>
-
+             
+            <div class="emailS">
+                <label for="emailS">Email</label>
+                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+           </div>
+           <div class="emailD">
+                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
+           </div>
+           <div class="btnBus">
+                <input type="submit" value="Buscar Usuario">
+            </div>
+            <input type="hidden" name="tipoForm" value="bandera">
         </form>
         <!--Es un tipo de formulario -->
         <form method="POST">
@@ -123,7 +123,7 @@
                             echo('
                             <div class="fecha">
                                 <label for="fecha">Fecha de elaboración</label>
-                                <input type="date"  name="fecha" id"fecha" disabled>           
+                                <input type="date"  name="fecha" id"fecha">           
                             </div>');
                             echo('
                             <div class="falla">
