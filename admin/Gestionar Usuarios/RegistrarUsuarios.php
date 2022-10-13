@@ -14,7 +14,7 @@
     $queryRol ="SELECT * FROM roles WHERE idRole != 1";
     $resultadoRol=mysqli_query($db, $queryRol);
 
-    $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
+    $queryDep ="SELECT * FROM departamentos ORDER BY nomDpto";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
     
     $queryId = "SELECT MAX(idUser)+1 FROM users ";//Query para obtener el último id de la la tabla users + 1
