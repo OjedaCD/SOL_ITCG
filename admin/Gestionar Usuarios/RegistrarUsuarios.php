@@ -49,7 +49,15 @@
         while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
             if( $email == $usuario['email']) {
                 $ban = false;
-                break;
+                if($ban == false){
+                    echo("<script>
+                        function validarCorreo(){
+                        
+                            fracaso('Error! El email ya existe');
+                        }
+                            </script>");
+                    break;
+                }
             }
         }
         if ($ban != false){
@@ -76,7 +84,7 @@
         <form method="POST">
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+                <input required type="text" name="emailS" id="emailS" onblur="validarCorreo(this)" pattern="[A-Za-z 0-9]+">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -128,13 +136,18 @@
                 <input type="submit" value="Registrar Usuario">
             </div>
         </form>
+        
+        
+       
+       
+
+
+
     </section>
 </main>
 <?php 
     inlcuirTemplate('footer');
     if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {
         echo "<script>exito('Usuario Registrado');</script>";
-    }elseif($ban == false && $_SERVER['REQUEST_METHOD']==="POST"){
-        echo "<script>fracaso('Error! El email ya existe');</script>";
     }
 ?>

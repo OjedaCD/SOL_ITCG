@@ -55,7 +55,7 @@
             
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+ required">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -111,7 +111,7 @@
                             echo('
                             <div class="telefono">
                                 <label for="telefono">Telefono</label>
-                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">           
+                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" placeholder="Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+" required>           
                             </div>');
                             echo('
                             <div class="departamento">
