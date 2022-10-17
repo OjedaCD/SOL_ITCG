@@ -12,7 +12,7 @@
     $db = conectarDB();
 
     $ban = null;
-    $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
+    $queryDep ="SELECT * FROM departamentos ORDER BY nomDpto";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
 
 ?>
