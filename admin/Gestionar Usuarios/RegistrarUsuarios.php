@@ -42,6 +42,7 @@
         $rolUsuario =$_POST['rolUsuario'];
         $departamento =$_POST['departamento'];
         $password =$_POST['password'];
+        $edo = "HABILITADO";
 
         $email = "".trim($email)."@cdguzman.tecnm.mx";
         $query = "SELECT * FROM users";
@@ -62,10 +63,9 @@
                 }
                 $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
                 $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-                $queryUs ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono, idRole) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$rolUsuario}')";
+                $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
                 $resultadoUs =mysqli_query($db, $queryUs);
-                $queryAcc = "INSERT INTO accesos(idUser, idRole, idDpto) VALUES ('{$value}','{$rolUsuario}','{$departamento}')";
-                $resultadoAcc =mysqli_query($db, $queryAcc);
+                
             }
         }
     }

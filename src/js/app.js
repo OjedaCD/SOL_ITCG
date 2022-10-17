@@ -9,8 +9,6 @@ eye.addEventListener("click", function(){
         eye.style.opacity = 0.2;
     }
 })
-
-
 function exito(mensaje) {
     Swal.fire({
         position: 'center',
