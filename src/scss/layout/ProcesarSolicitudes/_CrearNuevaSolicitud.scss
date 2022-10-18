@@ -5,76 +5,66 @@
     .tipoSol{
         display: flex;
         gap: 2rem;
-        margin-bottom: 3rem;
-        margin-right: 2rem;
-        width: 100%;
-        height: 18rem;
-        position: relative;
-        overflow: hidden;
-
-        justify-content: center;
-        align-items: center;
-        gap: 5rem;
         text-align: center;
 
-        
         .area{
-            margin-left: 2%;
             
-            float: left;
             label{
-                width: 33%;
-                float: left;
+                position: relative;
+                top:-2rem;
+                width: 35rem;
+                
             }
             select{
-                position:absolute;
+                position: relative;
+                
+                top:-1.2rem;
+                width: 35rem;
                 border: .1rem solid $azulMarino;
                 border-radius: 0.8rem;
                 height: 3rem;
-                float: left;
+                text-align: center;
             }
         }
-
-
-        
         .emailS{
-        float: left;
-        margin-left: 2%;
-        align-items: center;
-                    
-            input{
-                float: left;
-                width: 50%;
-            }
+            position: relative;
+            display: flex;
+            justify-content: center;
+            top: 1rem;
+            width: 100%;
+            left: -6.8rem;
             label{
-                
-                text-align: center; 
-                float: left;
+                width: 33%;
+                display: inline;
+            }
+            input{
+                display: flex;
+                width: 40%;
             }
     
         }
         .emailD{
-            margin-left: 2%;
-            float: left;
+            position: relative;
+            width: 100%;
+            left: -6.4rem;
+            top: 1rem;
             input{
+                display: flex;
                 width: 50%;
-                float: left;
             }
         }
         .btnBus{
-            position:absolute;
-            margin-left: 2%;
-            top: -2rem;
-            float: left;
+            position: relative;
+            
             input{
-                float: left;
-                width: 15%;
+               
+                top: 1rem;
+                width: 15rem;
                 background-color: $verdeVariante;
                 color: $blanco;
                 border-radius: 0.8rem;
                 cursor: pointer;
                 text-align: center;
-                top: -1rem;
             }
         }
 

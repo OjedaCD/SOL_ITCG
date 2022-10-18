@@ -54,9 +54,8 @@
                 $resultadoFalla =mysqli_query($db, $queryFalla);
             }
         
-            $querySol = "
-            INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, descripcion, observacion, Etapa, Prioridad, Estado) 
-            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$descripcion}','{$descripcion}','{$etapa}','{$prioridad}','{$estado}')";
+            $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, descripcion, observacion, Etapa, Prioridad, Estado) 
+            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}')";
             $resultadoUs =mysqli_query($db, $querySol);
 
             $query1 = "SET FOREIGN_KEY_CHECKS=1";
