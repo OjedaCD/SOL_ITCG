@@ -1,6 +1,7 @@
 <?php  
     require "../../includes/funciones.php";  $auth = estaAutenticado();
     require "../../includes/config/database.php";
+    
     if (!$auth) {
        header('location: /'); die();
     }
@@ -11,130 +12,230 @@
     }
     $db = conectarDB();
 
-    $queryRol ="SELECT * FROM roles WHERE idRole != 1";
-    $resultadoRol=mysqli_query($db, $queryRol);
 
-    $queryDep ="SELECT * FROM departamentos";//Query para mostrar la el select con los departamentos
+    $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
     
-    $queryId = "SELECT MAX(idUser)+1 FROM users ";//Query para obtener el último id de la la tabla users + 1
-    $resultadoId =mysqli_query($db, $queryId);
-    
-    $email ="";
-    $token = "";
-    $nombre="";
-    $apellidoP="";
-    $apellidoS="";
-    $rolUsuario = "";
-    $departamento = "";
-    $password = "";
-    $ban = true;
-    if ($_SERVER['REQUEST_METHOD']==="POST") {
-        //Obtengo los datos del form
-        
-        $idUser = mysqli_fetch_assoc($resultadoId);//Guarda el id
-        $email = $_POST['emailS'];
-        $token = $_POST['password'];
-        $nombre = $_POST['nombre'];
-        $apellidoP = $_POST['apellidoP'];
-        $apellidoS = $_POST['apellidoS'];
-        $telefono = $_POST['telefono'];
-        $rolUsuario =$_POST['rolUsuario'];
-        $departamento =$_POST['departamento'];
-        $password =$_POST['password'];
+    $queryFallaCP ="SELECT * FROM fallas WHERE idFalla <=7";
+    $resultadoFallaCP= mysqli_query($db, $queryFallaCP);
 
-        $email = "".trim($email)."@cdguzman.tecnm.mx";
-        $query = "SELECT * FROM users";
-        $resultado = mysqli_query($db, $query);
-        while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
-            if( $email == $usuario['email']) {
-                $ban = false;
-                break;
+    $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla >7";
+    $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
+
+
+    $ban = null;
+
+    if ($_SERVER['REQUEST_METHOD']==="POST" ){
+
+        //idSolicitud con el folio
+        $id = $_POST['tipoForm'];//el id de usuario se ocupa para validar que quien modifique la persona sea la misma que la creó
+        $folio = $_POST['tipoForm2'];
+        $falla =$_POST['checkbox'];
+        $descripcion = $_POST['descripcion']; 
+        $observacion = $_POST['observacion'];
+        $fecha = date('Y-m-d');
+        
+        
+        
+
+    
+        $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = $folio";
+        $resultadoIdSol =mysqli_query($db, $queryIdSol);
+        $aux3 = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
+
+        
+        foreach ($aux3 as $key => $idSol) {
+            
+            $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
+            $resultadoLlave0 = mysqli_query($db, $query0);
+    
+            $queryBorrar ="DELETE FROM detalles WHERE idSolicitud = '{$idSol}' ";
+            $resultadoBorrar= mysqli_query($db, $queryBorrar);
+
+            $query1 = "SET FOREIGN_KEY_CHECKS=1";
+            $resultadoLlave0 = mysqli_query($db, $query1);
+
+            foreach ($falla as $key => $fallas) {
+                $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
+                $resultadoFalla =mysqli_query($db, $queryFalla);
+
             }
+
+            
+            $querySol = "UPDATE solicitudes SET `folio`='$folio', `fecha`='$fecha', `descripcion`='$descripcion', `observacion`='$observacion'
+            WHERE idSolicitud = '$idSol'";
+            $resultadoUs =mysqli_query($db, $querySol);
+
+            
+      
         }
-        if ($ban != false){
-            foreach($idUser as $value){//Recorro una vez y lo inserto en users y accesos
-                if($value < 1){
-                    $value += 1;
-                }
-                if(empty($telefono)){//Valida que no sea nulo
-                    $telefono = 0;
-                }
-                $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
-                $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-                $queryUs ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono, idRole) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$rolUsuario}')";
-                $resultadoUs =mysqli_query($db, $queryUs);
-                $queryAcc = "INSERT INTO accesos(idUser, idRole, idDpto) VALUES ('{$value}','{$rolUsuario}','{$departamento}')";
-                $resultadoAcc =mysqli_query($db, $queryAcc);
-            }
-        }
+        
     }
 ?>
-<main class="RegistroNuevoUsuario">
+<main class="ModificarSolicitud">
     <section class="w80">
-        <h1>Registrar Nuevo Usuario</h1>
+        <h1>Cancelar Solicitud Pendiente</h1>
+        <form method="GET" class="tipoSol" >
+           
+        <div class="folioS">
+                <label for="folioS">Ingrese el número de folio</label>
+                <input required type="text" name="folioS" id="folioS" pattern="[0-9]+">           
+                <div class="btnBus">
+                    <input type="submit" value="Buscar Solicitud">
+                </div> 
+            </div>
+        
+            <input type="hidden" name="tipoForm" value="bandera">
+        </form>
+
+
+
         <form method="POST">
-            <div class="emailS">
-                <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
-           </div>
-           <div class="emailD">
-                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-           </div>
-            <div class="nombreUser">
-                <label for="nombre">Nombre</label>
-                <input required type="text" name="nombre" id="nombre" maxlength="50" required pattern="[A-Za-z]+">           
-            </div>
-            <div class="apellidoP">
-                <label for="apellido">Primer Apellido</label>
-                <input required type="text" name="apellidoP" id="apellidoP"maxlength="50" required pattern="[A-Za-z]+">           
-            </div>
-            <div class="apellidoS">
-                <label for="apellido">Segundo Apellido</label>
-                <input required type="text" name="apellidoS" id="apellidoS"maxlength="50" required pattern="[A-Za-z]+">           
-            </div>
-            <div class="tel">
-                <label for="tel">Teléfono</label>
-                <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">
-            </div>
-            <div class="rolUsuario">
-                <label for="rolUsuario">Rol de Usuario</label>
-                <select name="rolUsuario" id="rolUsuario" required>
-                    <option value=""disabled selected>--Seleccione Rol--</option>  
-                    <?php while($rol = mysqli_fetch_assoc($resultadoRol)):?>
-                        <option value="<?php echo $rol['idRole'];?>">
-                            <?php echo $rol['nomRole'];?>
-                        </option>
-                    <?php endwhile;?>  
-                </select>
-            </div>
-            <div class="departamento">
-            <label for="departamento">Departamento</label>
-                <select name="departamento" id="departamento" required>
-                    <option value=""disabled selected>--Seleccione Departamento--</option>  
-                    <?php while($dpto = mysqli_fetch_assoc($resultadoDep)):?>
-                        <option value="<?php echo $dpto['idDpto'];?>">
-                            <?php echo $dpto['nomDpto'];?>
-                        </option>
-                    <?php endwhile;?>  
-                </select>         
-            </div>
-            <div class="eye">
-                <label for="password">Contraseña</label>
-                <input required type="password" name="password" id="password" maxlength="8" minlength="8" placeholder="Ingrese una contraseña de 8 caracteres"> 
-                <img src="/src/img/Show.png" alt="" class="icon" id="ojo">
-            </div>
-            <div class="btnRU">
-                <input type="submit" value="Registrar Usuario">
-            </div>
+            <?php 
+
+                if ($_SERVER['REQUEST_METHOD']==="GET" && isset($_GET['tipoForm'])) {
+                    //Obtengo los datos del form
+                    $folio = $_GET['folioS']?? null;;
+
+
+                    $queryIdUs ="SELECT s.idUser FROM solicitudes as s WHERE s.folio = '{$folio}' ";
+                    $resultadoIdUs = mysqli_query($db, $queryIdUs);// guardo el id del usuario
+
+                    if($resultadoIdUs){//comprueba si existe el folio ------------------
+                        foreach ($resultadoIdUs as $value) {//Envío el id en un input tipo hidden
+                            foreach ($value as $key) {
+                                echo ('<input type="hidden" name="tipoForm" value="'.$key.'" >');//Envío el id sel usuario
+                                $aux = $key;
+                                break;
+                            }
+                            
+                        }
+                        $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.idUser = $aux ";
+                        $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
+                        $ban = true; 
+                        $row = mysqli_fetch_assoc($resultadoDatos);
+                        echo ('
+                        <div class="email">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" value = "'.$row["email"].'" pattern="[A-Za-z 0-9]+" disabled>           
+                        </div>');
+                        $queryDpto ="SELECT s.idDpto, s.fecha FROM solicitudes as s WHERE s.folio = $folio ";
+                        $resultadoDpto = mysqli_query($db, $queryDpto);
+                        $row3 = mysqli_fetch_assoc($resultadoDpto);
+
+                        
+                        $queryNomDpto ="SELECT d.nomDpto FROM departamentos as d WHERE d.idDpto = $row3[idDpto] ";
+                        $resultadoNomDpto = mysqli_query($db, $queryNomDpto);
+                        $row4 = mysqli_fetch_assoc($resultadoNomDpto);
+
+                        $aux2 = $folio;
+                        
+                        echo ('<div class="folio">
+                                    <label for="folio">Folio</label>
+                                    <input type="text" name="'.$aux2.'" id="folio" value="'.$aux2.'" disabled>           
+                        </div>');  
+                        echo ('<input type="hidden" name="tipoForm2" value="'.$aux2.'" >');    //Envia el folio 
+                        
+                        echo('
+                        <div class="nombreUser">
+                            <label for="nombre">Nombre del Solicitante</label>
+                            <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" maxlength="50" pattern="[A-Za-z]+" disabled >           
+                        </div>');
+                       
+                        echo('
+                        <div class="nombreUser">
+                            <label for="area">Área de la solicitud</label>
+                            <input type="text" name="area" id="nombre" value = "'.$row4["nomDpto"].'" maxlength="50" pattern="[A-Za-z]+" disabled >           
+                        </div>');
+                        
+                        function cambiaf_a_espanol($fecha){
+                            preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
+                            $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
+                            return $lafecha;
+                        }
+                 
+                        $fechaaux = cambiaf_a_espanol($row3["fecha"]);
+                        function cambiarFormatoAMysql($fecha){
+                            preg_match( '/([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{2,4})/', $fecha, $mifecha);
+                            $lafecha=$mifecha[3]."-".$mifecha[2]."-".$mifecha[1];
+                            return $lafecha;
+                        }
+                        echo('
+                        <div class="fecha">
+                            <label for="fecha">Fecha de elaboración</label>
+                            <input id="fechaActual" name="fecha" value="'.$fechaaux.'" type="text" disabled>
+                        </div>');
+                        
+                        
+                     /*$queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $aux ";
+                        $resultadoDetalles =  mysqli_query($db, $queryDetalles);
+                        foreach ($resultadoDetalles as $key => $value) {
+                            if (in_array($falla["idFalla"],$value["idFalla"])){
+                                $Marcado = ' checked="checked"';
+                                unset($resultadoDetalles[$value]);//elimina 
+                                echo gettype($value);
+                            } else {
+                                $Marcado='';
+                            }
+                            echo("<input type = 'checkbox' name ='checkbox[]' $Marcado value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
+                         
+
+                              foreach ($resultadoDetalles as $key => $checkboxSel) {
+                                        if (in_array($cont,$checkboxSel["idFalla"])){
+                                            $Marcado = ' checked="checked"';
+                                            unset($resultadoDetalles[$checkboxSel]);
+                                            echo("<input type = 'checkbox' name ='checkbox[]' $Marcado value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
+                                        } else {
+                                            $Marcado='';
+                                        }
+                                    }
+                        }
+                        */
+
+                        
+                        if($row3["idDpto"] == 20){//Formulario del centro de computo
+                            echo('<div class="fallas" ">');//Obtener la posicion del array
+                                while($falla = mysqli_fetch_assoc($resultadoFallaCP)){//Lo recorre de 1 - 7
+                                    echo("<input type = 'checkbox' name ='checkbox[]' value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
+                                     
+                                }
+                            echo('</div>');
+                        }
+                        }elseif($row3["idDpto"] == 21){//Formulario de servicios de mantenimiento
+                            
+                            echo('<div class="fallas" ">');
+                                while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){//Lo recorre de 1 - 7
+                                    echo("<input type = 'checkbox' name ='checkbox[]'  value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
+                                     
+                                }
+                            echo('</div>');
+                        }
+
+                        echo('
+                        <div class="descripcion">
+                            <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción de la falla lo más detallada posible."></textarea>
+                        </div>'); 
+                        echo('
+                        <div class="observacion">
+                            <textarea id ="observacion" name ="observacion" placeholder="Razones de cancelación"></textarea>
+                        </div>'); 
+
+                        echo('
+                        <div class="btnCS">
+                            <input type="submit" value="Cancelar Solicitud">
+                        </div>');
+                    }else{
+                        $ban = false;
+                    }
+            ?>
         </form>
     </section>
 </main>
 <?php 
     inlcuirTemplate('footer');
-    if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {
-        echo "<script>exito('Usuario Registrado');</script>";
-    }elseif($ban == false && $_SERVER['REQUEST_METHOD']==="POST"){
-        echo "<script>fracaso('Error! El email ya existe');</script>";
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm'])) {
+        echo "<script>exito('Solicitud Encontrada');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
+        echo "<script>fracaso('Error! No se encontró la solicitud');</script>";
     }
 ?>

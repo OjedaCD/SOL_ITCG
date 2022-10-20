@@ -119,7 +119,7 @@
                             <label for="email">Email</label>
                             <input type="text" name="email" id="email" value = "'.$row["email"].'" pattern="[A-Za-z 0-9]+" disabled>           
                         </div>');
-                        $queryDpto ="SELECT s.idDpto FROM solicitudes as s WHERE s.idSolicitud = $aux ";
+                        $queryDpto ="SELECT s.idDpto FROM solicitudes as s WHERE s.folio = $folio  ";
                         $resultadoDpto = mysqli_query($db, $queryDpto);
                         $row3 = mysqli_fetch_assoc($resultadoDpto);
   
@@ -156,35 +156,48 @@
 
                         
                  
-                        /*$queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $aux ";
+                     /*$queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $aux ";
                         $resultadoDetalles =  mysqli_query($db, $queryDetalles);
                         foreach ($resultadoDetalles as $key => $value) {
                             if (in_array($falla["idFalla"],$value["idFalla"])){
                                 $Marcado = ' checked="checked"';
-                                unset($resultadoDetalles[$value]);
+                                unset($resultadoDetalles[$value]);//elimina 
                                 echo gettype($value);
                             } else {
                                 $Marcado='';
                             }
                             echo("<input type = 'checkbox' name ='checkbox[]' $Marcado value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
                          
+
+                              foreach ($resultadoDetalles as $key => $checkboxSel) {
+                                        if (in_array($cont,$checkboxSel["idFalla"])){
+                                            $Marcado = ' checked="checked"';
+                                            unset($resultadoDetalles[$checkboxSel]);
+                                            echo("<input type = 'checkbox' name ='checkbox[]' $Marcado value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
+                                        } else {
+                                            $Marcado='';
+                                        }
+                                    }
                         }
                         */
 
+                        
                         if($row3["idDpto"] == 20){//Formulario del centro de computo
+                            echo('<div class="fallas" ">');//Obtener la posicion del array
+                                while($falla = mysqli_fetch_assoc($resultadoFallaCP)){//Lo recorre de 1 - 7
+                                    echo("<input type = 'checkbox' name ='checkbox[]' value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
+                                     
+                                }
+                            echo('</div>');
+                        }
+                        }elseif($row3["idDpto"] == 21){//Formulario de servicios de mantenimiento
+                            
                             echo('<div class="fallas" ">');
-                                while($falla = mysqli_fetch_assoc($resultadoFallaCP)){
+                                while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){//Lo recorre de 1 - 7
                                     echo("<input type = 'checkbox' name ='checkbox[]'  value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
                                      
                                 }
-                        echo('</div>'); 
-
-                        }elseif($row3["idDpto"] == 21){//Formulario de servicios de mantenimiento
-                            echo('<div class="fallas" >');
-                                    echo("<input type = 'checkbox' name ='checkbox[]'  value='$falla[idFalla]' >".$falla['nomFalla'].'<br>');
-                                            
-                                }
-                        echo('</div>'); 
+                            echo('</div>');
                         }
 
                         echo('
@@ -203,9 +216,6 @@
                     }else{
                         $ban = false;
                     }
-                    
-                
-                
             ?>
         </form>
     </section>

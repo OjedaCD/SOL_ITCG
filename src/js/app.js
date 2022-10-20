@@ -28,6 +28,11 @@ function fracaso(mensaje) {
         timer: 2000
       })
 }
+function cambiaf_a_espanol($fecha){
+    preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
+    $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
+    return $lafecha;
+}
 
 function advertencia(mensaje) {
     Swal.fire({
