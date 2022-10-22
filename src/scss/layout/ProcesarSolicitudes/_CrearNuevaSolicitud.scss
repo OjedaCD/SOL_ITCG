@@ -4,62 +4,54 @@
 
     .tipoSol{
         display: flex;
-        gap: 2rem;
-        text-align: center;
-
+        align-content: center;
+        justify-content: center;
+        margin-bottom: 4rem;
+        width: 100%;
+        margin-left: -2%;
         .area{
-            
+            display: inline;
+            width: 40%;
             label{
-                position: relative;
-                top:-2rem;
-                width: 35rem;
-                
+                width: 10%;
+                display: inline;
             }
             select{
-                position: relative;
-                
-                top:-1.2rem;
-                width: 35rem;
+                display: inline;
+                width: 70%;
                 border: .1rem solid $azulMarino;
                 border-radius: 0.8rem;
-                height: 3rem;
-                text-align: center;
+                height: 4rem;
+                text-align: left;
             }
         }
         .emailS{
-            position: relative;
-            display: flex;
-            justify-content: center;
-            top: 1rem;
-            width: 100%;
-            left: -6.8rem;
+            display: inline;
+            width: 25%;
+            margin-left: -5%;
             label{
-                width: 33%;
+                width: 10%;
                 display: inline;
             }
             input{
-                display: flex;
-                width: 40%;
+                display: inline;
+                width: 50%;
             }
     
         }
         .emailD{
-            position: relative;
-            width: 100%;
-            left: -6.4rem;
-            top: 1rem;
+            display: inline;
+            margin-left: -4%;
+            width: 20%;
             input{
-                display: flex;
-                width: 50%;
+                width: 100%;
             }
         }
-        .btnBus{
-            position: relative;
-            
+        .btnBus{ 
+            float: left;
+            margin-left: 2rem;
             input{
-               
-                top: 1rem;
-                width: 15rem;
+                width: 100%;
                 background-color: $verdeVariante;
                 color: $blanco;
                 border-radius: 0.8rem;
@@ -70,15 +62,29 @@
 
     }
     
-    .descripcion{
-        display: flex;
+    .opciones{
+        align-content: center;
         justify-content: center;
-        align-items: center;
-        gap: 5rem;
         text-align: center;
-
+        margin-top: 2rem;
+        label{
+            
+            
+            width: 60%;
+        }
+    }
+    .descripcion{
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        
+        label{
+            margin-left: 28%;
+            display: flex;
+            width: 60%;
+        }
         textarea{
-            width: 61rem;
+            width: 80%;
             height: 12rem;
             background-color: $blanco;
             color: black;
@@ -87,48 +93,65 @@
         }
     }
     
-    
-    .btnBus{
-        position: relative;
-        input{
-            position: absolute;
-            right: 8rem;
-            top: -5rem;
-            width: 15%;
-            background-color: $verdeVariante;
-            color: $blanco;
-            border-radius: 0.8rem;
-            cursor: pointer;
-            text-align: center;
-        }
-    }
-
-    .email, .nombreUser,.folio,.fecha{
+    .email, .nombreUser,.folio,.fecha,.departamento{
         display: flex;
         justify-content: center;
         gap: 2rem;
     }
     
     input:not(input[type="submit"]){
-        width: 35%;
+        width: 45%;
     }
     label{
-        width: 15%;
+        width: 20%;
         display: inline;
     }
 
-    .falla{
-        margin-top: 4rem;
-        
-        margin-bottom: 4rem;
+    .fallas{
+        margin-top: 2rem;
+        text-align: left;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+        input{
+            margin-top: 1.2rem;
+            margin-left: -15%;
+        }
+        label{
+            position: absolute;
+            margin-left: -13%;
+            width: 100%;
+            margin-bottom: -8%;
+           
+        }
+        margin-bottom: 2rem;
+    }
+    .fallas2{
+        margin-top: 2rem;
+        text-align: left;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+        input{
+            margin-top: 1.2rem;
+            margin-left: 7%;
+        }
+        label{
+            position: absolute;
+            margin-left: -13%;
+            width: 100%;
+            margin-bottom: -8%;
+           
+        }
+        margin-bottom: 2rem;
     }
     .btnCS{
-        margin-top: 2rem;
-        display: flex;
-        justify-content: right;
-        margin-right: 27.5rem;
+        position: relative;
+        float: right;
+        margin-top: 1rem;
+        right: 23%;
         input{
-            width: 20%;
+            width: 100%;
             background-color: $verde;
             color: $blanco;
         }

@@ -23,9 +23,8 @@
 
     $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla >7";
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
-
     $ban = null;
-
+    $ban2 = null;
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
         
         $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
@@ -40,7 +39,6 @@
         $estado = "ESPERA";
         $fecha = date('Y-m-d');
         
-        
         foreach($idSolicitud as $idSol){
             $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
             $resultadoLlave0 = mysqli_query($db, $query0);
@@ -53,11 +51,14 @@
                 $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
                 $resultadoFalla =mysqli_query($db, $queryFalla);
             }
-        
             $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, descripcion, observacion, Etapa, Prioridad, Estado) 
             VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}')";
             $resultadoUs =mysqli_query($db, $querySol);
-
+            if($resultadoUs){
+                $ban3 = true;
+            }else{
+                $ban3 = false;
+            }
             $query1 = "SET FOREIGN_KEY_CHECKS=1";
             $resultadoLlave0 = mysqli_query($db, $query1);
         }
@@ -86,7 +87,7 @@
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
            </div>
            <div class="btnBus">
-                <input type="submit" value="Buscar Usuario">
+                <input type="submit" value="Generar Formulario">
             </div>
             <input type="hidden" name="tipoForm" value="bandera">
         </form>
@@ -97,96 +98,112 @@
                     $email = $_GET['emailS']?? null;;
                     $area = $_GET['area']?? null;;
                     $email = "".trim($email)."@cdguzman.tecnm.mx";
-
+                    $ban = true; 
+                    $ban2 = true;
                     $query = "SELECT * FROM users";
                     $resultado = mysqli_query($db, $query);
                     while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
-                        if( $email == $usuario['email']) {
-                            $ban = true; 
-                            $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.email = '$email'";
-                            $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
-                            $queryId = "SELECT u.idUser FROM users as u WHERE u.email = '{$email}'";//se necesita el id del usuario para relacionarlo con accesos
-                            $resultadoId = mysqli_query($db, $queryId);
-    
-                            foreach ($resultadoId as $value) {//Envío el id en un input tipo hidden
-                                foreach ($value as $key) {
-                                    echo ('<input type="hidden" name="tipoForm" value="'.$key.'" >');
-                                }
+                        $queryId = "SELECT u.idUser FROM users as u WHERE u.email = '{$email}'";//se necesita el id del usuario para relacionarlo con accesos
+                        $resultadoId = mysqli_query($db, $queryId);
+                        foreach ($resultadoId as $value) {//Envío el id en un input tipo hidden
+                            foreach ($value as $key) {
+                                echo ('<input type="hidden" name="tipoForm" value="'.$key.'" >');
                             }
+                        }
+                        if( $email == $usuario['email']) {//Comprueba el email dentro de la BD
+                            
+                            if($_SESSION['idUser'] == $key){//Compruba que el usuario que genera la solicitud sea el mismo que inicio sesion
 
-                            $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);
-                            $row = mysqli_fetch_assoc($resultadoDatos);
+                                $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.email = '$email'";
+                                $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
+                                $row = mysqli_fetch_assoc($resultadoDatos);
 
-                            echo ('
-                            <div class="email">
-                                <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.$row["email"].'" pattern="[A-Za-z 0-9]+" disabled>           
-                            </div>');
-                            $Year = date("Y");
+                                $queryDpto = "SELECT nomDpto FROM departamentos WHERE idDpto = $row[idDpto]";
+                                $resultadoDpto = mysqli_query($db, $queryDpto);
+                                $row2 = mysqli_fetch_assoc($resultadoDpto);//Toma los datos de accesos y departamentos
 
-                            foreach($idSolicitud as $value){
-                                if($value < 1){
-                                    $value += 1;
+                                $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);
+                                $Year = date("Y");
+                                foreach($idSolicitud as $value){
+                                    if($value < 1){
+                                        $value += 1;
+                                    }
+                                    $aux = $area.$value.$Year;
+                                    
+                                    echo ('<div class="folio">
+                                                <label for="folio">Folio</label>
+                                                <input type="text" name="'.$aux.'" id="folio" value="'.$aux.'" disabled>           
+                                            </div>
+                                            ');       
                                 }
-                                $aux = $area.$value.$Year;
+                                echo ('<input type="hidden" name="tipoForm2" value="'.$aux.'" >');
+
+                                echo ('
+                                <div class="email">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" id="email" value = "'.$row["email"].'" pattern="[A-Za-z 0-9]+" disabled>           
+                                </div>');
                                 
-                                echo ('<div class="folio">
-                                            <label for="folio">Folio</label>
-                                            <input type="text" name="'.$aux.'" id="folio" value="'.$aux.'" disabled>           
-                                        </div>
-                                        ');       
+                                echo('
+                                <div class="nombreUser">
+                                    <label for="nombre">Nombre del Solicitante</label>
+                                    <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" maxlength="50" pattern="[A-Za-z]+" disabled >           
+                                </div>');
+                                echo('
+                                <div class="departamento">
+                                    <label for="departamento">Departamento</label>
+                                        <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
+                                </div>');
+                                echo('
+                                <div class="fecha">
+                                    <label for="fecha">Fecha de elaboración</label>
+                                    <input id="fechaActual" name="fecha" type="date" disabled>
+                                </div>');
+                                echo('<script> window.onload = function(){
+                                    var fecha = new Date(); //Fecha actual
+                                    var mes = fecha.getMonth()+1; //obteniendo mes
+                                    var dia = fecha.getDate(); //obteniendo dia
+                                    var ano = fecha.getFullYear(); //obteniendo año
+                                    if(dia<10)
+                                    dia=\'0\'+dia; //agrega cero si el menor de 10
+                                    if(mes<10)
+                                    mes=\'0\'+mes //agrega cero si el menor de 10
+                                    document.getElementById(\'fechaActual\').value=ano+"-"+mes+"-"+dia;
+                                }</script>');
+                                echo('
+                                <div class="opciones">
+                                    <label for="opciones">Clasificación de la falla a reparar:</label>
+                                </div>');
+                                
+                                if($area == 20){//Formulario del centro de computo
+                                    echo('<div class="fallas" ">');
+                                        while($falla = mysqli_fetch_assoc($resultadoFallaCP)){
+                                            echo('<input type = "checkbox" name ="checkbox[]" value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                                        }
+                                echo('</div>'); 
+                                
+                                }elseif($area == 21){//Formulario de servicios de mantenimiento
+                                    echo('<div class="fallas2" >');
+                                        while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){
+                                            echo('<input type = "checkbox" name ="checkbox[]" value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                                        }
+                                echo('</div>'); 
+                                }
+
+                                echo('
+                                <div class="descripcion">
+                                    <label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>
+                                    <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required></textarea>
+                                </div>'); 
+
+                                echo('
+                                <div class="btnCS">
+                                    <input type="submit" value="Crear Solicitud">
+                                </div>');
+                                break;
+                            }else{
+                                $ban2 = false;
                             }
-                            echo ('<input type="hidden" name="tipoForm2" value="'.$aux.'" >');
-
-                            echo('
-                            <div class="nombreUser">
-                                <label for="nombre">Nombre del Solicitante</label>
-                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" maxlength="50" pattern="[A-Za-z]+" disabled >           
-                            </div>');
-                            echo('
-                            <div class="fecha">
-                                <label for="fecha">Fecha de elaboración</label>
-                                <input id="fechaActual" name="fecha" type="date" disabled>
-                            </div>');
-
-                            echo('<script> window.onload = function(){
-                                var fecha = new Date(); //Fecha actual
-                                var mes = fecha.getMonth()+1; //obteniendo mes
-                                var dia = fecha.getDate(); //obteniendo dia
-                                var ano = fecha.getFullYear(); //obteniendo año
-                                if(dia<10)
-                                dia=\'0\'+dia; //agrega cero si el menor de 10
-                                if(mes<10)
-                                mes=\'0\'+mes //agrega cero si el menor de 10
-                                document.getElementById(\'fechaActual\').value=ano+"-"+mes+"-"+dia;
-                            }</script>');
-
-                            
-                            if($area == 20){//Formulario del centro de computo
-                                echo('<div class="fallas" ">');
-                                     while($falla = mysqli_fetch_assoc($resultadoFallaCP)){
-                                        echo('<input type = "checkbox" name ="checkbox[]" value="'.$falla['idFalla'].'">'.$falla['nomFalla'].'<br>');
-                                     }
-                            echo('</div>'); 
-                            
-                            }elseif($area == 21){//Formulario de servicios de mantenimiento
-                                echo('<div class="fallas" >');
-                                     while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){
-                                        echo('<input type = "checkbox" name ="checkbox[]" value="'.$falla['idFalla'].'">'.$falla['nomFalla'].'<br>');
-                                     }
-                            echo('</div>'); 
-                            }
-
-                            echo('
-                            <div class="descripcion">
-                                <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción de la falla lo más detallada posible."></textarea>
-                            </div>'); 
-
-                            echo('
-                            <div class="btnCS">
-                                <input type="submit" value="Crear Solicitud">
-                            </div>');
-                            break;
                         }else{
                             $ban = false;
                         }
@@ -198,9 +215,15 @@
 </main>
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm'])) {
-        echo "<script>exito('Usuario Encontrado');</script>";
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm']) && $ban2 == true) {
+        echo "<script>exito('Usuario Encontrado se ha generado el formulario');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
         echo "<script>fracaso('Error! El email no existe');</script>";
+    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban3 == true){
+        echo "<script>exito('Se ha generado su solicitud');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban3 == false){
+        echo "<script>fracaso('Intente otra vez, su solicitud no se ha generado');</script>";
+    }if($ban2 == false && isset($_GET['tipoForm']) && $_SERVER['REQUEST_METHOD'] === "GET"){
+        echo "<script>fracaso('Error! El email no le pertenece, ingrese el suyo');</script>";
     }
 ?>

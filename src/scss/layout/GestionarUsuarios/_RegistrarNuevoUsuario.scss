@@ -1,30 +1,39 @@
 .RegistroNuevoUsuario{
     margin-top: 2rem;
-    .emailS{
-        position: relative;
+    .user{
         display: flex;
-        justify-content: center;
-        gap: 2rem;
-        width: 50%;
-        left: 18.8rem;
-        label{
-            width: 30%;
+        text-align: center;
+        margin-bottom: 1rem;
+        margin-left: 19.6%;
+        .emailS{
             display: inline;
+            width: 50%;
+            label{
+                width: 50%;
+                margin-right: 34%;
+            }
         }
-
+        .emailD{
+            margin-left: -1.6%;
+            display: inline;
+            width: 22.5%;
+            input{
+                width: 100%;
+            }
+        }
     }
-    .emailD{
+    
+    .btnRU{
         position: relative;
-        width: 45%;
-        left: 55.6rem;
-        top: -5rem;
+        float: right;
+        right: 23%;
         input{
-            position: absolute;
-            right: 19rem;
-            display: flex;
-            width: 35%;
+            width: 100%;
+            background-color: $verde;
+            color: $blanco;
         }
     }
+
     .nombreUser, .apellidoP, .apellidoS, .tel, .rolUsuario, .departamento {
         display: flex;
         justify-content: center;
@@ -43,22 +52,13 @@
         width: 15%;
         display: inline;
     }
-    .btnRU{
-        display: flex;
-        justify-content: right;
-        margin-right: 27rem;
-        input{
-            width: 20%;
-            background-color: $verde;
-            color: $blanco;
-        }
-    }
+    
     .eye {
         display: flex;
         justify-content: center;
         gap: 2rem;
         align-items: center;
-        height: 4rem;
+        height: 100%;
         width: 100%;
         background-color: white;
         position: relative;

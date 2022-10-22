@@ -1,17 +1,6 @@
 <?php  
     require "../../includes/funciones.php";  $auth = estaAutenticado();
-    require "../../includes/config/database.php";
-    
-    //Import PHPMailer classes into the global namespace
-    //These must be at the top of your script, not inside a function
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
-
-    require '../../includes/PHPMailer/Exception.php';
-    require '../../includes/PHPMailer/PHPMailer.php';
-    require '../../includes/PHPMailer/SMTP.php';
-    
+    require "../../includes/config/database.php";  
     if (!$auth) {
        header('location: /'); die();
     }
@@ -21,66 +10,42 @@
         die();
     }
     $db = conectarDB();
-    
-    $email ="";
     $ban = null;
 
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
         $razon = $_POST['razon'];
-        $id = $_POST['tipoForm'];
+        $id = $_POST['tipoForm2'];
+        $edoUsuario = $_POST['edoUsuario'];
 
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
-        
-        //Create an instance; passing `true` enables exceptions
-        $mail = new PHPMailer(true);
         try {
-            //Server settings
-            $mail->SMTPDebug = 0;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'L18290915@cdguzman.tecnm.mx';                     //SMTP username
-            $mail->Password   = 'MaxBarrigon1';                               //SMTP password
-            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        
-            //Recipients
-            $mail->setFrom('L18290915@cdguzman.tecnm.mx', 'David Ojeda');//correo del superAdmin
-            $mail->addAddress('L18290915@cdguzman.tecnm.mx'); //correo a eliminar            //Name is optional
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Se ha eliminado tu cuenta del sistema de solicitudes SOL_ITCG';
-            $mail->Body    = $razon;
-            $mail->CharSet = 'UTF-8';
-        
-            $mail->send();
             $ban = true;
-            $queryCancelar = "DELETE FROM `users` WHERE `users`.`idUser` = '{$id}'";
-            $resultadoLlave0 = mysqli_query($db, $queryCancelar);
+            $queryCambiar= "UPDATE users SET `edoUser`='$edoUsuario' WHERE idUser = '$id'";
+            $resultadoCambiar = mysqli_query($db, $queryCambiar);
+
+            //Aquí ira el código para enviar el email cuando se suba al servidor
         } catch (Exception $e) {
             $ban = false;
         }
         $query1 = "SET FOREIGN_KEY_CHECKS=1";
         $resultadoLlave0 = mysqli_query($db, $query1);
     }
-
 ?>
-<main class="CancelarUsuario">
+<main class="CambiarEstado">
     <section class="w80">
-        <h1>Cancelar Usuarios</h1>
-        <form method="GET" >
-            <div class="btnBCU">
-                <input type="submit" value="Buscar Usuario">
-            </div>
+        <h1>Cambiar Estado de Usuarios</h1>
+        <form method="GET" class="buscarUs" >
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+                <input type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+" required>           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
            </div>
+           <div class="btnBus">
+                <input type="submit" value="Buscar Usuario">
+            </div>
            <input type="hidden" name="tipoForm" value="bandera">
         </form>
 
@@ -96,29 +61,29 @@
                         if( $email == $usuario['email']) {
                             $ban = true;
                             //Aquí va el envia el codigo a los inputs
-                            $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
+                            $queryDatos= "SELECT u.idUser, u.email, u.nomUsuario, u.apellidoUsuario, u.edoUser, u.telefono, u.idDpto, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
                             $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
-                            $queryId = "SELECT u.idUser FROM users as u WHERE u.email = '{$email}'";//se necesita el id del usuario para relacionarlo con accesos
-                            $resultadoId = mysqli_query($db, $queryId);
-                            
-                            foreach ($resultadoId as $value) {
-                                foreach ($value as $key) {
-                                    $queryDpto = "SELECT  d.nomDpto FROM departamentos as d INNER JOIN accesos as ac ON ac.idDpto = d.idDpto WHERE ac.idUser = '{$key}'";
-                                    $resultadoDpto = mysqli_query($db, $queryDpto);
-                                    echo ('<input type="hidden" name="tipoForm" value="'.$key.'">');
-                                }
-                            }
                             $row = mysqli_fetch_assoc($resultadoDatos);//Toma los datos de usuarios y roles
+
+                            $queryDpto = "SELECT nomDpto FROM departamentos WHERE idDpto = $row[idDpto]";
+                            $resultadoDpto = mysqli_query($db, $queryDpto);
                             $row2 = mysqli_fetch_assoc($resultadoDpto);//Toma los datos de accesos y departamentos
+
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.$row["email"].'" disabled>           
+                                <input type="text" name="email" id="email" value = "'.$row["email"].'" disabled>
+                                <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">           
                             </div>');
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" disabled>           
+                            </div>');
+                            echo('
+                            <div class="telefono">
+                                <label for="telefono">Teléfono de Usuario</label>
+                                <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" disabled>           
                             </div>');
                             echo('
                             <div class="departamento">
@@ -131,12 +96,23 @@
                                 <input type="text" name="rolUsuario" id="rolUsuario" value = "'.$row["nomRole"].'" disabled>           
                             </div>');
                             echo('
+                            <div class="edoUsuario">
+                                <label for="edoUsuario">Estado de Usuario</label>
+                                <select name="edoUsuario" id="edoUsuario" required>
+                                    <option value=""disabled selected>--Seleccione Estado--</option>
+                                    <option value="HABILITADO">HABILITADO</option>
+                                    <option value="DESHABILITADO">DESHABILITADO</option>
+                                </select> 
+                            </div>'); 
+                            
+                            echo('
                             <div class="razon">
-                                <textarea name ="razon" placeholder="Ingresa las razones de la cancelación del usuario para notificarle en su correo institucional una vez eliminado del sistema -Las solicitudes generadas por él no se eliminarán-"></textarea>
+                                <label for="razon">Razón del cambio de estado del usuario</label>
+                                <textarea name ="razon" placeholder="Ingresa las razones del cambio de estado del usuario, para notificarle en su correo institucional una vez HABILITADO/DESHABILITADO del sistema -Las solicitudes generadas por él no se eliminarán-" required></textarea>
                             </div>');
                             echo('
                             <div class="btnCU">
-                                <input type="submit" value="Cancelar Usuario">
+                                <input type="submit" value="Cambiar Estado">
                             </div>');
                             break;
                         }else{
@@ -156,8 +132,8 @@
     }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
         echo "<script>fracaso('Error! El email no existe');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true){
-        echo "<script>advertencia('El usuario se ha cancelado');</script>";
+        echo "<script>advertencia('Se ha cambiado el estado del usuario');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false){
-        echo "<script>fracaso('No se ha podido cancelar el usuario');</script>";
+        echo "<script>fracaso('No se ha podido cambiar el estado del usuario');</script>";
     }
 ?>

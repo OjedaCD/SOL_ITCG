@@ -3,37 +3,36 @@
     margin-top: 4rem;
 
     .tipoSol{
-        display: inline;
-        gap: 2rem;
-        text-align: center;
-        align-items: center;
-        text-align: center;
+        display: flex;
         margin-bottom: 3rem;
-
-        .folioS{     
-                input{
-                    width: 25%;
-                }
-
-                label{
-                    width: 25%;
-                }
-                .btnBus{
-                    top: .7rem;
-                    input{
-                        
-                        width: 15%;
-                        background-color: $verdeVariante;
-                        color: $blanco;
-                        border-radius: 0.8rem;
-                        cursor: pointer;
-        
-                    }
-                }
+        justify-content: center;
+        align-content: center;
+        width: 100%;
+        .folioS{   
+            display: inline;
+            input{
+                width: 25%;
             }
 
+            label{
+                width: 25%;
+            }
+        }
+        .btnBus{
+            display: inline;
+            margin-left: 2rem;
+            margin-top: 5rem;
+            width: 20%;
+            input{
+                width: 100%;
+                background-color: $verdeVariante;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                text-align: center;
+            }
+        }
         
-
     }
     
     .descripcion, .observacion{

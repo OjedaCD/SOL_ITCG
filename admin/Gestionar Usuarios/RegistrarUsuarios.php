@@ -45,36 +45,17 @@
         $edo = "HABILITADO";
 
         $email = "".trim($email)."@cdguzman.tecnm.mx";
-        $query = "SELECT * FROM users";
-        $resultado = mysqli_query($db, $query);
-        while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
-            if( $email == $usuario['email']) {
-                $ban = false;
-                if($ban == false){
-                    echo("<script>
-                        function validarCorreo(){
-                        
-                            fracaso('Error! El email ya existe');
-                        }
-                            </script>");
-                    break;
-                }
+        foreach($idUser as $value){//Recorro una vez y lo inserto en users
+            if($value < 1){
+                $value += 1;
             }
-        }
-        if ($ban != false){
-            foreach($idUser as $value){//Recorro una vez y lo inserto en users y accesos
-                if($value < 1){
-                    $value += 1;
-                }
-                if(empty($telefono)){//Valida que no sea nulo
-                    $telefono = 0;
-                }
-                $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
-                $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-                $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
-                $resultadoUs =mysqli_query($db, $queryUs);
-                
+            if(empty($telefono)){//Valida que no sea nulo
+                $telefono = 0;
             }
+            $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
+            $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
+            $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
+            $resultadoUs =mysqli_query($db, $queryUs);
         }
     }
 ?>
@@ -82,13 +63,16 @@
     <section class="w80">
         <h1>Registrar Nuevo Usuario</h1>
         <form method="POST">
-            <div class="emailS">
-                <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" onblur="validarCorreo(this)" pattern="[A-Za-z 0-9]+">           
-           </div>
-           <div class="emailD">
-                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-           </div>
+            <div class="user">
+                <div class="emailS">
+                    <label for="emailS">Email</label>
+                    <input required type="text" name="emailS" id="emailS" onblur="validarCorreo(this)" pattern="[A-Za-z 0-9]+">           
+                </div>
+                <div class="emailD">
+                    <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
+                </div>
+            </div>
+            
             <div class="nombreUser">
                 <label for="nombre">Nombre</label>
                 <input required type="text" name="nombre" id="nombre" maxlength="50" required pattern="[A-Za-z]+">           
@@ -136,13 +120,6 @@
                 <input type="submit" value="Registrar Usuario">
             </div>
         </form>
-        
-        
-       
-       
-
-
-
     </section>
 </main>
 <?php 

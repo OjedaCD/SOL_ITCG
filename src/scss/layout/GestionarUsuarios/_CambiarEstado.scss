@@ -1,7 +1,6 @@
-.ModificarUsuarios{
+.CambiarEstado{
     
     margin-top: 2rem;
-
     .buscarUs{
         display: flex;
         text-align: center;
@@ -37,8 +36,7 @@
             }
         }
     }
-
-    .email, .nombreUser,.apellidoUser,.telefono, .departamento, .rolUsuario{
+    .email, .nombreUser, .departamento, .rolUsuario, .edoUsuario, .telefono{
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -56,15 +54,34 @@
         width: 15%;
         display: inline;
     }
-
-
-    .btnMU{
+    .razon{
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        
+        label{
+            margin-left: 37.5%;
+            display: flex;
+            width: 30%;
+        }
+        textarea{
+            width: 60%;
+            height: 12rem;
+            background-color: $blanco;
+            color: black;
+            border: .2rem solid black;
+            border-radius: 0.8rem;
+        }
+    }
+    
+    .btnCU{
         position: relative;
         float: right;
-        right: 23%;
+        right: 20%;
+        top: 2rem;
         input{
             width: 100%;
-            background-color: $verde;
+            background-color: $azulMarino;
             color: $blanco;
         }
     }

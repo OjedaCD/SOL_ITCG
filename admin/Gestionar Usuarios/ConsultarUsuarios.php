@@ -56,6 +56,7 @@
                 <input type="submit" value="Buscar Usuario">
             </div>
         </form>
+
         <div class="correo" id="correo"><?php
             if ($_SERVER['REQUEST_METHOD']==="POST" && $_POST['tipoForm']=="correo") {
                 //Obtengo los datos del form de consultar usuario por correo
@@ -67,19 +68,14 @@
                     if( $email == $usuario['email']) {
                         $ban = true;
                         //Aquí va el envia el codigo a los inputs
-                        $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
+                        $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.edoUser, u.telefono, u.idDpto, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
                         $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
-                        $queryId = "SELECT u.idUser FROM users as u WHERE u.email = '{$email}'";//se necesita el id del usuario para relacionarlo con accesos
-                        $resultadoId = mysqli_query($db, $queryId);
-                        
-                        foreach ($resultadoId as $value) {
-                            foreach ($value as $key) {
-                                $queryDpto = "SELECT  d.nomDpto FROM departamentos as d INNER JOIN accesos as ac ON ac.idDpto = d.idDpto WHERE ac.idUser = $key";
-                                $resultadoDpto = mysqli_query($db, $queryDpto);
-                            }
-                        }
                         $row = mysqli_fetch_assoc($resultadoDatos);//Toma los datos de usuarios y roles
+
+                        $queryDpto = "SELECT nomDpto FROM departamentos WHERE idDpto = $row[idDpto]";
+                        $resultadoDpto = mysqli_query($db, $queryDpto);
                         $row2 = mysqli_fetch_assoc($resultadoDpto);//Toma los datos de accesos y departamentos
+
                         echo ('
                         <div class="email">
                             <label for="email">Email</label>
@@ -89,6 +85,11 @@
                         <div class="nombreUser">
                             <label for="nombre">Nombre</label>
                             <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" disabled>           
+                        </div>');
+                        echo('
+                        <div class="telefono">
+                            <label for="telefono">Teléfono de Usuario</label>
+                            <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" disabled>           
                         </div>');
                         echo('
                         <div class="departamento">
@@ -101,9 +102,9 @@
                             <input type="text" name="rolUsuario" id="rolUsuario" value = "'.$row["nomRole"].'" disabled>           
                         </div>');
                         echo('
-                        <div class="telefono">
-                            <label for="telefono">Teléfono de Usuario</label>
-                            <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" disabled>           
+                        <div class="edoUsuario">
+                            <label for="edoUsuario">Estado de Usuario</label>
+                            <input type="text" name="edoUsuario" id="rolUsuario" value = "'.$row["edoUser"].'" disabled>           
                         </div>');
                         break;
                     }else{
@@ -116,10 +117,10 @@
         <div class="departamento">
             <div class = "container-table">
                 <?php if ($_SERVER['REQUEST_METHOD']=="POST" && $_POST['tipoForm']=="departamento") {          
-                        $dpto=$_POST['departamento'];//Guarda el id del departamento seleccionado 
-                        $queryDpto1 ="SELECT nomDpto FROM departamentos WHERE idDpto = $dpto";
+                        $departamento =$_POST['departamento'];
+                        $queryDpto1 ="SELECT nomDpto FROM departamentos WHERE idDpto = $departamento";
                         $resultadoDpto1 = mysqli_query($db, $queryDpto1);
-
+                        
                         while($row3 = mysqli_fetch_assoc($resultadoDpto1)){
                             echo ('<div class="table__title">');
                             echo ($row3 ["nomDpto"]);
@@ -128,18 +129,19 @@
 
                         echo ('<div class="table__header">Email</div>');
                         echo ('<div class="table__header">Nombre</div>');
-                        echo ('<div class="table__header">Rol</div>');
                         echo ('<div class="table__header">Teléfono</div>');
-                        
+                        echo ('<div class="table__header">Rol</div>');
+                        echo ('<div class="table__header">Estado</div>');
 
-                        $queryDpto2 = ("SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN accesos as ac ON ac.idUser = u.idUser WHERE ac.idDpto = $dpto ORDER BY u.apellidoUsuario DESC");                       
+                        $queryDpto2 = ("SELECT u.edoUser, u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN departamentos as d ON d.idDpto = u.idDpto WHERE d.idDpto = $departamento ORDER BY u.apellidoUsuario DESC");                       
                         $resultadoDpto2 =mysqli_query($db, $queryDpto2);
                         while($row4 = mysqli_fetch_assoc($resultadoDpto2)){
                             if($row4['email']) { 
                                 echo ('<div class="table__item">'.$row4["email"].'</div>');
                                 echo ('<div class="table__item">'.$row4["nomUsuario"]." ".$row4["apellidoUsuario"].'</div>');
-                                echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
                                 echo ('<div class="table__item">'.$row4["telefono"].'</div>');
+                                echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
+                                echo ('<div class="table__item">'.$row4["edoUser"].'</div>');
                                 $ban = true;
                             }else{
                                 $ban = false;

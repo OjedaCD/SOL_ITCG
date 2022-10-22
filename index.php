@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
             //revisar el password
             while($usuario = mysqli_fetch_assoc($resultado)){
             //verificar si el password es correcto o no 
-                if( $email == $usuario['email']) {
+                if( $email == $usuario['email'] && $usuario['edoUser'] == "HABILITADO") {
                     # code...
                     $auth = password_verify($password, $usuario['token']);//Compara la contraseña en la BD
                     if ($auth) {
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                         $_SESSION['usuario'] = $usuario['email'];//Se identifica al usario en el sistema 
                         $_SESSION['login'] = true;
                         $_SESSION['idRole'] = $usuario['idRole'];
+                        $_SESSION['idDpto'] = $usuario['idDpto'];
                         $_SESSION['idUser'] = $usuario['idUser'];//Aquí será el id
                         header('location: /admin');//Accede a los modulos
-                        
                     }
                     else {
                         $errores[0] = 'La contraseña es incorrecta';

@@ -17,7 +17,6 @@
 
     $queryDep ="SELECT * FROM departamentos ORDER BY nomDpto";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
-    
     $ban = null;
 
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
@@ -28,14 +27,14 @@
         $telefono = $_POST['telefono'];
         $departamento = $_POST['departamento'];
         $rolU = $_POST['rolUsuario'];
-        $id = $_POST['tipoForm'];
+        $id = $_POST['tipoForm2'];
 
         $email = "".trim($email)."@cdguzman.tecnm.mx";
 
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
         
-        $queryModificar= "UPDATE users u INNER JOIN accesos a on u.idUser = a.idUser SET `email`='$email',`nomUsuario`='$nombre', `apellidoUsuario`='$apellidos',`telefono`='$telefono',u.idRole='$rolU', a.idRole = u.idRole, a.idDpto ='$departamento' WHERE u.idUser = '$id'";
+        $queryModificar= "UPDATE users SET `email`='$email',`nomUsuario`='$nombre', `apellidoUsuario`='$apellidos',`telefono`='$telefono',idRole='$rolU', idDpto ='$departamento' WHERE idUser = '$id'";
         $resultadoModificar = mysqli_query($db, $queryModificar);
 
         if($resultadoModificar) {
@@ -51,11 +50,11 @@
     <section class="w80">
         <h1>Modificar Usuarios</h1>
         <!--Es un tipo de formulario -->
-        <form method="GET" >
+        <form method="GET" class="buscarUs" >
             
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+ required">           
+                <input type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+" required>           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -78,25 +77,16 @@
                         if( $email == $usuario['email']) {
                             $ban = true;
                             //Aquí va el envia el codigo a los inputs
-                            $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario,u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
+                            $queryDatos= "SELECT u.idUser, u.email, u.nomUsuario, u.apellidoUsuario, u.edoUser, u.telefono, u.idDpto, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
                             $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
-                            $queryId = "SELECT u.idUser FROM users as u WHERE u.email = '{$email}'";//se necesita el id del usuario para relacionarlo con accesos
-                            $resultadoId = mysqli_query($db, $queryId);
-                            //Recorre un arregelo el foreach, y el value as key es para utilizar la llave principal
-                            foreach ($resultadoId as $value) {
-                                foreach ($value as $key) {
-                                    $queryDpto = "SELECT  d.nomDpto FROM departamentos as d INNER JOIN accesos as ac ON ac.idDpto = d.idDpto WHERE ac.idUser = '{$key}'";
-                                    $resultadoDpto = mysqli_query($db, $queryDpto);
-                                    echo ('<input type="hidden" name="tipoForm" value="'.$key.'">');
-                                }
-                            }
                             $row = mysqli_fetch_assoc($resultadoDatos);//Toma los datos de usuarios y roles
-                            $row2 = mysqli_fetch_assoc($resultadoDpto);//Toma los datos de accesos y departamentos
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
                                 <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" pattern="[A-Za-z 0-9]+" required >           
+                                <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">
                             </div>');
+                        
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
@@ -126,8 +116,6 @@
                                 echo('
                                 </select> 
                             </div>');  
-                            
-                            
                             echo('
                             <div class="rolUsuario">
                                 <label for="rolUsuario">Rol de Usuario</label>

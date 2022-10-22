@@ -60,14 +60,9 @@
                 $resultadoFalla =mysqli_query($db, $queryFalla);
 
             }
-
-            
             $querySol = "UPDATE solicitudes SET `folio`='$folio', `fecha`='$fecha', `descripcion`='$descripcion', `observacion`='$observacion'
             WHERE idSolicitud = '$idSol'";
             $resultadoUs =mysqli_query($db, $querySol);
-
-            
-      
         }
         
     }
@@ -75,16 +70,14 @@
 <main class="ModificarSolicitud">
     <section class="w80">
         <h1>Modificar Solicitud</h1>
-        <form method="GET" class="tipoSol" >
-           
-        <div class="folioS">
+        <form method="GET" class="tiposSol" >
+            <div class="folioS">
                 <label for="folioS">Ingrese el número de folio</label>
                 <input required type="text" name="folioS" id="folioS" pattern="[0-9]+">           
-                <div class="btnBus">
-                    <input type="submit" value="Buscar Solicitud">
-                </div> 
             </div>
-        
+            <div class="btnBus">
+                <input type="submit" value="Buscar Solicitud">
+            </div> 
             <input type="hidden" name="tipoForm" value="bandera">
         </form>
 
