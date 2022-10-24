@@ -21,21 +21,13 @@
 
     $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla >7";
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
-    if($_SERVER['REQUEST_METHOD']==="GET"){
-        
-        $folio = $_GET['tipoForm2']?? null;;
-        $observacion = $_GET['observacion']?? null;;
-        $btn= $_GET['btn']?? null;;
-
-        echo($folio."<br>".$observacion."<br>".$btn);
-    }
-
+   
 ?>
 <main class="VerSolicitud">
     <section class="w80">
         <h1>Ver Solicitud</h1>
 
-        <form method="GET">
+        <form method="GET" action ="VerSolicitudesEntrantes.php">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="POST") {
                     //Obtengo los datos del form
@@ -174,7 +166,7 @@
                                 echo('
                                 <div class="observacion">
                                     <label for="observacion">Observaciones o Comentarios </label>
-                                    <textarea id ="observacion" name ="observacion" placeholder="Los administradores deben de colocar de manera obligatoria las observaciones o comentarios para que el solicitante de seguimiento a su solicitud." required></textarea>
+                                    <textarea id ="observacion" name ="observacion" placeholder="Los administradores deben de colocar de manera obligatoria las observaciones o comentarios para que el solicitante de seguimiento a su solicitud. Así como el personal involucrado para atender dicha solicitud." required></textarea>
                                 </div>'); 
 
                                 echo('
@@ -203,5 +195,4 @@
     </section>
 </main>
 <?php 
-    inlcuirTemplate('footer');
 ?>

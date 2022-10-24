@@ -228,7 +228,7 @@
                                     <label for="observacion">Correcciones para que su solicitud sea valida:</label>
                                     <textarea id ="observacion" disabled name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."></textarea>
                                 </div>'); 
-
+//poner la desicion del placeholder
                                 echo('
                                 <div class="btnCS">
                                     <input type="submit" value="Modificar Solicitud">

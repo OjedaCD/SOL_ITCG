@@ -10,34 +10,41 @@
 
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
+    $ban = null;
+    if($_SERVER['REQUEST_METHOD']==="GET"){
+        
+        $folio = $_GET['tipoForm2']?? null;;
+        $observacion = $_GET['observacion']?? null;;
+        $btn= $_GET['btn']?? null;;
+
+        $queryOb = "UPDATE solicitudes SET  `observacion`='$observacion'WHERE folio = '$folio'";
+        $resultadoOb=mysqli_query($db, $queryOb);
+        if($resultadoOb){
+            
+            if($btn == "Aceptar Solicitud"){
+                $queryA = "UPDATE solicitudes SET  `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+                $resultadoA=mysqli_query($db, $queryA);
+                $ban = true;
+            }elseif($btn == "Rechazar Solicitud"){
+                $queryR = "UPDATE solicitudes SET  `Estado`='RECHAZADO', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
+                $resultadoR=mysqli_query($db, $queryR);
+                $ban = false;
+            }
+            
+        }
+    }
+
     
 ?>
 <main class="VerSolicitudesEntrantes">
     <section class="w80">
         <h1>Ver Solicitudes Entrantes</h1>
-        <form method="GET" class="tipoSol" >
-            <div class="area">
-            <label for="area">Area</label>
-                <select name="area" id="area" required>
-                    <option value=""disabled selected>--Seleccione Área Solicitante--</option>  
-                    <?php while($dpto = mysqli_fetch_assoc($resultadoDep)):?>
-                        <option value="<?php echo $dpto['idDpto'];?>">
-                            <?php echo $dpto['nomDpto'];?>
-                        </option>
-                    <?php endwhile;?>  
-                </select>         
-            </div>
-           <div class="btnBus">
-                <input type="submit" value="Ver Solicitudes">
-            </div>
-            <input type="hidden" name="tipoForm" value="bandera">
-        </form>
 
         <?php
         //necesito 
-            if($_SERVER['REQUEST_METHOD']==="GET" && isset($_GET['tipoForm'])){
-                $area = $_GET['area']?? null;;
-                $query ="SELECT * FROM solicitudes WHERE idDpto = $area";
+ 
+
+                $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
                 $resultado = mysqli_query($db, $query);
                 
 
@@ -76,9 +83,6 @@
                 }
                 echo('</table>');
 
-            }else{
-                $ban = false;
-            }
 
         ?>
     </section>
@@ -86,5 +90,12 @@
 
 <?php 
     inlcuirTemplate('footer');
+    
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm2'])) {
+        echo "<script>exito('Solicitud Aceptada');</script>";
+        
+    }if($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm2'])){
+        echo "<script>fracaso('Solicitud Rechazada');</script>";
+    }
 ?>
 
