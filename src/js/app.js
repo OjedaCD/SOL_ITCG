@@ -18,7 +18,6 @@ function exito(mensaje) {
         timer: 2000
       })
 }
-
 function fracaso(mensaje) {
     Swal.fire({
         position: 'center',

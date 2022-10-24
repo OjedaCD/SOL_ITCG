@@ -19,6 +19,10 @@
                 <ion-icon name="clipboard"></ion-icon>
                 Procesar Solicitudes
             </a>
+            <a href="/admin/Gestionar Solicitudes Entrantes/GestionarSE.php">
+            <ion-icon name="git-compare-outline"></ion-icon>
+                Gestionar Solicitudes Entrantes
+            </a>
         </div>
     </section>
 </main>

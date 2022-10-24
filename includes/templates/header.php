@@ -54,6 +54,17 @@
                 <li><a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">Cancelar Solicitud Pendiente</a></li>
             </ul>
         </li>
+
+
+        <li><a href="/admin/Gestionar Solicitudes Entrantes/GestionarSE.php">Gestionar Solicitudes Entrantes</a>
+            <ul>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/CancelarSolicitudes.php">Cancelar solicitud</a></li>
+            </ul>
+        </li>
+
+
         <li><a href="">Opciones</a>
             <ul>
                 <li><?php if ($auth): ?>

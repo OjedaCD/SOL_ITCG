@@ -1,0 +1,108 @@
+.VerSolicitudesEntrantes{
+    
+    margin-top: 4rem;
+
+    .tipoSol{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin-bottom: 4rem;
+        width: 100%;
+        margin-left: -2%;
+        .area{
+            display: inline;
+            width: 40%;
+            label{
+                width: 10%;
+                display: inline;
+            }
+            select{
+                display: inline;
+                width: 70%;
+                border: .1rem solid $azulMarino;
+                border-radius: 0.8rem;
+                height: 4rem;
+                text-align: left;
+            }
+        }
+        .emailS{
+            display: inline;
+            width: 25%;
+            margin-left: -5%;
+            label{
+                width: 10%;
+                display: inline;
+            }
+            input{
+                display: inline;
+                width: 50%;
+            }
+    
+        }
+        .emailD{
+            display: inline;
+            margin-left: -4%;
+            width: 20%;
+            input{
+                width: 100%;
+            }
+        }
+        .btnBus{ 
+            float: left;
+            margin-left: 2rem;
+            input{
+                width: 100%;
+                background-color: $verdeVariante;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                text-align: center;
+            }
+        }
+
+    }
+
+}
+    .tabla {
+        margin: 0rem auto;
+        text-align: left;
+        padding: 0rem;
+        border-spacing: 1px;
+        width: 100%;
+        border-width: .5rem;
+        border-radius: 0rem 0rem 1rem 1rem;
+        --overflow: hidden;
+        tr {
+            
+            transition: all .5s;
+            th {
+                font-weight: normal;
+                font-size: 2rem;
+            }
+            &:nth-child(odd) {
+                background-color: ghostwhite;
+            }
+            &:nth-child(even) {
+                background-color: rgb(240, 223, 223);
+            }
+            &:hover {
+                background-color: $azulMarino;
+                transition: all .5s;
+                color: white;
+                --transform: scale(1.1);
+                cursor: pointer;
+            }
+
+            
+            input{
+                width: 15rem;
+                background-color: $azulVariante;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+        }
+        
+    }
+
+

@@ -1,40 +1,8 @@
-.ModificarSolicitud{
+.VerSolicitud{
     
     margin-top: 4rem;
 
-    .tiposSol{
-        display: flex;
-        margin-bottom: 3rem;
-        justify-content: center;
-        
-        align-content: center;
-        width: 100%;
-        .folioS{   
-            input{
-            display: inline;
-                width: 25%;
-            }
-
-            label{
-                width: 25%;
-            }
-        }
-        .btnBus{
-            display: inline;
-            margin-left: 2rem;
-            margin-top: 5rem;
-            width: 25%;
-            input{
-                width: 100%;
-                background-color: $verdeVariante;
-                color: $blanco;
-                border-radius: 0.8rem;
-                cursor: pointer;
-                text-align: center;
-            }
-        }
-        
-    }
+    
     .opciones{
         align-content: center;
         justify-content: center;
@@ -66,21 +34,38 @@
         }
     }
     
-    
-    .btnBus{
-        position: relative;
-        input{
-            position: absolute;
-            right: 8rem;
-            top: -5rem;
-            width: 15%;
-            background-color: $verdeVariante;
-            color: $blanco;
-            border-radius: 0.8rem;
-            cursor: pointer;
-            text-align: center;
+    .Botones{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin-top: 2rem;
+        .btnRS{
+            float: left;
+            
+            input{
+                background-color: rgba(139, 4, 4, 0.527);
+                color: $blanco;
+                width: 100%;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                text-align: center;
+            }
         }
+        .btnAS{
+            float: left;
+            margin-left: 50%;
+            input{
+                background-color: $azulVariante;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
     }
+    
 
     .email, .nombreUser,.folio,.fecha, .departamento{
         display: flex;

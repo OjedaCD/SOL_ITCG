@@ -18,6 +18,14 @@
 @import 'layout/ProcesarSolicitudes/ProcesarSolicitudesMenu';
 @import 'layout/ProcesarSolicitudes/CrearNuevaSolicitud';
 @import 'layout/ProcesarSolicitudes/ModificarSolicitud';
+@import 'layout/ProcesarSolicitudes/CancelarSolicitudPendiente';
+
+//Gestionar Solicitudes Entrantes
+@import 'layout/GestionarSolicitudesEntrantes/GestionarSEMenu';
+@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudesEntrantes';
+@import 'layout/GestionarSolicitudesEntrantes/VerSolicitud';
+
+
 //Internas
 @import 'internas/footer';
 @import 'internas/header';

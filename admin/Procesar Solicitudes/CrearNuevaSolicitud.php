@@ -54,7 +54,7 @@
             $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, descripcion, observacion, Etapa, Prioridad, Estado) 
             VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}')";
             $resultadoUs =mysqli_query($db, $querySol);
-            if($resultadoUs){
+            if($resultadoUs && $resultadoFalla){
                 $ban3 = true;
             }else{
                 $ban3 = false;
@@ -91,15 +91,29 @@
             </div>
             <input type="hidden" name="tipoForm" value="bandera">
         </form>
-        <form method="POST">
+        <script>
+        function validar(esto){
+        valido=false;
+            for(a=0;a<esto.elements.length;a++){
+                if(esto[a].type=="checkbox" && esto[a].checked==true){
+                valido=true;
+                break
+                }
+            }
+            if(!valido){
+                alert("Chequee una casilla!");return false
+            }
+        } 
+        </script> 
+        <form method="POST" onsubmit="return validar(this)">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET" && isset($_GET['tipoForm'])) {
                     //Obtengo los datos del form
                     $email = $_GET['emailS']?? null;;
                     $area = $_GET['area']?? null;;
                     $email = "".trim($email)."@cdguzman.tecnm.mx";
-                    $ban = true; 
-                    $ban2 = true;
+                    
+                    
                     $query = "SELECT * FROM users";
                     $resultado = mysqli_query($db, $query);
                     while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
@@ -111,17 +125,17 @@
                             }
                         }
                         if( $email == $usuario['email']) {//Comprueba el email dentro de la BD
-                            
+                            $ban = true; 
                             if($_SESSION['idUser'] == $key){//Compruba que el usuario que genera la solicitud sea el mismo que inicio sesion
-
+                                $ban2 = true;
                                 $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.email = '$email'";
                                 $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                                 $row = mysqli_fetch_assoc($resultadoDatos);
 
                                 $queryDpto = "SELECT nomDpto FROM departamentos WHERE idDpto = $row[idDpto]";
                                 $resultadoDpto = mysqli_query($db, $queryDpto);
-                                $row2 = mysqli_fetch_assoc($resultadoDpto);//Toma los datos de accesos y departamentos
-
+                                $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
+                                
                                 $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);
                                 $Year = date("Y");
                                 foreach($idSolicitud as $value){
@@ -151,9 +165,10 @@
                                 </div>');
                                 echo('
                                 <div class="departamento">
-                                    <label for="departamento">Departamento</label>
+                                    <label for="departamento">Dpto del solicitante</label>
                                         <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                                 </div>');
+
                                 echo('
                                 <div class="fecha">
                                     <label for="fecha">Fecha de elaboración</label>
