@@ -17,9 +17,9 @@
                 <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                 Tablero Kanban
             </a>
-            <a href="/admin/Gestionar Solicitudes Entrantes/CancelarSolicitudes.php">
+            <a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">
                 <ion-icon name="close-circle-outline"></ion-icon>
-                Cancelar Solicitud
+                Solicitudes Aceptadas
             </a>
         </div>
     </section>

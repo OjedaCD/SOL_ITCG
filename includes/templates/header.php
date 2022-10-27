@@ -60,7 +60,7 @@
             <ul>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/CancelarSolicitudes.php">Cancelar solicitud</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">Solicitudes Aceptadas</a></li>
             </ul>
         </li>
 
@@ -71,6 +71,9 @@
                             <a href="/cerrar-sesion.php">Cerrar Sesión</a>
                     <?php endif;?>
                 </li>
+                <li><a href="/admin/Respadar Datos/RespaldoBDD.php">Descargar BD</a></a></li>
+                <li><a href="/admin/Respadar Datos/NuevoProceso.php">Iniciar nuevo proceso</a></a></li>
+            
             </ul>
         </li>
     </ul>
