@@ -39,51 +39,44 @@
 <main class="VerSolicitudesEntrantes">
     <section class="w80">
         <h1>Ver Solicitudes Entrantes</h1>
-
         <?php
-        //necesito 
- 
+            $query ="SELECT * FROM solicitudes WHERE Estado = 'ESPERA' OR Estado = 'RECHAZADO' AND idDpto = $_SESSION[idDpto] AND Etapa = 'PENDIENTE' ORDER BY Estado ASC , fecha ASC
+            ";
+            $resultado = mysqli_query($db, $query);
+            echo('
+            <table class="tabla">
+            <tr>
+                <th>DEPARTAMENTO</th>
+                <th>NOMBRE</th>
+                <th>FECHA DE ENVÍO</th>
+                <th>ESTADO</th>
+                <th>DETALLES</th>
+            </tr>'); 
+            while ($row = mysqli_fetch_array($resultado)){
+                $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
+                INNER JOIN solicitudes as s ON u.idUser = s.idUser WHERE s.idUser = $row[idUser]";//Selecciono el id del usurio
+                $resultadoId = mysqli_query($db, $queryId);
+                $row2 = mysqli_fetch_array($resultadoId);
 
-                $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
-                $resultado = mysqli_query($db, $query);
-                
+                $queryDpto ="SELECT d.nomDpto FROM departamentos as d
+                INNER JOIN users as u ON u.idDpto = d.idDpto WHERE u.idUser = $row[idUser]";//Selecciono el id del usurio
+                $resultadoDpto = mysqli_query($db, $queryDpto);
+                $row3 = mysqli_fetch_array($resultadoDpto);
 
-                echo('
-                <table class="tabla">
-                <tr>
-                    <th>DEPARTAMENTO</th>
-                    <th>NOMBRE</th>
-                    <th>FECHA DE ENVÍO</th>
-                    <th>ESTADO</th>
-                    <th>DETALLES</th>
-                </tr>'); 
-                while ($row = mysqli_fetch_array($resultado)){
-                    $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
-                    INNER JOIN solicitudes as s ON u.idUser = s.idUser WHERE s.idUser = $row[idUser]";//Selecciono el id del usurio
-                    $resultadoId = mysqli_query($db, $queryId);
-                    $row2 = mysqli_fetch_array($resultadoId);
-
-                    $queryDpto ="SELECT d.nomDpto FROM departamentos as d
-                    INNER JOIN users as u ON u.idDpto = d.idDpto WHERE u.idUser = $row[idUser]";//Selecciono el id del usurio
-                    $resultadoDpto = mysqli_query($db, $queryDpto);
-                    $row3 = mysqli_fetch_array($resultadoDpto);
-
-                    echo('<form method="POST" action ="VerSolicitud.php">
-                        <input name = "'.$row['folio'].'" type="hidden">
-                        <tr>
-                            <th>'.$row3['nomDpto'].'</th>
-                            <th>'.$row2['nomUsuario'].$row2['apellidoUsuario'].'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.$row['Estado'].'</th>
-                            
-                            <th><input type="submit" value="Ver detalles"></th>
-                            
-                        </tr>
-                    </form>');
-                }
-                echo('</table>');
-
-
+                echo('<form method="POST" action ="VerSolicitud.php">
+                    <input name = "'.$row['folio'].'" type="hidden">
+                    <tr>
+                        <th>'.$row3['nomDpto'].'</th>
+                        <th>'.$row2['nomUsuario']." ".$row2['apellidoUsuario'].'</th>
+                        <th>'.$row['fecha'].'</th>
+                        <th>'.$row['Estado'].'</th>
+                        
+                        <th><input type="submit" value="Ver detalles"></th>
+                        
+                    </tr>
+                </form>');
+            }
+            echo('</table>');
         ?>
     </section>
 </main>

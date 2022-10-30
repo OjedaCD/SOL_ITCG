@@ -50,7 +50,7 @@
             <ul>
                 <li><a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">Crear Nueva Solicitud</a></li>
                 <li><a href="/admin/Procesar Solicitudes/VerEstadoSolicitud.php">Ver el Estado de la Solicitud</a></li>
-                <li><a href="/admin/Procesar Solicitudes/ModificarSolicitud.php">Modificar Solicitud</a></li>
+                <li><a href="/admin/Procesar Solicitudes/ModificarSolicitudRechazada.php">Modificar Solicitud Rechazada</a></li>
                 <li><a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">Cancelar Solicitud Pendiente</a></li>
             </ul>
         </li>

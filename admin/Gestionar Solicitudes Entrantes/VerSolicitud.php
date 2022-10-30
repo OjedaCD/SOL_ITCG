@@ -6,10 +6,7 @@
        header('location: /'); die();
     }
     inlcuirTemplate('header');
-    if ($_SESSION['idRole'] != '1') {
-        header('location: /admin/index.php'); 
-        die();
-    }
+    
     $db = conectarDB();
 
 
@@ -49,8 +46,8 @@
                                     
                                 }
                             }
-                            if ($_SESSION['idUser'] == $key){
-                                $ban2 = true;
+                         
+                                
                                 $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.idUser = $key ";
                                 $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                                 $row = mysqli_fetch_assoc($resultadoDatos);
@@ -160,12 +157,12 @@
                                 }
                                 
                                 echo('<div class="descripcion">
-                                        <label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>
+                                        <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
                                         <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                                     </div>'); 
                                 echo('
                                 <div class="observacion">
-                                    <label for="observacion">Observaciones o Comentarios </label>
+                                    <label for="observacion">Observaciones o Comentarios del Administrador:</label>
                                     <textarea id ="observacion" name ="observacion" placeholder="Los administradores deben de colocar de manera obligatoria las observaciones o comentarios para que el solicitante de seguimiento a su solicitud. Así como el personal involucrado para atender dicha solicitud." required></textarea>
                                 </div>'); 
 
@@ -181,12 +178,6 @@
                                 
                                 ');
                                 
-                            
-                            }else{
-                                $ban3 = false;
-                            } 
-                        }else{
-                            $ban0 = false;
                         }
                     }
                 }

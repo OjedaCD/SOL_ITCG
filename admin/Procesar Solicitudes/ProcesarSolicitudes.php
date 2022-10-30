@@ -17,9 +17,9 @@
                 <ion-icon name="copy-outline"></ion-icon>
                 Ver Estado de solicitudes enviadas
             </a>
-            <a href="/admin/Procesar Solicitudes/ModificarSolicitud.php">
+            <a href="/admin/Procesar Solicitudes/ModificarSolicitudRechazada.php">
                 <ion-icon name="newspaper-outline"></ion-icon>
-                Modificar Solicitud
+                Modificar Solicitud Rechazada
             </a>
             <a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">
                 <ion-icon name="close-circle-outline"></ion-icon>
