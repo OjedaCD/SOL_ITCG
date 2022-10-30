@@ -63,7 +63,7 @@
             echo('
             <table class="tabla">
             <tr>
-                <th>DEPARTAMENTO</th>
+                <th>ÁREA SOLICITANTE</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA DE ENVÍO</th>
                 <th>ESTADO</th>
@@ -76,7 +76,7 @@
                     $row2 = mysqli_fetch_array($resultadoId);
 
                     $queryDpto ="SELECT d.nomDpto FROM departamentos as d
-                    INNER JOIN users as u ON u.idDpto = d.idDpto WHERE u.idUser = $row[idUser]";//Selecciono el id del usurio
+                    INNER JOIN solicitudes as s ON s.idDpto = d.idDpto WHERE s.folio = $row[folio]";//Selecciono el id del usurio
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
 
@@ -84,6 +84,7 @@
                         <input name = "'.$row['folio'].'" type="hidden">
                         <tr>
                             <th>'.$row3['nomDpto'].'</th>
+
                             <th>'.$row2['nomUsuario']." ".$row2['apellidoUsuario'].'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.$row['Estado'].'</th>

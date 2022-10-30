@@ -66,7 +66,7 @@
         <h1>Crear Nueva Solicitud</h1>
         <form method="GET" class="tipoSol" >
             <div class="area">
-            <label for="area">Area</label>
+            <label for="area">Área</label>
                 <select name="area" id="area" required>
                     <option value=""disabled selected>--Seleccione Área Solicitante--</option>  
                     <?php while($dpto = mysqli_fetch_assoc($resultadoDep)):?>

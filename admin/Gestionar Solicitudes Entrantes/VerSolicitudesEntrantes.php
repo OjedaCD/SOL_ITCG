@@ -40,8 +40,7 @@
     <section class="w80">
         <h1>Ver Solicitudes Entrantes</h1>
         <?php
-            $query ="SELECT * FROM solicitudes WHERE Estado = 'ESPERA' OR Estado = 'RECHAZADO' AND idDpto = $_SESSION[idDpto] AND Etapa = 'PENDIENTE' ORDER BY Estado ASC , fecha ASC
-            ";
+            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = 'PENDIENTE' ORDER BY Estado ASC , fecha ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
@@ -53,6 +52,7 @@
                 <th>DETALLES</th>
             </tr>'); 
             while ($row = mysqli_fetch_array($resultado)){
+                
                 $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
                 INNER JOIN solicitudes as s ON u.idUser = s.idUser WHERE s.idUser = $row[idUser]";//Selecciono el id del usurio
                 $resultadoId = mysqli_query($db, $queryId);
