@@ -5,7 +5,8 @@
     if (!$auth) {
        header('location: /'); die();
     }
-    inlcuirTemplate('header'); 
+    inlcuirTemplate('header');
+
     $db = conectarDB();
 
 
@@ -18,26 +19,15 @@
     $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla >7";
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
 
+    $ban = null;
+
     
 ?>
-<main class="ModificarSolicitudFormato">
+<main class="VerEstadoEtapaSolicitudFormato">
     <section class="w80">
-        <h1>Modificar Solicitud</h1>
-        <script>
-        function validar(esto){
-        valido=false;
-            for(a=0;a<esto.elements.length;a++){
-                if(esto[a].type=="checkbox" && esto[a].checked==true){
-                valido=true;
-                break
-                }
-            }
-            if(!valido){
-                alert("Chequee una casilla!");return false
-            }
-        } 
-        </script> 
-        <form method="POST" onsubmit="return validar(this)" action ="ModificarSolicitudRechazada.php">
+        <h1>Ver detalles</h1>
+
+        <form method="POST" action ="VerEstadoEtapaSolicitud.php">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -58,7 +48,7 @@
                     }
 
                     if ($_SESSION['idUser'] == $idU){
-                      
+                        $ban2 = true;
                         $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.idUser = $idU ";
                         $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                         $row = mysqli_fetch_assoc($resultadoDatos);
@@ -93,19 +83,29 @@
                             <label for="departamento">Dpto del solicitante</label>
                                 <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                         </div>');
-                        date_default_timezone_set("America/Mexico_City");
-                        $fecha = date('Y-m-d');
 
                         echo('
                         <div class="fecha">
                             <label for="fecha">Fecha de elaboración</label>
-                            <input id="fechaActual" name="fecha" value ="'.$fecha.'"value type="date" disabled>
+                            <input id="fechaActual" name="fecha" type="date" disabled>
                         </div>');
 
+                        echo('<script> window.onload = function(){
+                            var fecha = new Date(); //Fecha actual
+                            var mes = fecha.getMonth()+1; //obteniendo mes
+                            var dia = fecha.getDate(); //obteniendo dia
+                            var ano = fecha.getFullYear(); //obteniendo año
+                            if(dia<10)
+                            dia=\'0\'+dia; //agrega cero si el menor de 10
+                            if(mes<10)
+                            mes=\'0\'+mes //agrega cero si el menor de 10
+                            document.getElementById(\'fechaActual\').value=ano+"-"+mes+"-"+dia;
+                        }</script>');
                         echo('
                             <div class="opciones">
                                 <label for="opciones">Clasificación de la falla a reparar:</label>
                             </div>');
+                        
                         $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
                         $resultadoDetalles =  mysqli_query($db, $queryDetalles);
                         $detalles = array();
@@ -113,11 +113,12 @@
                         foreach ($resultadoDetalles as $key => $value) {
                             array_push($detalles,$value["idFalla"]);
                         }
-                        $Marcado = ' checked="checked"';                                
+                        $Marcado = ' checked="checked"';
                         if($row3['idDpto'] == 20){//Formulario del centro de computo
                             echo('<div class="fallas" ">');
                                 while($falla = mysqli_fetch_assoc($resultadoFallaCP)){
-                                    echo('<input type = "checkbox" name ="checkbox[]"');
+                                    
+                                    echo('<input type = "checkbox" disabled name ="checkbox[]"');
                                     if($detalles){
                                         
                                         foreach ($detalles as $key => $checkboxSel) {
@@ -130,13 +131,15 @@
                                             }
                                         }
                                     }
-                                    echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');}
+                                    echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                                    
+                                }
                         echo('</div>'); 
                         
                         }elseif($row3['idDpto'] == 21){//Formulario de servicios de mantenimiento
                             echo('<div class="fallas2" >');
                                 while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){
-                                    echo('<input type = "checkbox"  name ="checkbox[]"');
+                                    echo('<input type = "checkbox" disabled name ="checkbox[]"');
                                     if($detalles){
                                         
                                         foreach ($detalles as $key => $checkboxSel) {
@@ -149,7 +152,8 @@
                                             }
                                         }
                                     }
-                                    echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');}
+                                    echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                                }
                         echo('</div>'); 
                         }
                         
@@ -159,25 +163,15 @@
                         foreach ($aux1 as $key => $value) {
                             echo('<div class="descripcion">
                                 <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
-                                <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required>')."".trim($value);
-                        echo('</textarea>
-                        </div>');
-                        }
-                        
-                        $queryOb= "SELECT observacion FROM solicitudes WHERE folio = $folio ";
-                        $resultadoOb = mysqli_query($db, $queryOb);
-                        $aux2 = mysqli_fetch_assoc($resultadoOb);
-                        foreach ($aux2 as $key => $value) {
-                            echo('<div class="observacion">
-                            <label for="observacion">Correcciones para que su solicitud sea valida:</label>
-                            <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                                <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." disabled>')."".trim($value);
                         echo('</textarea>
                         </div>');
                         }
                         echo('
                         <div class="btnCS">
-                            <input type="submit" value="Modificar Solicitud">
+                            <input type="submit" value="Cerrar Solicitud">
                         </div>');
+                    
                     }
                 }
             ?>

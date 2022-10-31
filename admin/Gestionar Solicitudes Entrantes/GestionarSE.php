@@ -21,6 +21,10 @@
                 <ion-icon name="close-circle-outline"></ion-icon>
                 Solicitudes Aceptadas
             </a>
+            <a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">
+                <ion-icon name="close-circle-outline"></ion-icon>
+                Reportes de Solicitudes
+            </a>
         </div>
     </section>
 </main>

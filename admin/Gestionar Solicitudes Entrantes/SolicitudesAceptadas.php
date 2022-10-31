@@ -13,13 +13,13 @@
         
         $folio = $_POST['tipoForm2'];
         $btn= $_POST['btn'];
-
+        
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `Etapa`='FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET  Etapa = 'FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Cancelar Solicitud"){
-            $queryR = "UPDATE solicitudes SET  `Estado`='CANCELADO' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET  `Estado`='CANCELADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }

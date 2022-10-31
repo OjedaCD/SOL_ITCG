@@ -1,7 +1,6 @@
-.ModificarUsuarios{
+.RestablecerContraseña{
     
     margin-top: 2rem;
-
     .buscarUs{
         display: flex;
         text-align: center;
@@ -37,8 +36,7 @@
             }
         }
     }
-
-    .email, .nombreUser,.apellidoUser,.telefono, .departamento, .rolUsuario{
+    .email, .nombreUser, .departamento, .rolUsuario, .edoUsuario, .telefono{
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -57,11 +55,11 @@
         display: inline;
     }
 
-
-    .btnMU{
+    .btnRC{
         position: relative;
         float: right;
-        right: 23%;
+        left: -23%;
+        top: 2rem;
         input{
             width: 100%;
             background-color: $azulVariante;

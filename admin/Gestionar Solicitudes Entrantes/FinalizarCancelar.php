@@ -31,10 +31,10 @@
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
-                    foreach($_GET as $key => $value){
+                    foreach($_GET as $f1 => $value){
                     }
             
-                    $folio = $key;
+                    $folio = $f1;
                     $query = "SELECT folio FROM solicitudes";
                     $resultado = mysqli_query($db, $query);
                     

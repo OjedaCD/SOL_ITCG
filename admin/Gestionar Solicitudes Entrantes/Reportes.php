@@ -70,7 +70,7 @@
 ?>
 <main class="ModificarSolicitud">
     <section class="w80">
-        <h1>Kanban</h1>
+        <h1>Reportes</h1>
         <form method="GET" class="tiposSol" >
             <div class="folioS">
                 <label for="folioS">Ingrese el número de folio</label>
