@@ -67,7 +67,7 @@
     }
     
 
-    .email, .nombreUser,.folio,.fecha, .departamento{
+    .email, .nombreUser,.folio,.fecha, .departamento,.prioridad{
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -76,10 +76,16 @@
     input:not(input[type="submit"]){
         width: 35%;
     }
+    select {
+        border-radius: 0.5rem;
+        margin: 1.5rem, 0;
+        height: 4rem;
+    }
     label{
         width: 15%;
         display: inline;
     }
+
     .fallas{
         margin-top: 2rem;
         text-align: left;
@@ -88,12 +94,12 @@
         justify-content: center;
         input{
             margin-top: 1.2rem;
-            margin-left: -15%;
+            margin-left: -5%;
         }
         label{
             position: absolute;
-            margin-left: -13%;
-            width: 100%;
+            margin-left: -10%;
+            width: 95%;
             margin-bottom: -8%;
            
         }
@@ -107,12 +113,12 @@
         justify-content: center;
         input{
             margin-top: 1.2rem;
-            margin-left: 7%;
+            margin-left: -5%;
         }
         label{
             position: absolute;
-            margin-left: -13%;
-            width: 100%;
+            margin-left: -10%;
+            width: 95%;
             margin-bottom: -8%;
            
         }

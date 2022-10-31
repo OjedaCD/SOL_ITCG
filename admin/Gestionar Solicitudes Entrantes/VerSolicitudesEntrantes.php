@@ -16,17 +16,18 @@
         $folio = $_GET['tipoForm2']?? null;;
         $observacion = $_GET['observacion']?? null;;
         $btn= $_GET['btn']?? null;;
+        $prioridad = $_GET['prioridad']?? null;;
 
         $queryOb = "UPDATE solicitudes SET  `observacion`='$observacion'WHERE folio = '$folio'";
         $resultadoOb=mysqli_query($db, $queryOb);
         if($resultadoOb){
             
             if($btn == "Aceptar Solicitud"){
-                $queryA = "UPDATE solicitudes SET  `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+                $queryA = "UPDATE solicitudes SET  `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 $ban = true;
             }elseif($btn == "Rechazar Solicitud"){
-                $queryR = "UPDATE solicitudes SET  `Estado`='RECHAZADO', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
+                $queryR = "UPDATE solicitudes SET  `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
                 $resultadoR=mysqli_query($db, $queryR);
                 $ban = false;
             }

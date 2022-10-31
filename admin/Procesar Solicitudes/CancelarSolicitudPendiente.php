@@ -21,11 +21,10 @@
 
         
         foreach ($aux3 as $key => $idSol) {
-            $estado ="CANCELADO";
             $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
             $resultadoLlave0 = mysqli_query($db, $query0);
         
-            $querySol = "UPDATE solicitudes SET `Estado`='$estado' WHERE idSolicitud = '$idSol'";
+            $querySol = "UPDATE solicitudes SET Estado ='CANCELADO' , Etapa = 'FINALIZADO' WHERE idSolicitud = '$idSol'";
             $resultadoUs =mysqli_query($db, $querySol);
 
             $query1 = "SET FOREIGN_KEY_CHECKS=1";
