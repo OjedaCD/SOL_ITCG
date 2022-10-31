@@ -23,7 +23,7 @@
 
     
 ?>
-<main class="CancelarSolicitudPendiente">
+<main class="CancelarSolicitudFormato">
     <section class="w80">
         <h1>Cancelar Solicitud Pendiente</h1>
 

@@ -7,7 +7,7 @@
 ?>
 <main class="ProcesarSolicitudes">
     <section class="w80">
-        <h1>Procesar Solicitudes Menu</h1>
+        <h1>Procesar Solicitudes Menú</h1>
         <div class="PS">
             <a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">
                 <ion-icon name="document-outline"></ion-icon>

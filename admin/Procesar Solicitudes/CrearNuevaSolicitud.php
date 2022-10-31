@@ -34,6 +34,8 @@
         $etapa = "PENDIENTE";
         $prioridad = "BAJA";
         $estado = "ESPERA";
+
+        date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
         
         foreach($idSolicitud as $idSol){
@@ -165,12 +167,15 @@
                                     <label for="departamento">Dpto del solicitante</label>
                                         <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                                 </div>');
-
+                                date_default_timezone_set("America/Mexico_City");
+                                $fecha = date('Y-m-d');
+        
                                 echo('
                                 <div class="fecha">
                                     <label for="fecha">Fecha de elaboración</label>
-                                    <input id="fechaActual" name="fecha" type="date" disabled>
+                                    <input id="fechaActual" name="fecha" value ="'.$fecha.'"value type="date" disabled>
                                 </div>');
+        
                                 echo('<script> window.onload = function(){
                                     var fecha = new Date(); //Fecha actual
                                     var mes = fecha.getMonth()+1; //obteniendo mes

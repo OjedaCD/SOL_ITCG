@@ -39,7 +39,7 @@
         }
     }
 ?>
-<main class="VerSolicitudesEntrantes">
+<main class="CancelarSolicitudPendiente">
     <section class="w80">
         <h1>Cancelar Solicitud Pendiente</h1>
         <?php 

@@ -23,9 +23,9 @@
 
     
 ?>
-<main class="CancelarSolicitudPendiente">
+<main class="VerEstadoEtapaSolicitudFormato">
     <section class="w80">
-        <h1>Cancelar Solicitud Pendiente</h1>
+        <h1>Ver detalles</h1>
 
         <form method="POST" action ="VerEstadoEtapaSolicitud.php">
             <?php 
@@ -167,14 +167,6 @@
                         echo('</textarea>
                         </div>');
                         }
-                            
-
-                        echo('
-                        <div class="observacion">
-                            <label for="observacion">Razones de la concelación:</label>
-                            <textarea id ="observacion" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud"></textarea>
-                        </div>'); 
-
                         echo('
                         <div class="btnCS">
                             <input type="submit" value="Cerrar Solicitud">

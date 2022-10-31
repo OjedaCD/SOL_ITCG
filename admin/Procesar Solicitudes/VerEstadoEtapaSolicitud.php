@@ -9,7 +9,7 @@
     $db =conectarDB();
 
 ?>
-<main class="VerSolicitudesEntrantes">
+<main class="VerEstadoEtapaSolicitud">
     <section class="w80">
         <h1>Ver Estado o Etapa de Solicitud</h1>
         <?php 
@@ -22,7 +22,7 @@
                 <th>FECHA DE ENVÍO</th>
                 <th>ESTADO</th>
                 <th>ETAPA</th>
-                <th>VER SOLICITUD</th>
+                <th>VER DETALLES</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                    
@@ -39,7 +39,7 @@
                             <th>'.$row['fecha'].'</th>
                             <th>'.$row['Estado'].'</th>
                             <th>'.$row['Etapa'].'</th>
-                            <th><input type="submit" value="Ver Solicitud"></th>
+                            <th><input type="submit" value="Ver Detalles"></th>
                         </tr>
                     </form>');
                 }

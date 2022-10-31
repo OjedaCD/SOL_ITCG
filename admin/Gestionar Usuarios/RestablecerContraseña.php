@@ -27,7 +27,7 @@
         } 
         $aux2 = generateRandomString();
         $passwordhash = password_hash($aux2, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-        //echo($aux2);
+        echo($aux2);
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
         

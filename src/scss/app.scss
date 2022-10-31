@@ -18,9 +18,13 @@
 //Procesar Solicitudes
 @import 'layout/ProcesarSolicitudes/ProcesarSolicitudesMenu';
 @import 'layout/ProcesarSolicitudes/CrearNuevaSolicitud';
-@import 'layout/ProcesarSolicitudes/ModificarSolicitud';
 @import 'layout/ProcesarSolicitudes/CancelarSolicitudPendiente';
-
+@import 'layout/ProcesarSolicitudes/VerEstadoEtapaSolicitud';
+@import 'layout/ProcesarSolicitudes/VerEstadoEtapaSolicitudFormato';
+@import 'layout/ProcesarSolicitudes/ModificarSolicitudRechazada';
+@import 'layout/ProcesarSolicitudes/ModificarSolicitudRechazadaFormato';
+@import 'layout/ProcesarSolicitudes/CancelarSolicitudPendiente';
+@import 'layout/ProcesarSolicitudes/CancelarSolicitudPendienteFormato';
 //Gestionar Solicitudes Entrantes
 @import 'layout/GestionarSolicitudesEntrantes/GestionarSEMenu';
 @import 'layout/GestionarSolicitudesEntrantes/VerSolicitudesEntrantes';

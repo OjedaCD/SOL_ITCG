@@ -32,15 +32,21 @@
 ?>
 <div class="header">
     <ul class="nav">
-        <?php if($rol == 1):?>
+        <?php if($rol == 1 || $rol == 2):?>
         <li><a href="/admin/index.php">Inicio</a></li>
         <li><a href="/admin/Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
+                <?php if($rol == 1 ):?>
                 <li><a href="/admin/Gestionar Usuarios/RegistrarUsuarios.php">Registrar Usuarios</a></li>
+                <?php endif;?>
+                <?php if($rol == 1 || $rol == 2):?>
                 <li><a href="/admin/Gestionar Usuarios/ConsultarUsuarios.php">Consultar Usuarios</a></li>
+                <?php endif;?>
+                <?php if($rol == 1 ):?>
                 <li><a href="/admin/Gestionar Usuarios/ModificarUsuarios.php">Modificar Usuarios</a></li>
                 <li><a href="/admin/Gestionar Usuarios/CambiarEstado.php">Cambiar Estado de Usuarios</a></li>
                 <li><a href="/admin/Gestionar Usuarios/RestablecerContraseña.php">Restablecer Contraseña</a></li>
+                <?php endif;?>
             </ul>
         </li>
         <?php endif;?>

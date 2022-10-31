@@ -54,7 +54,7 @@
     }
 
 ?>
-<main class="VerSolicitudesEntrantes">
+<main class="ModificarSolicitudRechazada">
     <section class="w80">
         <h1>Modificar Solicitud Rechazada</h1>
         <?php 

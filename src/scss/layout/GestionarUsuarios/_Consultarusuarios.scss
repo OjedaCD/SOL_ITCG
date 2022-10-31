@@ -11,7 +11,7 @@
         .btnChoseC{
             width: 100%;
             padding: 1rem;
-            background-color: $azulMarino;
+            background-color: $verde;
             color: $blanco;
             border-radius: 0.8rem;
             cursor: pointer;
@@ -19,7 +19,7 @@
         .btnChoseD{
             width: 100%;
             padding: 1rem;
-            background-color: $verde;
+            background-color: $azulMarino;
             color: $blanco;
             border-radius: 0.8rem;
             cursor: pointer;
@@ -49,7 +49,7 @@
             .btnCOUD{
                 input{
                     width: 100%;
-                    background-color: $verde;
+                    background-color: $azulVariante;
                     color: $blanco;
                     border-radius: 0.8rem;
                 }
@@ -87,7 +87,7 @@
         .btnCOUC{
             input{
                 width: 100%;
-                background-color: $verde;
+                background-color: $verdeVariante;
                 color: $blanco;
                 border-radius: 0.8rem;
             }
@@ -140,8 +140,7 @@
             display: flex;
             font-weight: bold;
             text-align: left;
-            
-            
+
         }
         .table__item{
             display: flex;

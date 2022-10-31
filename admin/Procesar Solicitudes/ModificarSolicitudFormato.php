@@ -5,11 +5,7 @@
     if (!$auth) {
        header('location: /'); die();
     }
-    inlcuirTemplate('header');
-    if ($_SESSION['idRole'] != '1') {
-        header('location: /admin/index.php'); 
-        die();
-    }
+    inlcuirTemplate('header'); 
     $db = conectarDB();
 
 
@@ -24,7 +20,7 @@
 
     
 ?>
-<main class="ModificarSolicitud">
+<main class="ModificarSolicitudFormato">
     <section class="w80">
         <h1>Modificar Solicitud</h1>
         <script>

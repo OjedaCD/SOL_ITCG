@@ -1,40 +1,8 @@
-.ModificarSolicitud{
+.VerEstadoEtapaSolicitudFormato{
     
     margin-top: 4rem;
 
-    .tiposSol{
-        display: flex;
-        margin-bottom: 3rem;
-        justify-content: center;
-        
-        align-content: center;
-        width: 100%;
-        .folioS{   
-            input{
-            display: inline;
-                width: 25%;
-            }
-
-            label{
-                width: 25%;
-            }
-        }
-        .btnBus{
-            display: inline;
-            margin-left: 2rem;
-            margin-top: 5rem;
-            width: 25%;
-            input{
-                width: 100%;
-                background-color: $verdeVariante;
-                color: $blanco;
-                border-radius: 0.8rem;
-                cursor: pointer;
-                text-align: center;
-            }
-        }
-        
-    }
+    
     .opciones{
         align-content: center;
         justify-content: center;
@@ -66,21 +34,6 @@
         }
     }
     
-    
-    .btnBus{
-        position: relative;
-        input{
-            position: absolute;
-            right: 8rem;
-            top: -5rem;
-            width: 15%;
-            background-color: $verdeVariante;
-            color: $blanco;
-            border-radius: 0.8rem;
-            cursor: pointer;
-            text-align: center;
-        }
-    }
 
     .email, .nombreUser,.folio,.fecha, .departamento{
         display: flex;
@@ -103,12 +56,12 @@
         justify-content: center;
         input{
             margin-top: 1.2rem;
-            margin-left: -15%;
+            margin-left: -5%;
         }
         label{
             position: absolute;
-            margin-left: -13%;
-            width: 100%;
+            margin-left: -10%;
+            width: 95%;
             margin-bottom: -8%;
            
         }
@@ -122,12 +75,12 @@
         justify-content: center;
         input{
             margin-top: 1.2rem;
-            margin-left: 7%;
+            margin-left: -5%;
         }
         label{
             position: absolute;
-            margin-left: -13%;
-            width: 100%;
+            margin-left: -10%;
+            width: 95%;
             margin-bottom: -8%;
            
         }
@@ -140,7 +93,7 @@
         right: 10%;
         input{
             width: 100%;
-            background-color: $verde;
+            background-color: $azulMarino;
             color: $blanco;
         }
     }
