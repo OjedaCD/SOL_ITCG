@@ -2,6 +2,9 @@
     require "../../includes/funciones.php";  $auth = estaAutenticado();
     require "../../includes/config/database.php";
     
+
+
+
     if (!$auth) {
        header('location: /'); die();
     }
@@ -49,6 +52,7 @@
 <main class="ModificarUsuarios">
     <section class="w80">
         <h1>Modificar Usuarios</h1>
+        <script type = "text/javascript" src ="Validaciones.js"></script>
         <!--Es un tipo de formulario -->
         <form method="GET" class="buscarUs" >
             
@@ -101,7 +105,7 @@
                             echo('
                             <div class="telefono">
                                 <label for="telefono">Telefono</label>
-                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" placeholder="Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+" required>           
+                                    <input type="text" name="telefono" id="telefono"  value = "'.$row["telefono"].'" placeholder="Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+" required>           
                             </div>');
                             echo('
                             <div class="departamento">

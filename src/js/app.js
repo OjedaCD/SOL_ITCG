@@ -63,3 +63,5 @@ function mostrarContenido2(){
 	document.getElementById('content1').style.display ='none';
     
 }
+const nombre = document.getElementById("nombre");
+console.log(nombre);
