@@ -37,11 +37,10 @@
         <li><a href="/admin/Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
                 <li><a href="/admin/Gestionar Usuarios/RegistrarUsuarios.php">Registrar Usuarios</a></li>
-                
                 <li><a href="/admin/Gestionar Usuarios/ConsultarUsuarios.php">Consultar Usuarios</a></li>
-                
                 <li><a href="/admin/Gestionar Usuarios/ModificarUsuarios.php">Modificar Usuarios</a></li>
                 <li><a href="/admin/Gestionar Usuarios/CambiarEstado.php">Cambiar Estado de Usuarios</a></li>
+                <li><a href="/admin/Gestionar Usuarios/RestablecerContraseña.php">Restablecer Contraseña</a></li>
             </ul>
         </li>
         <?php endif;?>
@@ -49,7 +48,7 @@
         <li><a href="/admin/Procesar Solicitudes/ProcesarSolicitudes.php">Procesar Solicitudes</a>
             <ul>
                 <li><a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">Crear Nueva Solicitud</a></li>
-                <li><a href="/admin/Procesar Solicitudes/VerEstadoSolicitud.php">Ver el Estado de la Solicitud</a></li>
+                <li><a href="/admin/Procesar Solicitudes/VerEstadoEtapaSolicitud.php">Ver Estado o Etapa de Solicitud</a></li>
                 <li><a href="/admin/Procesar Solicitudes/ModificarSolicitudRechazada.php">Modificar Solicitud Rechazada</a></li>
                 <li><a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">Cancelar Solicitud Pendiente</a></li>
             </ul>
@@ -61,6 +60,7 @@
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">Solicitudes Aceptadas</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">Reportes de Solicitudes</a></li>
             </ul>
         </li>
 

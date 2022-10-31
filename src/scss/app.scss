@@ -10,9 +10,10 @@
 //Gestionar Usuarios
 @import 'layout/GestionarUsuarios/GestionarUsMenu';
 @import 'layout/GestionarUsuarios/RegistrarNuevoUsuario';
-@import 'layout/GestionarUsuarios/CambiarEstado';
-@import 'layout/GestionarUsuarios/ModificarUsuarios';
 @import 'layout/GestionarUsuarios/Consultarusuarios';
+@import 'layout/GestionarUsuarios/ModificarUsuarios';
+@import 'layout/GestionarUsuarios/CambiarEstado';
+@import 'layout/GestionarUsuarios/RestablecerContraseña';
 
 //Procesar Solicitudes
 @import 'layout/ProcesarSolicitudes/ProcesarSolicitudesMenu';

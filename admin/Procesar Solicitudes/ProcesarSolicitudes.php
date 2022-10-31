@@ -13,9 +13,9 @@
                 <ion-icon name="document-outline"></ion-icon>
                 Crear Nueva Solicitud
             </a>
-            <a href="/admin/Procesar Solicitudes/VerEstadoSolicitud.php">
+            <a href="/admin/Procesar Solicitudes/VerEstadoEtapaSolicitud.php">
                 <ion-icon name="copy-outline"></ion-icon>
-                Ver Estado de solicitudes enviadas
+                Ver Estado o Etapa de solicitud
             </a>
             <a href="/admin/Procesar Solicitudes/ModificarSolicitudRechazada.php">
                 <ion-icon name="newspaper-outline"></ion-icon>

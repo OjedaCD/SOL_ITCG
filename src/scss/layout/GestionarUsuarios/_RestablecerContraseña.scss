@@ -1,0 +1,74 @@
+.RestablecerContraseña{
+    
+    margin-top: 2rem;
+    .buscarUs{
+        display: flex;
+        text-align: center;
+        margin-bottom: 4rem;
+        margin-left: 21%;
+        .emailS{
+            display: inline;
+            width: 50%;
+            label{
+                width: 50%;
+                margin-right: 34%;
+            }
+        }
+        .emailD{
+            margin-left: -1.6%;
+            display: inline;
+            width: 22.5%;
+            input{
+                width: 100%;
+            }
+        }
+    
+        .btnBus{
+            float: left;
+            margin-left: 2rem;
+            input{
+                width: 100%;
+                background-color: $verdeVariante;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                text-align: center;
+            }
+        }
+    }
+    .email, .nombreUser, .departamento, .rolUsuario, .edoUsuario, .telefono{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    select {
+        border-radius: 0.5rem;
+        margin: 1.5rem, 0;
+        height: 4rem;
+        width: 35%;
+    }
+    input:not(input[type="submit"]){
+        width: 35%;
+    }
+    label{
+        width: 15%;
+        display: inline;
+    }
+
+    .btnRC{
+        position: relative;
+        float: right;
+        left: -23%;
+        top: 2rem;
+        input{
+            width: 100%;
+            background-color: $azulMarino;
+            color: $blanco;
+        }
+    }
+
+    
+}
+
+
+

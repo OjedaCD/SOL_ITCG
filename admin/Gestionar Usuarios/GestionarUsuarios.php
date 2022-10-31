@@ -17,13 +17,17 @@
                 <ion-icon name="search-sharp"></ion-icon>
                 Consultar Usuarios
             </a>
+            <a href="/admin/Gestionar Usuarios/ModificarUsuarios.php">
+                <ion-icon name="people-outline"></ion-icon>
+                Modificar Usuarios
+            </a>
             <a href="/admin/Gestionar Usuarios/CambiarEstado.php">
                 <ion-icon name="person-circle-outline"></ion-icon>
                 Cambiar Estado de Usuarios
             </a>
-            <a href="/admin/Gestionar Usuarios/ModificarUsuarios.php">
-                <ion-icon name="people-outline"></ion-icon>
-                Modificar Usuarios
+            <a href="/admin/Gestionar Usuarios/RestablecerContraseña.php">
+                <ion-icon name="refresh-circle-outline"></ion-icon>
+                Restablecer Contraseña
             </a>
         </div>
     </section>
