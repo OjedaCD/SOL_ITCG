@@ -30,7 +30,8 @@
     $password = "";
     $ban = true;
     if ($_SERVER['REQUEST_METHOD']==="POST") {
-        //Obtengo los datos del form  
+        //Obtengo los datos del form
+        
         $idUser = mysqli_fetch_assoc($resultadoId);//Guarda el id
         $email = $_POST['emailS'];
         $token = $_POST['password'];
@@ -44,75 +45,50 @@
         $edo = "HABILITADO";
 
         $email = "".trim($email)."@cdguzman.tecnm.mx";
-        $query = "SELECT email FROM users where email = '$email'";
-
-        $resultado = mysqli_query($db, $query);
-        while($usuario = mysqli_fetch_assoc($resultado)){//Comprueba si existe el email en la BD
-            if( $email == $usuario['email']) {
-                $ban = false;
-                /*echo"<script>
-                        function validarCorreo(){
-                            fracaso('Error! El email ya existe');
-                        }
-                    </script>";*/
-                                             
+        foreach($idUser as $value){//Recorro una vez y lo inserto en users
+            if($value < 1){
+                $value += 1;
             }
-            break;  
-        }
-            
-        if ($ban != false){
-            foreach($idUser as $value){//Recorro una vez y lo inserto en users y accesos
-                if($value < 1){
-                    $value += 1;
-                }
-                if(empty($telefono)){//Valida que no sea nulo
-                    $telefono = 0;
-                }
-                $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
-                $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-                $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
-                $resultadoUs =mysqli_query($db, $queryUs);
-                
+            if(empty($telefono)){//Valida que no sea nulo
+                $telefono = 0;
             }
-            // $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
-            // $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-            // $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
-            // $resultadoUs =mysqli_query($db, $queryUs);
+            $apellidoUsuario = $apellidoP ." ".$apellidoS;//El apellido primero y segundo se concatenan
+            $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
+            $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
+            $resultadoUs =mysqli_query($db, $queryUs);
         }
     }
 ?>
 <main class="RegistroNuevoUsuario">
     <section class="w80">
         <h1>Registrar Nuevo Usuario</h1>
-        
-        <form method="POST" name="f1"id = "form">
+        <form method="POST">
+            <div class="user">
+                <div class="emailS">
+                    <label for="emailS">Email</label>
+                    <input required type="text" name="emailS" id="emailS" onblur="validarCorreo(this)" pattern="[A-Za-z 0-9]+">           
+                </div>
+                <div class="emailD">
+                    <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
+                </div>
+            </div>
             
-            <div class="emailS">
-                <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS"   required pattern="[A-Za-z 0-9]+">           
-           </div>
-           <div class="emailD">
-                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-           </div>
-
-           <div class="nombreUser">
-                <!-- <script type ="text/javascript" src ="Validaciones.js"></script> -->
+            <div class="nombreUser">
                 <label for="nombre">Nombre</label>
-                <input required type="text" name="nombre"  id="nombre"  required onkeypress= "return sololetras(event)" maxlength="50"  pattern="[A-Za-z. ]+">           
+                <input required type="text" name="nombre" id="nombre" maxlength="50" required pattern="[A-Za-z]+">           
             </div>
             <div class="apellidoP">
                 <label for="apellido">Primer Apellido</label>
-                <input required type="text" name="apellidoP" id="apellidoP" required onkeypress= "return sololetras(event)" maxlength="50" required pattern="[A-Za-z]+">           
+                <input required type="text" name="apellidoP" id="apellidoP"maxlength="50" required pattern="[A-Za-z]+">           
             </div>
             <div class="apellidoS">
                 <label for="apellido">Segundo Apellido</label>
-                <input required type="text" name="apellidoS" id="apellidoS" required onkeypress= "return sololetras(event)" maxlength="50" required pattern="[A-Za-z]+">           
+                <input required type="text" name="apellidoS" id="apellidoS"maxlength="50" required pattern="[A-Za-z]+">           
             </div>
             <div class="tel">
                 <label for="tel">Teléfono</label>
-                <input type="tel" name="telefono" onkeypress="ValidaNumeros()"  placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">
+                <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">
             </div>
-            
             <div class="rolUsuario">
                 <label for="rolUsuario">Rol de Usuario</label>
                 <select name="rolUsuario" id="rolUsuario" required>
@@ -143,15 +119,9 @@
             <div class="btnRU">
                 <input type="submit" value="Registrar Usuario">
             </div>
-
         </form>
-            <p class="warnings" id= "warnings"></p>
     </section>
-    
 </main>
-
-
-                    
 <?php 
     inlcuirTemplate('footer');
     if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {

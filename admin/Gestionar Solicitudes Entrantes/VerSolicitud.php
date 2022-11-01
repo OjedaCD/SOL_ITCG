@@ -165,6 +165,17 @@
                                     <label for="observacion">Observaciones o Comentarios del Administrador:</label>
                                     <textarea id ="observacion" name ="observacion" placeholder="Los administradores deben de colocar de manera obligatoria las observaciones o comentarios para que el solicitante de seguimiento a su solicitud. Así como el personal involucrado para atender dicha solicitud." required></textarea>
                                 </div>'); 
+                                echo('
+                                <div class="prioridad">
+                                <label for="prioridad">Nivel de Prioridad</label>
+                                <select name="prioridad" id="prioridad"  required>
+                                <option value=""disabled selected>--Seleccione Prioridad--</option>
+                                    <option value="BAJA">BAJA</option>
+                                    <option value="MEDIA">MEDIA</option>
+                                    <option value="ALTA">ALTA</option>
+                                
+                                </select></div>'); 
+                            
 
                                 echo('
                                 <div class = "Botones">

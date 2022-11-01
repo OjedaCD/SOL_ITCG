@@ -9,7 +9,7 @@ $password = "12345678";
 
 $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 //Query para crear el usuario 
-$query ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono,edoUser, idRole,idDpto) VALUES ('1','{$email}','{$passwordhash}','Gerardo','Montelongo Contreras','3121430063','HABILITADO','1','20')";
+$query ="INSERT INTO users(idUser, email, token, nomUsuario, apellidoUsuario, telefono, idRole) VALUES ('1','{$email}','{$passwordhash}','Gerardo','Montelongo Contreras','3121430063','1')";
 echo $query;
 
 //exit;

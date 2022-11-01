@@ -64,8 +64,8 @@
         <li><a href="/admin/Gestionar Solicitudes Entrantes/GestionarSE.php">Gestionar Solicitudes Entrantes</a>
             <ul>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">Solicitudes Aceptadas</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">Reportes de Solicitudes</a></li>
             </ul>
         </li>
