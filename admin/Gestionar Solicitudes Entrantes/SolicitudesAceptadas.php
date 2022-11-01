@@ -26,7 +26,7 @@
     }
 
 ?>
-<main class="VerSolicitudesEntrantes">
+<main class="SolicitudesAceptadas">
     <section class="w80">
         <h1>Solicitudes Aceptadas</h1>
         <?php 
@@ -52,7 +52,7 @@
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
 
-                    echo('<form method="GET" action ="FinalizarCancelar.php">
+                    echo('<form method="GET" action ="SolicitudesAceptadasFormato.php">
                         <input name = "'.$row['folio'].'" type="hidden">
                         <tr>
                             <th>'.$row3['nomDpto'].'</th>

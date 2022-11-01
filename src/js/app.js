@@ -21,7 +21,7 @@ function exito(mensaje) {
 function borrarDatos (formulario){
     const result = Swal.fire({
         title: '¿Está seguro de Eliminar?',
-        text: "Se Eliminaran todas las solicitudes",
+        text: "Se Eliminarán todas las solicitudes",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

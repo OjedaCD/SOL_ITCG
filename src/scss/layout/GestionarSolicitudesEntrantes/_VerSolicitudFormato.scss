@@ -1,0 +1,143 @@
+.VerSolicitudFormato{
+    
+    margin-top: 4rem;
+
+    
+    .opciones{
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2rem;
+        label{
+            
+            
+            width: 60%;
+        }
+    }
+    .descripcion, .observacion{
+        align-content: center;
+        justify-content: center;
+        text-align: center;
+        
+        label{
+            margin-left: 10%;
+            display: flex;
+            width: 60%;
+        }
+        textarea{
+            width: 80%;
+            height: 12rem;
+            background-color: $blanco;
+            color: black;
+            border: .2rem solid black;
+            border-radius: 0.8rem;
+        }
+    }
+    
+    .Botones{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin-top: 2rem;
+        .btnRS{
+            float: left;
+            
+            input{
+                background-color: $verde;
+                color: $blanco;
+                width: 100%;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                text-align: center;
+            }
+        }
+        .btnAS{
+            float: left;
+            margin-left: 50%;
+            input{
+                background-color: $azulMarino;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+    }
+    
+
+    .email, .nombreUser,.folio,.fecha, .departamento,.prioridad{
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    input:not(input[type="submit"]){
+        width: 35%;
+    }
+    select {
+        border-radius: 0.5rem;
+        margin: 1.5rem, 0;
+        height: 4rem;
+    }
+    label{
+        width: 15%;
+        display: inline;
+    }
+
+    .fallas{
+        margin-top: 2rem;
+        text-align: left;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+        input{
+            margin-top: 1.2rem;
+            margin-left: -5%;
+        }
+        label{
+            position: absolute;
+            margin-left: -10%;
+            width: 95%;
+            margin-bottom: -8%;
+           
+        }
+        margin-bottom: 2rem;
+    }
+    .fallas2{
+        margin-top: 2rem;
+        text-align: left;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+        input{
+            margin-top: 1.2rem;
+            margin-left: -5%;
+        }
+        label{
+            position: absolute;
+            margin-left: -10%;
+            width: 95%;
+            margin-bottom: -8%;
+           
+        }
+        margin-bottom: 2rem;
+    }
+    .btnCS{
+        position: relative;
+        float: right;
+        margin-top: 1rem;
+        right: 10%;
+        input{
+            width: 100%;
+            background-color: $verde;
+            color: $blanco;
+        }
+    }
+
+    
+}
+
+
+

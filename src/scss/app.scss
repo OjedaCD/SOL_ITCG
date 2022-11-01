@@ -28,8 +28,9 @@
 //Gestionar Solicitudes Entrantes
 @import 'layout/GestionarSolicitudesEntrantes/GestionarSEMenu';
 @import 'layout/GestionarSolicitudesEntrantes/VerSolicitudesEntrantes';
-@import 'layout/GestionarSolicitudesEntrantes/VerSolicitud';
-
+@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFormato';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadasFormato';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadas';
 //Opciones
 @import 'layout/RespaldarDatos/nuevoProceso';
 @import 'layout/RespaldarDatos/respaldoBDD';

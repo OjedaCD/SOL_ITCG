@@ -53,7 +53,7 @@
                         $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                         $row = mysqli_fetch_assoc($resultadoDatos);
                         
-                        $queryDpto ="SELECT s.idDpto, s.idSolicitud FROM solicitudes as s WHERE s.folio = $folio  ";
+                        $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.fecha FROM solicitudes as s WHERE s.folio = $folio  ";
                         $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                         $row3 = mysqli_fetch_assoc($resultadoDpto);
                         
@@ -83,24 +83,17 @@
                             <label for="departamento">Dpto del solicitante</label>
                                 <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                         </div>');
-
+                        $fecha1 = $row3['fecha'];
+                        function cambiaf_a_espanol($fecha){
+                            preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
+                            $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
+                            return $lafecha;
+                        }
                         echo('
                         <div class="fecha">
                             <label for="fecha">Fecha de elaboración</label>
-                            <input id="fechaActual" name="fecha" type="date" disabled>
+                            <input id="fechaActual" name="fecha" type="text" value ="'.cambiaf_a_espanol($fecha1).'" disabled>
                         </div>');
-
-                        echo('<script> window.onload = function(){
-                            var fecha = new Date(); //Fecha actual
-                            var mes = fecha.getMonth()+1; //obteniendo mes
-                            var dia = fecha.getDate(); //obteniendo dia
-                            var ano = fecha.getFullYear(); //obteniendo año
-                            if(dia<10)
-                            dia=\'0\'+dia; //agrega cero si el menor de 10
-                            if(mes<10)
-                            mes=\'0\'+mes //agrega cero si el menor de 10
-                            document.getElementById(\'fechaActual\').value=ano+"-"+mes+"-"+dia;
-                        }</script>');
                         echo('
                             <div class="opciones">
                                 <label for="opciones">Clasificación de la falla a reparar:</label>
@@ -172,7 +165,7 @@
                         echo('
                         <div class="observacion">
                             <label for="observacion">Razones de la concelación:</label>
-                            <textarea id ="observacion" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud"></textarea>
+                            <textarea id ="observacion" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud" required></textarea>
                         </div>'); 
 
                         echo('

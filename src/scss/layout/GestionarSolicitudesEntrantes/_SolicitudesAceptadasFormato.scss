@@ -1,4 +1,4 @@
-.VerSolicitud{
+.SolicitudesAceptadasFormato{
     
     margin-top: 4rem;
 
@@ -43,7 +43,7 @@
             float: left;
             
             input{
-                background-color: rgba(139, 4, 4, 0.527);
+                background-color: $verde;
                 color: $blanco;
                 width: 100%;
                 border-radius: 0.8rem;
@@ -55,7 +55,7 @@
             float: left;
             margin-left: 50%;
             input{
-                background-color: $azulVariante;
+                background-color: $azulMarino;
                 color: $blanco;
                 border-radius: 0.8rem;
                 cursor: pointer;
