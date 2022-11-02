@@ -11,13 +11,12 @@
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
     $ban = null;
-    if($_SERVER['REQUEST_METHOD']==="POST"){
+    if($_SERVER['REQUEST_METHOD']==="GET"){
         
-        $folio = $_POST['tipoForm2'];
-        $observacion = $_POST['observacion'];
-        $btn= $_POST['btn'];
-        $prioridad = $_POST['prioridad'];
-
+        $folio = $_GET['tipoForm2']?? null;;
+        $observacion = $_GET['observacion']?? null;;
+        $btn= $_GET['btn']?? null;;
+        $prioridad = $_GET['prioridad']?? null;;
 
         $queryOb = "UPDATE solicitudes SET  `observacion`='$observacion'WHERE folio = '$folio'";
         $resultadoOb=mysqli_query($db, $queryOb);
@@ -65,7 +64,7 @@
                 $resultadoDpto = mysqli_query($db, $queryDpto);
                 $row3 = mysqli_fetch_array($resultadoDpto);
 
-                echo('<form method="GET" action ="VerSolicitudFormato.php">
+                echo('<form method="POST" action ="VerSolicitud.php">
                     <input name = "'.$row['folio'].'" type="hidden">
                     <tr>
                         <th>'.$row3['nomDpto'].'</th>
@@ -86,10 +85,10 @@
 <?php 
     inlcuirTemplate('footer');
     
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true ) {
+    if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm2'])) {
         echo "<script>exito('Solicitud Aceptada');</script>";
         
-    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false ){
+    }if($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm2'])){
         echo "<script>fracaso('Solicitud Rechazada');</script>";
     }
 ?>

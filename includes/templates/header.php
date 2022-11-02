@@ -50,7 +50,7 @@
             </ul>
         </li>
         <?php endif;?>
-        <?php if($rol == 3 ):?>
+
         <li><a href="/admin/Procesar Solicitudes/ProcesarSolicitudes.php">Procesar Solicitudes</a>
             <ul>
                 <li><a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">Crear Nueva Solicitud</a></li>
@@ -59,8 +59,8 @@
                 <li><a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">Cancelar Solicitud Pendiente</a></li>
             </ul>
         </li>
-        <?php endif;?>
-        <?php if($rol == 1 || $rol == 2):?>
+
+
         <li><a href="/admin/Gestionar Solicitudes Entrantes/GestionarSE.php">Gestionar Solicitudes Entrantes</a>
             <ul>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
@@ -69,7 +69,7 @@
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">Reportes de Solicitudes</a></li>
             </ul>
         </li>
-        <?php endif;?>
+
 
         <li><a href="">Opciones</a>
             <ul>
@@ -77,10 +77,9 @@
                             <a href="/cerrar-sesion.php">Cerrar Sesión</a>
                     <?php endif;?>
                 </li>
-                <?php if($rol == 1 ):?>
-                <li><a href="/admin/Respadar Datos/RespaldoBDD.php">Respaldar Base de Datos</a></a></li>
+                <li><a href="/admin/Respadar Datos/RespaldoBDD.php">Descargar BD</a></a></li>
                 <li><a href="/admin/Respadar Datos/NuevoProceso.php">Iniciar nuevo proceso</a></a></li>
-                <?php endif;?>
+            
             </ul>
         </li>
     </ul>
