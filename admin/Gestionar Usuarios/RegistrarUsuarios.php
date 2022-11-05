@@ -66,7 +66,7 @@
             <div class="user">
                 <div class="emailS">
                     <label for="emailS">Email</label>
-                    <input required type="text" name="emailS" id="emailS" onblur="validarCorreo(this)" pattern="[A-Za-z 0-9]+">           
+                    <input required type="text" name="emailS" id="emailS"  onkeypress="return letrasNumeros(event)" maxlength="9" pattern="[A-Za-z 0-9]+">           
                 </div>
                 <div class="emailD">
                     <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -75,19 +75,19 @@
             
             <div class="nombreUser">
                 <label for="nombre">Nombre</label>
-                <input required type="text" name="nombre" id="nombre" maxlength="50" required pattern="[A-Za-z]+">           
+                <input required type="text" name="nombre" id="nombre" require onkeydown="return letrasYespacios(event)" maxlength="50" required pattern="[A-Za-z ]+">           
             </div>
             <div class="apellidoP">
                 <label for="apellido">Primer Apellido</label>
-                <input required type="text" name="apellidoP" id="apellidoP"maxlength="50" required pattern="[A-Za-z]+">           
+                <input required type="text" name="apellidoP" id="apellidoP" maxlength="50"  onkeydown="return letrasYespacios(event)"  pattern="[A-Za-z ]+">           
             </div>
             <div class="apellidoS">
                 <label for="apellido">Segundo Apellido</label>
-                <input required type="text" name="apellidoS" id="apellidoS"maxlength="50" required pattern="[A-Za-z]+">           
+                <input required type="text" name="apellidoS" id="apellidoS"maxlength="50" require onkeydown="return letrasYespacios(event)" required pattern="[A-Za-z ]+">           
             </div>
             <div class="tel">
                 <label for="tel">Teléfono</label>
-                <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+">
+                <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" onkeypress="ValidaNumeros()" minlength="0" maxlength="10" pattern="[0-9]+">
             </div>
             <div class="rolUsuario">
                 <label for="rolUsuario">Rol de Usuario</label>

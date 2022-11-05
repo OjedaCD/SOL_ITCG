@@ -38,7 +38,7 @@
         <form method="GET" class="buscarUs" >
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+" required>           
+                <input type="text" name="emailS" id="emailS" onkeypress="return letrasNumeros(event)" maxlength="9" pattern="[A-Za-z 0-9]+" required>           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           

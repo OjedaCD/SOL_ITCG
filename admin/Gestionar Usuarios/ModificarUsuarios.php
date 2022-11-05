@@ -54,7 +54,7 @@
             
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+" required>           
+                <input type="text" name="emailS" id="emailS" onkeypress="return letrasNumeros(event)" maxlength="9" pattern="[A-Za-z 0-9]+" required>           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -83,25 +83,25 @@
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" pattern="[A-Za-z 0-9]+" required >           
+                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" onkeypress="return letrasNumeros(event)" maxlength="9" pattern="[A-Za-z 0-9]+" required >           
                                 <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">
                             </div>');
                         
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" maxlength="50" pattern="[A-Za-z]+" required >           
+                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" require onkeydown="return letrasYespaciosModificar(event)" maxlength="50" pattern="[A-Za-z ]+"  >           
                             </div>');
                             echo('
                             <div class="apellidoUser">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" maxlength="50" pattern="[a-zA-Z\s]+" required>           
+                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" require onkeydown="return letrasYespaciosModificar(event)" maxlength="50" pattern="[a-zA-Z\s]+" required>           
                             </div>');
                              
                             echo('
                             <div class="telefono">
                                 <label for="telefono">Telefono</label>
-                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" placeholder="Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+" required>           
+                                    <input type="text" name="telefono" id="telefono" value = "'.$row["telefono"].'" onkeypress="ValidaNumeros()" placeholder="Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+" required>           
                             </div>');
                             echo('
                             <div class="departamento">
