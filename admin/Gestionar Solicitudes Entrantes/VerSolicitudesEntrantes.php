@@ -40,7 +40,14 @@
 ?>
 <main class="VerSolicitudesEntrantes">
     <section class="w80">
-        <h1>Ver Solicitudes Entrantes</h1>
+        <?php 
+            if($_SESSION['idDpto'] == 20 ){
+                echo('<h1>Ver Solicitudes Entrantes Centro de Cómputo</h1>');
+            }
+            if($_SESSION['idDpto'] == 21 ){
+                echo('<h1>Ver Solicitudes Entrantes Mantenimiento de Equipo</h1>');
+            }
+        ?>
         <?php
             $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = 'PENDIENTE' ORDER BY Estado ASC , fecha ASC";
             $resultado = mysqli_query($db, $query);

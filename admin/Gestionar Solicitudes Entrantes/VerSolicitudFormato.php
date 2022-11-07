@@ -151,7 +151,7 @@
                         $aux2 = mysqli_fetch_assoc($resultadoOb);
                         foreach ($aux2 as $key => $value) {
                             echo('<div class="observacion">
-                            <label for="observacion">Correcciones para que la solicitud sea ACEPTADA:</label>
+                            <label for="observacion">Coloque las observaciones pertinentes a la solicitud:</label>
                             <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($value);  
                         echo('</textarea>
                         </div>');
@@ -163,9 +163,9 @@
                     <label for="prioridad">Nivel de Prioridad</label>
                     <select name="prioridad" id="prioridad"  required>
                     <option value=""disabled selected>--Seleccione Prioridad--</option>
-                        <option value="BAJA">BAJA</option>
-                        <option value="MEDIA">MEDIA</option>
-                        <option value="ALTA">ALTA</option>
+                        <option value="3BAJA">BAJA</option>
+                        <option value="2MEDIA">MEDIA</option>
+                        <option value="1ALTA">ALTA</option>
                     
                     </select></div>'); 
                 

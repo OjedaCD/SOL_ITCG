@@ -28,7 +28,14 @@
 ?>
 <main class="SolicitudesAceptadas">
     <section class="w80">
-        <h1>Solicitudes Aceptadas</h1>
+        <?php 
+            if($_SESSION['idDpto'] == 20 ){
+                echo('<h1>Solicitudes Aceptadas Centro de Cómputo</h1>');
+            }
+            if($_SESSION['idDpto'] == 21 ){
+                echo('<h1>Solicitudes Aceptadas Mantenimiento de Equipo</h1>');
+            }
+        ?>
         <?php 
             $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = 'PROCESO'";
             $resultado = mysqli_query($db, $query);
