@@ -163,9 +163,9 @@
                     <label for="prioridad">Nivel de Prioridad</label>
                     <select name="prioridad" id="prioridad"  required>
                     <option value=""disabled selected>--Seleccione Prioridad--</option>
-                        <option value="BAJA">BAJA</option>
-                        <option value="MEDIA">MEDIA</option>
-                        <option value="ALTA">ALTA</option>
+                        <option value="3BAJA">BAJA</option>
+                        <option value="2MEDIA">MEDIA</option>
+                        <option value="1ALTA">ALTA</option>
                     
                     </select></div>'); 
                 

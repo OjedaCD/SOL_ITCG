@@ -6,10 +6,7 @@
        header('location: /'); die();
     }
     inlcuirTemplate('header');
-    if ($_SESSION['idRole'] != '1') {
-        header('location: /admin/index.php'); 
-        die();
-    }
+
     $db = conectarDB();
 
 
