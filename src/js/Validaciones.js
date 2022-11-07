@@ -53,7 +53,7 @@ function letrasYespacios(e){
     key = e.keyCode || e.which;
     teclado = String.fromCharCode(key).toString();
     letras = "qwertyuiopasdfghjklñzxcvbnmáéíóúQWERTYUIOPASDFGHJKLÑZXCVBNMÁÉÍÓÚ";
-    especiales=['32','46','8'];
+    especiales=['32','46','8','37','39'];
     tecladoEspecial = false;
 
     tecladoAnterior =tecladoAnterior+ " " + e.keyCode;
@@ -98,7 +98,7 @@ function letrasYespaciosModificar(e){
     key = e.keyCode || e.which;
     teclado = String.fromCharCode(key).toString();
     letras = "qwertyuiopasdfghjklñzxcvbnmáéíóúQWERTYUIOPASDFGHJKLÑZXCVBNMÁÉÍÓÚ";
-    especiales=['32','46','8'];
+    especiales=['32','46','8','37','39'];
     tecladoEspecial = false;
 
     tecladoAnterior =tecladoAnterior+ " " + e.keyCode;
@@ -122,7 +122,7 @@ function letrasYespaciosModificar(e){
     
 
     if(espacios == 0){
-        if(letras.indexOf(teclado) != -1 || key == especiales[2]  ){
+        if(letras.indexOf(teclado) != -1 || tecladoEspecial === true  ){
             
             espacios = 1;
             return true;

@@ -90,12 +90,12 @@
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" require onkeydown="return letrasYespaciosModificar(event)" maxlength="50" pattern="[A-Za-z ]+"  >           
+                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" require onkeydown="return letrasYespaciosModificar(event)" maxlength="50" pattern="[A-Za-z áéíóú]+"  >           
                             </div>');
                             echo('
                             <div class="apellidoUser">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" require onkeydown="return letrasYespaciosModificar(event)" maxlength="50" pattern="[a-zA-Z\s]+" required>           
+                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" require onkeydown="return letrasYespaciosModificar(event)" maxlength="50" pattern="[a-zA-Z áéíóú]+" required>           
                             </div>');
                              
                             echo('
