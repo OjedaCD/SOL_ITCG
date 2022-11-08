@@ -1,31 +1,23 @@
 .TableroKanban{
     
 	margin-top: 4rem;
-	align-content: center;
-	justify-content: center;
-	width: 80%;
 
-	.KanbanContent {
+	.KanbanContent{
+
 		width: 100%;
 		margin: 0;
 		padding: 0;
-		font-family: 'Ubuntu', sans-serif;
+		margin-left: 12.5%;
 		background-color: #F8F8FC;
 	
 
-		.container {
-			box-shadow: 4px 4px 16px #E1E1E1;
-		}
 		.top {
-			margin-top: 80px;
+			margin-top: 2rem;
 		}
 		h1 {
 			margin: 0;
 		}
-		img {
-			max-width: 100%;
-			height: auto;
-		}
+
 		.drop__card, .drop__data {
 			display: flex;
 			align-items: center;
@@ -45,18 +37,17 @@
 			font-size: 1rem;
 			color: #272A3A;
 			font-weight: 500;
+			text-align: left;
 		}
-		.drop__profession {
+		.drop__date {
+			font-size: 1rem;
+			color: #272A3A;
+			font-weight: 500;
+			text-align: right;
+		}
+		.drop__description {
 			font-size: .813rem;
 			color: #8A8EAA;
-		}
-		.drop__social {
-			margin: 0 .375rem;
-			color: #8A8EAA;
-			transition: .4s;
-			&:hover {
-				color: #272A3A;
-			}
 		}
 		.sortable-chosen {
 			box-shadow: 8px 8px 32px #E1E1E1;
@@ -66,7 +57,6 @@
 		}
 	}
 	
-
 }
 
 

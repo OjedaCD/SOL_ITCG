@@ -225,12 +225,10 @@
     if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm']) && $ban2 == true) {
         echo "<script>exito('Usuario Encontrado se ha generado el formulario');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
-        echo "<script>fracaso('Error! El email no existe');</script>";
+        echo "<script>fracaso('Error! Ingrese su email');</script>";
     }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban3 == true){
         echo "<script>exito('Se ha generado su solicitud');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban3 == false){
         echo "<script>fracaso('Intente otra vez, su solicitud no se ha generado');</script>";
-    }if($ban2 == false && isset($_GET['tipoForm']) && $_SERVER['REQUEST_METHOD'] === "GET"){
-        echo "<script>fracaso('Error! El email no le pertenece, ingrese el suyo');</script>";
     }
 ?>
