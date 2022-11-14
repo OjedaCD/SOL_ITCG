@@ -14,7 +14,7 @@
 		margin: 0;
 		padding: 0;
 		background-color: #F8F8FC;
-		
+	
 		
 		.interna1{
 			width: 30%;
@@ -32,11 +32,33 @@
 				display: flex;
 				align-items: center;
 			}
-			.drop__card {
+			.drop__card1 {
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				box-shadow: 4px 4px 16px  #ec0808, -2px -2px 16px rgb(250, 6, 6);
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__card2 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #ac471fc9, -2px -2px 16px rgb(177, 43, 43);
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__card3 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #7e3b261c, -2px -2px 16px #e420209d;
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -68,6 +90,12 @@
 		}
 
 
+
+
+
+
+
+
 		.interna2{
 			
 			width: 30%;
@@ -86,11 +114,33 @@
 				display: flex;
 				align-items: center;
 			}
-			.drop__card {
+			.drop__card1 {
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				box-shadow: 4px 4px 16px  #ecb708, -2px -2px 16px rgb(211, 192, 23);
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__card2 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #c29a1788, -2px -2px 16px rgb(177, 146, 43);
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__card3 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #7e6e261c, -2px -2px 16px #d1b7259d;
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -139,11 +189,34 @@
 				display: flex;
 				align-items: center;
 			}
-			.drop__card {
+			
+			.drop__card1 {
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				box-shadow: 4px 4px 16px  #23ec08, -2px -2px 16px rgb(23, 211, 48);
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__card2 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #5bc21749, -2px -2px 16px rgba(43, 177, 54, 0.596);
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__card3 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #267e2a1c, -2px -2px 16px #25d12559;
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
