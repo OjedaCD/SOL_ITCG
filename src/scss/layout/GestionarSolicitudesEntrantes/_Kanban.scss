@@ -1,7 +1,14 @@
 .TableroKanban{
     
 	margin-top: 4rem;
-	
+	//Rojo pendiente, Amarillo Proceso, Verde finalizadao
+
+	$prioridadA: #c04141;
+	$prioridadM: #c041419d;
+	$prioridadB: #c041412a;
+
+
+	//necesito determinar el color para cada columna dependiendo del estado
 	.contenedor{
 		width: 100%;
 		margin: 0;
@@ -28,6 +35,7 @@
 				background-color: #F8F8FC;
 				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
 				margin-bottom: 20px;
+				border-radius: 2rem;
 				&:hover {
 					cursor: pointer;
 				}
@@ -61,7 +69,7 @@
 			
 			width: 30%;
 			float: left;
-			margin-left: 1rem;
+			margin-left: 3rem;
 			
 			.top {
 				margin-top: 2rem;
@@ -79,6 +87,7 @@
 				background-color: #F8F8FC;
 				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
 				margin-bottom: 20px;
+				border-radius: 2rem;
 				&:hover {
 					cursor: pointer;
 				}
@@ -111,7 +120,7 @@
 			height: 0%;
 			width: 30%;
 			float: left;
-			margin-left: 1rem;
+			margin-left: 3rem;
 			.top {
 				margin-top: 2rem;
 			}
@@ -128,6 +137,7 @@
 				background-color: #F8F8FC;
 				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
 				margin-bottom: 20px;
+				border-radius: 2rem;
 				&:hover {
 					cursor: pointer;
 				}

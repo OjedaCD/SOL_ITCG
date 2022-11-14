@@ -67,6 +67,7 @@
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">Solicitudes Aceptadas</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">Reportes de Solicitudes</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/ImprimirSolicitudFinalizada.php">Imprimir Solicitud Finalizada</a></li>
             </ul>
         </li>
         <?php endif;?>

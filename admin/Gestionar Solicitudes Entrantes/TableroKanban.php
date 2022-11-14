@@ -59,7 +59,17 @@
                                 $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
                                 $resultadoSol  = mysqli_query($db, $querySol);
                                 $rowN= mysqli_fetch_assoc($resultadoSol);
-                
+            
+
+                                
+                                if($row['Prioridad'] = "3BAJA"){
+                                
+                                }elseif($row['Prioridad'] = "2MEDIA"){
+
+                                }elseif($row['Prioridad'] = "1ALTA"){
+
+                                }
+                                
                                 echo('              
                                 <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
                                     <div class="drop__card">

@@ -30,10 +30,11 @@
 @import 'layout/GestionarSolicitudesEntrantes/VerSolicitudesEntrantes';
 @import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFormato';
 @import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadasFormato';
+@import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizadaFormato';
 @import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadas';
 @import 'layout/GestionarSolicitudesEntrantes/Kanban';
 @import 'layout/GestionarSolicitudesEntrantes/Reportes';
-
+@import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizada';
 //Opciones
 @import 'layout/RespaldarDatos/nuevoProceso';
 @import 'layout/RespaldarDatos/respaldoBDD';

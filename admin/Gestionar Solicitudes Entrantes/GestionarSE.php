@@ -21,10 +21,13 @@
                 <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                 Tablero Kanban
             </a>
-            
             <a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">
                 <ion-icon name="stats-chart-outline"></ion-icon>
                 Reportes de Solicitudes
+            </a>
+            <a href="/admin/Gestionar Solicitudes Entrantes/ImprimirSolicitudFinalizada.php">
+            <ion-icon name="print-outline"></ion-icon>
+                Imprimir Solicitud Finalizada
             </a>
         </div>
     </section>
