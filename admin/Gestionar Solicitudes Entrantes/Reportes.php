@@ -90,8 +90,8 @@
         }
         </script>
         <div class="grafico">
-            <h1>INTERNO<div id="piechart1" style="width: 900px; height: 500px;"></div></h1>
-            <h1>EXTERNO<div id="piechart2" style="width: 900px; height: 500px;"></div></h1>
+            <div id="piechart1"></div>
+            <div id="piechart2"></div>
         </div>
         
     </section>

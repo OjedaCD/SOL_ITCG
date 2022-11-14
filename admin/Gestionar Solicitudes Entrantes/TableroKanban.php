@@ -49,6 +49,7 @@
         ?>
         <div class="contenedor">
             <div class="interna1">
+            <h4>PENDIENTE</h4>
                 <div class="container top">
                     <div class="row sortable"  id="drop-items">
                         <?php 
@@ -89,6 +90,7 @@
             </div>
 
             <div class="interna2">
+            <h4>PROCESO</h4>
                 <div class="container top">
                     <div class="row sortable"  id="drop-items">
                         <?php 
@@ -118,6 +120,7 @@
                 </div>
             </div>
             <div class="interna3">
+                <h4>FINALIZADA</h4>
                 <div class="container top">
                     <div class="row sortable"  id="drop-items">
                         <?php 

@@ -1,15 +1,27 @@
 .Reportes{
     margin-top: 4rem;
+    
     .grafico{
-        display: inline;
+        width: 100%;
+		margin: 0;
+		padding: 0;
+        
         #piechart1{
+            float: right;
             justify-content: center;
             align-content: center;
-           
+            width: 90rem; 
+            height: 50rem;
+            margin-right: -10%;
         }
         #piechart2{
+            float: right;
             justify-content: center;
             align-content: center;
+            width: 90rem; 
+            height: 50rem;
+            margin-left: -5%;
+            
         }
     }
     
