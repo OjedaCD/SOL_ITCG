@@ -34,10 +34,7 @@
  foreach ($resultadoSolF as $key => $value) {
     array_push($finalizado,$value["idSolicitud"]);
  }
- $banP = true;
- $banPr = null;
- $banF = null;
- $kanban = array();
+
 
 ?>
 <main class="TableroKanban">
@@ -50,71 +47,98 @@
                 echo('<h1>Knaban Mantenimiento de Equipo</h1>');
             }
         ?>
-        <div class="KanbanContent">
-            <div class="container top">
-            <link href ="/build/css/bootstrap.css" rel="stylesheet">
-                <div class="row sortable"  id="drop-items">
-                    <?php for ($i=1; $i < $total ; $i++) { //Se recorren todas las posiciones que son las solicitudes
-                        
-                        if($banP && $pendiente >= 0){
-                            foreach ($pendiente as $key) {
-                                $valorX  = array_shift($pendiente);
-                                array_push($kanban, $valorX);
-                                break;
-                            }
-                            $banP = false;
-                            $banPr = true;
-                            $banF = false;
-                        }
-                        if($banPr && $proceso >= 0){
-                            foreach ($proceso as $key) {
-                                $valorX  = array_shift($proceso);
-                                array_push($kanban, $valorX);
-                                break;
-                            }
-                            $banP = false;
-                            $banPr = false;
-                            $banF = true;
-                        } 
-                        if($banF && $finalizado >= 0){
-                            foreach ($finalizado as $key) {
-                                $valorX  = array_shift($finalizado);
-                                array_push($kanban, $valorX);
-                                break;
-                            }
-                            $banP = true;
-                            $banPr = false;
-                            $banF = false;
-                        }     
-                        
-                    }
-
-
-                    foreach ($kanban as $key => $value) {
-                        $query = "SELECT * FROM solicitudes where idSolicitud = $value";
-                        $resultado = mysqli_query($db, $query);
-                        $row= mysqli_fetch_assoc($resultado);
-                        $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
-                        $resultadoSol  = mysqli_query($db, $querySol);
-                        $rowN= mysqli_fetch_assoc($resultadoSol);
-    
-                        echo('              
-                        <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
-                            <div class="drop__card">
-                                <div class="drop__data">
-                                    <div>
-                                        <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
-                                        <span class="drop__description">'.$row['descripcion'].'</span>
-                                        <h1 class="drop__date">'.$row['fecha'].'</h1>
+        <div class="contenedor">
+            <div class="interna1">
+                <div class="container top">
+                    <div class="row sortable"  id="drop-items">
+                        <?php 
+                            foreach ($pendiente as $key => $value) {
+                                $query = "SELECT * FROM solicitudes where idSolicitud = $value";
+                                $resultado = mysqli_query($db, $query);
+                                $row= mysqli_fetch_assoc($resultado);
+                                $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
+                                $resultadoSol  = mysqli_query($db, $querySol);
+                                $rowN= mysqli_fetch_assoc($resultadoSol);
+                
+                                echo('              
+                                <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
+                                    <div class="drop__card">
+                                        <div class="drop__data">
+                                            <div>
+                                                <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
+                                                <span class="drop__description">'.$row['descripcion'].'</span>
+                                                <h1 class="drop__date">'.$row['fecha'].'</h1>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>');
-                    }
-
-                    ?>
+                                </div>');
+                            }
+                            ?>   
+                    </div>
                 </div>
             </div>
+
+            <div class="interna2">
+                <div class="container top">
+                    <div class="row sortable"  id="drop-items">
+                        <?php 
+                            foreach ($proceso as $key => $value) {
+                                $query = "SELECT * FROM solicitudes where idSolicitud = $value";
+                                $resultado = mysqli_query($db, $query);
+                                $row= mysqli_fetch_assoc($resultado);
+                                $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
+                                $resultadoSol  = mysqli_query($db, $querySol);
+                                $rowN= mysqli_fetch_assoc($resultadoSol);
+                
+                                echo('              
+                                <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
+                                    <div class="drop__card">
+                                        <div class="drop__data">
+                                            <div>
+                                                <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
+                                                <span class="drop__description">'.$row['descripcion'].'</span>
+                                                <h1 class="drop__date">'.$row['fecha'].'</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>');
+                            }
+                            ?>   
+                    </div>
+                </div>
+            </div>
+            <div class="interna3">
+                <div class="container top">
+                    <div class="row sortable"  id="drop-items">
+                        <?php 
+                            foreach ($finalizado as $key => $value) {
+                                $query = "SELECT * FROM solicitudes where idSolicitud = $value";
+                                $resultado = mysqli_query($db, $query);
+                                $row= mysqli_fetch_assoc($resultado);
+                                $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
+                                $resultadoSol  = mysqli_query($db, $querySol);
+                                $rowN= mysqli_fetch_assoc($resultadoSol);
+                
+                                echo('              
+                                <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
+                                    <div class="drop__card">
+                                        <div class="drop__data">
+                                            <div>
+                                                <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
+                                                <span class="drop__description">'.$row['descripcion'].'</span>
+                                                <h1 class="drop__date">'.$row['fecha'].'</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>');
+                            }
+                            ?>   
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
             <script type="text/javascript" charset="utf-8" src="/build/js/jquery-3.3.1.min.js"></script>
             <script type="text/javascript" charset="utf-8" src="/build/js/jquery-ui.min.js"></script>
             <script type="text/javascript">
@@ -140,7 +164,7 @@
                     });
                 }
             </script>
-        </div>
+       
     </section>
 </main>
 <?php 

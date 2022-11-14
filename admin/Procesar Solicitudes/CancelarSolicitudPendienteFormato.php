@@ -53,7 +53,7 @@
                         $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                         $row = mysqli_fetch_assoc($resultadoDatos);
                         
-                        $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.fecha FROM solicitudes as s WHERE s.folio = $folio  ";
+                        $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                         $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                         $row3 = mysqli_fetch_assoc($resultadoDpto);
                         
@@ -150,7 +150,7 @@
                         echo('</div>'); 
                         }
                         
-                        $queryDes = "SELECT descripcion FROM solicitudes WHERE folio = $folio ";
+                        $queryDes = "SELECT descripcion FROM solicitudes WHERE folio = '{$folio}' ";
                         $resultadoDes = mysqli_query($db, $queryDes);
                         $aux1 = mysqli_fetch_assoc($resultadoDes);
                         foreach ($aux1 as $key => $value) {

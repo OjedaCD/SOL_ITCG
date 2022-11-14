@@ -1,10 +1,18 @@
 .Reportes{
     margin-top: 4rem;
-    #piechart{
-        justify-content: center;
-        align-content: center;
-        margin-left: 15%;
+    .grafico{
+        display: inline;
+        #piechart1{
+            justify-content: center;
+            align-content: center;
+           
+        }
+        #piechart2{
+            justify-content: center;
+            align-content: center;
+        }
     }
+    
 }
     
 

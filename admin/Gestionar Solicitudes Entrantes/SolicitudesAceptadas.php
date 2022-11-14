@@ -7,22 +7,28 @@
     
     inlcuirTemplate('header');
     $db =conectarDB();
-
     $ban = null;
+    $ban2 = null;
     if($_SERVER['REQUEST_METHOD']==="POST"){
         
         $folio = $_POST['tipoForm2'];
         $btn= $_POST['btn'];
+        $observacion = $_POST['observacion'];
         
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET  Etapa = 'FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `Estado`='FINALIZADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
+        }elseif($btn == "Actualizar Comentario"){
+            $queryA = "UPDATE solicitudes SET `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+            $resultadoA=mysqli_query($db, $queryA);
+            $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){
             $queryR = "UPDATE solicitudes SET  `Estado`='CANCELADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }
+
     }
 
 ?>
@@ -81,6 +87,9 @@
         echo "<script>exito('Solicitud Finalizada');</script>";
     }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && isset($_POST['tipoForm2'])){
         echo "<script>fracaso('Solicitud Cancelada');</script>";
+    }
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true ) {
+        echo "<script>exito('Comentario Actualizado');</script>";
     }
 ?>
 

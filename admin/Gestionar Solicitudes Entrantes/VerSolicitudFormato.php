@@ -45,7 +45,7 @@
                     $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                     $row = mysqli_fetch_assoc($resultadoDatos);
                     
-                    $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.descripcion, s.fecha FROM solicitudes as s WHERE s.folio = $folio  ";
+                    $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.descripcion, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                     $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                     $row3 = mysqli_fetch_assoc($resultadoDpto);
                     
@@ -146,46 +146,90 @@
                             <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                         </div>'); 
-                    $queryOb= "SELECT observacion FROM solicitudes WHERE folio = $folio ";
-                        $resultadoOb = mysqli_query($db, $queryOb);
-                        $aux2 = mysqli_fetch_assoc($resultadoOb);
-                        foreach ($aux2 as $key => $value) {
-                            echo('<div class="observacion">
-                            <label for="observacion">Coloque las observaciones pertinentes a la solicitud:</label>
-                            <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($value);  
-                        echo('</textarea>
-                        </div>');
-                        
 
-
-                    echo('
-                    <div class="prioridad">
-                    <label for="prioridad">Nivel de Prioridad</label>
-                    <select name="prioridad" id="prioridad"  required>
-                    <option value=""disabled selected>--Seleccione Prioridad--</option>
-                        <option value="3BAJA">BAJA</option>
-                        <option value="2MEDIA">MEDIA</option>
-                        <option value="1ALTA">ALTA</option>
+                    $queryOb= "SELECT observacion, Prioridad, tipo FROM solicitudes WHERE folio = '{$folio}' ";
+                    $resultadoOb = mysqli_query($db, $queryOb);
+                    $aux2 = mysqli_fetch_assoc($resultadoOb);
                     
-                    </select></div>'); 
-                
+                    echo('<div class="observacion">
+                    <label for="observacion">Coloque las observaciones o comentarios pertinentes a la solicitud:</label>
+                    <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
+                    echo('</textarea></div>');
+                    
+                    echo('
+                    <div class= "opcionesSel">
+                        <div class="prioridad">
+                        <label for="prioridad">Nivel de Prioridad</label>
+                        <select name="prioridad" id="prioridad" required >');
+                        if(!empty($aux2['Prioridad'])){
+                            if($aux2['Prioridad'] == "3BAJA"){
+                                echo('                                
+                                <option selected="selected" value="'.$aux2['Prioridad'].'">BAJA</option>
+                                <option value="2MEDIA">MEDIA</option>
+                                <option value="1ALTA">ALTA</option>
+                                </select></div>');
+                            }elseif($aux2['Prioridad'] == "2MEDIA"){
+                                echo('                                
+                                <option value="3BAJA">BAJA</option>
+                                <option dedault selected="selected" value="'.$aux2['Prioridad'].'">MEDIA</option>
+                                <option value="1ALTA">ALTA</option>
+                                </select></div>');
+                            }elseif($aux2['Prioridad'] == "1ALTA"){
+                                echo('                                
+                                <option value="3BAJA">BAJA</option>
+                                <option value="2MEDIA">MEDIA</option>
+                                <option selected="selected" value="'.$aux2['Prioridad'].'">ALTA</option>
+                                </select></div>');
+                            }
+                        }else{
+                            echo('                                
+                                <option value="3BAJA">BAJA</option>
+                                <option value="2MEDIA">MEDIA</option>
+                                <option value="1ALTA">ALTA</option>
+                                </select></div>');
+                        }
+
+                        echo('
+                        <div class="tipo">
+                        <label for="tipo">Tipo de mantenimiento</label>
+                        <select name="tipo" id="tipo" required >');
+                        if(!empty($aux2['tipo'])){
+                            if($aux2['tipo'] == "INTERNO"){
+                                echo('                                
+                                <option selected="selected" value="'.$aux2['tipo'].'">INTERNO</option>
+                                <option value="EXTERNO">EXTERNO</option>
+                                </select></div>');
+                            }elseif($aux2['tipo'] == "EXTERNO"){
+                                echo('                                
+                                <option value="INTERNO">INTERNO</option>
+                                <option selected="selected" value="'.$aux2['tipo'].'">EXTERNO</option>
+                                </select></div>');
+                            }
+                        }else{
+                            echo('                                
+                                <option value="INTERNO">INTERNO</option>
+                                <option value="EXTERNO">EXTERNO</option>
+                                </select></div>');
+                        }
+                    echo('</div>');
 
                     echo('
                     <div class = "Botones">
                         <div class="btnRS">
                             <input type="submit" name = "btn"  value="Rechazar Solicitud">
                         </div>
+                        <div class="btnAC">
+                            <input type="submit" name = "btn" value="Actualizar Comentario">
+                        </div>
                         <div class="btnAS">
                             <input type="submit" name = "btn" value="Aceptar Solicitud">
                         </div>
-                    </div>
+                    </div>');
                     
-                    ');
                 }
-            }
-        ?>
-    </form>
-</section>
+            ?>
+        </form>
+    </section>
 </main>
 <?php 
 inlcuirTemplate('footer');

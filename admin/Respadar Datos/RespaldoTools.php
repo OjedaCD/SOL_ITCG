@@ -44,7 +44,7 @@ class MySqlBackupLite {
 
 
   public function backUp() {
-    $this->fileName = "Backup_".date('Ymd').".sql";
+    $this->fileName = "SOL_ITCG_".date('Ymd').".sql";
     $this->connectMySql();
     $this->getTables();
     $this->orderTables();

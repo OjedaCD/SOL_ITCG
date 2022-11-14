@@ -39,11 +39,10 @@
         align-content: center;
         justify-content: center;
         margin-top: 2rem;
-        .btnRS{
-            float: left;
-            
+        gap: 15rem;
+        .btnCSo{
             input{
-                background-color: $verde;
+                background-color: rgb(173, 37, 37);
                 color: $blanco;
                 width: 100%;
                 border-radius: 0.8rem;
@@ -51,9 +50,19 @@
                 text-align: center;
             }
         }
-        .btnAS{
-            float: left;
-            margin-left: 50%;
+        .btnAC{
+           
+            input{
+                background-color: $azulVariante;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        .btnFSo{
+
             input{
                 background-color: $azulMarino;
                 color: $blanco;
@@ -65,7 +74,6 @@
         }
         
     }
-    
 
     .email, .nombreUser,.folio,.fecha, .departamento,.prioridad{
         display: flex;

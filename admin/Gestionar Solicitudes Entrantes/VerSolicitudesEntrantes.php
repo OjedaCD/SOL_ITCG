@@ -11,28 +11,27 @@
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
     $ban = null;
+    $ban2 = null;
     if($_SERVER['REQUEST_METHOD']==="POST"){
         
         $folio = $_POST['tipoForm2'];
         $observacion = $_POST['observacion'];
         $btn= $_POST['btn'];
         $prioridad = $_POST['prioridad'];
+        $tipo = $_POST['tipo'];
 
-
-        $queryOb = "UPDATE solicitudes SET  `observacion`='$observacion'WHERE folio = '$folio'";
-        $resultadoOb=mysqli_query($db, $queryOb);
-        if($resultadoOb){
-            
-            if($btn == "Aceptar Solicitud"){
-                $queryA = "UPDATE solicitudes SET  `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
-                $resultadoA=mysqli_query($db, $queryA);
-                $ban = true;
-            }elseif($btn == "Rechazar Solicitud"){
-                $queryR = "UPDATE solicitudes SET  `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
-                $resultadoR=mysqli_query($db, $queryR);
-                $ban = false;
-            }
-            
+        if($btn == "Aceptar Solicitud"){
+            $queryA = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+            $resultadoA=mysqli_query($db, $queryA);
+            $ban = true;
+        }elseif($btn == "Actualizar Comentario"){
+            $queryAC = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ESPERA', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
+            $resultadoAC=mysqli_query($db, $queryAC);
+            $ban2 = true;
+        }elseif($btn == "Rechazar Solicitud"){
+            $queryR = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
+            $resultadoR=mysqli_query($db, $queryR);
+            $ban = false;
         }
     }
 
@@ -95,9 +94,12 @@
     
     if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true ) {
         echo "<script>exito('Solicitud Aceptada');</script>";
-        
-    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false ){
+    }
+    if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false ){
         echo "<script>fracaso('Solicitud Rechazada');</script>";
+    }
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true ) {
+        echo "<script>exito('Comentario Actualizado');</script>";
     }
 ?>
 

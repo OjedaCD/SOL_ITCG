@@ -50,7 +50,7 @@
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                 
-                    $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.descripcion, s.observacion, s.fecha FROM solicitudes as s WHERE s.folio = $folio  ";
+                    $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.descripcion, s.observacion, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                     $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                     $row3 = mysqli_fetch_assoc($resultadoDpto);
                     
@@ -139,16 +139,28 @@
                             <label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                         </div>'); 
+
+                    $queryOb= "SELECT observacion, Prioridad, tipo FROM solicitudes WHERE folio = '{$folio}' ";
+                    $resultadoOb = mysqli_query($db, $queryOb);
+                    $aux2 = mysqli_fetch_assoc($resultadoOb);
+                    
+                    echo('<div class="observacion">
+                    <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
+                    <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
+                    echo('</textarea></div>');
+
                     echo('
                     <div class = "Botones">
-                        <div class="btnRS">
-                            <input type="submit" name = "btn"  value="Finalizar Solicitud">
-                        </div>
-                        <div class="btnAS">
+                        <div class="btnCSo">
                             <input type="submit" name = "btn" value="Cancelar Solicitud">
                         </div>
-                    </div>
-                    
+                        <div class="btnAC">
+                            <input type="submit" name = "btn" value="Actualizar Comentario">
+                        </div>
+                        <div class="btnFSo">
+                            <input type="submit" name = "btn"  value="Finalizar Solicitud">
+                        </div>
+                    </div>                 
                     ');   
                 }
             ?>
@@ -157,4 +169,5 @@
 </main>
 <?php 
     inlcuirTemplate('footer');
+    
 ?>

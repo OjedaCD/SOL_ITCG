@@ -20,7 +20,7 @@
         date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
 
-        $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = $folio";
+        $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = '{$folio}'";
         $resultadoIdSol =mysqli_query($db, $queryIdSol);
         $aux3 = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
 
@@ -76,7 +76,7 @@
                     $row2 = mysqli_fetch_array($resultadoId);
 
                     $queryDpto ="SELECT d.nomDpto FROM departamentos as d
-                    INNER JOIN solicitudes as s ON s.idDpto = d.idDpto WHERE s.folio = $row[folio]";//Selecciono el id del usurio
+                    INNER JOIN solicitudes as s ON s.idDpto = d.idDpto WHERE s.folio = '$row[folio]'";//Selecciono el id del usurio
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
 

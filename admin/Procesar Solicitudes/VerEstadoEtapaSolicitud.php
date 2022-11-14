@@ -25,10 +25,9 @@
                 <th>VER DETALLES</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
-                   
-
+                
                     $queryDpto ="SELECT d.nomDpto FROM departamentos as d
-                    INNER JOIN solicitudes as s ON s.idDpto = d.idDpto WHERE s.folio = $row[folio]";//Selecciono el id del usurio
+                    INNER JOIN solicitudes as s ON s.idDpto = d.idDpto WHERE s.folio = '$row[folio]'";//Selecciono el id del usurio
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
 

@@ -32,9 +32,9 @@
         $observacion = " ";
         $area = $_GET['area']?? null;
         $etapa = "PENDIENTE";
-        $prioridad = "BAJA";
+        $prioridad = "3BAJA";
         $estado = "ESPERA";
-
+        $tipo = "INTERNO";
         date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
         
@@ -50,8 +50,8 @@
                 $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
                 $resultadoFalla =mysqli_query($db, $queryFalla);
             }
-            $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, descripcion, observacion, Etapa, Prioridad, Estado) 
-            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}')";
+            $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, tipo, descripcion, observacion, Etapa, Prioridad, Estado) 
+            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$tipo}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}')";
             $resultadoUs =mysqli_query($db, $querySol);
             if($resultadoUs && $resultadoFalla){
                 $ban3 = true;
@@ -80,7 +80,7 @@
             </div>
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9.]+">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -140,17 +140,20 @@
                                 foreach($idSolicitud as $value){
                                     if($value < 1){
                                         $value += 1;
+                                    }  
+                                    if($area == 20){
+                                        $aux = "CC".$area.$value.$Year;
+                                    }elseif($area == 21){
+                                        $aux = "ME".$area.$value.$Year;
                                     }
-                                    $aux = $area.$value.$Year;
+                                    echo ('
+                                    <div class="folio">
+                                        <label for="folio">Folio</label>
+                                        <input type="text" name= "folio" id= "folio" value="'.$aux.'" disabled>           
+                                    </div>'); 
                                     
-                                    echo ('<div class="folio">
-                                                <label for="folio">Folio</label>
-                                                <input type="text" name="'.$aux.'" id="folio" value="'.$aux.'" disabled>           
-                                            </div>
-                                            ');       
                                 }
                                 echo ('<input type="hidden" name="tipoForm2" value="'.$aux.'" >');
-
                                 echo ('
                                 <div class="email">
                                     <label for="email">Email</label>
@@ -225,7 +228,7 @@
     if ($_SERVER['REQUEST_METHOD'] === "GET" && $ban == true && isset($_GET['tipoForm']) && $ban2 == true) {
         echo "<script>exito('Usuario Encontrado se ha generado el formulario');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
-        echo "<script>fracaso('Error! Ingrese su email');</script>";
+        echo "<script>fracaso('Error! Email invalido');</script>";
     }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban3 == true){
         echo "<script>exito('Se ha generado su solicitud');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban3 == false){

@@ -1,62 +1,167 @@
 .TableroKanban{
     
 	margin-top: 4rem;
-
-	.KanbanContent{
-
+	
+	.contenedor{
 		width: 100%;
 		margin: 0;
 		padding: 0;
-		margin-left: 12.5%;
 		background-color: #F8F8FC;
-	
-
-		.top {
-			margin-top: 2rem;
-		}
-		h1 {
-			margin: 0;
-		}
-
-		.drop__card, .drop__data {
-			display: flex;
-			align-items: center;
-		}
-		.drop__card {
-			justify-content: space-between;
-			padding: .75rem 1.25rem .75rem .75rem;
-			background-color: #F8F8FC;
-			box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
-			margin-bottom: 20px;
-			&:hover {
-				cursor: pointer;
+		
+		
+		.interna1{
+			width: 30%;
+			float: left;
+			.top {
+				margin-top: 2rem;
+			}
+			h1 {
+				margin: 0;
+			}
+			.drop__card, .drop__data {
+				display: flex;
+				align-items: center;
+			}
+			.drop__card {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				margin-bottom: 20px;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__name {
+				font-size: 1rem;
+				color: #272A3A;
+				font-weight: 500;
+				text-align: left;
+			}
+			.drop__date {
+				font-size: 1rem;
+				color: #272A3A;
+				font-weight: 500;
+				text-align: right;
+			}
+			.drop__description {
+				font-size: 1.2rem;
+				color: #8A8EAA;
+			}
+			.sortable-chosen {
+				box-shadow: 8px 8px 32px #E1E1E1;
+			}
+			.sortable-drag {
+				opacity: 0;
 			}
 		}
-	
-		.drop__name {
-			font-size: 1rem;
-			color: #272A3A;
-			font-weight: 500;
-			text-align: left;
+
+
+		.interna2{
+			
+			width: 30%;
+			float: left;
+			margin-left: 1rem;
+			
+			.top {
+				margin-top: 2rem;
+			}
+			h1 {
+				margin: 0;
+			}
+			.drop__card, .drop__data {
+				display: flex;
+				align-items: center;
+			}
+			.drop__card {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				margin-bottom: 20px;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__name {
+				font-size: 1rem;
+				color: #272A3A;
+				font-weight: 500;
+				text-align: left;
+			}
+			.drop__date {
+				font-size: 1rem;
+				color: #272A3A;
+				font-weight: 500;
+				text-align: right;
+			}
+			.drop__description {
+				font-size: 1.2rem;
+				color: #8A8EAA;
+			}
+			.sortable-chosen {
+				box-shadow: 8px 8px 32px #E1E1E1;
+			}
+			.sortable-drag {
+				opacity: 0;
+			}
 		}
-		.drop__date {
-			font-size: 1rem;
-			color: #272A3A;
-			font-weight: 500;
-			text-align: right;
-		}
-		.drop__description {
-			font-size: .813rem;
-			color: #8A8EAA;
-		}
-		.sortable-chosen {
-			box-shadow: 8px 8px 32px #E1E1E1;
-		}
-		.sortable-drag {
-			opacity: 0;
+
+		.interna3{
+			height: 0%;
+			width: 30%;
+			float: left;
+			margin-left: 1rem;
+			.top {
+				margin-top: 2rem;
+			}
+			h1 {
+				margin: 0;
+			}
+			.drop__card, .drop__data {
+				display: flex;
+				align-items: center;
+			}
+			.drop__card {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				margin-bottom: 20px;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			.drop__name {
+				font-size: 1rem;
+				color: #272A3A;
+				font-weight: 500;
+				text-align: left;
+			}
+			.drop__date {
+				font-size: 1rem;
+				color: #272A3A;
+				font-weight: 500;
+				text-align: right;
+			}
+			.drop__description {
+				font-size: 1.2rem;
+				color: #8A8EAA;
+			}
+			.sortable-chosen {
+				box-shadow: 8px 8px 32px #E1E1E1;
+			}
+			.sortable-drag {
+				opacity: 0;
+			}
 		}
 	}
-	
 }
+
+		
+
+
+
+
 
 
