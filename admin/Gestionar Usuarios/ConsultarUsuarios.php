@@ -46,7 +46,7 @@
             <!--Dependiendo de la opción mostrada y el input hidden aquí presento o el usuario o la lista-->
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" pattern="[A-Za-z 0-9]+">           
+                <input required type="text" name="emailS" id="emailS" required onkeypress= "return letrasNumeros(event)" maxlength="10" pattern="[A-Za-z 0-9]+">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
