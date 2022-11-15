@@ -150,6 +150,64 @@
                     echo('</textarea></div>');
 
                     echo('
+                    <div class= "opcionesSel">
+                        <div class="prioridad">
+                        <label for="prioridad">Nivel de Prioridad</label>
+                        <select name="prioridad" id="prioridad" required >');
+                        if(!empty($aux2['Prioridad'])){
+                            if($aux2['Prioridad'] == "3BAJA"){
+                                echo('                                
+                                <option selected="selected" value="'.$aux2['Prioridad'].'">BAJA</option>
+                                <option value="2MEDIA">MEDIA</option>
+                                <option value="1ALTA">ALTA</option>
+                                </select></div>');
+                            }elseif($aux2['Prioridad'] == "2MEDIA"){
+                                echo('                                
+                                <option value="3BAJA">BAJA</option>
+                                <option dedault selected="selected" value="'.$aux2['Prioridad'].'">MEDIA</option>
+                                <option value="1ALTA">ALTA</option>
+                                </select></div>');
+                            }elseif($aux2['Prioridad'] == "1ALTA"){
+                                echo('                                
+                                <option value="3BAJA">BAJA</option>
+                                <option value="2MEDIA">MEDIA</option>
+                                <option selected="selected" value="'.$aux2['Prioridad'].'">ALTA</option>
+                                </select></div>');
+                            }
+                        }else{
+                            echo('                                
+                                <option value="3BAJA">BAJA</option>
+                                <option value="2MEDIA">MEDIA</option>
+                                <option value="1ALTA">ALTA</option>
+                                </select></div>');
+                        }
+
+                        echo('
+                        <div class="tipo">
+                        <label for="tipo">Tipo de mantenimiento</label>
+                        <select name="tipo" id="tipo" required >');
+                        if(!empty($aux2['tipo'])){
+                            if($aux2['tipo'] == "INTERNO"){
+                                echo('                                
+                                <option selected="selected" value="'.$aux2['tipo'].'">INTERNO</option>
+                                <option value="EXTERNO">EXTERNO</option>
+                                </select></div>');
+                            }elseif($aux2['tipo'] == "EXTERNO"){
+                                echo('                                
+                                <option value="INTERNO">INTERNO</option>
+                                <option selected="selected" value="'.$aux2['tipo'].'">EXTERNO</option>
+                                </select></div>');
+                            }
+                        }else{
+                            echo('                                
+                                <option value="INTERNO">INTERNO</option>
+                                <option value="EXTERNO">EXTERNO</option>
+                                </select></div>');
+                        }
+                    echo('</div>');
+
+
+                    echo('
                     <div class = "Botones">
                         <div class="btnCSo">
                             <input type="submit" name = "btn" value="Cancelar Solicitud">

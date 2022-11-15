@@ -18,7 +18,7 @@
     $queryDep ="SELECT * FROM departamentos ORDER BY nomDpto";//Query para mostrar la el select con los departamentos
     $resultadoDep= mysqli_query($db, $queryDep);
     $ban = null;
-
+    $ban2 = null;
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
         
         $email = $_POST['email'];
@@ -38,9 +38,9 @@
         $resultadoModificar = mysqli_query($db, $queryModificar);
 
         if($resultadoModificar) {
-            $ban = true;
+            $ban2 = true;
         } else{
-            $ban = false;
+            $ban2 = false;
         }
         $query1 = "SET FOREIGN_KEY_CHECKS=1";
         $resultadoLlave0 = mysqli_query($db, $query1);
@@ -54,7 +54,7 @@
             
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" required onkeypress= "return letrasNumeros(event)" maxlength="10" pattern="[A-Za-z 0-9]+">           
+                <input type="text" name="emailS" id="emailS" required  maxlength="20" pattern="[A-Za-z 0-9.]+">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -83,7 +83,7 @@
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" required onkeypress= "return letrasNumeros(event)" maxlength="10" pattern="[A-Za-z 0-9]+" >           
+                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" required maxlength="20" pattern="[A-Za-z 0-9.]+" >           
                                 <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">
                             </div>');
                         
@@ -149,9 +149,9 @@
         echo "<script>exito('Usuario Encontrado');</script>";
     }elseif($_SERVER['REQUEST_METHOD'] === "GET" && $ban == false && isset($_GET['tipoForm'])){
         echo "<script>fracaso('Error! El email no existe');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true){
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true){
         echo "<script>exito('El usuario se ha modificado');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false){
-        echo "<script>fracaso('No se ha podido modificar el usuario');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == false){
+        echo "<script>fracaso('Error! El Email ya esta en uso');</script>";
     }
 ?>

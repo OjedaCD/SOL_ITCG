@@ -56,6 +56,11 @@
             $passwordhash = password_hash($password, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
             $queryUs ="INSERT INTO users (idUser, email, token, nomUsuario, apellidoUsuario, telefono, edoUser, idRole, idDpto) VALUES ('{$value}','{$email}','{$passwordhash}','{$nombre}','{$apellidoUsuario}','{$telefono}','{$edo}','{$rolUsuario}','{$departamento}')";
             $resultadoUs =mysqli_query($db, $queryUs);
+            if($resultadoUs){
+                $ban = true;
+            }else{
+                $ban = false;
+            }
         }
     }
 ?>
@@ -66,7 +71,7 @@
             <div class="user">
                 <div class="emailS">
                     <label for="emailS">Email</label>
-                    <input required type="text" name="emailS" id="emailS" required onkeypress= "return letrasNumeros(event)" maxlength="10" pattern="[A-Za-z 0-9]+">           
+                    <input required type="text" name="emailS" id="emailS" required maxlength="20" pattern="[A-Za-z 0-9.]+">           
                 </div>
                 <div class="emailD">
                     <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -126,5 +131,7 @@
     inlcuirTemplate('footer');
     if ($ban && $_SERVER['REQUEST_METHOD']==="POST") {
         echo "<script>exito('Usuario Registrado');</script>";
+    }elseif ($ban == false && $_SERVER['REQUEST_METHOD']==="POST") {
+        echo "<script>fracaso('Error! El usuario ya existe');</script>";
     }
 ?>

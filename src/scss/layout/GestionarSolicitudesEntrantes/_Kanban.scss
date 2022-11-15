@@ -47,7 +47,7 @@
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px #ac471fc9, -2px -2px 16px rgb(177, 43, 43);
+				box-shadow: 4px 4px 16px #ac471fa1, -2px -2px 16px rgba(177, 43, 43, 0.842);
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -89,13 +89,6 @@
 			}
 		}
 
-
-
-
-
-
-
-
 		.interna2{
 			
 			width: 30%;
@@ -118,7 +111,7 @@
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px  #ecb708, -2px -2px 16px rgb(211, 192, 23);
+				box-shadow: 4px 4px 16px  #caec08, -2px -2px 16px rgb(211, 192, 23);
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -129,7 +122,7 @@
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px #c29a1788, -2px -2px 16px rgb(177, 146, 43);
+				box-shadow: 4px 4px 16px #d6ca27b7, -2px -2px 16px rgba(168, 177, 43, 0.733);
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -223,6 +216,18 @@
 					cursor: pointer;
 				}
 			}
+			.drop__card4 {
+				justify-content: space-between;
+				padding: .75rem 1.25rem .75rem .75rem;
+				background-color: #F8F8FC;
+				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
+				margin-bottom: 20px;
+				border-radius: 2rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+			
 			.drop__name {
 				font-size: 1rem;
 				color: #272A3A;

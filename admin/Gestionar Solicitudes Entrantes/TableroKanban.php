@@ -153,6 +153,9 @@
                                     }elseif($row['Prioridad'] == '3BAJA'){
                                         $clase = 'drop__card3';
                                     }
+                                    if($row['Estado'] == 'CANCELADO'){
+                                        $clase = 'drop__card4';
+                                    }
                                     echo $clase;
                                     echo('">
                                         <div class="drop__data">

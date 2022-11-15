@@ -14,17 +14,19 @@
         $folio = $_POST['tipoForm2'];
         $btn= $_POST['btn'];
         $observacion = $_POST['observacion'];
+        $prioridad = $_POST['prioridad'];
+        $tipo = $_POST['tipo'];
         
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `Estado`='FINALIZADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='FINALIZADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
-            $queryA = "UPDATE solicitudes SET `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){
-            $queryR = "UPDATE solicitudes SET  `Estado`='CANCELADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET  `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }
