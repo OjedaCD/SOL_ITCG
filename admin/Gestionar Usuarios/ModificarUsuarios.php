@@ -54,7 +54,7 @@
             
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" required  maxlength="20" pattern="[A-Za-z 0-9.]+">           
+                <input type="text" name="emailS" id="emailS" required  maxlength="25" pattern="[A-Za-z 0-9.]+">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -77,25 +77,25 @@
                         if( $email == $usuario['email']) {
                             $ban = true;
                             //Aquí va el envia el codigo a los inputs
-                            $queryDatos= "SELECT u.idUser, u.email, u.nomUsuario, u.apellidoUsuario, u.edoUser, u.telefono, u.idDpto, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
+                            $queryDatos= "SELECT * FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
                             $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                             $row = mysqli_fetch_assoc($resultadoDatos);//Toma los datos de usuarios y roles
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" required maxlength="20" pattern="[A-Za-z 0-9.]+" >           
+                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" required maxlength="25" pattern="[A-Za-z 0-9.]+" >           
                                 <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">
                             </div>');
                         
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" maxlength="50" pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespaciosModificar(event)" >           
+                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" maxlength="60" pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespaciosModificar(event)" >           
                             </div>');
                             echo('
                             <div class="apellidoUser">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" maxlength="50" pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespaciosModificar(event)">           
+                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" maxlength="60" pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespaciosModificar(event)">           
                             </div>');
                              
                             echo('
@@ -108,11 +108,19 @@
                                 <label for="departamento">Departamento</label>
                                 <select name="departamento" id="departamento" required>
                                     <option value=""disabled selected>--Seleccione Departamento--</option>');
-                                     while($dpto = mysqli_fetch_assoc($resultadoDep)){
-                                        echo('<option value="'.$dpto['idDpto'].'">');
-                                        echo $dpto['nomDpto'];
-                                        echo ('</option>');
-                                     }
+                                    if(!empty($row['idDpto'])){ 
+                                        while($dpto = mysqli_fetch_assoc($resultadoDep)){
+                                            if($row['idDpto'] == $dpto['idDpto']){
+                                                echo('<option selected = "selected" value="'.$dpto['idDpto'].'">');
+                                                echo $dpto['nomDpto'];
+                                                echo ('</option>');
+                                            }else{
+                                                echo('<option value="'.$dpto['idDpto'].'">');
+                                                echo $dpto['nomDpto'];
+                                                echo ('</option>');
+                                            }    
+                                        }
+                                    }
                                 echo('
                                 </select> 
                             </div>');  
@@ -121,10 +129,18 @@
                                 <label for="rolUsuario">Rol de Usuario</label>
                                 <select name="rolUsuario" id="rolUsuario" required>
                                     <option value=""disabled selected>--Seleccione Rol--</option>');
-                                    while($rol = mysqli_fetch_assoc($resultadoRol)){
-                                        echo('<option value="'.$rol['idRole'].'">');
-                                        echo $rol['nomRole'];
-                                        echo ('</option>');
+                                    if(!empty($row['idRole'])){ 
+                                        while($rol = mysqli_fetch_assoc($resultadoRol)){
+                                            if($rol['idRole'] == $row['idRole']){
+                                                echo('<option selected="selected" value="'.$rol['idRole'].'">');
+                                                echo $rol['nomRole'];
+                                            echo ('</option>');
+                                            }else{
+                                                echo('<option value="'.$rol['idRole'].'">');
+                                                echo $rol['nomRole'];
+                                                echo ('</option>');
+                                            }
+                                        }    
                                     }
                                     echo('
                                 </select> 

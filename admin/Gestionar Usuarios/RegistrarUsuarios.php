@@ -71,7 +71,7 @@
             <div class="user">
                 <div class="emailS">
                     <label for="emailS">Email</label>
-                    <input required type="text" name="emailS" id="emailS" required maxlength="20" pattern="[A-Za-z 0-9.]+">           
+                    <input required type="text" name="emailS" id="emailS" required maxlength="25" pattern="[A-Za-z 0-9.]+">           
                 </div>
                 <div class="emailD">
                     <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -80,30 +80,19 @@
             
             <div class="nombreUser">
                 <label for="nombre">Nombre</label>
-                <input required type="text" name="nombre" id="nombre"  maxlength="50"  pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespacios(event)">           
+                <input required type="text" name="nombre" id="nombre"  maxlength="60"  pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespacios(event)">           
             </div>
             <div class="apellidoP">
                 <label for="apellido">Primer Apellido</label>
-                <input required type="text" name="apellidoP" id="apellidoP"maxlength="50"  pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespacios(event)">           
+                <input required type="text" name="apellidoP" id="apellidoP"maxlength="30"  pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespacios(event)">           
             </div>
             <div class="apellidoS">
                 <label for="apellido">Segundo Apellido</label>
-                <input required type="text" name="apellidoS" id="apellidoS"maxlength="50"  pattern="[A-Za-z áéíóí]+" required  onkeypress= "return letrasYespacios(event)">           
+                <input required type="text" name="apellidoS" id="apellidoS"maxlength="30"  pattern="[A-Za-z áéíóí]+" required  onkeypress= "return letrasYespacios(event)">           
             </div>
             <div class="tel">
                 <label for="tel">Teléfono</label>
                 <input type="tel" name="telefono" placeholder="--Opcional--Introduce tú número de teléfono" minlength="0" maxlength="10" pattern="[0-9]+" onkeypress="return ValidaNumeros(event)">
-            </div>
-            <div class="rolUsuario">
-                <label for="rolUsuario">Rol de Usuario</label>
-                <select name="rolUsuario" id="rolUsuario" required>
-                    <option value=""disabled selected>--Seleccione Rol--</option>  
-                    <?php while($rol = mysqli_fetch_assoc($resultadoRol)):?>
-                        <option value="<?php echo $rol['idRole'];?>">
-                            <?php echo $rol['nomRole'];?>
-                        </option>
-                    <?php endwhile;?>  
-                </select>
             </div>
             <div class="departamento">
             <label for="departamento">Departamento</label>
@@ -116,10 +105,21 @@
                     <?php endwhile;?>  
                 </select>         
             </div>
+            <div class="rolUsuario">
+                <label for="rolUsuario">Rol de Usuario</label>
+                <select name="rolUsuario" id="rolUsuario" required>
+                    <option value=""disabled selected>--Seleccione Rol--</option>  
+                    <?php while($rol = mysqli_fetch_assoc($resultadoRol)):?>
+                        <option value="<?php echo $rol['idRole'];?>">
+                            <?php echo $rol['nomRole'];?>
+                        </option>
+                    <?php endwhile;?>  
+                </select>
+            </div>
             <div class="eye">
                 <label for="password">Contraseña</label>
-                <input required type="password" name="password" id="password" maxlength="8" minlength="8" placeholder="Ingrese una contraseña de 8 caracteres"> 
-                <img src="/src/img/Show.png" alt="" class="icon" id="ojo">
+                <input required type="password" name="password" id="password" minlength="20" placeholder="Ingrese una contraseña de 20 caracteres"> 
+                <img src="../../src/img/Show.png" alt="" class="icon" id="ojo">
             </div>
             <div class="btnRU">
                 <input type="submit" value="Registrar Usuario">

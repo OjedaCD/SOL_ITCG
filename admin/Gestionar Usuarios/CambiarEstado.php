@@ -1,15 +1,12 @@
 <?php
-
-use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\PHPMailer;
 
     require "../../includes/funciones.php";  $auth = estaAutenticado();
     require "../../includes/config/database.php"; 
     
-
     require '../../includes/PHPMailer/Exception.php';
     require '../../includes/PHPMailer/PHPMailer.php';
     require '../../includes/PHPMailer/SMTP.php';
-    
 
     if (!$auth) {
        header('location: /'); die();
@@ -28,7 +25,6 @@ use PHPMailer\PHPMailer\PHPMailer;
         $razon = $_POST['razon'];
         $id = $_POST['tipoForm2'];
         $edoUsuario = $_POST['edoUsuario'];
-
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
         $mail = new PHPMailer(true);
@@ -38,18 +34,18 @@ use PHPMailer\PHPMailer\PHPMailer;
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'L18290915@cdguzman.tecnm.mx';                     //SMTP username
-            $mail->Password   = '#';                               //SMTP password
+            $mail->Username   = 'solicitudes.cc@cdguzman.tecnm.mx';                     //SMTP username
+            $mail->Password   =                               //SMTP password
             $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom('L18290915@cdguzman.tecnm.mx', 'David Ojeda');//correo del superAdmin
-            $mail->addAddress('L18290915@cdguzman.tecnm.mx'); //correo a eliminar            //Name is optional
+            $mail->setFrom('solicitudes.cc@cdguzman.tecnm.mx', 'Solicitudes Centro de Cómputo');//correo del superAdmin
+            $mail->addAddress($_POST['email']); //correo a recibir
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Se ha eliminado tu cuenta del sistema de solicitudes SOL_ITCG';
+            $mail->Subject = 'El estado de tu cuenta del sistema de solicitudes SOL_ITCG se encuetra '.$edoUsuario;
             $mail->Body    = $razon;
             $mail->CharSet = 'UTF-8';
         
@@ -73,7 +69,7 @@ use PHPMailer\PHPMailer\PHPMailer;
         <form method="GET" class="buscarUs" >
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" required  maxlength="20" pattern="[A-Za-z 0-9.]+" required>           
+                <input type="text" name="emailS" id="emailS" required  maxlength="25" pattern="[A-Za-z 0-9.]+" required>           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -96,7 +92,7 @@ use PHPMailer\PHPMailer\PHPMailer;
                         if( $email == $usuario['email']) {
                             $ban = true;
                             //Aquí va el envia el codigo a los inputs
-                            $queryDatos= "SELECT u.idUser, u.email, u.nomUsuario, u.apellidoUsuario, u.edoUser, u.telefono, u.idDpto, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
+                            $queryDatos= "SELECT * FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole WHERE u.email = '$email'";
                             $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                             $row = mysqli_fetch_assoc($resultadoDatos);//Toma los datos de usuarios y roles
 
@@ -108,7 +104,8 @@ use PHPMailer\PHPMailer\PHPMailer;
                             <div class="email">
                                 <label for="email">Email</label>
                                 <input type="text" name="email" id="email" value = "'.$row["email"].'" disabled>
-                                <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">           
+                                <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">    
+                                <input type="hidden" name="email" value="'.$row["email"].'">         
                             </div>');
                             echo('
                             <div class="nombreUser">
@@ -134,16 +131,37 @@ use PHPMailer\PHPMailer\PHPMailer;
                             <div class="edoUsuario">
                                 <label for="edoUsuario">Estado de Usuario</label>
                                 <select name="edoUsuario" id="edoUsuario" required>
-                                    <option value=""disabled selected>--Seleccione Estado--</option>
+                                <option value=""disabled selected>--Seleccione Estado--</option>
+                                '); 
+                                
+                                if(!empty($row['edoUser'])){
+                                    if($row['edoUser'] == "HABILITADO"){
+                                        echo('                                
+                                        <option selected="selected" value="'.$row['edoUser'].'" >HABILITADO</option>
+                                        <option value="DESHABILITADO">DESHABILITADO</option>
+                                        </select> 
+                                        </div>
+                                        ');
+                                    }elseif($row['edoUser'] == "DESHABILITADO"){
+                                        echo('                                
+                                        <option value="HABILITADO">HABILITADO</option>
+                                        <option selected="selected" value="'.$row['edoUser'].'">DESHABILITADO</option>
+                                        </select></div>
+                                        '); 
+                                    }
+                                }else{
+                                    echo('                                
                                     <option value="HABILITADO">HABILITADO</option>
                                     <option value="DESHABILITADO">DESHABILITADO</option>
-                                </select> 
-                            </div>'); 
-                            
+                                    </select> 
+                                    </div>');
+                                }
+                            echo('</div>');
+                                 
                             echo('
                             <div class="razon">
                                 <label for="razon">Razón del cambio de estado del usuario</label>
-                                <textarea name ="razon" placeholder="Ingresa las razones del cambio de estado del usuario, para notificarle en su correo institucional una vez HABILITADO/DESHABILITADO del sistema -Las solicitudes generadas por él no se eliminarán-" required></textarea>
+                                <textarea name ="razon" maxlength="255" placeholder="Ingresa las razones del cambio de estado del usuario, para notificarle en su correo institucional una vez HABILITADO/DESHABILITADO del sistema -Las solicitudes generadas por él no se eliminarán-" required></textarea>
                             </div>');
                             echo('
                             <div class="btnCU">

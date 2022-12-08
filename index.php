@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                         $_SESSION['idRole'] = $usuario['idRole'];
                         $_SESSION['idDpto'] = $usuario['idDpto'];
                         $_SESSION['idUser'] = $usuario['idUser'];//Aquí será el id
-                        header('location: /admin');//Accede a los modulos
+                        header('location: ./admin');//Accede a los modulos
                     }
                     else {
                         $errores[0] = 'La contraseña es incorrecta';
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/build/css/app.css">
+    <link rel="stylesheet" href="./build/css/app.css">
     <title>SOL_ITCG</title>
 </head>
 <body class="bg-Azul">
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                 </div>
                 <div class="pass">
                     <label for="pass">Contraseña</label>
-                    <input type="password" name="pass" id="pass" placeholder="Contraseña" maxlength="8" >
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña" maxlength="20" >
                 </div>
                 <div class="iniciar">
                     <button>
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
 
 <!--Como aquí aún no llamamos a los templates necesitamos llamar a las funciones Script
 y SCSS desde este archivo-->
-<script src="/build/css/app.css"></script>
+<script src="./build/css/app.css"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

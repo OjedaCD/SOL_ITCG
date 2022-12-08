@@ -1,6 +1,12 @@
 <?php  
+    use PHPMailer\PHPMailer\PHPMailer;
     require "../../includes/funciones.php";  $auth = estaAutenticado();
-    require "../../includes/config/database.php";  
+    require "../../includes/config/database.php"; 
+    
+    require '../../includes/PHPMailer/Exception.php';
+    require '../../includes/PHPMailer/PHPMailer.php';
+    require '../../includes/PHPMailer/SMTP.php';
+    
     if (!$auth) {
        header('location: /'); die();
     }
@@ -16,8 +22,8 @@
         
         $id = $_POST['tipoForm2'];
 
-        function generateRandomString($length = 8) {
-            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        function generateRandomString($length = 20) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%!';
             $charactersLength = strlen($characters);
             $randomString = '';
             for ($i = 0; $i < $length; $i++) {
@@ -27,21 +33,43 @@
         } 
         $aux2 = generateRandomString();
         $passwordhash = password_hash($aux2, PASSWORD_DEFAULT);//Se encripta la contraseña con un costo elevado a la 10
-        echo($aux2);
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
         
-        $queryModificar= "UPDATE users SET `token`='$passwordhash' WHERE idUser = '$id'";
-        $resultadoModificar = mysqli_query($db, $queryModificar);
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'solicitudes.cc@cdguzman.tecnm.mx';                     //SMTP username
+            $mail->Password   =                              //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('solicitudes.cc@cdguzman.tecnm.mx', 'Solicitudes Centro de Cómputo');//correo del superAdmin
+            $mail->addAddress($_POST['email']); //correo a eliminar            //Name is optional
 
-        if($resultadoModificar){
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Se ha generado una nueva contraseña para tu cuenta del sistema de solicitudes SOL_ITCG';
+            $mail->Body    = 'La nueva contraseña es '.$aux2;
+            $mail->CharSet = 'UTF-8';
+    
+            
+            $mail->send();
             $ban = true;
-        }else{
+            $queryModificar= "UPDATE users SET `token`='$passwordhash' WHERE idUser = '$id'";
+            $resultadoModificar = mysqli_query($db, $queryModificar);
+            //Aquí ira el código para enviar el email cuando se suba al servidor
+        } catch (Exception $e) {
             $ban = false;
         }
+
         $query1 = "SET FOREIGN_KEY_CHECKS=1";
         $resultadoLlave0 = mysqli_query($db, $query1);
-
     }
 ?>
 <main class="RestablecerContraseña">
@@ -50,7 +78,7 @@
         <form method="GET" class="buscarUs" >
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS"required onkeypress= "return letrasNumeros(event)" maxlength="10" pattern="[A-Za-z 0-9]+" required>           
+                <input type="text" name="emailS" id="emailS"required maxlength="25" pattern="[A-Za-z 0-9.]+" required>           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -85,7 +113,8 @@
                             <div class="email">
                                 <label for="email">Email</label>
                                 <input type="text" name="email" id="email" value = "'.$row["email"].'" disabled>
-                                <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">           
+                                <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'"> 
+                                <input type="hidden" name="email" value="'.$row["email"].'">           
                             </div>');
                             echo('
                             <div class="nombreUser">

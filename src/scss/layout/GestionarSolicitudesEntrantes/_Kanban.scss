@@ -3,9 +3,7 @@
 	margin-top: 4rem;
 	//Rojo pendiente, Amarillo Proceso, Verde finalizadao
 
-	$prioridadA: #c04141;
-	$prioridadM: #c041419d;
-	$prioridadB: #c041412a;
+
 
 
 	//necesito determinar el color para cada columna dependiendo del estado
@@ -111,7 +109,7 @@
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px  #caec08, -2px -2px 16px rgb(211, 192, 23);
+				box-shadow: 4px 4px 16px  #c4cf28, -2px -2px 16px rgb(211, 192, 23);
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -122,7 +120,7 @@
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px #d6ca27b7, -2px -2px 16px rgba(168, 177, 43, 0.733);
+				box-shadow: 4px 4px 16px #fcf04dab, -2px -2px 16px rgba(168, 177, 43, 0.733);
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
@@ -187,7 +185,7 @@
 				justify-content: space-between;
 				padding: .75rem 1.25rem .75rem .75rem;
 				background-color: #F8F8FC;
-				box-shadow: 4px 4px 16px  #23ec08, -2px -2px 16px rgb(23, 211, 48);
+				box-shadow: 4px 4px 16px  #0ac76f, -2px -2px 16px rgb(23, 211, 48);
 				margin-bottom: 20px;
 				border-radius: 2rem;
 				&:hover {
