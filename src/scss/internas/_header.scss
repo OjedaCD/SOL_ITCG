@@ -3,20 +3,33 @@ body{
 }
 
 header{
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    .itcg{
-        width: 8rem;
-        margin-top: 6rem;
+    justify-content: center;
+    align-self: center;
+    
+    .logos{
+        display: flex;
+        justify-content: center;
+        .logosin{
+            
+            .sep{
+                width: 46.5rem;
+                float: left;
+            }
+            .tecnm{
+                width: 23.2rem;
+                float: left;
+            }
+            .itcg{
+                width: 6.6rem;
+            } 
+        }
+        
+               
     }
-    .sep, .tecnm{
-        width: 17rem;
-        margin-left: 8rem;
-    }
-    .tecnm{
-        margin-top: -9rem;
-    }
+    
     .text_header{
+        margin-top: 2rem;
+        position: relative;
         h1, h2, h3{
             margin: 0;
         }

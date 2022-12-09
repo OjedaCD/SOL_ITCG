@@ -1,7 +1,6 @@
     <footer>
         <section>
-            <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
-            <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
+
             <div class="datos">
                 <div class="direccion">
                     <p class="black">Instituto Tecnológico de Ciudad Guzmán</p>

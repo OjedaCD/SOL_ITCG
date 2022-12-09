@@ -60,6 +60,15 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
     <link rel="stylesheet" href="./build/css/app.css">
     <title>SOL_ITCG</title>
 </head>
+<header>   
+    <div class="logos">
+        <div class="logosin">
+            <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
+            <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
+            <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
+        </div>
+    </div>  
+</header>
 <body class="bg-Azul">
     <main>
         <section>

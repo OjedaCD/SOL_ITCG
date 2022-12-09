@@ -1,63 +1,87 @@
-.bg-Azul{
-    background-color: $azulMarino;
-}
-
-.alerta {
-    padding: .5rem;
-    text-align: center;
-    color: $blanco;
-    font-weight: $bold;
-    text-transform: uppercase;
-    margin: 1rem 0;
-
-    &.error {
-        background-color: $rojo;
+header{
+    justify-content: center;
+    align-self: center;
+    .logos{
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        .logosin{
+            
+            .sep{
+                width: 46.5rem;
+                float: left;
+            }
+            .tecnm{
+                width: 23.2rem;
+                float: left;
+            }
+            .itcg{
+                width: 6.6rem;
+            } 
+        }        
     }
 }
+.bg-Azul{
+    background-color: $azulMarino;
+    
+    .alerta {
+        padding: .5rem;
+        text-align: center;
+        color: $blanco;
+        font-weight: $bold;
+        text-transform: uppercase;
+        margin: 1rem 0;
+    
+        &.error {
+            background-color: $rojo;
+        }
+    }
+}
+
 main{
     display: flex;
     justify-content: center;
-    margin-top: 15rem;
+    margin-top: 5rem;
     section{
         background-color: $blanco;
         width: 30%;
         border-radius: 0.8rem;
         padding-bottom: 3rem;
     }
-}
-form{
-    margin-left: 3rem;
-    margin-right: 3rem;
-    label{
-        display: block;
-        margin: 1rem;
-        font-weight: $bold;
-    }
-    input{
-        border-radius: 0.5rem;
-        width: 100%;
-        height: 4rem;
-    }
-    a{
-        font-size: 1.5rem;
-        text-decoration: underline;
-        color: $azulMarino;
-    }
-
-    .iniciar{
-        display: flex;
-        justify-content: center;
-        button{
-            border: .2rem solid $negro;
+    form{
+        margin-left: 3rem;
+        margin-right: 3rem;
+        label{
+            display: block;
+            margin: 1rem;
+            font-weight: $bold;
+        }
+        input{
             border-radius: 0.5rem;
-            margin-top: 2rem;
+            width: 100%;
+            height: 4rem;
+        }
+        a{
+            font-size: 1.5rem;
+            text-decoration: underline;
+            color: $azulMarino;
+        }
+    
+        .iniciar{
             display: flex;
-            align-items: center;
-            input{
-                width: auto;
-                border: none;
+            justify-content: center;
+            button{
+                border: .2rem solid $negro;
+                border-radius: 0.5rem;
+                margin-top: 2rem;
+                display: flex;
+                align-items: center;
+                input{
+                    width: auto;
+                    border: none;
+                }
             }
         }
+        
     }
-    
 }

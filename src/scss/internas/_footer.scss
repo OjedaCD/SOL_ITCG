@@ -6,16 +6,9 @@ footer{
         background-color: $verde;
         @include grid(3, 1fr);
         align-items: center;
-        border-radius: 0.8rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        .sep{
-            margin-left: 10rem;
-        }
-        .sep, .tecnm{
-            width: 20rem;
-        }
+     
         .datos{
+            padding-left: 2rem;
             width: 60rem;
             .derechos{
                 margin-right: 10rem;

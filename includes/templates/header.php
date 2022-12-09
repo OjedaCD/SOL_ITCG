@@ -18,14 +18,18 @@
 </head>
 
 <header>   
-    <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
-    <div class="text_header">
-        <h1>TECNOLÓGICO NACIONAL DE MÉXICO</h1>
-        <h2>INSTITUTO TECNOLÓGICO DE CIUDAD GUZMÁN</h2>
-        <H3>Sistema de Solicitudes de Mantenimiento</H3>
+    
+    <div class="logos">
+        <div class="logosin">
+            <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
+            <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
+            <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
+        </div>
     </div>
-    <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
-    <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
+    <div class="text_header">
+        <h1>Sistema de Solicitudes de Mantenimiento</31>
+    </div>
+    
 </header>
 <?php 
     $rol = $_SESSION['idRole'];
