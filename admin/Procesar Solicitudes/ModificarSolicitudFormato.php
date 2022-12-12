@@ -159,7 +159,7 @@
                         foreach ($aux1 as $key => $value) {
                             echo('<div class="descripcion">
                                 <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
-                                <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required>')."".trim($value);
+                                <textarea id ="descripcion" maxlength="255" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required>')."".trim($value);
                         echo('</textarea>
                         </div>');
                         }
@@ -170,7 +170,7 @@
                         foreach ($aux2 as $key => $value) {
                             echo('<div class="observacion">
                             <label for="observacion">Correcciones para que su solicitud sea valida:</label>
-                            <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                            <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
                         echo('</textarea>
                         </div>');
                         }

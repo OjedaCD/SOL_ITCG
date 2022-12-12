@@ -57,7 +57,7 @@
                         $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                         $row3 = mysqli_fetch_assoc($resultadoDpto);
                         
-                        $queryDpto = "SELECT nomDpto FROM departamentos WHERE idDpto = $row[idDpto]";
+                        $queryDpto = "SELECT * FROM departamentos WHERE idDpto = $row[idDpto]";
                         $resultadoDpto = mysqli_query($db, $queryDpto);
                         $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                         
@@ -76,12 +76,15 @@
                         <div class="nombreUser">
                             <label for="nombre">Nombre del Solicitante</label>
                             <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" maxlength="50" pattern="[A-Za-z]+" disabled >           
+                            <input type="hidden" name="nombre" value="'.$row["nomUsuario"]." ".$row["apellidoUsuario"].'" >
                         </div>');
 
                         echo('
                         <div class="departamento">
                             <label for="departamento">Dpto del solicitante</label>
-                                <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
+                            <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
+                            <input type="hidden" name="dpto" value="'.$row2["nomDpto"].'" >
+                            <input type="hidden" name="idDpto" value="'.$row2["idDpto"].'" >
                         </div>');
                         $fecha1 = $row3['fecha'];
                         function cambiaf_a_espanol($fecha){
@@ -157,7 +160,9 @@
                             echo('<div class="descripcion">
                                 <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
                                 <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." disabled>')."".trim($value);
+                                
                         echo('</textarea>
+                            <input type="hidden" name="descripcion" value="'."".trim($value).'" >
                         </div>');
                         }
                             
@@ -165,7 +170,7 @@
                         echo('
                         <div class="observacion">
                             <label for="observacion">Razones de la concelación:</label>
-                            <textarea id ="observacion" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud" required></textarea>
+                            <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud" required></textarea>
                         </div>'); 
 
                         echo('

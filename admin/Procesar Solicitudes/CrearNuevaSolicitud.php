@@ -203,7 +203,7 @@
                                 echo('
                                 <div class="descripcion">
                                     <label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>
-                                    <textarea id ="descripcion" maxlength="250" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required></textarea>
+                                    <textarea id ="descripcion" maxlength="255" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required></textarea>
                                 </div>'); 
 
                                 echo('

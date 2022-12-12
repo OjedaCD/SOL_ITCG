@@ -146,7 +146,7 @@
                     
                     echo('<div class="observacion">
                     <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
-                    <textarea id ="observacion"  name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
+                    <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                     echo('</textarea></div>');
 
                     echo('
