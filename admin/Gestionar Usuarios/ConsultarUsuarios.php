@@ -21,6 +21,7 @@
         <h1>Consultar Usuarios</h1>
         <div class="btnsLista">
             <input type="button" onclick="mostrarContenido();" value="Consultar usuarios por departamento" class="btnChoseD">
+            <input type="button" onclick="mostrarContenido3();" value="Consulta general" class="btnChoseG" >
             <input type="button" onclick="mostrarContenido2();" value="Consultar usuarios por correo" class="btnChoseC" >
         </div>
         <form method="POST" id="content1" class="content1">
@@ -113,27 +114,21 @@
                 }
             }?>
         </div>
-        
-        <div class="departamento">
-            <div class = "container-table">
-                <?php if ($_SERVER['REQUEST_METHOD']=="POST" && $_POST['tipoForm']=="departamento") {          
-                        $departamento =$_POST['departamento'];
-                        $queryDpto1 ="SELECT nomDpto FROM departamentos WHERE idDpto = $departamento";
-                        $resultadoDpto1 = mysqli_query($db, $queryDpto1);
-                        
-                        while($row3 = mysqli_fetch_assoc($resultadoDpto1)){
-                            echo ('<div class="table__title">');
-                            echo ($row3 ["nomDpto"]);
-                            echo ('</div>');
-                        }
-
+        <div id = "general">
+            <div class = "container-table2">
+                <?php  
+                    $queryDpto1 ="SELECT * FROM departamentos ORDER BY nomDpto ASC";
+                    $resultadoDpto1 = mysqli_query($db, $queryDpto1);
+                    while($row3 = mysqli_fetch_assoc($resultadoDpto1)){
+                        echo ('<div class="table__title">');
+                        echo ($row3 ["nomDpto"]);
+                        echo ('</div>');
                         echo ('<div class="table__header">Email</div>');
                         echo ('<div class="table__header">Nombre</div>');
                         echo ('<div class="table__header">Teléfono</div>');
                         echo ('<div class="table__header">Rol</div>');
                         echo ('<div class="table__header">Estado</div>');
-
-                        $queryDpto2 = ("SELECT u.edoUser, u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN departamentos as d ON d.idDpto = u.idDpto WHERE d.idDpto = $departamento ORDER BY u.apellidoUsuario DESC");                       
+                        $queryDpto2 = ("SELECT u.edoUser, u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN departamentos as d ON d.idDpto = u.idDpto WHERE d.idDpto = $row3[idDpto] ORDER BY u.apellidoUsuario DESC"); 
                         $resultadoDpto2 =mysqli_query($db, $queryDpto2);
                         while($row4 = mysqli_fetch_assoc($resultadoDpto2)){
                             if($row4['email']) { 
@@ -147,6 +142,54 @@
                                 $ban = false;
                             }
                         }
+                        echo "<br>";
+                    }
+
+                ?>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="departamento">
+            <div class = "container-table">
+            <?php if ($_SERVER['REQUEST_METHOD']=="POST" && $_POST['tipoForm']=="departamento") {          
+                    $departamento =$_POST['departamento'];
+                    $queryDpto1 ="SELECT nomDpto FROM departamentos WHERE idDpto = $departamento";
+                    $resultadoDpto1 = mysqli_query($db, $queryDpto1);
+                        
+                    while($row3 = mysqli_fetch_assoc($resultadoDpto1)){
+                        echo ('<div class="table__title">');
+                        echo ($row3 ["nomDpto"]);
+                        echo ('</div>');
+                    }
+                    echo ('<div class="table__header">Email</div>');
+                    echo ('<div class="table__header">Nombre</div>');
+                    echo ('<div class="table__header">Teléfono</div>');
+                    echo ('<div class="table__header">Rol</div>');
+                    echo ('<div class="table__header">Estado</div>');
+
+                    $queryDpto2 = ("SELECT u.edoUser, u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN departamentos as d ON d.idDpto = u.idDpto WHERE d.idDpto = $departamento ORDER BY u.apellidoUsuario DESC");                       
+                    $resultadoDpto2 =mysqli_query($db, $queryDpto2);
+                    while($row4 = mysqli_fetch_assoc($resultadoDpto2)){
+                        if($row4['email']) { 
+                            echo ('<div class="table__item">'.$row4["email"].'</div>');
+                            echo ('<div class="table__item">'.$row4["nomUsuario"]." ".$row4["apellidoUsuario"].'</div>');
+                            echo ('<div class="table__item">'.$row4["telefono"].'</div>');
+                            echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
+                            echo ('<div class="table__item">'.$row4["edoUser"].'</div>');
+                            $ban = true;
+                        }else{
+                            $ban = false;
+                        }
+                    }
                 }?>
             </div>
         </div>

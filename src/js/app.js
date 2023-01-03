@@ -54,12 +54,18 @@ function advertencia(mensaje) {
 }
 
 function mostrarContenido(){
+    document.getElementById('content2').style.display ='none';
+    document.getElementById('general').style.display ='none';    
 	document.getElementById('content1').style.display ='flex';
-	document.getElementById('content2').style.display ='none';
 }
 
 function mostrarContenido2(){
+    document.getElementById('content1').style.display ='none';
+    document.getElementById('general').style.display ='none';    
 	document.getElementById('content2').style.display ='flex';
-	document.getElementById('content1').style.display ='none';
-    
+}
+function mostrarContenido3(){
+    document.getElementById('content2').style.display ='none';
+	document.getElementById('content1').style.display ='none';  
+    document.getElementById('general').style.display ='flex';    
 }
