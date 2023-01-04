@@ -149,15 +149,6 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
         <div class="departamento">
             <div class = "container-table">
             <?php if ($_SERVER['REQUEST_METHOD']=="POST" && $_POST['tipoForm']=="departamento") {          

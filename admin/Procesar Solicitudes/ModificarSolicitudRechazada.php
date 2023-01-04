@@ -58,7 +58,7 @@
     <section class="w80">
         <h1>Modificar Solicitud Rechazada</h1>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idUser = $_SESSION[idUser] AND Estado = 'RECHAZADO' AND Etapa = 'PENDIENTE' ORDER BY fecha ASC";
+            $query ="SELECT * FROM solicitudes WHERE idUser = $_SESSION[idUser] AND Estado = 'RECHAZADO' AND Etapa = '1PENDIENTE' ORDER BY fecha ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">

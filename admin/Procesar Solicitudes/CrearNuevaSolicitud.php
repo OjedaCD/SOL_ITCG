@@ -31,7 +31,7 @@
         $descripcion = $_POST['descripcion']; 
         $observacion = " ";
         $area = $_GET['area']?? null;
-        $etapa = "PENDIENTE";
+        $etapa = "1PENDIENTE";
         $prioridad = "3BAJA";
         $estado = "ESPERA";
         $tipo = "INTERNO";

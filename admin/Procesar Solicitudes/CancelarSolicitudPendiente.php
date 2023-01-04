@@ -61,7 +61,7 @@
                 
                 $mail->send();
                 $ban = true;
-                $querySol = "UPDATE solicitudes SET Estado ='CANCELADO' , Etapa = 'FINALIZADO' WHERE idSolicitud = '$idSol'";
+                $querySol = "UPDATE solicitudes SET Estado ='CANCELADO' , Etapa = '3FINALIZADO' WHERE idSolicitud = '$idSol'";
                 $resultadoUs =mysqli_query($db, $querySol);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
@@ -76,7 +76,7 @@
     <section class="w80">
         <h1>Cancelar Solicitud Pendiente</h1>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idUser = $_SESSION[idUser] AND (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND Etapa = 'PENDIENTE' ORDER BY fecha ASC";
+            $query ="SELECT * FROM solicitudes WHERE idUser = $_SESSION[idUser] AND (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND Etapa = '1PENDIENTE' ORDER BY fecha ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">

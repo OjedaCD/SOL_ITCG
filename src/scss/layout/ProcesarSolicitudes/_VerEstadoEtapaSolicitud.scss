@@ -11,8 +11,34 @@
         border-width: .5rem;
         border-radius: 0rem 0rem 1rem 1rem;
         --overflow: hidden;
-        tr {
-            
+        .rechazado{
+            transition: all .5s;
+            th {
+                font-weight: normal;
+                font-size: 2rem;
+            }
+            &:nth-child(odd) {
+                background-color: rgb(211, 65, 20);
+            }
+            &:nth-child(even) {
+                background-color: rgb(219, 7, 7);
+            }
+            &:hover {
+                background-color: $azulMarino;
+                transition: all .5s;
+                color: rgb(85, 168, 17);
+                --transform: scale(1.1);
+                cursor: pointer;
+            }
+            .pen{
+                width: 100%;
+                background-color: #f70400;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+        }
+        .espera {
             transition: all .5s;
             th {
                 font-weight: normal;
@@ -33,9 +59,23 @@
             }
 
             
-            input{
+            .pen{
                 width: 100%;
-                background-color: $azulVariante;
+                background-color: #f70400;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .pro{
+                width: 100%;
+                background-color: #fea506;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .fin{
+                width: 100%;
+                background-color: #00a118;
                 color: $blanco;
                 border-radius: 0.8rem;
                 cursor: pointer;

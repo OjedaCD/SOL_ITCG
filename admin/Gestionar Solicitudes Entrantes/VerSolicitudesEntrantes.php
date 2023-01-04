@@ -21,15 +21,15 @@
         $tipo = $_POST['tipo'];
 
         if($btn == "Aceptar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
-            $queryAC = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ESPERA', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
+            $queryAC = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoAC=mysqli_query($db, $queryAC);
             $ban2 = true;
         }elseif($btn == "Rechazar Solicitud"){
-            $queryR = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='PENDIENTE' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }
@@ -48,15 +48,15 @@
             }
         ?>
         <?php
-            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = 'PENDIENTE' ORDER BY Estado ASC , fecha ASC";
+            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = '1PENDIENTE' ORDER BY Estado ASC , fecha ASC, Prioridad ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
             <tr>
                 <th>DEPARTAMENTO</th>
-                <th>NOMBRE</th>
-                <th>FECHA DE ENVÍO</th>
-                <th>ESTADO</th>
+                <th>SOLICITANTE</th>
+                <th>FECHA</th>
+                <th>DESCRIPCIÓN</th>
                 <th>DETALLES</th>
             </tr>'); 
             while ($row = mysqli_fetch_array($resultado)){
@@ -70,20 +70,24 @@
                 INNER JOIN users as u ON u.idDpto = d.idDpto WHERE u.idUser = $row[idUser]";//Selecciono el id del usurio
                 $resultadoDpto = mysqli_query($db, $queryDpto);
                 $row3 = mysqli_fetch_array($resultadoDpto);
-
+                $name = $row2['nomUsuario']." ".$row2['apellidoUsuario'];
                 echo('<form method="GET" action ="VerSolicitudFormato.php">
                     <input name = "'.$row['folio'].'" type="hidden">
                     <tr>
-                        <th>'.$row3['nomDpto'].'</th>
-                        <th>'.$row2['nomUsuario']." ".$row2['apellidoUsuario'].'</th>
+                        <th>'.substr("$row3[nomDpto]", 0,26).'</th>
+                        <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
-                        <th>'.$row['Estado'].'</th>
-                        
-                        <th><input type="submit" value="Ver detalles"></th>
-                        
+                        <th>'.substr("$row[descripcion]", 0,40).'</th>
+                        ');
+                        if ($row['Estado'] != "RECHAZADO"){
+                            echo('<th><input class = "aceptado"type="submit" value="Ver detalles"></th>');
+                        }else{
+                            echo('<th><input class = "rechazado"type="submit" value="Ver detalles"></th>');
+                        }
+                       echo('
                     </tr>
                 </form>');
-            }
+            }//El color del botón cambia a rojo si es rechazada  y se va al final con prioridad
             echo('</table>');
         ?>
     </section>

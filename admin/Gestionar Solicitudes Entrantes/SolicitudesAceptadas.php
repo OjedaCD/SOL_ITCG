@@ -18,15 +18,15 @@
         $tipo = $_POST['tipo'];
         
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='FINALIZADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
-            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='PROCESO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){
-            $queryR = "UPDATE solicitudes SET  `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = 'FINALIZADO' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET  `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }
@@ -45,15 +45,15 @@
             }
         ?>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = 'PROCESO'";
+            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO'";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
             <tr>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
-                <th>FECHA DE ENVÍO</th>
-                <th>ESTADO</th>
+                <th>FECHA</th>
+                <th>DESCRIPCIÓN</th>
                 <th>FINALIZAR/CANCELAR</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
@@ -66,16 +66,17 @@
                     INNER JOIN users as u ON u.idDpto = d.idDpto WHERE u.idUser = $row[idUser]";//Selecciono el id del usurio
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
-
+                    
+                    $name = $row2['nomUsuario']." ".$row2['apellidoUsuario'];
                     echo('<form method="GET" action ="SolicitudesAceptadasFormato.php">
                         <input name = "'.$row['folio'].'" type="hidden">
-                        <tr>
-                            <th>'.$row3['nomDpto'].'</th>
-                            <th>'.$row2['nomUsuario']." ".$row2['apellidoUsuario'].'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.$row['Estado'].'</th>
-                            <th><input type="submit" value="Finalizar o Cancelar"></th>
-                        </tr>
+                    <tr>
+                        <th>'.substr("$row3[nomDpto]", 0,26).'</th>
+                        <th>'.substr("$name", 0,15).'</th>
+                        <th>'.$row['fecha'].'</th>
+                        <th>'.substr("$row[descripcion]", 0,40).'</th>
+                        <th><input type="submit" value="Finalizar o Cancelar"></th>
+                    </tr>
                     </form>');
                 }
                 echo('</table>');
