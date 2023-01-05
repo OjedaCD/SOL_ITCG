@@ -140,7 +140,7 @@
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                         </div>'); 
 
-                    $queryOb= "SELECT observacion, Prioridad, tipo FROM solicitudes WHERE folio = '{$folio}' ";
+                    $queryOb= "SELECT observacion, Prioridad, tipo, validacion FROM solicitudes WHERE folio = '{$folio}' ";
                     $resultadoOb = mysqli_query($db, $queryOb);
                     $aux2 = mysqli_fetch_assoc($resultadoOb);
                     
@@ -148,7 +148,12 @@
                     <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
                     <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                     echo('</textarea></div>');
-
+                    if($aux2['validacion'] != 0){
+                        echo('<div class="encargados">
+                        <label for="encargados">Coloque el nombre de las personas encargadas de atender la solicitud:</label>
+                        <textarea requiered id ="encargados" maxlength="255" name ="encargados"> ')."".trim($aux2['observacion']);  
+                        echo('</textarea></div>');
+                    }
                     echo('
                     <div class= "opcionesSel">
                         <div class="prioridad">
@@ -205,8 +210,6 @@
                                 </select></div>');
                         }
                     echo('</div>');
-
-
                     echo('
                     <div class = "Botones">
                         <div class="btnCSo">
@@ -215,8 +218,17 @@
                         <div class="btnAC">
                             <input type="submit" name = "btn" value="Actualizar Comentario">
                         </div>
+                        ');
+                        
+                        echo('
                         <div class="btnFSo">
-                            <input type="submit" name = "btn"  value="Finalizar Solicitud">
+                            ');
+                            if($aux2['validacion'] == 0){
+                                echo('<input type="submit" disabled="disabled" name = "btn"  value="Finalizar Solicitud">');
+                            }else{
+                                echo('<input type="submit" name = "btn"  value="Finalizar Solicitud">');
+                            }
+                        echo('
                         </div>
                     </div>                 
                     ');   

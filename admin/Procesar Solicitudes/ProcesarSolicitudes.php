@@ -13,17 +13,13 @@
                 <ion-icon name="document-outline"></ion-icon>
                 Crear Nueva Solicitud
             </a>
-            <a href="/admin/Procesar Solicitudes/VerEstadoEtapaSolicitud.php">
-                <ion-icon name="copy-outline"></ion-icon>
-                Ver Estado o Etapa de solicitud
+            <a href="/admin/Procesar Solicitudes/SolicitudesCC.php">
+                <ion-icon name="globe-outline"></ion-icon>
+                Solicitudes Centro de Cómputo
             </a>
-            <a href="/admin/Procesar Solicitudes/ModificarSolicitudRechazada.php">
-                <ion-icon name="newspaper-outline"></ion-icon>
-                Modificar Solicitud Rechazada
-            </a>
-            <a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">
-                <ion-icon name="close-circle-outline"></ion-icon>
-                Cancelar Solicitud Pendiente 
+            <a href="/admin/Procesar Solicitudes/SolicitudesME.php">
+                <ion-icon name="hammer-outline"></ion-icon>
+                Solicitudes Mantenimiento de Equipo
             </a>
         </div>
     </section>

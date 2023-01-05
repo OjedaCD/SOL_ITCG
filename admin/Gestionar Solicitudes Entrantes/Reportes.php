@@ -14,6 +14,9 @@
   $queryAI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'INTERNO'";
   $resultadoAI= mysqli_query($db, $queryAI);
 
+  $queryRI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'INTERNO'";
+  $resultadoRI= mysqli_query($db, $queryRI);
+
   $queryFI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'INTERNO'";
   $resultadoFI= mysqli_query($db, $queryFI);
 
@@ -22,6 +25,7 @@
 
   $rowEI = mysqli_fetch_assoc($resultadoEI);
   $rowAI = mysqli_fetch_assoc($resultadoAI);
+  $rowRI = mysqli_fetch_assoc($resultadoRI);
   $rowFI = mysqli_fetch_assoc($resultadoFI);
   $rowCI = mysqli_fetch_assoc($resultadoCI);
 
@@ -32,6 +36,9 @@
   $queryAE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'EXTERNO'";
   $resultadoAE= mysqli_query($db, $queryAE);
 
+  $queryRE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'EXTERNO'";
+  $resultadoRE= mysqli_query($db, $queryRE);
+
   $queryFE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'EXTERNO'";
   $resultadoFE= mysqli_query($db, $queryFE);
 
@@ -40,6 +47,7 @@
 
   $rowEE = mysqli_fetch_assoc($resultadoEE);
   $rowAE = mysqli_fetch_assoc($resultadoAE);
+  $rowRE = mysqli_fetch_assoc($resultadoRE);
   $rowFE = mysqli_fetch_assoc($resultadoFE);
   $rowCE = mysqli_fetch_assoc($resultadoCE);
 
@@ -65,6 +73,7 @@
             <?php 
                 echo "['" .'ESPERA INTERNO'."', " .$rowEI['contador']."],".
                 "['" .'ACEPTADO INTERNO'."', " .$rowAI['contador']."],".
+                "['" .'RECHAZADO INTERNO'."', " .$rowAI['contador']."],".
                 "['" .'FINALIZADO INTERNO'."', " .$rowFI['contador']."],".
                 "['" .'CANCELADO INTERNO'."', " .$rowCI['contador']."]"
                 ;
@@ -80,6 +89,7 @@
             <?php 
                 echo "['" .'ESPERA EXTERNO'."', " .$rowEE['contador']."],".
                 "['" .'ACEPTADO EXTERNO'."', " .$rowAE['contador']."],".
+                "['" .'RECHAZADO EXTERNO'."', " .$rowAE['contador']."],".
                 "['" .'FINALIZADO EXTERNO'."', " .$rowFE['contador']."],".
                 "['" .'CANCELADO EXTERNO'."', " .$rowCE['contador']."]"
                 ;

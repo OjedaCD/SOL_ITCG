@@ -9,7 +9,6 @@
 
     $db = conectarDB();
 
-
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
     
@@ -18,16 +17,14 @@
 
     $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla >7";
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
-
-    $ban = null;
-
     
 ?>
 <main class="CancelarSolicitudFormato">
     <section class="w80">
-        <h1>Cancelar Solicitud Pendiente</h1>
+        <h1>Cancelar Solicitud</h1>
 
-        <form method="POST" action ="CancelarSolicitudPendiente.php">
+        <form method="POST" action ="SolicitudesCC.php">
+            <input type="hidden" name ="cancelar" value="cancelar">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -165,8 +162,6 @@
                             <input type="hidden" name="descripcion" value="'."".trim($value).'" >
                         </div>');
                         }
-                            
-
                         echo('
                         <div class="observacion">
                             <label for="observacion">Razones de la concelación:</label>

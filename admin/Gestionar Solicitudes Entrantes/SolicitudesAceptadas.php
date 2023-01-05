@@ -17,6 +17,7 @@
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
         
+        
         if($btn == "Finalizar Solicitud"){
             $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
@@ -26,7 +27,7 @@
             $resultadoA=mysqli_query($db, $queryA);
             $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){
-            $queryR = "UPDATE solicitudes SET  `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET  `tipo`='$tipo', validacion = 1, `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }

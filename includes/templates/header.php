@@ -58,9 +58,8 @@
         <li><a href="/admin/Procesar Solicitudes/ProcesarSolicitudes.php">Procesar Solicitudes</a>
             <ul>
                 <li><a href="/admin/Procesar Solicitudes/CrearNuevaSolicitud.php">Crear Nueva Solicitud</a></li>
-                <li><a href="/admin/Procesar Solicitudes/VerEstadoEtapaSolicitud.php">Ver Estado o Etapa de Solicitud</a></li>
-                <li><a href="/admin/Procesar Solicitudes/ModificarSolicitudRechazada.php">Modificar Solicitud Rechazada</a></li>
-                <li><a href="/admin/Procesar Solicitudes/CancelarSolicitudPendiente.php">Cancelar Solicitud Pendiente</a></li>
+                <li><a href="/admin/Procesar Solicitudes/SolicitudesCC.php">Solicitudes Centro de Cómputo</a></li>    
+                <li><a href="/admin/Procesar Solicitudes/SolicitudesME.php">Solicitudes Mantenimiento de Equipo</a></li> 
             </ul>
         </li>
         <?php endif;?>

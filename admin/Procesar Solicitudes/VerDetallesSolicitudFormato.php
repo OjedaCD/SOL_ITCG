@@ -19,15 +19,13 @@
     $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla >7";
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
 
-    $ban = null;
-
     
 ?>
 <main class="VerEstadoEtapaSolicitudFormato">
     <section class="w80">
         <h1>Ver detalles</h1>
 
-        <form method="POST" action ="VerEstadoEtapaSolicitud.php">
+        <form method="POST" action ="SolicitudesCC.php">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -66,7 +64,6 @@
                                     <label for="folio">Folio</label>
                                     <input type="text" name="'.$folio.'" id="folio" value="'.$folio.'" disabled>           
                         </div>');  
-                        echo ('<input type="hidden" name="tipoForm2" value="'.$folio.'" >');    //Envia el folio 
                         echo ('
                         <div class="email">
                             <label for="email">Email</label>

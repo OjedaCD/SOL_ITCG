@@ -13,14 +13,14 @@
  $cont = mysqli_fetch_assoc($resultadoCont);
  $total = intval($cont['contador']);
 
- $querySolP = ("SELECT * FROM `solicitudes` WHERE Etapa = 'PENDIENTE' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
+ $querySolP = ("SELECT * FROM `solicitudes` WHERE Etapa = '1PENDIENTE' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
  $resultadoSolP  = mysqli_query($db, $querySolP);
  $pendiente = array();
  foreach ($resultadoSolP as $key => $value) {
     array_push($pendiente ,$value["idSolicitud"]);
  }
 
- $querySolPr = ("SELECT * FROM `solicitudes` WHERE Etapa = 'PROCESO' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
+ $querySolPr = ("SELECT * FROM `solicitudes` WHERE Etapa = '2PROCESO' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
  $resultadoSolPr  = mysqli_query($db, $querySolPr);
  $proceso = array();
  foreach ($resultadoSolPr as $key => $value) {
@@ -28,7 +28,7 @@
  }
 
 
- $querySolF = ("SELECT * FROM `solicitudes` WHERE Etapa = 'FINALIZADO' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
+ $querySolF = ("SELECT * FROM `solicitudes` WHERE Etapa = '3FINALIZADO' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
  $resultadoSolF  = mysqli_query($db, $querySolF);
  $finalizado= array();
  foreach ($resultadoSolF as $key => $value) {
