@@ -1,105 +1,237 @@
-.ModificarSolicitudFormato{
-    
-    margin-top: 4rem;
-
-    
-    .opciones{
-        align-content: center;
-        justify-content: center;
-        text-align: center;
-        margin-top: 2rem;
-        label{
-            
-            
-            width: 60%;
+#modificar{
+    .ModificarSolicitudFormato{  
+        width: 100%;
+        margin-top: 4rem;
+        .opciones{
+            align-content: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 2rem;
+            label{
+                
+                
+                width: 60%;
+            }
         }
-    }
-    .descripcion, .observacion{
-        align-content: center;
-        justify-content: center;
-        text-align: center;
+        .descripcion, .observacion{
+            align-content: center;
+            justify-content: center;
+            text-align: center;
+            
+            label{
+                margin-left: 10%;
+                display: flex;
+                width: 60%;
+            }
+            textarea{
+                width: 80%;
+                height: 12rem;
+                background-color: $blanco;
+                color: black;
+                border: .2rem solid black;
+                border-radius: 0.8rem;
+            }
+        }
         
-        label{
-            margin-left: 10%;
+    
+        .email, .nombreUser,.folio,.fecha, .departamento{
             display: flex;
-            width: 60%;
+            justify-content: center;
+            gap: 2rem;
         }
-        textarea{
-            width: 80%;
-            height: 12rem;
-            background-color: $blanco;
-            color: black;
-            border: .2rem solid black;
-            border-radius: 0.8rem;
-        }
-    }
-    
-
-    .email, .nombreUser,.folio,.fecha, .departamento{
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-    }
-    
-    input:not(input[type="submit"]){
-        width: 35%;
-    }
-    label{
-        width: 15%;
-        display: inline;
-    }
-    .fallas{
-        margin-top: 2rem;
-        text-align: left;
-        position: relative;
-        align-content: center;
-        justify-content: center;
-        input{
-            margin-top: 1.2rem;
-            margin-left: -5%;
+        
+        input:not(input[type="submit"]){
+            width: 35%;
         }
         label{
-            position: absolute;
-            margin-left: -10%;
-            width: 95%;
-            margin-bottom: -8%;
-           
+            width: 15%;
+            display: inline;
         }
-        margin-bottom: 2rem;
-    }
-    .fallas2{
-        margin-top: 2rem;
-        text-align: left;
-        position: relative;
-        align-content: center;
-        justify-content: center;
-        input{
-            margin-top: 1.2rem;
-            margin-left: -5%;
+        .fallas{
+            margin-top: 2rem;
+            text-align: left;
+            position: relative;
+            align-content: center;
+            justify-content: center;
+            input{
+                margin-top: 1.2rem;
+                margin-left: -5%;
+            }
+            label{
+                position: absolute;
+                margin-left: -10%;
+                width: 95%;
+                margin-bottom: -8%;
+               
+            }
+            margin-bottom: 2rem;
         }
-        label{
-            position: absolute;
-            margin-left: -10%;
-            width: 95%;
-            margin-bottom: -8%;
-           
+        .fallas2{
+            margin-top: 2rem;
+            text-align: left;
+            position: relative;
+            align-content: center;
+            justify-content: center;
+            input{
+                margin-top: 1.2rem;
+                margin-left: -5%;
+            }
+            label{
+                position: absolute;
+                margin-left: -10%;
+                width: 95%;
+                margin-bottom: -8%;
+               
+            }
+            margin-bottom: 2rem;
         }
-        margin-bottom: 2rem;
-    }
-    .btnCS{
-        position: relative;
-        float: right;
-        margin-top: 1rem;
-        right: 10%;
-        input{
-            width: 100%;
-            background-color: $azulMarino;
-            color: $blanco;
+        .btnMS{
+            position: relative;
+            float: right;
+            margin-top: 1rem;
+            right: 10%;
+            input{
+                width: 100%;
+                background-color: $azulMarino;
+                color: $blanco;
+            }
         }
-    }
-
+        .btnCS{
+            position: relative;
+            float: left;
+            margin-top: 1rem;
+            left: 10%;
+            width: 45rem;
+            input{
+                width: 100%;
+                background-color: rgb(219, 7, 7);
+                color: $blanco;
+            }
+        }
     
+        
+    }
 }
 
+
+#cancelar{
+    display: none;
+    padding: 0%;
+    .CancelarSolicitudFormato{
+        width: 100%;
+        margin-top: 4rem;
+    
+        
+        .opciones{
+            align-content: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 2rem;
+            label{
+                
+                
+                width: 60%;
+            }
+        }
+        .descripcion, .observacion{
+            align-content: center;
+            justify-content: center;
+            text-align: center;
+            
+            label{
+                margin-left: 10%;
+                display: flex;
+                width: 60%;
+            }
+            textarea{
+                width: 80%;
+                height: 12rem;
+                background-color: $blanco;
+                color: black;
+                border: .2rem solid black;
+                border-radius: 0.8rem;
+            }
+        }
+        
+    
+        .email, .nombreUser,.folio,.fecha, .departamento{
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        input:not(input[type="submit"]){
+            width: 35%;
+        }
+        label{
+            width: 15%;
+            display: inline;
+        }
+        .fallas{
+            margin-top: 2rem;
+            text-align: left;
+            position: relative;
+            align-content: center;
+            justify-content: center;
+            input{
+                margin-top: 1.2rem;
+                margin-left: -5%;
+            }
+            label{
+                position: absolute;
+                margin-left: -10%;
+                width: 95%;
+                margin-bottom: -8%;
+               
+            }
+            margin-bottom: 2rem;
+        }
+        .fallas2{
+            margin-top: 2rem;
+            text-align: left;
+            position: relative;
+            align-content: center;
+            justify-content: center;
+            input{
+                margin-top: 1.2rem;
+                margin-left: -5%;
+            }
+            label{
+                position: absolute;
+                margin-left: -10%;
+                width: 95%;
+                margin-bottom: -8%;
+               
+            }
+            margin-bottom: 2rem;
+        }
+        .btnCS{
+            position: relative;
+            float: right;
+            margin-top: 1rem;
+            right: 10%;
+            input{
+                width: 100%;
+                background-color: $azulMarino;
+                color: $blanco;
+            }
+        } 
+
+        .btnMS{
+            position: relative;
+            float: left;
+            margin-top: 1rem;
+            left: 10%;
+            width: 45rem;
+            input{
+                width: 100%;
+                background-color: rgb(219, 7, 7);
+                color: $blanco;
+            }
+        }
+        
+    }
+     
+}
 
 

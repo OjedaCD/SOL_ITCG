@@ -15,7 +15,7 @@
                 Registrar Usuarios
             </a>
             <?php endif;?>
-            <?php if($_SESSION['idRole'] == '1' || $_SESSION['idRole'] == '2'):?> 
+            <?php if($_SESSION['idRole'] == '1' || $_SESSION['idRole'] == '2'|| $_SESSION['idRole'] == '4'):?> 
             <a href="/admin/Gestionar Usuarios/ConsultarUsuarios.php">
                 <ion-icon name="search-sharp"></ion-icon>
                 Consultar Usuarios

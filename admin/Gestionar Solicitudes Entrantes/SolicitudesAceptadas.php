@@ -9,7 +9,7 @@
     $db =conectarDB();
     $ban = null;
     $ban2 = null;
-    if($_SERVER['REQUEST_METHOD']==="POST"){
+    if($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['tipoForm3'])){
         
         $folio = $_POST['tipoForm2'];
         $btn= $_POST['btn'];
@@ -87,12 +87,12 @@
 
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && isset($_POST['tipoForm2'])) {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && isset($_POST['tipoForm2']) && isset($_POST['tipoForm3'])) {
         echo "<script>exito('Solicitud Finalizada');</script>";
-    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && isset($_POST['tipoForm2'])){
+    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && isset($_POST['tipoForm2']) && isset($_POST['tipoForm3'])){
         echo "<script>fracaso('Solicitud Cancelada');</script>";
     }
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true ) {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true && isset($_POST['tipoForm3'])) {
         echo "<script>exito('Comentario Actualizado');</script>";
     }
 ?>

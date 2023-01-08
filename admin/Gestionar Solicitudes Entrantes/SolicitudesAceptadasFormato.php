@@ -143,95 +143,103 @@
                     $queryOb= "SELECT observacion, Prioridad, tipo, validacion FROM solicitudes WHERE folio = '{$folio}' ";
                     $resultadoOb = mysqli_query($db, $queryOb);
                     $aux2 = mysqli_fetch_assoc($resultadoOb);
-                    
-                    echo('<div class="observacion">
-                    <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
-                    <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
-                    echo('</textarea></div>');
-                    if($aux2['validacion'] != 0){
-                        echo('<div class="encargados">
-                        <label for="encargados">Coloque el nombre de las personas encargadas de atender la solicitud:</label>
-                        <textarea requiered id ="encargados" maxlength="255" name ="encargados"> ')."".trim($aux2['observacion']);  
+                    if($_SESSION['idRole'] != 4){
+                        echo('<div class="observacion">
+                        <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
+                        <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
-                    }
-                    echo('
-                    <div class= "opcionesSel">
-                        <div class="prioridad">
-                        <label for="prioridad">Nivel de Prioridad</label>
-                        <select name="prioridad" id="prioridad" required >');
-                        if(!empty($aux2['Prioridad'])){
-                            if($aux2['Prioridad'] == "3BAJA"){
-                                echo('                                
-                                <option selected="selected" value="'.$aux2['Prioridad'].'">BAJA</option>
-                                <option value="2MEDIA">MEDIA</option>
-                                <option value="1ALTA">ALTA</option>
-                                </select></div>');
-                            }elseif($aux2['Prioridad'] == "2MEDIA"){
-                                echo('                                
-                                <option value="3BAJA">BAJA</option>
-                                <option dedault selected="selected" value="'.$aux2['Prioridad'].'">MEDIA</option>
-                                <option value="1ALTA">ALTA</option>
-                                </select></div>');
-                            }elseif($aux2['Prioridad'] == "1ALTA"){
-                                echo('                                
-                                <option value="3BAJA">BAJA</option>
-                                <option value="2MEDIA">MEDIA</option>
-                                <option selected="selected" value="'.$aux2['Prioridad'].'">ALTA</option>
-                                </select></div>');
-                            }
-                        }else{
-                            echo('                                
-                                <option value="3BAJA">BAJA</option>
-                                <option value="2MEDIA">MEDIA</option>
-                                <option value="1ALTA">ALTA</option>
-                                </select></div>');
+                        if($aux2['validacion'] != 0){
+                            echo('<div class="encargados">
+                            <label for="encargados">Coloque el nombre de las personas encargadas de atender la solicitud:</label>
+                            <textarea requiered id ="encargados" maxlength="255" name ="encargados"> ')."".trim($aux2['observacion']);  
+                            echo('</textarea></div>');
                         }
-
                         echo('
-                        <div class="tipo">
-                        <label for="tipo">Tipo de mantenimiento</label>
-                        <select name="tipo" id="tipo" required >');
-                        if(!empty($aux2['tipo'])){
-                            if($aux2['tipo'] == "INTERNO"){
+                        <div class= "opcionesSel">
+                            <div class="prioridad">
+                            <label for="prioridad">Nivel de Prioridad</label>
+                            <select name="prioridad" id="prioridad" required >');
+                            if(!empty($aux2['Prioridad'])){
+                                if($aux2['Prioridad'] == "3BAJA"){
+                                    echo('                                
+                                    <option selected="selected" value="'.$aux2['Prioridad'].'">BAJA</option>
+                                    <option value="2MEDIA">MEDIA</option>
+                                    <option value="1ALTA">ALTA</option>
+                                    </select></div>');
+                                }elseif($aux2['Prioridad'] == "2MEDIA"){
+                                    echo('                                
+                                    <option value="3BAJA">BAJA</option>
+                                    <option dedault selected="selected" value="'.$aux2['Prioridad'].'">MEDIA</option>
+                                    <option value="1ALTA">ALTA</option>
+                                    </select></div>');
+                                }elseif($aux2['Prioridad'] == "1ALTA"){
+                                    echo('                                
+                                    <option value="3BAJA">BAJA</option>
+                                    <option value="2MEDIA">MEDIA</option>
+                                    <option selected="selected" value="'.$aux2['Prioridad'].'">ALTA</option>
+                                    </select></div>');
+                                }
+                            }else{
                                 echo('                                
-                                <option selected="selected" value="'.$aux2['tipo'].'">INTERNO</option>
-                                <option value="EXTERNO">EXTERNO</option>
-                                </select></div>');
-                            }elseif($aux2['tipo'] == "EXTERNO"){
-                                echo('                                
-                                <option value="INTERNO">INTERNO</option>
-                                <option selected="selected" value="'.$aux2['tipo'].'">EXTERNO</option>
-                                </select></div>');
+                                    <option value="3BAJA">BAJA</option>
+                                    <option value="2MEDIA">MEDIA</option>
+                                    <option value="1ALTA">ALTA</option>
+                                    </select></div>');
                             }
-                        }else{
-                            echo('                                
-                                <option value="INTERNO">INTERNO</option>
-                                <option value="EXTERNO">EXTERNO</option>
-                                </select></div>');
-                        }
-                    echo('</div>');
-                    echo('
-                    <div class = "Botones">
-                        <div class="btnCSo">
-                            <input type="submit" name = "btn" value="Cancelar Solicitud">
-                        </div>
-                        <div class="btnAC">
-                            <input type="submit" name = "btn" value="Actualizar Comentario">
+    
+                            echo('
+                            <div class="tipo">
+                            <label for="tipo">Tipo de mantenimiento</label>
+                            <select name="tipo" id="tipo" required >');
+                            if(!empty($aux2['tipo'])){
+                                if($aux2['tipo'] == "INTERNO"){
+                                    echo('                                
+                                    <option selected="selected" value="'.$aux2['tipo'].'">INTERNO</option>
+                                    <option value="EXTERNO">EXTERNO</option>
+                                    </select></div>');
+                                }elseif($aux2['tipo'] == "EXTERNO"){
+                                    echo('                                
+                                    <option value="INTERNO">INTERNO</option>
+                                    <option selected="selected" value="'.$aux2['tipo'].'">EXTERNO</option>
+                                    </select></div>');
+                                }
+                            }else{
+                                echo('                                
+                                    <option value="INTERNO">INTERNO</option>
+                                    <option value="EXTERNO">EXTERNO</option>
+                                    </select></div>');
+                            }
+                        echo('</div>');
+                        echo('
+                        <div class = "Botones">
+                            <div class="btnCSo">
+                                <input type="submit" name = "btn" value="Cancelar Solicitud">
+                            </div>
+                            <div class="btnAC">
+                                <input type="submit" name = "btn" value="Actualizar Comentario">
+                            </div>
+                            ');
+                            
+                            echo('
+                            <div class="btnFSo">
+                                ');
+                                if($aux2['validacion'] == 0){
+                                    echo('<input type="submit" disabled="disabled" name = "btn"  value="Finalizar Solicitud">');
+                                }else{
+                                    echo('<input type="submit" name = "btn"  value="Finalizar Solicitud">');
+                                }
+                            echo('
+                            </div>
+                            <input type="hidden" name="tipoForm3" value="X" >
+                        </div>                 
+                        '); 
+                    }else{
+                        echo('
+                        <div class="btnCS">
+                            <input type="submit" name = "btn" value="Cerrar Solicitud">
                         </div>
                         ');
-                        
-                        echo('
-                        <div class="btnFSo">
-                            ');
-                            if($aux2['validacion'] == 0){
-                                echo('<input type="submit" disabled="disabled" name = "btn"  value="Finalizar Solicitud">');
-                            }else{
-                                echo('<input type="submit" name = "btn"  value="Finalizar Solicitud">');
-                            }
-                        echo('
-                        </div>
-                    </div>                 
-                    ');   
+                    }  
                 }
             ?>
         </form>

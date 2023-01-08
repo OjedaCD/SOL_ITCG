@@ -21,7 +21,7 @@
 
     
 ?>
-<main class="VerEstadoEtapaSolicitudFormato">
+<main class="ServicioSolicitudFormato">
     <section class="w80">
         <h1>Validar Servicio</h1>
         <form method="POST" action ="SolicitudesCC.php">

@@ -12,7 +12,7 @@
     $resultadoDep= mysqli_query($db, $queryDep);
     $ban = null;
     $ban2 = null;
-    if($_SERVER['REQUEST_METHOD']==="POST"){
+    if($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['tipoForm3'])){
         
         $folio = $_POST['tipoForm2'];
         $observacion = $_POST['observacion'];
@@ -96,13 +96,13 @@
 <?php 
     inlcuirTemplate('footer');
     
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true ) {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && isset($_POST['tipoForm3'])) {
         echo "<script>exito('Solicitud Aceptada');</script>";
     }
-    if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false ){
+    if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && isset($_POST['tipoForm3'])){
         echo "<script>fracaso('Solicitud Rechazada');</script>";
     }
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true ) {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true && isset($_POST['tipoForm3'])) {
         echo "<script>exito('Comentario Actualizado');</script>";
     }
 ?>

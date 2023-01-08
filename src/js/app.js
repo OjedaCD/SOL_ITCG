@@ -69,3 +69,12 @@ function mostrarContenido3(){
 	document.getElementById('content1').style.display ='none';  
     document.getElementById('general').style.display ='flex';    
 }
+
+function mostrarContenido4(){
+    document.getElementById('modificar').style.display ='none'; 
+    document.getElementById('cancelar').style.display ='flex';    
+}
+function mostrarContenido5(){
+    document.getElementById('cancelar').style.display ='none';    
+    document.getElementById('modificar').style.display ='flex'; 
+}

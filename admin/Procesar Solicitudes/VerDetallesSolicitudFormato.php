@@ -21,7 +21,7 @@
 
     
 ?>
-<main class="VerEstadoEtapaSolicitudFormato">
+<main class="VerDetallesSolicitudFormato">
     <section class="w80">
         <h1>Ver detalles</h1>
 
@@ -154,6 +154,30 @@
                             echo('<div class="descripcion">
                                 <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
                                 <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." disabled>')."".trim($value);
+                        echo('</textarea>
+                        </div>');
+                        }
+
+                        $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
+                        $resultadoOb = mysqli_query($db, $queryOb);
+                        $aux1 = mysqli_fetch_assoc($resultadoOb);
+                        foreach ($aux1 as $key => $value) {
+                            if(strlen("".trim($value)) != 0){
+                                echo('<div class="observacion">
+                                <label for="observacion">Correcciones para que su solicitud sea valida:</label>
+                                <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                                echo('</textarea>
+                                </div>');
+                            }
+                        }
+
+                        $queryEn = "SELECT encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
+                        $resultadoEn = mysqli_query($db, $queryEn);
+                        $aux3 = mysqli_fetch_assoc($resultadoEn);
+                        foreach ($aux3 as $key => $value) {
+                            echo('<div class="encargadoS">
+                                <label for="encargadoS">Nombres de las personas encargadas de atender la solicitud:</label>
+                                <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($value);
                         echo('</textarea>
                         </div>');
                         }

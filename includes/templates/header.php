@@ -36,14 +36,14 @@
 ?>
 <div class="header">
     <ul class="nav">
-        <?php if($rol == 1 || $rol == 2):?>
+        <?php if($rol == 1 || $rol == 2|| $rol == 4):?>
         <li><a href="/admin/index.php">Inicio</a></li>
         <li><a href="/admin/Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
                 <?php if($rol == 1 ):?>
                 <li><a href="/admin/Gestionar Usuarios/RegistrarUsuarios.php">Registrar Usuarios</a></li>
                 <?php endif;?>
-                <?php if($rol == 1 || $rol == 2):?>
+                <?php if($rol == 1 || $rol == 2|| $rol == 4):?>
                 <li><a href="/admin/Gestionar Usuarios/ConsultarUsuarios.php">Consultar Usuarios</a></li>
                 <?php endif;?>
                 <?php if($rol == 1 ):?>
@@ -63,7 +63,7 @@
             </ul>
         </li>
         <?php endif;?>
-        <?php if($rol == 1 || $rol == 2):?>
+        <?php if($rol == 1 || $rol == 2 || $rol == 4):?>
         <li><a href="/admin/Gestionar Solicitudes Entrantes/GestionarSE.php">Gestionar Solicitudes Entrantes</a>
             <ul>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
