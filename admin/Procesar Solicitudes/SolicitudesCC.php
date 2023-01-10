@@ -155,17 +155,13 @@
                         echo('<form method="GET" action ="VerDetallesSolicitudFormato.php">'); 
                     }
 
-
-
-
-                    
                     echo('
                         <input name = "'.$row['folio'].'" type="hidden">');
-                        if($row['Estado'] != "RECHAZADO"){
+                        if($row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO"|| $row['Estado'] == "CANCELADO" || intval($row['validacion']) == 0 && $row['Estado'] == "ACEPTADO"){
                             echo('
                         <tr class="espera">
                             <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,50).'</th>
+                            <th>'.substr("$row[descripcion]", 0,70).'</th>
                             <th>'.$row['Estado'].'</th>
                             ');
                         if ($row['Etapa'] == "1PENDIENTE"){
@@ -177,13 +173,21 @@
                             }
                         echo('
                         </tr>');
-                        }else{
+                        }elseif($row['Estado'] == "RECHAZADO"){
                             echo('
                         <tr class="rechazado">
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,70).'</th>
                             <th>'.$row['Estado'].'</th>
                             <th><input class = "pen"type="submit" value="Modificar Solicitud"></th>
+                        </tr>');
+                        }elseif(intval($row['validacion']) == 1 && $row['Estado'] == "ACEPTADO"){
+                            echo('
+                        <tr class="validado">
+                            <th>'.$row['fecha'].'</th>
+                            <th>'.substr("$row[descripcion]", 0,70).'</th>
+                            <th>'.$row['Estado'].'</th>
+                            <th><input class = "pen"type="submit" value="Validar Servicio"></th>
                         </tr>');
                         }
                     echo('</form>');

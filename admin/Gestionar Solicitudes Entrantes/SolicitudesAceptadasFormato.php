@@ -140,7 +140,7 @@
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                         </div>'); 
 
-                    $queryOb= "SELECT observacion, Prioridad, tipo, validacion FROM solicitudes WHERE folio = '{$folio}' ";
+                    $queryOb= "SELECT observacion, Prioridad, tipo, validacion, encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
                     $resultadoOb = mysqli_query($db, $queryOb);
                     $aux2 = mysqli_fetch_assoc($resultadoOb);
                     if($_SESSION['idRole'] != 4){
@@ -149,9 +149,9 @@
                         <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
                         if($aux2['validacion'] != 0){
-                            echo('<div class="encargados">
-                            <label for="encargados">Coloque el nombre de las personas encargadas de atender la solicitud:</label>
-                            <textarea requiered id ="encargados" maxlength="255" name ="encargados"> ')."".trim($aux2['observacion']);  
+                            echo('<div class="encargadoS">
+                            <label for="encargadoS">Coloque el nombre de las personas encargadas de atender la solicitud:</label>
+                            <textarea requiered id ="encargadoS" maxlength="255" name ="encargadoS"> ')."".trim($aux2['encargadoS']);  
                             echo('</textarea></div>');
                         }
                         echo('

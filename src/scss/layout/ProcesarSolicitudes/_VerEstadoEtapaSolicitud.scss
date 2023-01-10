@@ -38,6 +38,33 @@
                 cursor: pointer;
             }
         }
+        .validado{
+            transition: all .5s;
+            th {
+                font-weight: normal;
+                font-size: 2rem;
+            }
+            &:nth-child(odd) {
+                background-color:  #fea506;
+            }
+            &:nth-child(even) {
+                background-color:  #fea506;
+            }
+            &:hover {
+                background-color: $azulMarino;
+                transition: all .5s;
+                color: rgb(231, 142, 191);
+                --transform: scale(1.1);
+                cursor: pointer;
+            }
+            .pen{
+                width: 100%;
+                background-color: #fea506;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+        }
         .espera {
             transition: all .5s;
             th {

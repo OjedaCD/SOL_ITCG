@@ -18,7 +18,6 @@
 </head>
 
 <header>   
-    
     <div class="logos">
         <div class="logosin">
             <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
@@ -35,6 +34,11 @@
     $rol = $_SESSION['idRole'];
 ?>
 <div class="header">
+    <div class="usuario" >
+    <a href="/admin/Opciones/DatosUsuario.php">
+        <ion-icon name="person-circle" ></ion-icon>
+    </a>    
+    </div>
     <ul class="nav">
         <?php if($rol == 1 || $rol == 2|| $rol == 4):?>
         <li><a href="/admin/index.php">Inicio</a></li>
@@ -68,6 +72,7 @@
             <ul>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">Solicitudes Aceptadas</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudFinalizada.php">Ver Solicitud Finalizada</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">Reportes de Solicitudes</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/ImprimirSolicitudFinalizada.php">Imprimir Solicitud Finalizada</a></li>
@@ -82,9 +87,10 @@
                     <?php endif;?>
                 </li>
                 <?php if($rol == 1 ):?>
-                <li><a href="/admin/Respadar Datos/RespaldoBDD.php">Respaldar Base de Datos</a></a></li>
-                <li><a href="/admin/Respadar Datos/NuevoProceso.php">Iniciar nuevo proceso</a></a></li>
+                <li><a href="/admin/Opciones/RespaldoBDD.php">Respaldar Base de Datos</a></a></li>
+                <li><a href="/admin/Opciones/NuevoProceso.php">Iniciar nuevo proceso</a></a></li>
                 <?php endif;?>
+                <li><a href="/admin/Opciones/DatosUsuario.php">Datos de Usuario</a></li>
             </ul>
         </li>
     </ul>

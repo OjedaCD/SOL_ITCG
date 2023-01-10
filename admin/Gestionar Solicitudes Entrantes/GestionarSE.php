@@ -17,6 +17,10 @@
                 <ion-icon name="checkmark-done-outline"></ion-icon>
                 Solicitudes Aceptadas
             </a>
+            <a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudFinalizada.php">
+                <ion-icon name="document-attach-outline"></ion-icon>
+                Ver Solicitudes Finalizadas 
+            </a>
             <a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">
                 <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                 Tablero Kanban

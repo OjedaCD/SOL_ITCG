@@ -28,15 +28,17 @@
 @import 'layout/GestionarSolicitudesEntrantes/VerSolicitudesEntrantes';
 @import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFormato';
 @import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadasFormato';
+@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFinalizadaFormato';
+@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFinalizada';
 @import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizadaFormato';
 @import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadas';
 @import 'layout/GestionarSolicitudesEntrantes/Kanban';
 @import 'layout/GestionarSolicitudesEntrantes/Reportes';
 @import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizada';
 //Opciones
-@import 'layout/RespaldarDatos/nuevoProceso';
-@import 'layout/RespaldarDatos/respaldoBDD';
-
+@import 'layout/Opciones/nuevoProceso';
+@import 'layout/Opciones/respaldoBDD';
+@import 'layout/Opciones/datosUsuario';
 //Internas
 @import 'internas/footer';
 @import 'internas/header';

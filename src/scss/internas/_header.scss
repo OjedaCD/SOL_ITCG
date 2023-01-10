@@ -45,6 +45,19 @@ header{
     display: flex;
     justify-content: center;
     background-color: $azulMarino;
+    .usuario{
+        height: 6rem;
+        width: 6rem;
+        position: fixed;
+        color: black;
+        right: 2%;
+        top: 0%;
+        ion-icon{
+            color: $azulVariante;
+            height: 6rem;
+            width: 6rem;
+        }
+    }
     ul, ol{
         list-style: none;
     }

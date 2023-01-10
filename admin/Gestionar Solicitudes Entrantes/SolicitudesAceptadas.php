@@ -16,10 +16,10 @@
         $observacion = $_POST['observacion'];
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
-        
+        $encargadoS = $_POST['encargadoS'];
         
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `encargadoS`='$encargadoS', `Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){

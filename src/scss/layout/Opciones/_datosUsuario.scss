@@ -1,0 +1,24 @@
+.DatosUsuario{
+    margin-top: 2rem;
+   
+    .correo{
+        margin-top: 2rem;
+        input{
+            width: 50%;
+            border-radius: 1rem;
+            
+        }
+        label{
+            width: 20%;
+            display: inline;
+            height:4rem;
+            margin-top: 1rem;
+        }
+        .email, .nombreUser, .departamento, .rolUsuario, .telefono, .edoUsuario{
+            display: flex;
+            height:4rem;
+            justify-content: center;
+        }
+    }
+    
+}

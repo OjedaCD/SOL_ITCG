@@ -48,11 +48,8 @@ class MySqlBackupLite {
     $this->connectMySql();
     $this->getTables();
     $this->orderTables();
-    $this->generateSqlHeader();
     $this->createTableStaments();
     $this->insertStaments();
-    $this->generateSqlFooter();
-
   }
 
 
@@ -129,24 +126,6 @@ class MySqlBackupLite {
     ];
     $this->arrayTables = $array;
   }
-
-
-  private function generateSqlHeader() {
-
-    $this->sqlString  = 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";' . "\r\n";
-    $this->sqlString .= 'SET time_zone = "' . $this->timeZone . '";' . "\r\n\r\n\r\n";
-    $this->sqlString .= '/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;' . "\r\n";
-    $this->sqlString .= '/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;' . "\r\n";
-    $this->sqlString .= '/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;' . "\r\n";
-    $this->sqlString .= '/*!40101 SET NAMES utf8 */;' . "\r\n";
-    $this->sqlString .= '--' . "\r\n";
-    $this->sqlString .= '-- Database: `' . $this->name . '`' . "\r\n";
-    $this->sqlString .= '--' . "\r\n\r\n\r\n";
-
-    return;
-
-  }
-
 
 
   private function createTableStaments() {
@@ -241,19 +220,6 @@ class MySqlBackupLite {
     }
 
     $this->sqlString .=")";
-
-  }
-
-
-
-  private function generateSqlFooter() {
-
-    $this->sqlString .=  "\r\n\r\n";
-    $this->sqlString .=  '/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;';
-    $this->sqlString .=  "\r\n";
-    $this->sqlString .=  '/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;';
-    $this->sqlString .=  "\r\n";
-    $this->sqlString .=  '/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;';
 
   }
 

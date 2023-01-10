@@ -24,8 +24,6 @@
 <main class="VerDetallesSolicitudFormato">
     <section class="w80">
         <h1>Ver detalles</h1>
-
-        <form method="POST" action ="SolicitudesCC.php">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -35,7 +33,12 @@
                     $folio = $fl;
                     $query = "SELECT folio FROM solicitudes";
                     $resultado = mysqli_query($db, $query);
-                    
+                    $ngg = substr($folio, 0, 2);
+                    if ($ngg == "CC"){
+                        echo('<form method="POST" action ="SolicitudesCC.php">');
+                    }else {
+                        echo('<form method="POST" action ="SolicitudesME.php">');
+                    }
 
                     $queryIdUs ="SELECT s.idUser FROM solicitudes as s WHERE s.folio = '{$folio}' ";
                     $resultadoIdUs = mysqli_query($db, $queryIdUs);
@@ -164,7 +167,7 @@
                         foreach ($aux1 as $key => $value) {
                             if(strlen("".trim($value)) != 0){
                                 echo('<div class="observacion">
-                                <label for="observacion">Correcciones para que su solicitud sea valida:</label>
+                                <label for="observacion">Correcciones para que su solicitud sea valida o comentarios:</label>
                                 <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
                                 echo('</textarea>
                                 </div>');

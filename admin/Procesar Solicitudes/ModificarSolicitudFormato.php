@@ -38,8 +38,6 @@
                 }
             } 
             </script> 
-            <form method="POST" onsubmit="return validar(this)" action ="SolicitudesCC.php">
-                <input type="hidden" name ="modificar" value = "modificar">
                 <?php 
                     if ($_SERVER['REQUEST_METHOD']==="GET") {
                         //Obtengo los datos del form
@@ -50,7 +48,14 @@
                         $query = "SELECT folio FROM solicitudes";
                         $resultado = mysqli_query($db, $query);
                         
-
+                        $ngg = substr($folio, 0, 2);
+                        if ($ngg == "CC"){
+                            echo('<form method="POST" onsubmit="return validar(this)" action ="SolicitudesCC.php">
+                            <input type="hidden" name ="modificar" value = "modificar">');
+                        }else {
+                            echo('<form method="POST" onsubmit="return validar(this)" action ="SolicitudesME.php">
+                            <input type="hidden" name ="modificar" value = "modificar">');
+                        }
                         $queryIdUs ="SELECT s.idUser FROM solicitudes as s WHERE s.folio = '{$folio}' ";
                         $resultadoIdUs = mysqli_query($db, $queryIdUs);
                         

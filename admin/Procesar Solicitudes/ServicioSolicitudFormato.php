@@ -24,8 +24,6 @@
 <main class="ServicioSolicitudFormato">
     <section class="w80">
         <h1>Validar Servicio</h1>
-        <form method="POST" action ="SolicitudesCC.php">
-            <input type="hidden" name ="validar" value="validar">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -35,7 +33,14 @@
                     $folio = $fl;
                     $query = "SELECT folio FROM solicitudes";
                     $resultado = mysqli_query($db, $query);
-                    
+                    $ngg = substr($folio, 0, 2);
+                    if ($ngg == "CC"){
+                        echo('<form method="POST" action ="SolicitudesCC.php">
+                        <input type="hidden" name ="validar" value="validar">');
+                    }else {
+                        echo('<form method="POST" action ="SolicitudesME.php">
+                        <input type="hidden" name ="validar" value="validar">');
+                    }
 
                     $queryIdUs ="SELECT s.idUser FROM solicitudes as s WHERE s.folio = '{$folio}' ";
                     $resultadoIdUs = mysqli_query($db, $queryIdUs);

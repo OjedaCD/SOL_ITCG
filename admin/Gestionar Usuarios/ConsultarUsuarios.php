@@ -5,7 +5,7 @@
        header('location: /'); die();
     }
     inlcuirTemplate('header');
-    if ($_SESSION['idRole'] != '1' && $_SESSION['idRole'] != '2' ) {
+    if ($_SESSION['idRole'] != '1' && $_SESSION['idRole'] != '2' && $_SESSION['idRole'] != '4' ) {
         header('location: /admin/index.php'); 
         die();
     }

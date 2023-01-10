@@ -20,17 +20,6 @@
     ob_start();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
 <?php 
     if ($_SERVER['REQUEST_METHOD']==="GET") {
         //Obtengo los datos del form
@@ -103,8 +92,6 @@
         </div>');
         echo('
             <div class="opciones">
-                <br>
-                <br>
                 <P><b>Clasificación de la falla a reparar:</label></b>
                 
             </div>');
@@ -165,8 +152,26 @@
         $aux1 = mysqli_fetch_assoc($resultadoDes);
         foreach ($aux1 as $key => $value) {
             echo('<div class="descripcion">
-                <br>
                 <P><b>Descripción del servicio solicitado o falla a reparar del Solicitante:</label></b>
+                <P>'."".trim($value).'</p>');
+        }
+        $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
+        $resultadoOb = mysqli_query($db, $queryOb);
+        $aux1 = mysqli_fetch_assoc($resultadoOb);
+        foreach ($aux1 as $key => $value) {
+            if(strlen("".trim($value)) != 0){
+                echo('                
+                <P><b>Correcciones para que su solicitud sea valida o comentarios:</label></b>
+                <P>'."".trim($value).'</p>');
+            }
+        }
+
+        $queryEn = "SELECT encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
+        $resultadoEn = mysqli_query($db, $queryEn);
+        $aux3 = mysqli_fetch_assoc($resultadoEn);
+        foreach ($aux3 as $key => $value) {
+            echo('
+                <P><b>Nombres de las personas encargadas de atender la solicitud:</label></b>
                 <P>'."".trim($value).'</p>');
         }
         echo('

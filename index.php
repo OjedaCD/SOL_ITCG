@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                         //Usuario Autentificado
                         session_start();
                         // //llenar arreglo de sesion
-                        $_SESSION['usuario'] = $usuario['email'];//Se identifica al usario en el sistema 
+                        $_SESSION['email'] = $usuario['email'];//Se identifica al usario en el sistema 
                         $_SESSION['login'] = true;
                         $_SESSION['idRole'] = $usuario['idRole'];
                         $_SESSION['idDpto'] = $usuario['idDpto'];
