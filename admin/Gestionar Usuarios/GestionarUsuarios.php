@@ -30,7 +30,7 @@
                 <ion-icon name="person-circle-outline"></ion-icon>
                 Cambiar Estado de Usuarios
             </a>
-            <a href="/admin/Gestionar Usuarios/RestablecerContraseña.php">
+            <a href="/admin/Gestionar Usuarios/RestablecerCon.php">
                 <ion-icon name="refresh-circle-outline"></ion-icon>
                 Restablecer Contraseña
             </a>

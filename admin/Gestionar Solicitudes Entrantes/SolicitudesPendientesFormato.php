@@ -20,11 +20,11 @@
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
    
 ?>
-<main class="VerSolicitudFormato">
+<main class="SolicitudesPendientesFormato">
     <section class="w80">
-        <h1>Ver Solicitud</h1>
+        <h1>Solicitud Pendiente</h1>
 
-        <form method="POST" action ="VerSolicitudesEntrantes.php">
+        <form method="POST" action ="SolicitudesPendientes.php">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form

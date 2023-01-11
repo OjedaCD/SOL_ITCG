@@ -21,10 +21,10 @@
 
     
 ?>
-<main class="VerSolicitudFinalizadaFormato">
+<main class="SolicitudesFinalizadasFormato">
     <section class="w80">
-    <form method="POST" action ="VerSolicitudFinalizada.php">
-        <h1>Ver detalles</h1>
+    <form method="POST" action ="SolicitudesFinalizadas.php">
+        <h1>Solicitud Finalizada</h1>
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form

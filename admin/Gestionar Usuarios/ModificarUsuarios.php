@@ -83,7 +83,7 @@
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.rtrim($row["email"],"@cdguzman.tecnm.mx").'" required maxlength="25" pattern="[A-Za-z 0-9.]+" >           
+                                <input type="text" name="email" id="email" value = "'.substr($row["email"], 0, -18).'" required maxlength="25" pattern="[A-Za-z 0-9.]+" >           
                                 <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">
                             </div>');
                         

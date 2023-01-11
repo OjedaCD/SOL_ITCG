@@ -1,4 +1,4 @@
-.VerSolicitudFinalizadaFormato{
+.SolicitudesPendientesFormato{
     
     margin-top: 4rem;
 
@@ -14,7 +14,7 @@
             width: 60%;
         }
     }
-    .descripcion, .observacion,.encargadoS{
+    .descripcion, .observacion{
         align-content: center;
         justify-content: center;
         text-align: center;
@@ -34,8 +34,50 @@
         }
     }
     
+    .Botones{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 15rem;
+        .btnRS{
+           
+            input{
+                background-color: #f70400;
+                color: $blanco;
+                width: 100%;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                text-align: center;
+            }
+        }
+        .btnAC{
+           
+            input{
+                background-color: #fea506;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        .btnAS{
+       
+            input{
+                background-color: #00a118;
+                color: $blanco;
+                border-radius: 0.8rem;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+    }
+    
 
-    .email, .nombreUser,.folio,.fecha, .departamento{
+    .email, .nombreUser,.folio,.fecha, .departamento, .prioridad, .tipo{
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -44,10 +86,16 @@
     input:not(input[type="submit"]){
         width: 35%;
     }
+    select {
+        border-radius: 0.5rem;
+        margin: 1.5rem, 0;
+        height: 4rem;
+    }
     label{
-        width: 15%;
+        width: 20%;
         display: inline;
     }
+
     .fallas{
         margin-top: 2rem;
         text-align: left;

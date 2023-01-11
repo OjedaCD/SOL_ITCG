@@ -12,7 +12,7 @@
     $resultadoDep= mysqli_query($db, $queryDep);
 
 ?>
-<main class="DatosUsuario">
+<main class="VerCuenta">
     <section class="w80">
         <h1>Datos de Usuario</h1>
         <div class="correo" id="correo"><?php

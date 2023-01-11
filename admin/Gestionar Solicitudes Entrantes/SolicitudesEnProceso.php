@@ -35,14 +35,14 @@
     }
 
 ?>
-<main class="SolicitudesAceptadas">
+<main class="SolicitudesEnProceso">
     <section class="w80">
         <?php 
             if($_SESSION['idDpto'] == 20 ){
-                echo('<h1>Solicitudes Aceptadas Centro de Cómputo</h1>');
+                echo('<h1>Solicitudes En Proceso Centro de Cómputo</h1>');
             }
             if($_SESSION['idDpto'] == 21 ){
-                echo('<h1>Solicitudes Aceptadas Mantenimiento de Equipo</h1>');
+                echo('<h1>Solicitudes En Proceso Mantenimiento de Equipo</h1>');
             }
         ?>
         <?php 
@@ -51,11 +51,12 @@
             echo('
             <table class="tabla">
             <tr>
+                <th>NUM</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>FINALIZAR/CANCELAR</th>
+                <th>PROCESO</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -69,14 +70,15 @@
                     $row3 = mysqli_fetch_array($resultadoDpto);
                     
                     $name = $row2['nomUsuario']." ".$row2['apellidoUsuario'];
-                    echo('<form method="GET" action ="SolicitudesAceptadasFormato.php">
+                    echo('<form method="GET" action ="SolicitudesEnProcesoFormato.php">
                         <input name = "'.$row['folio'].'" type="hidden">
                     <tr>
+                        <th>'.substr("$row[folio]", 4,-4).'</th>
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
                         <th>'.substr("$row[descripcion]", 0,40).'</th>
-                        <th><input type="submit" value="Finalizar o Cancelar"></th>
+                        <th><input type="submit" value="Ver Solicitud"></th>
                     </tr>
                     </form>');
                 }

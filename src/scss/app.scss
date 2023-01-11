@@ -25,20 +25,20 @@
 @import 'layout/ProcesarSolicitudes/CancelarSolicitudPendienteFormato';
 //Gestionar Solicitudes Entrantes
 @import 'layout/GestionarSolicitudesEntrantes/GestionarSEMenu';
-@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudesEntrantes';
-@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFormato';
-@import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadasFormato';
-@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFinalizadaFormato';
-@import 'layout/GestionarSolicitudesEntrantes/VerSolicitudFinalizada';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesPendientes';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesPendientesFormato';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesEnProceso';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesEnProcesoFormato';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesFinalizadas';
+@import 'layout/GestionarSolicitudesEntrantes/SolicitudesFinalizadasFormato';
 @import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizadaFormato';
-@import 'layout/GestionarSolicitudesEntrantes/SolicitudesAceptadas';
-@import 'layout/GestionarSolicitudesEntrantes/Kanban';
-@import 'layout/GestionarSolicitudesEntrantes/Reportes';
+@import 'layout/GestionarSolicitudesEntrantes/TableroDeSolicitudes';
+@import 'layout/GestionarSolicitudesEntrantes/ReportesDeSolicitudes';
 @import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizada';
 //Opciones
 @import 'layout/Opciones/nuevoProceso';
 @import 'layout/Opciones/respaldoBDD';
-@import 'layout/Opciones/datosUsuario';
+@import 'layout/Opciones/VerCuenta';
 //Internas
 @import 'internas/footer';
 @import 'internas/header';

@@ -35,7 +35,7 @@
 ?>
 <div class="header">
     <div class="usuario" >
-    <a href="/admin/Opciones/DatosUsuario.php">
+    <a href="/admin/Opciones/VerCuenta.php">
         <ion-icon name="person-circle" ></ion-icon>
     </a>    
     </div>
@@ -53,7 +53,7 @@
                 <?php if($rol == 1 ):?>
                 <li><a href="/admin/Gestionar Usuarios/ModificarUsuarios.php">Modificar Usuarios</a></li>
                 <li><a href="/admin/Gestionar Usuarios/CambiarEstado.php">Cambiar Estado de Usuarios</a></li>
-                <li><a href="/admin/Gestionar Usuarios/RestablecerContraseña.php">Restablecer Contraseña</a></li>
+                <li><a href="/admin/Gestionar Usuarios/RestablecerCon.php">Restablecer Contraseña</a></li>
                 <?php endif;?>
             </ul>
         </li>
@@ -70,11 +70,11 @@
         <?php if($rol == 1 || $rol == 2 || $rol == 4):?>
         <li><a href="/admin/Gestionar Solicitudes Entrantes/GestionarSE.php">Gestionar Solicitudes Entrantes</a>
             <ul>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudesEntrantes.php">Ver Solicitudes Entrantes</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesAceptadas.php">Solicitudes Aceptadas</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/VerSolicitudFinalizada.php">Ver Solicitud Finalizada</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroKanban.php">Tablero Kanban</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/Reportes.php">Reportes de Solicitudes</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesPendientes.php">Solicitudes Pendientes</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesEnProceso.php">Solicitudes En Proceso</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesFinalizadas.php">Solicitudes Finalizadas </a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroDeSolicitudes.php">Tablero De Solicitudes</a></li>
+                <li><a href="/admin/Gestionar Solicitudes Entrantes/ReportesDeSolicitudes.php">Reportes de Solicitudes</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/ImprimirSolicitudFinalizada.php">Imprimir Solicitud Finalizada</a></li>
             </ul>
         </li>
@@ -90,7 +90,7 @@
                 <li><a href="/admin/Opciones/RespaldoBDD.php">Respaldar Base de Datos</a></a></li>
                 <li><a href="/admin/Opciones/NuevoProceso.php">Iniciar nuevo proceso</a></a></li>
                 <?php endif;?>
-                <li><a href="/admin/Opciones/DatosUsuario.php">Datos de Usuario</a></li>
+                <li><a href="/admin/Opciones/VerCuenta.php">Ver Cuenta</a></li>
             </ul>
         </li>
     </ul>

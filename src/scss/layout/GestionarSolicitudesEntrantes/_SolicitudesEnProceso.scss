@@ -1,4 +1,4 @@
-.VerSolicitudesEntrantes{
+.SolicitudesEnProceso{
     
     margin-top: 4rem;
 
@@ -32,16 +32,10 @@
                 cursor: pointer;
             }
 
-            .aceptado{
+            
+            input{
                 width: 100%;
                 background-color: $azulVariante;
-                color: $blanco;
-                border-radius: 0.8rem;
-                cursor: pointer;
-            }
-            .rechazado{
-                width: 100%;
-                background-color: rgb(201, 32, 32);
                 color: $blanco;
                 border-radius: 0.8rem;
                 cursor: pointer;

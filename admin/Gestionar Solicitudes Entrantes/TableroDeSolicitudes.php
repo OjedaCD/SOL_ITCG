@@ -37,14 +37,14 @@
 
 
 ?>
-<main class="TableroKanban">
+<main class="TableroDeSolicitudes">
     <section class="w80">
         <?php 
             if($_SESSION['idDpto'] == 20 ){
-                echo('<h1>Kanban Centro de Cómputo</h1>');
+                echo('<h1>Tablero De Solicitudes Centro de Cómputo</h1>');
             }
             if($_SESSION['idDpto'] == 21 ){
-                echo('<h1>Knaban Mantenimiento de Equipo</h1>');
+                echo('<h1>Tablero De Solicitudes Mantenimiento de Equipo</h1>');
             }
         ?>
         <div class="contenedor">

@@ -133,7 +133,8 @@
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
-            <tr>
+            <tr>    
+                <th>NUM</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
                 <th>ESTADO</th>
@@ -160,6 +161,7 @@
                         if($row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO"|| $row['Estado'] == "CANCELADO" || intval($row['validacion']) == 0 && $row['Estado'] == "ACEPTADO"){
                             echo('
                         <tr class="espera">
+                            <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,70).'</th>
                             <th>'.$row['Estado'].'</th>
@@ -176,6 +178,7 @@
                         }elseif($row['Estado'] == "RECHAZADO"){
                             echo('
                         <tr class="rechazado">
+                            <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,70).'</th>
                             <th>'.$row['Estado'].'</th>
@@ -184,6 +187,7 @@
                         }elseif(intval($row['validacion']) == 1 && $row['Estado'] == "ACEPTADO"){
                             echo('
                         <tr class="validado">
+                            <th>'.substr("$row[folio]", 4,-4).'</th>    
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,70).'</th>
                             <th>'.$row['Estado'].'</th>

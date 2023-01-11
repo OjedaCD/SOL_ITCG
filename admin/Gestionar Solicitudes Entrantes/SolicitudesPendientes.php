@@ -37,14 +37,14 @@
 
     
 ?>
-<main class="VerSolicitudesEntrantes">
+<main class="SolicitudesPendientes">
     <section class="w80">
         <?php 
             if($_SESSION['idDpto'] == 20 ){
-                echo('<h1>Ver Solicitudes Entrantes Centro de Cómputo</h1>');
+                echo('<h1>Solicitudes Pendientes Centro De Cómputo</h1>');
             }
             if($_SESSION['idDpto'] == 21 ){
-                echo('<h1>Ver Solicitudes Entrantes Mantenimiento de Equipo</h1>');
+                echo('<h1>Solicitudes Pendientes Mantenimiento de Equipo</h1>');
             }
         ?>
         <?php
@@ -53,11 +53,12 @@
             echo('
             <table class="tabla">
             <tr>
+                <th>NUM</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>DETALLES</th>
+                <th>PENDIENTE</th>
             </tr>'); 
             while ($row = mysqli_fetch_array($resultado)){
                 
@@ -71,18 +72,20 @@
                 $resultadoDpto = mysqli_query($db, $queryDpto);
                 $row3 = mysqli_fetch_array($resultadoDpto);
                 $name = $row2['nomUsuario']." ".$row2['apellidoUsuario'];
-                echo('<form method="GET" action ="VerSolicitudFormato.php">
+                
+                echo('<form method="GET" action ="SolicitudesPendientesFormato.php">
                     <input name = "'.$row['folio'].'" type="hidden">
                     <tr>
+                        <th>'.substr("$row[folio]", 4,-4).'</th>
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
                         <th>'.substr("$row[descripcion]", 0,40).'</th>
                         ');
                         if ($row['Estado'] != "RECHAZADO"){
-                            echo('<th><input class = "aceptado"type="submit" value="Ver detalles"></th>');
+                            echo('<th><input class = "aceptado"type="submit" value="Ver Solicitud"></th>');
                         }else{
-                            echo('<th><input class = "rechazado"type="submit" value="Ver detalles"></th>');
+                            echo('<th><input class = "rechazado"type="submit" value="Ver Solicitud"></th>');
                         }
                        echo('
                     </tr>

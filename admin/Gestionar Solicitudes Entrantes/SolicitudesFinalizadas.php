@@ -9,20 +9,28 @@
     $db =conectarDB();
 
 ?>
-<main class="VerSolicitudFinalizada">
+<main class="SolicitudesFinalizadas">
     <section class="w80">
-        <h1>Ver Solicitud Finalizada</h1>
+    <?php 
+            if($_SESSION['idDpto'] == 20 ){
+                echo('<h1>Solicitudes Finalizadas Centro De Cómputo</h1>');
+            }
+            if($_SESSION['idDpto'] == 21 ){
+                echo('<h1>Solicitudes Finalizadas Mantenimiento de Equipo</h1>');
+            }
+        ?>
         <?php 
             $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Etapa = '3FINALIZADO' ORDER BY Estado ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
             <tr>
+                <th>NUM</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>VER DETALLES</th>
+                <th>FINALIZADA</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -34,14 +42,15 @@
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
                     $name = $row2['nomUsuario']." ".$row2['apellidoUsuario'];
-                    echo('<form method="GET" action ="VerSolicitudFinalizadaFormato.php">
+                    echo('<form method="GET" action ="SolicitudesFinalizadasFormato.php">
                         <input name = "'.$row['folio'].'" type="hidden">
                         <tr>
+                            <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                             <th>'.substr("$name", 0,15).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,40).'</th>
-                            <th><input type="submit" value="Ver Detalles"></th>
+                            <th><input type="submit" value="Ver Solicitud"></th>
                         </tr>
                     </form>');
                 }
