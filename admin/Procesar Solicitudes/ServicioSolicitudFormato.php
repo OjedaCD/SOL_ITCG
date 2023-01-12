@@ -23,7 +23,7 @@
 ?>
 <main class="ServicioSolicitudFormato">
     <section class="w80">
-        <h1>Validar Servicio</h1>
+        <h1>Confirmar Servicio</h1>
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -165,7 +165,7 @@
                         }
                         echo('
                         <div class="btnCS">
-                            <input type="submit" value="Validar Servicio">
+                            <input type="submit" value="Confirmar Servicio">
                         </div>');
                     
                     }

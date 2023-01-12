@@ -80,7 +80,7 @@
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
-                        <th>'.substr("$row[descripcion]", 0,40).'</th>
+                        <th>'.substr("$row[descripcion]", 0,30).'</th>
                         ');
                         if ($row['Estado'] != "RECHAZADO"){
                             echo('<th><input class = "aceptado"type="submit" value="Ver Solicitud"></th>');

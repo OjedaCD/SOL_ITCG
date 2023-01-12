@@ -18,22 +18,22 @@
                 font-size: 2rem;
             }
             &:nth-child(odd) {
-                background-color:  rgba(219, 7, 7, 0.801);
+                background-color:  #ff6961;
             }
             &:nth-child(even) {
-                background-color:  rgba(219, 7, 7, 0.801);
+                background-color:  #ff6961;
             }
             &:hover {
                 background-color: $azulMarino;
                 transition: all .5s;
-                color: rgb(85, 168, 17);
+                color: white;
                 --transform: scale(1.1);
                 cursor: pointer;
             }
             .pen{
                 width: 100%;
-                background-color: #f70400;
-                color: $blanco;
+                background-color: #f70400d7;
+                color: black;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }
@@ -45,22 +45,22 @@
                 font-size: 2rem;
             }
             &:nth-child(odd) {
-                background-color:  #fea506;
+                background-color:  #ffe180;
             }
             &:nth-child(even) {
-                background-color:  #fea506;
+                background-color:  #ffe180;
             }
             &:hover {
                 background-color: $azulMarino;
                 transition: all .5s;
-                color: rgb(231, 142, 191);
+                color: white;
                 --transform: scale(1.1);
                 cursor: pointer;
             }
             .pen{
                 width: 100%;
                 background-color: #fea506;
-                color: $blanco;
+                color: black;;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }
@@ -88,22 +88,22 @@
             
             .pen{
                 width: 100%;
-                background-color: #f70400;
-                color: $blanco;
+                background-color: #f70400d7;
+                color: black;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }
             .pro{
                 width: 100%;
                 background-color: #fea506;
-                color: $blanco;
+                color: black;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }
             .fin{
                 width: 100%;
-                background-color: #00a118;
-                color: $blanco;
+                background-color: #66db66;
+                color: black;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }

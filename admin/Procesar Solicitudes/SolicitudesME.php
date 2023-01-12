@@ -133,13 +133,14 @@
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
-            <tr>    
+            <tr>
                 <th>NUM</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
                 <th>ESTADO</th>
-                <th>DETALLES</th>
-                </tr>'); 
+                <th>OPCIONES</th>
+            </tr>'); 
+                
                 while ($row = mysqli_fetch_array($resultado)){
                 
                     $queryDpto ="SELECT d.nomDpto FROM departamentos as d
@@ -153,9 +154,9 @@
                     }elseif($row['Estado'] == "ACEPTADO"){
                         echo('<form method="GET" action ="ServicioSolicitudFormato.php">'); 
                     }else{
-                        echo('<form method="GET" action ="VerDetallesSolicitudFormato.php">'); 
+                        echo('<form method="GET" action ="DatosDeSolicitudFormato.php">'); 
                     }
-   
+
                     echo('
                         <input name = "'.$row['folio'].'" type="hidden">');
                         if($row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO"|| $row['Estado'] == "CANCELADO" || intval($row['validacion']) == 0 && $row['Estado'] == "ACEPTADO"){
@@ -163,15 +164,15 @@
                         <tr class="espera">
                             <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,70).'</th>
+                            <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
                             ');
                         if ($row['Etapa'] == "1PENDIENTE"){
                                 echo('<th><input class = "pen"type="submit" value="Cancelar Solicitud"></th>');        
                             }if($row['Etapa'] == "2PROCESO"){
-                                echo('<th><input class = "pro"type="submit" value="Validar Servicio"></th>');  
+                                echo('<th><input class = "pro"type="submit" value="Confirmar Servicio"></th>');  
                             }if($row['Etapa'] == "3FINALIZADO"){
-                                echo('<th><input class = "fin"type="submit" value="Ver detalles"></th>');  
+                                echo('<th><input class = "fin"type="submit" value="Datos de Solicitud"></th>');  
                             }
                         echo('
                         </tr>');
@@ -180,18 +181,18 @@
                         <tr class="rechazado">
                             <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,70).'</th>
+                            <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
                             <th><input class = "pen"type="submit" value="Modificar Solicitud"></th>
                         </tr>');
                         }elseif(intval($row['validacion']) == 1 && $row['Estado'] == "ACEPTADO"){
                             echo('
                         <tr class="validado">
-                            <th>'.substr("$row[folio]", 4,-4).'</th>    
+                            <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,70).'</th>
+                            <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
-                            <th><input class = "pen"type="submit" value="Validar Servicio"></th>
+                            <th><input class = "pen"type="submit" value="Confirmar Servicio"></th>
                         </tr>');
                         }
                     echo('</form>');
@@ -214,7 +215,7 @@
         echo "<script>fracaso('Error! Solicitud no Cancelada');</script>";
     }
     if ($_SERVER['REQUEST_METHOD'] === "POST" && $banV == true && isset($_POST['validar'])) {
-        echo "<script>exito('Solicitud Validada, el Administrador la Finalizará');</script>";
+        echo "<script>exito('Servicio confirmado, el Administrador la Finalizará');</script>";
     }if($_SERVER['REQUEST_METHOD'] === "POST" && $banV == false && isset($_POST['validar'])){
         echo "<script>fracaso('Error! Solicitud no Validada');</script>";
     }

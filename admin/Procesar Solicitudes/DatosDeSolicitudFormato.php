@@ -21,9 +21,9 @@
 
     
 ?>
-<main class="VerDetallesSolicitudFormato">
+<main class="DatosDeSolicitudFormato">
     <section class="w80">
-        <h1>Ver detalles</h1>
+        <h1>Datos de Solicitud</h1>
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -54,7 +54,7 @@
                         $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                         $row = mysqli_fetch_assoc($resultadoDatos);
                         
-                        $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
+                        $queryDpto ="SELECT * FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                         $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                         $row3 = mysqli_fetch_assoc($resultadoDpto);
                         
@@ -84,6 +84,7 @@
                                 <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                         </div>');
                         $fecha1 = $row3['fecha'];
+                        $fecha2 = $row3['fechaFin'];
                         function cambiaf_a_espanol($fecha){
                             preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
                             $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
@@ -93,6 +94,11 @@
                         <div class="fecha">
                             <label for="fecha">Fecha de elaboración</label>
                             <input id="fechaActual" name="fecha" type="text" value ="'.cambiaf_a_espanol($fecha1).'" disabled>
+                        </div>');
+                        echo('
+                        <div class="fechaFin">
+                            <label for="fechaFin">Fecha de realización</label>
+                            <input id="fechaFin" name="fechaFin" type="text" value ="'.cambiaf_a_espanol($fecha2).'" disabled>
                         </div>');
                         echo('
                             <div class="opciones">
@@ -173,6 +179,7 @@
                                 </div>');
                             }
                         }
+                        echo('<hr><h1>Orden De Trabajo</h1>');
 
                         $queryEn = "SELECT encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
                         $resultadoEn = mysqli_query($db, $queryEn);
@@ -183,6 +190,25 @@
                                 <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($value);
                         echo('</textarea>
                         </div>');
+                        }
+                        $queryTr = "SELECT trabajo FROM solicitudes WHERE folio = '{$folio}' ";
+                        $resultadoTr = mysqli_query($db, $queryTr);
+                        $aux4 = mysqli_fetch_assoc($resultadoTr);
+                        foreach ($aux4 as $key => $value) {
+                            echo('<div class="trabajo">
+                            <label for="trabajo">Trabajo realizado:</label>
+                            <textarea id ="trabajo" maxlength="255" name ="trabajo" disabled> ')."".trim($value);  
+                            echo('</textarea></div>');
+                        }
+
+                        $queryMa = "SELECT materiales FROM solicitudes WHERE folio = '{$folio}' ";
+                        $resultadoMa = mysqli_query($db, $queryMa);
+                        $aux5 = mysqli_fetch_assoc($resultadoMa);
+                        foreach ($aux5 as $key => $value) {
+                            echo('<div class="materiales">
+                            <label for="materiales">Materiales utilizados:</label>
+                            <textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  
+                            echo('</textarea></div>');
                         }
                         echo('
                         <div class="btnCS">

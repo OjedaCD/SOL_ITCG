@@ -14,7 +14,7 @@
 ?>
 <main class="VerCuenta">
     <section class="w80">
-        <h1>Datos de Usuario</h1>
+        <h1>Cuenta de Usuario</h1>
         <div class="correo" id="correo"><?php
             //Obtengo los datos del form de consultar usuario por correo
             $email = $_SESSION['email'];

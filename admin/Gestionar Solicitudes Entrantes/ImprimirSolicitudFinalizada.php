@@ -18,11 +18,12 @@
             echo('
             <table class="tabla">
             <tr>
+                <th>NUM</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>VER DETALLES</th>
+                <th>IMPRIMIR</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -37,6 +38,7 @@
                     echo('<form method="GET" action ="ImprimirSolicitudFinalizadaFormato.php">
                         <input name = "'.$row['folio'].'" type="hidden">
                         <tr>
+                            <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                             <th>'.substr("$name", 0,15).'</th>
                             <th>'.$row['fecha'].'</th>

@@ -54,6 +54,10 @@
                     $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                     $row3 = mysqli_fetch_assoc($resultadoDpto);
                     
+                    $queryOb= "SELECT observacion, Prioridad, tipo, validacion, encargadoS, trabajo, materiales FROM solicitudes WHERE folio = '{$folio}' ";
+                    $resultadoOb = mysqli_query($db, $queryOb);
+                    $aux2 = mysqli_fetch_assoc($resultadoOb);
+                    
                     echo ('<div class="folio">
                                 <label for="folio">Folio</label>
                                 <input type="text" name="'.$folio.'" id="folio" value="'.$folio.'" disabled>           
@@ -86,7 +90,16 @@
                         <label for="fecha">Fecha de elaboración</label>
                         <input id="fechaActual" name="fecha" type="text" value ="'.cambiaf_a_espanol($fecha1).'" disabled>
                     </div>');
+                    if($aux2['validacion'] != 0){
+                        date_default_timezone_set("America/Mexico_City");
+                        $fecha2 = date('Y-m-d');
 
+                        echo('
+                        <div class="fechaFin">
+                            <label for="fechaFin">Fecha de realización</label>
+                            <input id="fechaFin" name="fechaFin" value ="'.$fecha2.'"value type="date" disabled>
+                        </div>');
+                    }
                     echo('
                     <div class="opciones">
                         <label for="opciones">Clasificación de la falla a reparar:</label>
@@ -101,7 +114,7 @@
                     }
                     $Marcado = ' checked="checked"';
                     if($row3['idDpto'] == 20){//Formulario del centro de computo
-                        echo('<div class="fallas" ">');
+                        echo('<div class="fallas ">');
                             while($falla = mysqli_fetch_assoc($resultadoFallaCP)){
                                 echo('<input type = "checkbox" disabled name ="checkbox[]"');
                                 if($detalles){
@@ -140,18 +153,27 @@
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                         </div>'); 
 
-                    $queryOb= "SELECT observacion, Prioridad, tipo, validacion, encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
-                    $resultadoOb = mysqli_query($db, $queryOb);
-                    $aux2 = mysqli_fetch_assoc($resultadoOb);
+                    
                     if($_SESSION['idRole'] != 4){
                         echo('<div class="observacion">
                         <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
                         <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
                         if($aux2['validacion'] != 0){
+                            echo('<hr><h1>Orden De Trabajo</h1>');
                             echo('<div class="encargadoS">
-                            <label for="encargadoS">Coloque el nombre de las personas encargadas de atender la solicitud:</label>
-                            <textarea requiered id ="encargadoS" maxlength="255" name ="encargadoS"> ')."".trim($aux2['encargadoS']);  
+                            <label for="encargadoS">Coloque el nombre de las personas asignadas para atender la solicitud:</label>
+                            <textarea id ="encargadoS" maxlength="255" name ="encargadoS" required> ');  
+                            echo('</textarea></div>');
+
+                            echo('<div class="trabajo">
+                            <label for="trabajo">Coloque el trabajo realizado:</label>
+                            <textarea id ="trabajo" maxlength="255" name ="trabajo" required> ');  
+                            echo('</textarea></div>');
+
+                            echo('<div class="materiales">
+                            <label for="materiales">Coloque los materiales utilizados:</label>
+                            <textarea id ="materiales" maxlength="255" name ="materiales" required> ');  
                             echo('</textarea></div>');
                         }
                         echo('
@@ -186,7 +208,6 @@
                                     <option value="1ALTA">ALTA</option>
                                     </select></div>');
                             }
-    
                             echo('
                             <div class="tipo">
                             <label for="tipo">Tipo de mantenimiento</label>

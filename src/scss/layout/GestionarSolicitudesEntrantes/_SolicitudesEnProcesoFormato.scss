@@ -13,7 +13,7 @@
             width: 60%;
         }
     }
-    .descripcion, .observacion,.encargadoS{
+    .descripcion, .observacion,.encargadoS, .trabajo, .materiales{
         align-content: center;
         justify-content: center;
         text-align: center;
@@ -74,7 +74,7 @@
         
     }
 
-    .email, .nombreUser,.folio,.fecha, .departamento,.prioridad, .tipo{
+    .email, .nombreUser,.folio,.fecha, .departamento,.prioridad, .tipo, .fechaFin{
         display: flex;
         justify-content: center;
         gap: 2rem;
@@ -111,6 +111,10 @@
            
         }
         margin-bottom: 2rem;
+    }
+    hr{
+        height: 1rem;
+        background-color: black;
     }
     .fallas2{
         margin-top: 2rem;

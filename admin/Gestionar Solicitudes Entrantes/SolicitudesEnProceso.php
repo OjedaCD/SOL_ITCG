@@ -17,9 +17,14 @@
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
         $encargadoS = $_POST['encargadoS'];
-        
+        $trabajo = $_POST['trabajo'];
+        $materiales = $_POST['materiales'];
+
+        date_default_timezone_set("America/Mexico_City");
+        $fechaFin = date('Y-m-d');
+
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `encargadoS`='$encargadoS', `Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales', `fechaFin`='$fechaFin',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
@@ -77,7 +82,7 @@
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
-                        <th>'.substr("$row[descripcion]", 0,40).'</th>
+                        <th>'.substr("$row[descripcion]", 0,30).'</th>
                         <th><input type="submit" value="Ver Solicitud"></th>
                     </tr>
                     </form>');
