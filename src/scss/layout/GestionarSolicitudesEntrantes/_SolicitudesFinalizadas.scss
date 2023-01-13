@@ -33,10 +33,15 @@
             }
 
             
-            input{
-                width: 100%;
-                background-color: $azulVariante;
-                color: $blanco;
+            .si{
+                background-color: #66db66;
+                color: $black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .no{
+                background-color: $azulMarino;
+                color: $black;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }

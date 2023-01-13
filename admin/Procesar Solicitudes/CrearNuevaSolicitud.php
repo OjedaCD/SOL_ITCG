@@ -26,7 +26,6 @@
         
         $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
         $id = $_POST['tipoForm'];
-        $folio = $_POST['tipoForm2'];
         $falla =$_POST['checkbox'];
         $descripcion = $_POST['descripcion']; 
         $observacion = " ";
@@ -38,7 +37,8 @@
         $validacion = 0;
         date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
-        
+        $Year = date("Y");
+    
         foreach($idSolicitud as $idSol){
             $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
             $resultadoLlave0 = mysqli_query($db, $query0);
@@ -46,6 +46,12 @@
             if($idSol< 1){
                 $idSol += 1;
                 
+            }
+
+            if($area == 20){
+                $folio = "CC".$area.$idSol.$Year;
+            }elseif($area == 21){
+                $folio = "ME".$area.$idSol.$Year;
             }
             foreach ($falla as $key => $fallas) {
                 $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";

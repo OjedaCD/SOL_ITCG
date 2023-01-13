@@ -55,50 +55,22 @@
     if ($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['cancelar'])){
 
         $folio = $_POST['tipoForm2'];
-        $observacion = $_POST['observacion'];
         $nombre = $_POST['nombre'];
         $dpto = $_POST['dpto'];
-        $descripcion = $_POST['descripcion'];
+        $observacion = $_POST['observacion'];
         $idDpto = $_POST['idDpto'];
         $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = '{$folio}'";
         $resultadoIdSol =mysqli_query($db, $queryIdSol);
         $aux3 = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
         
-        
         foreach ($aux3 as $key => $idSol) {
             $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
             $resultadoLlave0 = mysqli_query($db, $query0);
-
-            //$mail = new PHPMailer(true);
+            date_default_timezone_set("America/Mexico_City");
+            $fecha = date('Y-m-d');
             try {
-                //Server settings
-                // $mail->SMTPDebug = 0;                      //Enable verbose debug output
-                // $mail->isSMTP();                                            //Send using SMTP
-                // $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
-                // $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                // $mail->Username   = 'pruebas_sol_itcg@cdguzman.tecnm.mx';                     //SMTP username
-                // $mail->Password   =                              //SMTP password
-                // $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-                // $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-            
-                // //Recipients
-                // $mail->setFrom('pruebas_sol_itcg@cdguzman.tecnm.mx', 'Solicitudes Centro de Cómputo');//correo del superAdmin
-                
-                // if($idDpto == 20){
-                //     $mail->addAddress('solicitudes.cc@cdguzman.tecnm.mx');
-                // }elseif($idDpto == 21){
-                //     $mail->addAddress('solicitudes.mnto@cdguzman.tecnm.mx');
-                // }
-                // //Content
-                // $mail->isHTML(true);                                  //Set email format to HTML
-                // $mail->Subject = 'La solicitud de '.$nombre.' del departamento de '.$dpto.' ha sido cancelada';
-                // $mail->Body    = 'Solicitud: '.'<br>'.$descripcion.'Razones de la cancelación '.'<br>'.$observacion;
-                // $mail->CharSet = 'UTF-8';
-        
-                
-                // $mail->send();
                 $banC = true;
-                $querySol = "UPDATE solicitudes SET Estado ='CANCELADO' , Etapa = '3FINALIZADO', validacion = 1 WHERE idSolicitud = '$idSol'";
+                $querySol = "UPDATE solicitudes SET fechaFin ='{$fecha}', observacion = '{$observacion}', Estado ='CANCELADO' , Etapa = '3FINALIZADO', validacion = 1 WHERE idSolicitud = '$idSol'";
                 $resultadoUs =mysqli_query($db, $querySol);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
@@ -108,6 +80,7 @@
             $resultadoLlave0 = mysqli_query($db, $query1);
         }
     }
+    
     if ($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['validar']) ){
         $folio = $_POST['tipoForm2'];
         $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = '{$folio}'";
@@ -127,7 +100,7 @@
 ?>
 <main class="VerEstadoEtapaSolicitud">
     <section class="w80">
-        <h1>Solicitudes Mantenimiento de Equipo</h1>
+        <h1>Solicitudes Mantenimiento De Equipo</h1>
         <?php 
             $query ="SELECT * FROM solicitudes WHERE idUser = $_SESSION[idUser] AND idDpto = 21 ORDER BY Etapa ASC, Fecha DESC";
             $resultado = mysqli_query($db, $query);

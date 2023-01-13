@@ -32,11 +32,17 @@
                 cursor: pointer;
             }
 
-            
-            input{
+            .no{
                 width: 100%;
                 background-color: $azulVariante;
-                color: $blanco;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .si{
+                width: 100%;
+                background-color: #fea506;
+                color: black;
                 border-radius: 0.8rem;
                 cursor: pointer;
             }

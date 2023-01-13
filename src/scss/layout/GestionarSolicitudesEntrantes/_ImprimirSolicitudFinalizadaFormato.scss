@@ -14,7 +14,11 @@
             width: 60%;
         }
     }
-    .descripcion, .observacion{
+    hr{
+        height: 1rem;
+        background-color: black;
+    }
+    .descripcion, .observacion,.encargadoS, .trabajo, .materiales{
         align-content: center;
         justify-content: center;
         text-align: center;
@@ -35,7 +39,7 @@
     }
     
 
-    .email, .nombreUser,.folio,.fecha, .departamento{
+    .email, .nombreUser,.folio,.fecha, .departamento,.fechaFin{
         display: flex;
         justify-content: center;
         gap: 2rem;

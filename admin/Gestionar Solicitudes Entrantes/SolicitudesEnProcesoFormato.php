@@ -156,24 +156,24 @@
                     
                     if($_SESSION['idRole'] != 4){
                         echo('<div class="observacion">
-                        <label for="observacion">Coloque los comentarios pertinentes a la solicitud si lo requiere:</label>
+                        <label for="observacion">Coloque los comentarios pertinentes, o las razones de cancelación de la solicitud:</label>
                         <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
                         if($aux2['validacion'] != 0){
                             echo('<hr><h1>Orden De Trabajo</h1>');
                             echo('<div class="encargadoS">
                             <label for="encargadoS">Coloque el nombre de las personas asignadas para atender la solicitud:</label>
-                            <textarea id ="encargadoS" maxlength="255" name ="encargadoS" required> ');  
+                            <textarea id ="encargadoS" maxlength="255" name ="encargadoS" required>')."".trim($aux2['encargadoS']);  
                             echo('</textarea></div>');
 
                             echo('<div class="trabajo">
                             <label for="trabajo">Coloque el trabajo realizado:</label>
-                            <textarea id ="trabajo" maxlength="255" name ="trabajo" required> ');  
+                            <textarea id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
                             echo('</textarea></div>');
 
                             echo('<div class="materiales">
                             <label for="materiales">Coloque los materiales utilizados:</label>
-                            <textarea id ="materiales" maxlength="255" name ="materiales" required> ');  
+                            <textarea id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
                             echo('</textarea></div>');
                         }
                         echo('
@@ -232,11 +232,14 @@
                             }
                         echo('</div>');
                         echo('
-                        <div class = "Botones">
-                            <div class="btnCSo">
+                        <div class = "Botones">');
+                        if($aux2['validacion'] != 1){
+                        
+                        echo('<div class="btnCSo">
                                 <input type="submit" name = "btn" value="Cancelar Solicitud">
-                            </div>
-                            <div class="btnAC">
+                            </div>');
+                        }
+                        echo('<div class="btnAC">
                                 <input type="submit" name = "btn" value="Actualizar Comentario">
                             </div>
                             ');

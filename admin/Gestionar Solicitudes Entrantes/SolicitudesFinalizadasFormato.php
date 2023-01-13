@@ -46,7 +46,7 @@
                     $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                     $row = mysqli_fetch_assoc($resultadoDatos);
                     
-                    $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
+                    $queryDpto ="SELECT * FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                     $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                     $row3 = mysqli_fetch_assoc($resultadoDpto);
                     
@@ -76,6 +76,7 @@
                             <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                     </div>');
                     $fecha1 = $row3['fecha'];
+                    $fecha2 = $row3['fechaFin'];
                     function cambiaf_a_espanol($fecha){
                         preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
                         $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
@@ -85,6 +86,11 @@
                     <div class="fecha">
                         <label for="fecha">Fecha de elaboración</label>
                         <input id="fechaActual" name="fecha" type="text" value ="'.cambiaf_a_espanol($fecha1).'" disabled>
+                    </div>');
+                    echo('
+                    <div class="fechaFin">
+                        <label for="fechaFin">Fecha de realización</label>
+                        <input id="fechaFin" name="fechaFin" type="text" value ="'.cambiaf_a_espanol($fecha2).'" disabled>
                     </div>');
                     echo('
                         <div class="opciones">
@@ -154,34 +160,59 @@
                     }
 
                     $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
-                    $resultadoOb = mysqli_query($db, $queryOb);
-                    $aux1 = mysqli_fetch_assoc($resultadoOb);
-                    foreach ($aux1 as $key => $value) {
-                        if(strlen("".trim($value)) != 0){
-                            echo('<div class="observacion">
-                            <label for="observacion">Correcciones para que su solicitud sea valida o comentarios:</label>
-                            <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                        $resultadoOb = mysqli_query($db, $queryOb);
+                        $aux1 = mysqli_fetch_assoc($resultadoOb);
+                        foreach ($aux1 as $key => $value) {
+                            if(strlen("".trim($value)) != 0){
+                                echo('<div class="observacion">');
+                                if($row3['Estado'] != "CANCELADO"){
+                                    echo('<label for="observacion">Correcciones para que su solicitud sea valida o comentarios:</label>');
+                                }else{
+                                    echo('<label for="observacion">Razones de cancelación:</label>');
+                                }
+                                echo('<textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                                echo('</textarea>
+                                </div>');
+                            }
+                        }
+                        if($row3['Estado'] != "CANCELADO"){
+                            echo('<hr><h1>Orden De Trabajo</h1>');
+
+                            $queryEn = "SELECT encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
+                            $resultadoEn = mysqli_query($db, $queryEn);
+                            $aux3 = mysqli_fetch_assoc($resultadoEn);
+                            foreach ($aux3 as $key => $value) {
+                                echo('<div class="encargadoS">
+                                    <label for="encargadoS">Nombres de las personas encargadas de atender la solicitud:</label>
+                                    <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($value);
                             echo('</textarea>
                             </div>');
+                            }
+                            $queryTr = "SELECT trabajo FROM solicitudes WHERE folio = '{$folio}' ";
+                            $resultadoTr = mysqli_query($db, $queryTr);
+                            $aux4 = mysqli_fetch_assoc($resultadoTr);
+                            foreach ($aux4 as $key => $value) {
+                                echo('<div class="trabajo">
+                                <label for="trabajo">Trabajo realizado:</label>
+                                <textarea id ="trabajo" maxlength="255" name ="trabajo" disabled> ')."".trim($value);  
+                                echo('</textarea></div>');
+                            }
+    
+                            $queryMa = "SELECT materiales FROM solicitudes WHERE folio = '{$folio}' ";
+                            $resultadoMa = mysqli_query($db, $queryMa);
+                            $aux5 = mysqli_fetch_assoc($resultadoMa);
+                            foreach ($aux5 as $key => $value) {
+                                echo('<div class="materiales">
+                                <label for="materiales">Materiales utilizados:</label>
+                                <textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  
+                                echo('</textarea></div>');
+                            }
                         }
+                        echo('
+                        <div class="btnCS">
+                            <input type="submit" value="Cerrar Solicitud">
+                        </div>');
                     }
-
-                    $queryEn = "SELECT encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
-                    $resultadoEn = mysqli_query($db, $queryEn);
-                    $aux3 = mysqli_fetch_assoc($resultadoEn);
-                    foreach ($aux3 as $key => $value) {
-                        echo('<div class="encargadoS">
-                            <label for="encargadoS">Nombres de las personas encargadas de atender la solicitud:</label>
-                            <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($value);
-                    echo('</textarea>
-                    </div>');
-                    }
-                    echo('
-                    <div class="btnCS">
-                        <input type="submit" value="Cerrar Solicitud">
-                    </div>');
-                    
-                }
                 
             ?>
            </form>

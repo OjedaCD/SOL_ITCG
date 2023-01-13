@@ -16,9 +16,9 @@
         $observacion = $_POST['observacion'];
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
-        $encargadoS = $_POST['encargadoS'];
-        $trabajo = $_POST['trabajo'];
-        $materiales = $_POST['materiales'];
+        $encargadoS = $_POST['encargadoS']?? null;
+        $trabajo = $_POST['trabajo']?? null;
+        $materiales = $_POST['materiales']?? null;
 
         date_default_timezone_set("America/Mexico_City");
         $fechaFin = date('Y-m-d');
@@ -32,7 +32,7 @@
             $resultadoA=mysqli_query($db, $queryA);
             $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){
-            $queryR = "UPDATE solicitudes SET  `tipo`='$tipo', validacion = 1, `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', observacion = '{$observacion}',`tipo`='$tipo', validacion = 1, `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }
@@ -44,10 +44,10 @@
     <section class="w80">
         <?php 
             if($_SESSION['idDpto'] == 20 ){
-                echo('<h1>Solicitudes En Proceso Centro de Cómputo</h1>');
+                echo('<h1>Solicitudes En Proceso Centro De Cómputo</h1>');
             }
             if($_SESSION['idDpto'] == 21 ){
-                echo('<h1>Solicitudes En Proceso Mantenimiento de Equipo</h1>');
+                echo('<h1>Solicitudes En Proceso Mantenimiento  De Equipo</h1>');
             }
         ?>
         <?php 
@@ -82,8 +82,13 @@
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
-                        <th>'.substr("$row[descripcion]", 0,30).'</th>
-                        <th><input type="submit" value="Ver Solicitud"></th>
+                        <th>'.substr("$row[descripcion]", 0,30).'</th>');
+                        if($row['validacion'] == 1){
+                            echo('<th><input class = "si"type="submit" value="Ver Solicitud"></th>');  
+                        }if($row['validacion'] == 0){
+                            echo('<th><input class = "no"type="submit" value="Ver Solicitud"></th>');  
+                        }
+                        echo('
                     </tr>
                     </form>');
                 }

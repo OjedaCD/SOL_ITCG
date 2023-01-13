@@ -20,7 +20,7 @@
             }
         ?>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Etapa = '3FINALIZADO' ORDER BY Estado ASC";
+            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Etapa = '3FINALIZADO' ORDER BY Estado DESC, Fecha DESC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
@@ -28,7 +28,7 @@
                 <th>NUM</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
-                <th>FECHA</th>
+                <th>FECHA-FIN</th>
                 <th>DESCRIPCIÓN</th>
                 <th>FINALIZADA</th>
                 </tr>'); 
@@ -48,9 +48,16 @@
                             <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                             <th>'.substr("$name", 0,15).'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,30).'</th>
-                            <th><input type="submit" value="Ver Solicitud"></th>
+                            <th>'.$row['fechaFin'].'</th>
+                            <th>'.substr("$row[descripcion]", 0,30).'</th>');
+                            if($row['Estado'] == "FINALIZADO"){
+                                echo('<th><input class ="si" type="submit" value="Ver Solicitud"></th>');
+                            }else{
+                                echo('<th><input class ="no" type="submit" value="Ver Solicitud"></th>');
+                            }
+                            
+
+                            echo('
                         </tr>
                     </form>');
                 }
