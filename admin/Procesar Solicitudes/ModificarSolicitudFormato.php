@@ -200,19 +200,24 @@
     <main class="CancelarSolicitudFormato">
         <section class="w80">
             <h1>Cancelar Solicitud</h1>
-            <form method="POST" action ="SolicitudesCC.php">
                 <input type="hidden" name ="cancelar" value="cancelar">
                 <?php 
                     if ($_SERVER['REQUEST_METHOD']==="GET") {
                         //Obtengo los datos del form
                         foreach($_GET as $fl => $value){
                         }
-                
                         $folio = $fl;
                         $query = "SELECT folio FROM solicitudes";
                         $resultado = mysqli_query($db, $query);
+                        $ngg = substr($folio, 0, 2);
+                        if ($ngg == "CC"){
+                            echo('<form method="POST" action ="SolicitudesCC.php">
+                            <input type="hidden" name ="cancelar" value="cancelar">');
+                        }else {
+                            echo('<form method="POST" action ="SolicitudesME.php">
+                            <input type="hidden" name ="cancelar" value="cancelar">');
+                        }
                         
-
                         $queryIdUs ="SELECT s.idUser FROM solicitudes as s WHERE s.folio = '{$folio}' ";
                         $resultadoIdUs = mysqli_query($db, $queryIdUs);
                         

@@ -118,7 +118,7 @@
             </div>
             <div class="eye">
                 <label for="password">Contraseña</label>
-                <input required type="password" name="password" id="password" minlength="20" placeholder="Ingrese una contraseña de 20 caracteres"> 
+                <input required type="password" name="password" id="password" maxlength="20" placeholder="Ingrese una contraseña de 20 caracteres"> 
                 <img src="../../src/img/Show.png" alt="" class="icon" id="ojo">
             </div>
             <div class="btnRU">
