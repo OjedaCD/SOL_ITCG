@@ -18,7 +18,7 @@
 			width: 30%;
 			float: left;
 			h4{
-				text-align: center;
+				text-align: left;
 			}
 			.top {
 				margin-top: 2rem;
@@ -37,9 +37,6 @@
 				box-shadow: 4px 4px 16px  #ec0808, -2px -2px 16px rgb(250, 6, 6);
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__card2 {
 				justify-content: space-between;
@@ -48,9 +45,6 @@
 				box-shadow: 4px 4px 16px #ac471fa1, -2px -2px 16px rgba(177, 43, 43, 0.842);
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__card3 {
 				justify-content: space-between;
@@ -59,9 +53,7 @@
 				box-shadow: 4px 4px 16px #7e3b261c, -2px -2px 16px #e420209d;
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
+
 			}
 			.drop__name {
 				font-size: 1rem;
@@ -85,15 +77,29 @@
 			.sortable-drag {
 				opacity: 0;
 			}
+			.aceptado{
+				width: 10rem;
+				background-color: $azulVariante;
+				color: black;
+				border-radius: 0.8rem;
+				cursor: pointer;
+			}
+			.rechazado{
+				width: 10rem;
+				background-color: #f70400d7;
+				color: black;
+				border-radius: 0.8rem;
+				cursor: pointer;
+			}
 		}
-
+		
 		.interna2{
 			
 			width: 30%;
 			float: left;
 			margin-left: 3rem;
 			h4{
-				text-align: center;
+				text-align: left;
 			}
 			.top {
 				margin-top: 2rem;
@@ -112,9 +118,6 @@
 				box-shadow: 4px 4px 16px  #c4cf28, -2px -2px 16px rgb(211, 192, 23);
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__card2 {
 				justify-content: space-between;
@@ -123,9 +126,7 @@
 				box-shadow: 4px 4px 16px #fcf04dab, -2px -2px 16px rgba(168, 177, 43, 0.733);
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
+
 			}
 			.drop__card3 {
 				justify-content: space-between;
@@ -134,9 +135,6 @@
 				box-shadow: 4px 4px 16px #7e6e261c, -2px -2px 16px #d1b7259d;
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__name {
 				font-size: 1rem;
@@ -160,6 +158,20 @@
 			.sortable-drag {
 				opacity: 0;
 			}
+			.no{
+                width: 10rem;
+                background-color: $azulVariante;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .si{
+                width: 10rem;
+                background-color: #fea506;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
 		}
 
 		.interna3{
@@ -168,7 +180,7 @@
 			float: left;
 			margin-left: 3rem;
 			h4{
-				text-align: center;
+				text-align: left;
 			}
 			.top {
 				margin-top: 2rem;
@@ -188,9 +200,6 @@
 				box-shadow: 4px 4px 16px  #0ac76f, -2px -2px 16px rgb(23, 211, 48);
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__card2 {
 				justify-content: space-between;
@@ -199,9 +208,6 @@
 				box-shadow: 4px 4px 16px #5bc21749, -2px -2px 16px rgba(43, 177, 54, 0.596);
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__card3 {
 				justify-content: space-between;
@@ -210,9 +216,6 @@
 				box-shadow: 4px 4px 16px #267e2a1c, -2px -2px 16px #25d12559;
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			.drop__card4 {
 				justify-content: space-between;
@@ -221,9 +224,6 @@
 				box-shadow: 4px 4px 16px #E1E1E1, -2px -2px 16px #FFF;
 				margin-bottom: 20px;
 				border-radius: 2rem;
-				&:hover {
-					cursor: pointer;
-				}
 			}
 			
 			.drop__name {
@@ -248,6 +248,20 @@
 			.sortable-drag {
 				opacity: 0;
 			}
+			.si{
+				width: 10rem;
+                background-color: #66db66;
+                color: $black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .no{
+				width: 10rem;
+                background-color: $azulMarino;
+                color: $black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
 		}
 	}
 }

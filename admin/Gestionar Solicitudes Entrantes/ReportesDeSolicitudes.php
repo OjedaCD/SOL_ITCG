@@ -62,6 +62,11 @@
                 echo('<h1>Reportes De Solicitudes Mantenimiento De Equipo</h1>');
             }
         ?>
+        <div class="btnsLista">
+            <input type="button" onclick="mostrarContenido6();" value="Consultar por departamento" class="btnChoseD">
+            <input type="button" onclick="mostrarContenido7();" value="Consulta general" class="btnChoseG" >
+            
+        </div>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
@@ -99,9 +104,189 @@
             chart2.draw(data2);
         }
         </script>
-        <div class="grafico">
-            <div id="piechart1"></div>
-            <div id="piechart2"></div>
+        <div id="grafico">
+            <div class = "int">
+                <div id="piechart1"></div>
+            </div>
+
+            <div class = "ext">
+                <div id="piechart2"></div>
+            </div>
+            <div class ="cont">
+            <?php 
+                    $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO'";
+                    $resultado = mysqli_query($db, $query);
+                    echo('
+                    <table class="tabla">
+                    <tr>
+                        <th>TIPO/ESTADO</th>
+                        <th>ESPERA</th>
+                        <th>ACEPTADO</th>
+                        <th>RECHAZADO</th>
+                        <th>FINALIZADO</th>
+                        <th>CANCELADO</th>
+                        </tr>'); 
+                            echo('
+                            <tr>
+                                <th>INTERNO</th>
+                                <th>'.$rowEI['contador'].'</th>
+                                <th>'.$rowAI['contador'].'</th>
+                                <th>'.$rowAI['contador'].'</th>
+                                <th>'.$rowFI['contador'].'</th>
+                                <th>'.$rowCI['contador'].'</th>
+                            </tr>');
+
+                            echo('
+                            <tr>
+                                <th>EXTERNO</th>
+                                <th>'.$rowEE['contador'].'</th>
+                                <th>'.$rowAE['contador'].'</th>
+                                <th>'.$rowAE['contador'].'</th>
+                                <th>'.$rowFE['contador'].'</th>
+                                <th>'.$rowCE['contador'].'</th> </tr>');
+                        echo('</table> ');
+                ?>
+            </div>
+        </div>
+
+        <div id ="porDpto1">
+            <?php 
+            $query ="SELECT * FROM departamentos";
+            $resultado = mysqli_query($db, $query);
+            echo('
+            <table class="tabla">
+            <tr>
+                <th>DEPARTAMENTO</th>
+                <th>ESPERA INTERNO</th>
+                <th>ACEPTADO INTERNO</th>
+                <th>RECHAZADO INTERNO</th>
+                <th>FINALIZADO INTERNO</th>
+                <th>CANCELADO INTERNO</th>
+                </tr>'); 
+                while ($row = mysqli_fetch_array($resultado)){
+                    $queryEIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ESPERA' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoEIG = mysqli_query($db, $queryEIG);
+                    $rowEIG = mysqli_fetch_assoc($resultadoEIG);
+
+                    $queryAIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ACEPTADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoAIG = mysqli_query($db, $queryAIG);
+                    $rowAIG = mysqli_fetch_assoc($resultadoAIG);
+        
+                    $queryRIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'RECHAZADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoRIG = mysqli_query($db, $queryRIG);
+                    $rowRIG = mysqli_fetch_assoc($resultadoRIG);
+        
+                    $queryFIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'FINALIZADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoFIG = mysqli_query($db, $queryFIG);
+                    $rowFIG = mysqli_fetch_assoc($resultadoFIG);
+        
+                    $queryCIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'CANCELADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]" ;
+                    $resultadoCIG = mysqli_query($db, $queryCIG);
+                    $rowCIG = mysqli_fetch_assoc($resultadoCIG);
+                    
+                    echo('
+                    <tr>
+                        <th>'.$row['nomDpto'].'</th>');
+                        if($rowEIG['contador'] != 0){
+                            echo('<th>'.$rowEIG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowAIG['contador'] != 0){
+                            echo('<th>'.$rowAIG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowRIG['contador'] != 0){
+                            echo('<th>'.$rowRIG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowFIG['contador'] != 0){
+                            echo('<th>'.$rowFIG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowCIG['contador'] != 0){
+                            echo('<th>'.$rowCIG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+
+                        echo('
+                    </tr>');
+                }
+                echo('</table>');
+            ?>  
+        </div>
+        <div id="porDpto2">
+        <?php 
+            $query ="SELECT * FROM departamentos";
+            $resultado = mysqli_query($db, $query);
+            echo('
+            <table class="tabla">
+            <tr>
+                <th>DEPARTAMENTO</th>
+                <th>ESPERA EXTERNO</th>
+                <th>ACEPTADO EXTERNO</th>
+                <th>RECHAZADO EXTERNO</th>
+                <th>FINALIZADO EXTERNO</th>
+                <th>CANCELADO EXTERNO</th>
+                </tr>'); 
+                while ($row = mysqli_fetch_array($resultado)){
+                    $queryEEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ESPERA' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoEEG = mysqli_query($db, $queryEEG);
+                    $rowEEG = mysqli_fetch_assoc($resultadoEEG);
+
+                    $queryAEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ACEPTADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoAEG = mysqli_query($db, $queryAEG);
+                    $rowAEG = mysqli_fetch_assoc($resultadoAEG);
+        
+                    $queryREG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'RECHAZADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoREG = mysqli_query($db, $queryREG);
+                    $rowREG = mysqli_fetch_assoc($resultadoREG);
+        
+                    $queryFEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'FINALIZADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoFEG = mysqli_query($db, $queryFEG);
+                    $rowFEG = mysqli_fetch_assoc($resultadoFEG);
+        
+                    $queryCEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'CANCELADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]" ;
+                    $resultadoCEG = mysqli_query($db, $queryCEG);
+                    $rowCEG = mysqli_fetch_assoc($resultadoCEG);
+
+                    echo('
+                    <tr>
+                        <th>'.$row['nomDpto'].'</th>');
+                        if($rowEEG['contador'] != 0){
+                            echo('<th>'.$rowEEG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowAEG['contador'] != 0){
+                            echo('<th>'.$rowAEG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowREG['contador'] != 0){
+                            echo('<th>'.$rowREG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowFEG['contador'] != 0){
+                            echo('<th>'.$rowFEG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        if($rowCEG['contador'] != 0){
+                            echo('<th>'.$rowCEG['contador'].'</th>');
+                        }else{
+                            echo ('<th></th>');
+                        }
+                        echo('
+                    </tr>');
+                }
+                echo('</table>');
+            ?>
         </div>
         
     </section>

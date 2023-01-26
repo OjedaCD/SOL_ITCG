@@ -78,3 +78,14 @@ function mostrarContenido5(){
     document.getElementById('cancelar').style.display ='none';    
     document.getElementById('modificar').style.display ='flex'; 
 }
+
+function mostrarContenido6(){
+    document.getElementById('grafico').style.display ='none';    
+    document.getElementById('porDpto1').style.display ='flex';
+    document.getElementById('porDpto2').style.display ='flex';  
+}
+function mostrarContenido7(){
+    document.getElementById('grafico').style.display ='flex';    
+    document.getElementById('porDpto1').style.display ='none';
+    document.getElementById('porDpto2').style.display ='none';
+}

@@ -28,7 +28,7 @@
  }
 
 
- $querySolF = ("SELECT * FROM `solicitudes` WHERE Etapa = '3FINALIZADO' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
+ $querySolF = ("SELECT * FROM `solicitudes` WHERE Etapa = '3FINALIZADO' AND idDpto = $_SESSION[idDpto] ORDER BY Estado DESC, Prioridad ASC");
  $resultadoSolF  = mysqli_query($db, $querySolF);
  $finalizado= array();
  foreach ($resultadoSolF as $key => $value) {
@@ -48,8 +48,9 @@
             }
         ?>
         <div class="contenedor">
+        
             <div class="interna1">
-            <h4>PENDIENTE</h4>
+                <h4>PENDIENTE</h4>
                 <div class="container top">
                     <div class="row sortable"  id="drop-items">
                         <?php 
@@ -74,21 +75,30 @@
                                     }
                                     echo $clase;
                                     echo('">
+                                    <form method="GET" action="SolicitudesPendientesFormato.php">
                                         <div class="drop__data">
                                             <div>
                                                 <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
                                                 <span class="drop__description">'.$row['descripcion'].'</span>
                                                 <h1 class="drop__date">'.$row['fecha'].'</h1>
+                                                <input name = "'.$row['folio'].'" type="hidden">');
+                                                if ($row['Estado'] != "RECHAZADO"){
+                                                    echo('<th><input class = "aceptado"type="submit" value="Ver Solicitud"></th>');
+                                                }else{
+                                                    echo('<th><input class = "rechazado"type="submit" value="Ver Solicitud"></th>');
+                                                }
+                                                echo('
                                             </div>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>');
                             }
                             ?>   
+                        </div>
                     </div>
                 </div>
-            </div>
-
+            
             <div class="interna2">
             <h4>PROCESO</h4>
                 <div class="container top">
@@ -115,13 +125,22 @@
                                     }
                                     echo $clase;
                                     echo('">
+                                    <form method="GET" action="SolicitudesEnProcesoFormato.php">
                                         <div class="drop__data">
                                             <div>
                                                 <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
                                                 <span class="drop__description">'.$row['descripcion'].'</span>
                                                 <h1 class="drop__date">'.$row['fecha'].'</h1>
+                                                <input name = "'.$row['folio'].'" type="hidden">');
+                                                if($row['validacion'] == 1){
+                                                    echo('<th><input class = "si"type="submit" value="Ver Solicitud"></th>');  
+                                                }if($row['validacion'] == 0){
+                                                    echo('<th><input class = "no"type="submit" value="Ver Solicitud"></th>');  
+                                                }
+                                                echo('
                                             </div>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>');
                             }
@@ -158,13 +177,22 @@
                                     }
                                     echo $clase;
                                     echo('">
+                                    <form method="GET" action="SolicitudesFinalizadasFormato.php">
                                         <div class="drop__data">
                                             <div>
                                                 <h1 class="drop__name">'.$rowN["nomUsuario"]." ".$rowN["apellidoUsuario"].'</h1>
                                                 <span class="drop__description">'.$row['descripcion'].'</span>
                                                 <h1 class="drop__date">'.$row['fecha'].'</h1>
+                                                <input name = "'.$row['folio'].'" type="hidden">');
+                                                if($row['Estado'] == "FINALIZADO"){
+                                                    echo('<th><input class ="si" type="submit" value="Ver Solicitud"></th>');
+                                                }else{
+                                                    echo('<th><input class ="no" type="submit" value="Ver Solicitud"></th>');
+                                                }
+                                                echo('
                                             </div>
                                         </div>
+                                    </form>
                                     </div>
                                 </div>');
                             }
@@ -173,6 +201,7 @@
                 </div>
             </div>
         </div>
+        
 
 
             <script type="text/javascript" charset="utf-8" src="/build/js/jquery-3.3.1.min.js"></script>
