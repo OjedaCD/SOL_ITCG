@@ -25,14 +25,6 @@
                 <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                 Tablero De Solicitudes
             </a>
-            <a href="/admin/Gestionar Solicitudes Entrantes/ReportesDeSolicitudes.php">
-                <ion-icon name="stats-chart-outline"></ion-icon>
-                Reportes De Solicitudes
-            </a>
-            <a href="/admin/Gestionar Solicitudes Entrantes/ImprimirSolicitudFinalizada.php">
-            <ion-icon name="print-outline"></ion-icon>
-                Imprimir Solicitud Finalizada
-            </a>
         </div>
     </section>
 </main>

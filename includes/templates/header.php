@@ -40,8 +40,8 @@
     </a>    
     </div>
     <ul class="nav">
-        <?php if($rol == 1 || $rol == 2|| $rol == 4):?>
         <li><a href="/admin/index.php">Inicio</a></li>
+        <?php if($rol == 1 || $rol == 2|| $rol == 4):?>
         <li><a href="/admin/Gestionar Usuarios/GestionarUsuarios.php">Gestionar Usuarios</a>
             <ul>
                 <?php if($rol == 1 ):?>
@@ -74,8 +74,13 @@
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesEnProceso.php">Solicitudes En Proceso</a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesFinalizadas.php">Solicitudes Finalizadas </a></li>
                 <li><a href="/admin/Gestionar Solicitudes Entrantes/TableroDeSolicitudes.php">Tablero De Solicitudes</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/ReportesDeSolicitudes.php">Reportes de Solicitudes</a></li>
-                <li><a href="/admin/Gestionar Solicitudes Entrantes/ImprimirSolicitudFinalizada.php">Imprimir Solicitud Finalizada</a></li>
+            </ul>
+        </li>
+        <li><a href="/admin/Estadisticas De Solicitudes/EstadisticasDS.php">Estadísticas De Solicitudes</a>
+            <ul>
+                <li><a href="/admin/Estadisticas De Solicitudes/ReportesDeSolicitudes.php">Reportes de Solicitudes</a></li>
+                <li><a href="/admin/Estadisticas De Solicitudes/ExportarDatos.php">Exportar Datos</a></li>
+                <li><a href="/admin/Estadisticas De Solicitudes/ImprimirSolicitudFinalizada.php">Imprimir Solicitud Finalizada</a></li>
             </ul>
         </li>
         <?php endif;?>

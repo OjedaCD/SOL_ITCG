@@ -36,36 +36,21 @@
         $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
         $resultadoLlave0 = mysqli_query($db, $query0);
         
-        $mail = new PHPMailer(true);
         try {
-            //Server settings
-            $mail->SMTPDebug = 0;                      //Enable verbose debug output
-            $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.office365.com';                     //Set the SMTP server to send through
-            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'solicitudes.cc@cdguzman.tecnm.mx';                     //SMTP username
-            $mail->Password   =                              //SMTP password
-            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
-            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        
-            //Recipients
-            $mail->setFrom('solicitudes.cc@cdguzman.tecnm.mx', 'Solicitudes Centro de Cómputo');//correo del superAdmin
-            $mail->addAddress($_POST['email']); //correo a eliminar            //Name is optional
-
-            //Content
-            $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = 'Se ha generado una nueva contraseña para tu cuenta del sistema de solicitudes SOL_ITCG';
-            $mail->Body    = 'La nueva contraseña es '.$aux2;
-            $mail->CharSet = 'UTF-8';
-    
-            
-            $mail->send();
+            $para = $_POST['email'];
+            $titulo = 'Se ha generado una nueva contraseña para tu cuenta del sistema de solicitudes SOL_ITCG';
+            $mensaje = 'La nueva contraseña es: '.$aux2;
+            $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+            mail($para, $titulo, $mensaje, $cabeceras);
             $ban = true;
             $queryModificar= "UPDATE users SET `token`='$passwordhash' WHERE idUser = '$id'";
             $resultadoModificar = mysqli_query($db, $queryModificar);
             //Aquí ira el código para enviar el email cuando se suba al servidor
         } catch (Exception $e) {
             $ban = false;
+            echo $e;
         }
 
         $query1 = "SET FOREIGN_KEY_CHECKS=1";

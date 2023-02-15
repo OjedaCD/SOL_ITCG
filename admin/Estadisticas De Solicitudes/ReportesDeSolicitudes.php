@@ -78,7 +78,7 @@
             <?php 
                 echo "['" .'ESPERA INTERNO'."', " .$rowEI['contador']."],".
                 "['" .'ACEPTADO INTERNO'."', " .$rowAI['contador']."],".
-                "['" .'RECHAZADO INTERNO'."', " .$rowAI['contador']."],".
+                "['" .'RECHAZADO INTERNO'."', " .$rowRI['contador']."],".
                 "['" .'FINALIZADO INTERNO'."', " .$rowFI['contador']."],".
                 "['" .'CANCELADO INTERNO'."', " .$rowCI['contador']."]"
                 ;
@@ -94,7 +94,7 @@
             <?php 
                 echo "['" .'ESPERA EXTERNO'."', " .$rowEE['contador']."],".
                 "['" .'ACEPTADO EXTERNO'."', " .$rowAE['contador']."],".
-                "['" .'RECHAZADO EXTERNO'."', " .$rowAE['contador']."],".
+                "['" .'RECHAZADO EXTERNO'."', " .$rowRE['contador']."],".
                 "['" .'FINALIZADO EXTERNO'."', " .$rowFE['contador']."],".
                 "['" .'CANCELADO EXTERNO'."', " .$rowCE['contador']."]"
                 ;
@@ -131,7 +131,7 @@
                                 <th>INTERNO</th>
                                 <th>'.$rowEI['contador'].'</th>
                                 <th>'.$rowAI['contador'].'</th>
-                                <th>'.$rowAI['contador'].'</th>
+                                <th>'.$rowRI['contador'].'</th>
                                 <th>'.$rowFI['contador'].'</th>
                                 <th>'.$rowCI['contador'].'</th>
                             </tr>');
@@ -141,7 +141,7 @@
                                 <th>EXTERNO</th>
                                 <th>'.$rowEE['contador'].'</th>
                                 <th>'.$rowAE['contador'].'</th>
-                                <th>'.$rowAE['contador'].'</th>
+                                <th>'.$rowRE['contador'].'</th>
                                 <th>'.$rowFE['contador'].'</th>
                                 <th>'.$rowCE['contador'].'</th> </tr>');
                         echo('</table> ');

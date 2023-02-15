@@ -28,6 +28,10 @@
             <ion-icon name="git-compare-outline"></ion-icon>
                 Gestionar Solicitudes Entrantes
             </a>
+            <a href="/admin/Estadisticas De Solicitudes/EstadisticasDS.php">
+            <ion-icon name="analytics-outline"></ion-icon>
+                Estadísticas De Solicitudes
+            </a>
             <?php endif;?>
         </div>
     </section>
