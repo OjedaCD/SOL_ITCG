@@ -24,10 +24,11 @@
 @import 'layout/ProcesarSolicitudes/ModificarSolicitudRechazadaFormato';
 @import 'layout/ProcesarSolicitudes/CancelarSolicitudPendienteFormato';
 //Estadísticas de Solicitudes
-@import 'layout/GestionarSolicitudesEntrantes/GestionarSEMenu';
-@import 'layout/GestionarSolicitudesEntrantes/ReportesDeSolicitudes';
-@import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizada';
-@import 'layout/GestionarSolicitudesEntrantes/ImprimirSolicitudFinalizadaFormato';
+@import 'layout/EstadisticasDeSolicitudes/EstadisticasDS';
+@import 'layout/EstadisticasDeSolicitudes/ReportesDeSolicitudes';
+@import 'layout/EstadisticasDeSolicitudes/ExportarDatos';
+@import 'layout/EstadisticasDeSolicitudes/ImprimirSolicitudFinalizada';
+@import 'layout/EstadisticasDeSolicitudes/ImprimirSolicitudFinalizadaFormato';
 //Gestionar Solicitudes Entrantes
 @import 'layout/GestionarSolicitudesEntrantes/GestionarSEMenu';
 @import 'layout/GestionarSolicitudesEntrantes/SolicitudesPendientes';

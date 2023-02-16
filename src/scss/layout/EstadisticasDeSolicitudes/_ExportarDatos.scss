@@ -1,0 +1,136 @@
+.ExportarDatos{
+    margin-top: 4rem;
+    .btnsLista{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        margin-left: 20%;
+        gap: 5rem;
+        width: 60%;
+        .btnChoseG{
+            width: 100%;
+            padding: 1rem;
+            background-color: $azulVariante;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+        }
+        .btnChoseD{
+            width: 100%;
+            padding: 1rem;
+            background-color: $azulMarino;
+            color: $blanco;
+            border-radius: 0.8rem;
+            cursor: pointer;
+        }
+    }
+    #grafico{
+        width: 100%;
+		margin: 0;
+		padding: 0;
+        display: none;
+        position: relative;
+            .int{
+                width: 50%;
+                height: 60 rem;
+                #piechart1{
+       
+                    justify-content: center;
+                    align-content: center;
+                    width: 90rem; 
+                    height: 50rem; 
+                }
+                
+            }
+            .ext{
+                width: 50%;
+                height: 60 rem;
+                #piechart2{
+                   
+                    justify-content: center;
+                    align-content: center;
+                    width: 100%; 
+                    height: 50rem;
+               }
+            }
+        .cont{
+            position: absolute;
+            margin-top: 22rem;
+            width: 100%;
+            .tabla {
+                margin: 0rem auto;
+                text-align: left;
+                padding: 0rem;
+                border-spacing: 1px;
+                width: 100%;
+                border-width: .5rem;
+                background-color: black;
+                --overflow: hidden;
+                tr {
+                    
+                    transition: all .5s;
+                    th {
+                        
+                        font-weight: normal;
+                        font-size: 2rem;
+                    }
+                    &:nth-child(odd) {
+                        background-color: ghostwhite;
+                    }
+                    &:nth-child(even) {
+                        background-color: rgb(240, 223, 223);
+                    }
+                    &:hover {
+                        background-color: $azulMarino;
+                        transition: all .5s;
+                        color: white;
+                        --transform: scale(1.1);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+    #porDpto1,#porDpto2{
+        display: none;
+        margin-top: 7rem;
+        .tabla {
+            margin: 0rem auto;
+            text-align: left;
+            padding: 0rem;
+            border-spacing: 1px;
+            width: 100%;
+            border-width: .5rem;
+           
+            --overflow: hidden;
+            background-color: black;
+            tr {
+                
+                transition: all .5s;
+                th {
+                    font-weight: normal;
+                    font-size: 2rem;
+                }
+                &:nth-child(odd) {
+                    background-color: ghostwhite;
+                }
+                &:nth-child(even) {
+                    background-color: rgb(240, 223, 223);
+                }
+                &:hover {
+                    background-color: $azulMarino;
+                    transition: all .5s;
+                    color: white;
+                    --transform: scale(1.1);
+                    cursor: pointer;
+                }
+            }
+        }
+        
+    }
+    
+}
+    
+
+

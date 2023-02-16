@@ -5,7 +5,7 @@
     }
     inlcuirTemplate('header');
 ?>
-<main class="GestionarSolicitudesEntrantes">
+<main class="EstadisticasDeSolicitudes">
     <section class="w80">
         <h1>Estadísticas De Solicitudes Menú</h1>
         <div class="GU">

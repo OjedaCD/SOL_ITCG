@@ -1,0 +1,6 @@
+.EstadisticasDeSolicitudes{
+    margin-top: 2rem;
+    .GU{
+        @include menu(3, 100%);// Es un mixin para la cantidad de modulos
+    }
+}
