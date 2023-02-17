@@ -1,103 +1,260 @@
 <?php  
-  require "../../includes/funciones.php";  $auth = estaAutenticado();
-  require "../../includes/config/database.php";
-  if (!$auth) {
-     header('location: /'); die();
-  }
-  
-  inlcuirTemplate('header');
-  $db =conectarDB();
+    require "../../includes/funciones.php";  $auth = estaAutenticado();
+    require "../../includes/config/database.php";
+    require '../../vendor/autoload.php';
+    use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
+    if (!$auth) {
+        header('location: /'); die();
+    }
+    
+    inlcuirTemplate('header');
+    $db =conectarDB();
 
-  $queryEI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' AND tipo = 'INTERNO'";
-  $resultadoEI= mysqli_query($db, $queryEI);
+    $queryEI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' AND tipo = 'INTERNO'";
+    $resultadoEI= mysqli_query($db, $queryEI);
 
-  $queryAI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'INTERNO'";
-  $resultadoAI= mysqli_query($db, $queryAI);
+    $queryAI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'INTERNO'";
+    $resultadoAI= mysqli_query($db, $queryAI);
 
-  $queryRI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'INTERNO'";
-  $resultadoRI= mysqli_query($db, $queryRI);
+    $queryRI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'INTERNO'";
+    $resultadoRI= mysqli_query($db, $queryRI);
 
-  $queryFI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'INTERNO'";
-  $resultadoFI= mysqli_query($db, $queryFI);
+    $queryFI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'INTERNO'";
+    $resultadoFI= mysqli_query($db, $queryFI);
 
-  $queryCI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'AND tipo = 'INTERNO'";
-  $resultadoCI= mysqli_query($db, $queryCI);
+    $queryCI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'AND tipo = 'INTERNO'";
+    $resultadoCI= mysqli_query($db, $queryCI);
 
-  $rowEI = mysqli_fetch_assoc($resultadoEI);
-  $rowAI = mysqli_fetch_assoc($resultadoAI);
-  $rowRI = mysqli_fetch_assoc($resultadoRI);
-  $rowFI = mysqli_fetch_assoc($resultadoFI);
-  $rowCI = mysqli_fetch_assoc($resultadoCI);
+    $rowEI = mysqli_fetch_assoc($resultadoEI);
+    $rowAI = mysqli_fetch_assoc($resultadoAI);
+    $rowRI = mysqli_fetch_assoc($resultadoRI);
+    $rowFI = mysqli_fetch_assoc($resultadoFI);
+    $rowCI = mysqli_fetch_assoc($resultadoCI);
 
 
-  $queryEE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' AND tipo = 'EXTERNO'";
-  $resultadoEE= mysqli_query($db, $queryEE);
+    $queryEE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' AND tipo = 'EXTERNO'";
+    $resultadoEE= mysqli_query($db, $queryEE);
 
-  $queryAE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'EXTERNO'";
-  $resultadoAE= mysqli_query($db, $queryAE);
+    $queryAE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'EXTERNO'";
+    $resultadoAE= mysqli_query($db, $queryAE);
 
-  $queryRE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'EXTERNO'";
-  $resultadoRE= mysqli_query($db, $queryRE);
+    $queryRE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'EXTERNO'";
+    $resultadoRE= mysqli_query($db, $queryRE);
 
-  $queryFE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'EXTERNO'";
-  $resultadoFE= mysqli_query($db, $queryFE);
+    $queryFE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'EXTERNO'";
+    $resultadoFE= mysqli_query($db, $queryFE);
 
-  $queryCE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'AND tipo = 'EXTERNO'";
-  $resultadoCE= mysqli_query($db, $queryCE);
+    $queryCE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'AND tipo = 'EXTERNO'";
+    $resultadoCE= mysqli_query($db, $queryCE);
 
-  $rowEE = mysqli_fetch_assoc($resultadoEE);
-  $rowAE = mysqli_fetch_assoc($resultadoAE);
-  $rowRE = mysqli_fetch_assoc($resultadoRE);
-  $rowFE = mysqli_fetch_assoc($resultadoFE);
-  $rowCE = mysqli_fetch_assoc($resultadoCE);
+    $rowEE = mysqli_fetch_assoc($resultadoEE);
+    $rowAE = mysqli_fetch_assoc($resultadoAE);
+    $rowRE = mysqli_fetch_assoc($resultadoRE);
+    $rowFE = mysqli_fetch_assoc($resultadoFE);
+    $rowCE = mysqli_fetch_assoc($resultadoCE);
+
+    if ($_SERVER['REQUEST_METHOD']==="POST" ){
+            $btn= $_POST['btn'];
+            $excel= new Spreadsheet();
+            $hojaActiva = $excel->getActiveSheet();
+            if($btn == "Estadísticas Generales"){
+                $hojaActiva->setTitle("Estadísticas");
+                $hojaActiva->getColumnDimension('A')->setWidth(15);
+                $hojaActiva->setCellValue('A1','TIPO/ESTADO');
+                $hojaActiva->getColumnDimension('B')->setWidth(15);
+                $hojaActiva->setCellValue('B1','ESPERA');
+                $hojaActiva->getColumnDimension('C')->setWidth(15);
+                $hojaActiva->setCellValue('C1','ACEPTADO');
+                $hojaActiva->getColumnDimension('D')->setWidth(15);
+                $hojaActiva->setCellValue('D1','RECHAZADO');
+                $hojaActiva->getColumnDimension('E')->setWidth(15);
+                $hojaActiva->setCellValue('E1','FINALIZADO');
+                $hojaActiva->getColumnDimension('F')->setWidth(15);
+                $hojaActiva->setCellValue('F1','CANCELADO');
+                
+                $hojaActiva->setCellValue('A2','INTERNO');
+                $hojaActiva->setCellValue('B2',$rowEI['contador']);
+                $hojaActiva->setCellValue('C2',$rowAI['contador']);
+                $hojaActiva->setCellValue('D2',$rowRI['contador']);
+                $hojaActiva->setCellValue('E2',$rowFI['contador']);
+                $hojaActiva->setCellValue('F2',$rowCI['contador']);
+
+                $hojaActiva->setCellValue('A3','EXTERNO');
+                $hojaActiva->setCellValue('B3',$rowEE['contador']);
+                $hojaActiva->setCellValue('C3',$rowAE['contador']);
+                $hojaActiva->setCellValue('D3',$rowRE['contador']);
+                $hojaActiva->setCellValue('E3',$rowFE['contador']);
+                $hojaActiva->setCellValue('F3',$rowCE['contador']);
+                    
+                ob_end_clean();    
+                // redirect output to client browser
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment;filename="Estadísticas.xlsx"');
+                header('Cache-Control: max-age=0');
+            }elseif($btn == "Departamento Interno"){
+                
+                $query ="SELECT * FROM departamentos";
+                $resultado = mysqli_query($db, $query);
+
+                $hojaActiva->setTitle("Departamento Interno");
+                $hojaActiva->getColumnDimension('A')->setWidth(55);
+                $hojaActiva->setCellValue('A1','DEPARTAMENTO');
+                $hojaActiva->getColumnDimension('B')->setWidth(15);
+                $hojaActiva->setCellValue('B1','ESPERA');
+                $hojaActiva->getColumnDimension('C')->setWidth(15);
+                $hojaActiva->setCellValue('C1','ACEPTADO');
+                $hojaActiva->getColumnDimension('D')->setWidth(15);
+                $hojaActiva->setCellValue('D1','RECHAZADO');
+                $hojaActiva->getColumnDimension('E')->setWidth(15);
+                $hojaActiva->setCellValue('E1','FINALIZADO');
+                $hojaActiva->getColumnDimension('F')->setWidth(15);
+                $hojaActiva->setCellValue('F1','CANCELADO');
+
+                $fila = 2;
+                while ($row = mysqli_fetch_array($resultado)){
+                    $queryEIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ESPERA' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoEIG = mysqli_query($db, $queryEIG);
+                    $rowEIG = mysqli_fetch_assoc($resultadoEIG);
+
+                    $queryAIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ACEPTADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoAIG = mysqli_query($db, $queryAIG);
+                    $rowAIG = mysqli_fetch_assoc($resultadoAIG);
+        
+                    $queryRIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'RECHAZADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoRIG = mysqli_query($db, $queryRIG);
+                    $rowRIG = mysqli_fetch_assoc($resultadoRIG);
+        
+                    $queryFIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'FINALIZADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoFIG = mysqli_query($db, $queryFIG);
+                    $rowFIG = mysqli_fetch_assoc($resultadoFIG);
+        
+                    $queryCIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'CANCELADO' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]" ;
+                    $resultadoCIG = mysqli_query($db, $queryCIG);
+                    $rowCIG = mysqli_fetch_assoc($resultadoCIG);
+                    
+                    $hojaActiva->setCellValue('A'.$fila,$row['nomDpto']);
+
+                    if($rowEIG['contador'] != 0){
+                        $hojaActiva->setCellValue('B'.$fila,$rowEIG['contador']);
+                    }else{
+                            
+                        $hojaActiva->setCellValue('B'.$fila,"");
+                    }
+                    if($rowAIG['contador'] != 0){
+                        $hojaActiva->setCellValue('C'.$fila,$rowAIG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('C'.$fila,"");
+                    }
+                    if($rowRIG['contador'] != 0){
+                        $hojaActiva->setCellValue('D'.$fila,$rowRIG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('D'.$fila,"");
+                    }
+                    if($rowFIG['contador'] != 0){
+                        $hojaActiva->setCellValue('E'.$fila,$rowFIG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('E'.$fila,"");
+                    }
+                    if($rowCIG['contador'] != 0){
+                        $hojaActiva->setCellValue('F'.$fila,$rowCIG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('E'.$fila,"");
+                    }
+                    $fila++;
+                }
+
+                ob_end_clean();    
+                // redirect output to client browser
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment;filename="Interno.xlsx"');
+                header('Cache-Control: max-age=0');
+            }elseif($btn == "Departamento Externo"){
+                $query ="SELECT * FROM departamentos";
+                $resultado = mysqli_query($db, $query);
+
+                $hojaActiva->setTitle("Departamento Externo");
+                $hojaActiva->getColumnDimension('A')->setWidth(55);
+                $hojaActiva->setCellValue('A1','DEPARTAMENTO');
+                $hojaActiva->getColumnDimension('B')->setWidth(15);
+                $hojaActiva->setCellValue('B1','ESPERA');
+                $hojaActiva->getColumnDimension('C')->setWidth(15);
+                $hojaActiva->setCellValue('C1','ACEPTADO');
+                $hojaActiva->getColumnDimension('D')->setWidth(15);
+                $hojaActiva->setCellValue('D1','RECHAZADO');
+                $hojaActiva->getColumnDimension('E')->setWidth(15);
+                $hojaActiva->setCellValue('E1','FINALIZADO');
+                $hojaActiva->getColumnDimension('F')->setWidth(15);
+                $hojaActiva->setCellValue('F1','CANCELADO');
+
+                $fila = 2;
+                while ($row = mysqli_fetch_array($resultado)){
+                    $queryEEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ESPERA' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoEEG = mysqli_query($db, $queryEEG);
+                    $rowEEG = mysqli_fetch_assoc($resultadoEEG);
+
+                    $queryAEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ACEPTADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoAEG = mysqli_query($db, $queryAEG);
+                    $rowAEG = mysqli_fetch_assoc($resultadoAEG);
+        
+                    $queryREG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'RECHAZADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoREG = mysqli_query($db, $queryREG);
+                    $rowREG = mysqli_fetch_assoc($resultadoREG);
+        
+                    $queryFEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'FINALIZADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]";
+                    $resultadoFEG = mysqli_query($db, $queryFEG);
+                    $rowFEG = mysqli_fetch_assoc($resultadoFEG);
+        
+                    $queryCEG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'CANCELADO' AND s.tipo = 'EXTERNO' AND u.idDpto = $row[idDpto]" ;
+                    $resultadoCEG = mysqli_query($db, $queryCEG);
+                    $rowCEG = mysqli_fetch_assoc($resultadoCEG);
+                    
+                    $hojaActiva->setCellValue('A'.$fila,$row['nomDpto']);
+
+                    if($rowEEG['contador'] != 0){
+                        $hojaActiva->setCellValue('B'.$fila,$rowEEG['contador']);
+                    }else{
+                            
+                        $hojaActiva->setCellValue('B'.$fila,"");
+                    }
+                    if($rowAEG['contador'] != 0){
+                        $hojaActiva->setCellValue('C'.$fila,$rowAEG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('C'.$fila,"");
+                    }
+                    if($rowREG['contador'] != 0){
+                        $hojaActiva->setCellValue('D'.$fila,$rowREG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('D'.$fila,"");
+                    }
+                    if($rowFEG['contador'] != 0){
+                        $hojaActiva->setCellValue('E'.$fila,$rowFEG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('E'.$fila,"");
+                    }
+                    if($rowCEG['contador'] != 0){
+                        $hojaActiva->setCellValue('F'.$fila,$rowCEG['contador']);
+                    }else{
+                        $hojaActiva->setCellValue('E'.$fila,"");
+                    }
+                    $fila++;
+                }
+
+                ob_end_clean();    
+                // redirect output to client browser
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment;filename="Externo.xlsx"');
+                header('Cache-Control: max-age=0');
+            }
+
+            $writer = IOFactory::createWriter($excel, 'Xlsx');
+            $writer->save('php://output');
+            exit;
+    }
 
 ?>
 <main class="ExportarDatos">
     <section class="w80">
         <?php 
-            require '../../vendor/autoload.php';
-
-            use PhpOffice\PhpSpreadsheet\{Spreadsheet, IOFactory};
-            
-            $excel= new Spreadsheet();
-            $hojaActiva = $excel->getActiveSheet();
-            $hojaActiva->setTitle("Estadisticas");
-        
-            $hojaActiva->setCellValue('A1','TIPO/ESTADO');
-            $hojaActiva->setCellValue('B1','ESPERA');
-            $hojaActiva->setCellValue('C1','ACEPTADO');
-            $hojaActiva->setCellValue('D1','RECHAZADO');
-            $hojaActiva->setCellValue('E1','FINALIZADO');
-            $hojaActiva->setCellValue('F1','CANCELADO');
-        
-            for ($i= 2; $i < 4; $i++) { 
-                if($i == 2){
-                    $hojaActiva->setCellValue('A'.$i,'INTERNO');
-                    $hojaActiva->setCellValue('B'.$i,$rowEI['contador']);
-                    $hojaActiva->setCellValue('C'.$i,$rowAI['contador']);
-                    $hojaActiva->setCellValue('D'.$i,$rowRI['contador']);
-                    $hojaActiva->setCellValue('E'.$i,$rowFI['contador']);
-                    $hojaActiva->setCellValue('F'.$i,$rowCI['contador']);
-                }elseif ($i == 3){
-                    $hojaActiva->setCellValue('A'.$i,'EXTERNO');
-                    $hojaActiva->setCellValue('B'.$i,$rowEE['contador']);
-                    $hojaActiva->setCellValue('C'.$i,$rowAE['contador']);
-                    $hojaActiva->setCellValue('D'.$i,$rowRE['contador']);
-                    $hojaActiva->setCellValue('E'.$i,$rowFE['contador']);
-                    $hojaActiva->setCellValue('F'.$i,$rowCE['contador']);
-                }
-                
-            }//ponla en otra clase
-            
-                
-            // redirect output to client browser
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="Estadisticas.xlsx"');
-            header('Cache-Control: max-age=0');
-        
-            $writer = IOFactory::createWriter($excel, 'Xlsx');
-            $writer->save('php://output');
-            exit;
 
             if($_SESSION['idDpto'] == 20 ){
                 echo('<h1>Exportar Datos Centro De Cómputo</h1>');
@@ -106,7 +263,11 @@
                 echo('<h1>Exportar Datos Mantenimiento De Equipo</h1>');
             }
         ?>
-      
+        <form action="" method ="POST" class="BtnExcel">
+            <input type="submit" name = "btn"  value="Estadísticas Generales" class="btnChoseG" >
+            <input type="submit" name = "btn" value="Departamento Interno" class="btnChoseI" >
+            <input type="submit" name = "btn" value="Departamento Externo" class="btnChoseE" >
+        </form>
         
     </section>
 </main>
