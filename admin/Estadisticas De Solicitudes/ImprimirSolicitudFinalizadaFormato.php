@@ -59,10 +59,10 @@
         $row4 = mysqli_fetch_assoc($resultadoSolicitud);//departamento al que pertenece el usuario
     
 
-        // <img src= "../../src/img/itcg.png" style="width: 80px" >
-        // <img src= "../../src/img/tecnm.png" style="width: 160px" >
+        
         echo ('<div class="folio">
-    
+        <img src= "../../src/img/itcg.png" style="width: 80px" >
+        <img src= "../../src/img/tecnm.png" style="width: 160px" >
             <P><b>DEPARTAMENTO SOLICITADO: </b> '.$row4['nomDpto'].'</p>  
             
             <P><b>Número de folio: </b> '.$folio.'</p>   
