@@ -11,9 +11,16 @@
 ?>
 <main class="ImprimirSolicitudFinalizada">
     <section class="w80">
-        <h1>Imprimir Solicitud Finalizada</h1>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Etapa = '3FINALIZADO' ORDER BY Estado ASC";
+            if($_SESSION['idDpto'] == 20 ){
+                echo('<h1>Imprimir Solicitud Finalizada Centro De Cómputo</h1>');
+            }
+            if($_SESSION['idDpto'] == 21 ){
+                echo('<h1>Imprimir Solicitud Finalizada Mantenimiento de Equipo</h1>');
+            }
+        ?>
+        <?php 
+            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Etapa = '3FINALIZADO' ORDER BY Estado DESC, Fecha DESC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
@@ -21,9 +28,9 @@
                 <th>NUM</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
-                <th>FECHA</th>
+                <th>FECHA-FIN</th>
                 <th>DESCRIPCIÓN</th>
-                <th>IMPRIMIR</th>
+                <th>FINALIZADA</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -41,9 +48,14 @@
                             <th>'.substr("$row[folio]", 4,-4).'</th>
                             <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                             <th>'.substr("$name", 0,15).'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,40).'</th>
-                            <th><input type="submit" value="Imprimir"></th>
+                            <th>'.$row['fechaFin'].'</th>
+                            <th>'.substr("$row[descripcion]", 0,30).'</th>');
+                            if($row['Estado'] == "FINALIZADO"){
+                                echo('<th><input class ="si" type="submit" value="Ver Solicitud"></th>');
+                            }else{
+                                echo('<th><input class ="no" type="submit" value="Ver Solicitud"></th>');
+                            }
+                            echo('
                         </tr>
                     </form>');
                 }

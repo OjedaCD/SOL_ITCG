@@ -5,15 +5,32 @@ header{
         background-color: white;
         display: flex;
         justify-content: center;
+
         .logosin{
-            
+            margin-bottom: 1rem;
             .sep{
                 width: 46.5rem;
                 float: left;
             }
+            .v-line1{
+                border: 1px solid #c59762;
+                background-color: #c59762;
+                height:7.4rem;
+                width: .2rem;
+                float: left;
+                margin-right: 1.5rem;
+            }
             .tecnm{
                 width: 23.2rem;
                 float: left;
+            }
+            .v-line2{
+                border: 2px solid #c59762;
+                background-color: #c59762;
+                height:7.4rem;
+                width: .2rem;
+                float: left;
+                margin-right: 1rem;
             }
             .itcg{
                 width: 6.6rem;

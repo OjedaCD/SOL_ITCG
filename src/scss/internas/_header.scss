@@ -9,26 +9,42 @@ header{
     .logos{
         display: flex;
         justify-content: center;
+
         .logosin{
-            
+            margin-bottom: 1rem;
+            margin-top: 1rem;
             .sep{
-                width: 46.5rem;
+                width: 34.875rem;
+                margin-right: 1.5rem;
+            }
+            .v-line1{
+                border: 1px solid #c59762;
+                background-color: #c59762;
+                height:7.4rem;
+                width: .2rem;
                 float: left;
+                margin-right: 1.5rem;
             }
             .tecnm{
-                width: 23.2rem;
+                width: 17.475rem;
+                margin-right: 2rem;
+            }
+            .v-line2{
+                border: 1px solid #c59762;
+                background-color: #c59762;
+                height:7.4rem;
                 float: left;
+                width: .2rem;
+                margin-right: 1rem;
             }
             .itcg{
-                width: 6.6rem;
+                width: 4.95rem;
             } 
-        }
-        
-               
+        }        
     }
     
     .text_header{
-        margin-top: 2rem;
+        
         position: relative;
         h1, h2, h3{
             margin: 0;

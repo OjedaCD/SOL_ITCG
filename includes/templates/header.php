@@ -21,7 +21,9 @@
     <div class="logos">
         <div class="logosin">
             <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
+            <div class="v-line1"></div>
             <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
+            <div class="v-line2"></div>
             <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
         </div>
     </div>
