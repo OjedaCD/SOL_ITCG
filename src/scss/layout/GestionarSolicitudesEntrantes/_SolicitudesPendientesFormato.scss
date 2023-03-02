@@ -75,9 +75,20 @@
         }
         
     }
-    
+    .opcionesSel{
 
-    .email, .nombreUser,.folio,.fecha, .departamento, .prioridad, .tipo{
+        label{
+            width: 15%;
+            display: inline;
+        }
+        .prioridad, .tipo, .mantenimiento, .lugar{
+            display: flex;
+            justify-content: left;
+            gap: 2rem;
+        }
+    }
+
+    .email, .nombreUser,.folio,.fecha, .departamento{
         display: flex;
         justify-content: center;
         gap: 2rem;

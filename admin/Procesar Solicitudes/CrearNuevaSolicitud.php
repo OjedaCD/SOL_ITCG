@@ -35,6 +35,9 @@
         $estado = "ESPERA";
         $tipo = "INTERNO";
         $validacion = 0;
+        $mantenimiento = "PREVENTIVO";
+        $lugar = "CÓMPUTO";
+        
         date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
         $Year = date("Y");
@@ -57,8 +60,8 @@
                 $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
                 $resultadoFalla =mysqli_query($db, $queryFalla);
             }
-            $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, tipo, descripcion, observacion, Etapa, Prioridad, Estado, validacion) 
-            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$tipo}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}','{$validacion}')";
+            $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, tipo, mantenimiento, lugar, descripcion, observacion, Etapa, Prioridad, Estado, validacion) 
+            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$tipo}','{$mantenimiento}','{$lugar}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}','{$validacion}')";
             $resultadoUs =mysqli_query($db, $querySol);
             if($resultadoUs && $resultadoFalla){
                 $ban3 = true;

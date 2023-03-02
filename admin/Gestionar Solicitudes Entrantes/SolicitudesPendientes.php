@@ -19,13 +19,15 @@
         $btn= $_POST['btn'];
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
+        $mantenimiento = $_POST['mantenimiento'];
+        $lugar = $_POST['lugar'];
 
         if($btn == "Aceptar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
-            $queryAC = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
+            $queryAC = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoAC=mysqli_query($db, $queryAC);
             $ban2 = true;
         }elseif($btn == "Rechazar Solicitud"){
