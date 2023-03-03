@@ -76,12 +76,12 @@
         
     }
     .opcionesSel{
-
         label{
-            width: 15%;
+            width: 25%;
             display: inline;
         }
-        .prioridad, .tipo, .mantenimiento, .lugar{
+        margin-left: 9%;
+        .prioridad, .tipo, .lugar{
             display: flex;
             justify-content: left;
             gap: 2rem;

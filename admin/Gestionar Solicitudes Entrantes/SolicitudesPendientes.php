@@ -19,9 +19,14 @@
         $btn= $_POST['btn'];
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
-        $mantenimiento = $_POST['mantenimiento'];
-        $lugar = $_POST['lugar'];
-
+        
+        if ($_SESSION['idDpto'] == 20){
+            $mantenimiento = $_POST['mantenimiento'];
+            $lugar = $_POST['lugar'];
+        }else{
+            $mantenimiento = "";
+            $lugar = "";
+        }
         if($btn == "Aceptar Solicitud"){
             $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);

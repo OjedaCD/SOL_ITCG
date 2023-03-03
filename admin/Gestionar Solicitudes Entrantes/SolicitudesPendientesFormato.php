@@ -188,8 +188,6 @@
                                     <option value="1ALTA">ALTA</option>
                                     </select></div>');
                             }
-
-                            
                             echo('
                             <div class="tipo">
                             <label for="tipo">Tipo de mantenimiento</label>
@@ -212,54 +210,54 @@
                                     <option value="EXTERNO">EXTERNO</option>
                                     </select>');
                             }
-                            
-
-                            echo('
-                            <select name="mantenimiento" id="mantenimiento" required >');
-                            if(!empty($aux2['mantenimiento'])){
-                                if($aux2['mantenimiento'] == "PREVENTIVO"){
+                            if($_SESSION['idDpto']== 20){
+                                echo('
+                                <select name="mantenimiento" id="mantenimiento" required >');
+                                if(!empty($aux2['mantenimiento'])){
+                                    if($aux2['mantenimiento'] == "PREVENTIVO"){
+                                        echo('                                
+                                        <option selected="selected" value="'.$aux2['mantenimiento'].'">PREVENTIVO</option>
+                                        <option value="CORRECTIVO">CORRECTIVO</option>
+                                        </select></div>');
+                                        
+                                    }elseif($aux2['mantenimiento'] == "CORRECTIVO"){
+                                        echo('                                
+                                        <option value="PREVENTIVO">PREVENTIVO</option>
+                                        <option selected="selected" value="'.$aux2['mantenimiento'].'">CORRECTIVO</option>
+                                        </select></div>');
+                                    }
+                                }else{
                                     echo('                                
-                                    <option selected="selected" value="'.$aux2['mantenimiento'].'">PREVENTIVO</option>
-                                    <option value="CORRECTIVO">CORRECTIVO</option>
-                                    </select></div>');
-                                }elseif($aux2['tipo'] == "CORRECTIVO"){
-                                    echo('                                
-                                    <option value="PREVENTIVO">PREVENTIVO</option>
-                                    <option selected="selected" value="'.$aux2['mantenimiento'].'">CORRECTIVO</option>
-                                    </select></div>');
+                                        <option value="PREVENTIVO">PREVENTIVO</option>
+                                        <option value="CORRECTIVO">CORRECTIVO</option>
+                                        </select></div>');
+                                }
+                                echo('
+                                <div class="lugar">
+                                <label for="lugar">Lugar de mantenimiento</label>
+                                <select name="lugar" id="lugar" required >');
+                                if(!empty($aux2['lugar'])){
+                                    if($aux2['lugar'] == "CÓMPUTO"){
+                                        echo('                                
+                                        <option selected="selected" value="'.$aux2['lugar'].'">CÓMPUTO</option>
+                                        <option value="LABORATORIO">LABORATORIO</option>
+                                        </select></div>');
+                                    }elseif($aux2['lugar'] == "LABORATORIO"){
+                                        echo('                                
+                                        <option value="CÓMPUTO">CÓMPUTO</option>
+                                        <option dedault selected="selected" value="'.$aux2['lugar'].'">LABORATORIO</option>
+                                        </select></div>');
+                                    }
+                                }else{
+                                    echo('                              
+                                        <option value="CÓMPUTO">CÓMPUTO</option>
+                                        <option value="LABORATORIO">LABORATORIO</option>
+                                        </select></div>');
                                 }
                             }else{
-                                echo('                                
-                                    <option value="PREVENTIVO">PREVENTIVO</option>
-                                    <option value="CORRECTIVO">CORRECTIVO</option>
-                                    </select></div>');
-                            }
-                            
-
-                            echo('
-                            <div class="lugar">
-                            <label for="lugar">Lugar de mantenimiento</label>
-                            <select name="lugar" id="lugar" required >');
-                            if(!empty($aux2['lugar'])){
-                                if($aux2['lugar'] == "CÓMPUTO"){
-                                    echo('                                
-                                    <option selected="selected" value="'.$aux2['lugar'].'">CÓMPUTO</option>
-                                    <option value="LABORATORIO">LABORATORIO</option>
-                                    </select></div>');
-                                }elseif($aux2['lugar'] == "LABORATORIO"){
-                                    echo('                                
-                                    <option value="CÓMPUTO">CÓMPUTO</option>
-                                    <option dedault selected="selected" value="'.$aux2['lugar'].'">LABORATORIO</option>
-                                    </select></div>');
-                                }
-                            }else{
-                                echo('                                
-                                    <option value="CÓMPUTO">CÓMPUTO</option>
-                                    <option value="LABORATORIO">LABORATORIO</option>
-                                    </select></div>');
+                                echo('</div>');
                             }
                         echo('</div>');
-
 
                         echo('
                         <div class = "Botones">
@@ -284,7 +282,7 @@
                         ');
                     }
                     
-                    
+                   
                 }
             ?>
         </form>
