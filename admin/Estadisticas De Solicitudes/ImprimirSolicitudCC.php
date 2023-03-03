@@ -48,7 +48,13 @@
         $queryDpto ="SELECT *FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
         $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
         $row3 = mysqli_fetch_assoc($resultadoDpto);
-
+        $fecha1 = $row3['fecha'];
+        $fecha2 = $row3['fechaFin'];
+        function cambiaf_a_espanol($fecha){
+            preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
+            $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
+            return $lafecha;
+        }
         
     }                
 ?>
@@ -65,20 +71,14 @@
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
+        font-size: 15px;
     }
     td, th{
         border: 1px solid black;
         padding: 8px;
         text-align: left;
     }
-    .my-table{
-        text-align: right;
 
-    }
-    #sing{
-        padding-top: 100px;
-        text-align: right;
-    }
     .uno{
         text-align: center;
     }
@@ -93,7 +93,16 @@
         text-align: center;
         width: 70px;
     }
-
+    .tres1{
+        width:  353px;
+    }
+    .cuatro2{
+        vertical-align: top;
+        width:  200px;
+    }
+    .cinco1{
+        width:  400px;
+    }
 
     </style>
 </head>
@@ -159,31 +168,122 @@
         <tbody>
             <tr>
                 <td class= "dos3">
-                    <b>Fecha de elaboración: </b> <?php echo $row3['fecha']?>
+                    <b>Fecha de elaboración: </b> <?php echo cambiaf_a_espanol($fecha1)?>
                 </td>
                 <td class= "dos4">
-                    <b>Fecha de realización:</b> <?php echo $row3['fechaFin']?>
+                    <b>Fecha de realización:</b> <?php echo cambiaf_a_espanol($fecha2)?>
                 </td>
             </tr>
-            
         </tbody>
     </table>
+    <table>
+        <tbody>
+            <tr>
+                <td class= "tres1">
+                    <b>Mantenimiento: </b> <?php echo $row3['mantenimiento']?>
+                    <?php echo $row3['tipo']?>
+                </td>
+                <td >
+                    <b>Tipo:</b> <?php echo $row3['lugar']?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Nombre del Solicitante: </b> <?php echo $row["nomUsuario"]." ".$row["apellidoUsuario"]?>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <b>Correo del Solicitante:</b> <?php echo $row["email"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Clasificación de la falla a reparar: </b> 
+                    <?php 
+                    $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
+                    $resultadoDetalles =  mysqli_query($db, $queryDetalles);
+                    $detalles = array();
+
+                    foreach ($resultadoDetalles as $key => $value) {
+                        array_push($detalles,$value["idFalla"]);
+                    }
+                    $Marcado = ' checked="checked"';
+                    echo('<div class="fallas" ">');
+                    while($falla = mysqli_fetch_assoc($resultadoFallaCP)){
+                        echo('<input type = "checkbox" style = "margin-left: 2rem" disabled name ="checkbox[]"');
+                        if($detalles){
+                            foreach ($detalles as $key => $checkboxSel) {
+                                $valorX  = array_shift($detalles);
+                                if ($valorX == $falla['idFalla']){
+                                    echo($Marcado);
+                                }else{
+                                    array_push($detalles, $valorX);
+                                }
+                            }
+                        }
+                        echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                    }
+                    echo('</div>'); 
+                    ?>
+                </td>
+                <td class="cuatro2">
+                    <b>Descripción de la falla:</b> <?php echo $row3["descripcion"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <b>Trabajo realizado:</b> <?php echo $row3["trabajo"]?>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <b>Materiales utilizados:</b> <?php echo $row3["materiales"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td class="cinco1">
+                    <b>Verificado y liberado por: (nombre y firma)</b>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td class="cinco1">
+                    <b>Aprobado por: (nombre y firma)</b>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
 </body>
 </html>
-
-<?php 
-    if ($_SERVER['REQUEST_METHOD']==="GET") {
-        //Obtengo los datos del form
-        foreach($_GET as $fl => $value){
-        }
-
-        $folio = "CC2012023";
-        $query = "SELECT folio FROM solicitudes";
-        $resultado = mysqli_query($db, $query);
-        
-    }                
-?>
-
 
 
 
