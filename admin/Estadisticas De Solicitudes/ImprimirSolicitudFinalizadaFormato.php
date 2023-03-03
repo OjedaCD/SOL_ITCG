@@ -25,7 +25,7 @@
         foreach($_GET as $fl => $value){
         }
 
-        $folio = $fl;
+        $folio = "CC2012023";
         $query = "SELECT folio FROM solicitudes";
         $resultado = mysqli_query($db, $query);
         
