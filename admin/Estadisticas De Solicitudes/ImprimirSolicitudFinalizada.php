@@ -42,7 +42,15 @@
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row3 = mysqli_fetch_array($resultadoDpto);
                     $name = $row2['nomUsuario']." ".$row2['apellidoUsuario'];
-                    echo('<form method="GET" action ="ImprimirSolicitudCC.php">
+                    echo('<form method="GET" action ="');
+                    
+                    if ($_SESSION['idDpto'] == 20){
+                        echo ('ImprimirSolicitudCC.php');
+                    }else{
+                        echo ('ImprimirSolicitudME.php');
+                    }
+                    
+                    echo('                    ">
                         <input name = "'.$row['folio'].'" type="hidden">
                         <tr>
                             <th>'.substr("$row[folio]", 4,-4).'</th>
