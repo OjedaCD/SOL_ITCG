@@ -71,7 +71,7 @@
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
-        font-size: 15px;
+        font-size: 16px;
     }
     td, th{
         border: 1px solid black;
@@ -102,8 +102,31 @@
     }
     .cinco1{
         width:  400px;
+        height: 50px;
     }
-
+    .pie1, .pie2{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+    }
+    .pie2{
+        text-align: center;
+    }
+    .tipo{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+    }
+    .enunciado{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+    }
+    
     </style>
 </head>
 <body>
@@ -143,7 +166,7 @@
                                 <td><b>Revisión:</b> 8</td>
                             </tr>
                             <tr>
-                                <td><b>Pág</b> 1 de 1</td>
+                                <td><b>Pág</b> 1 de 2</td>
                             </tr>
                         </tbody>
                     </table>
@@ -151,6 +174,20 @@
             </tr>
         </tbody>
     </table>
+    <p class="enunciado"><b >SOLICITUD DE MANTENIMIENTO CORRECTIVO DE EQUIPO DE CÓMPUTO</b></p>
+    <div class="tipo">
+        <?php 
+        if($row3['lugar'] == 'CÓMPUTO'){
+            echo('
+            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+        }else{
+            echo('
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+        }
+        ?>
+    </div>
     <br>
     <table>
         <tbody>
@@ -167,39 +204,20 @@
     <table>
         <tbody>
             <tr>
+                <td>
+                    <b>Nombre y firma del Solicitante: </b> <?php echo $row["nomUsuario"]." ".$row["apellidoUsuario"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+            <tr>
                 <td class= "dos3">
                     <b>Fecha de elaboración: </b> <?php echo cambiaf_a_espanol($fecha1)?>
                 </td>
-                <td class= "dos4">
-                    <b>Fecha de realización:</b> <?php echo cambiaf_a_espanol($fecha2)?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td class= "tres1">
-                    <b>Mantenimiento: </b> <?php echo $row3['mantenimiento']?>
-                    <?php echo $row3['tipo']?>
-                </td>
-                <td >
-                    <b>Tipo:</b> <?php echo $row3['lugar']?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    <b>Nombre del Solicitante: </b> <?php echo $row["nomUsuario"]." ".$row["apellidoUsuario"]?>
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    <b>Correo del Solicitante:</b> <?php echo $row["email"]?>
-                </td>
+
             </tr>
         </tbody>
     </table>
@@ -208,7 +226,8 @@
         <tbody>
             <tr>
                 <td>
-                    <b>Clasificación de la falla a reparar: </b> 
+                    <b>Clasificación de la falla a reparar: </b>
+                    <br><br>
                     <?php 
                     $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
                     $resultadoDetalles =  mysqli_query($db, $queryDetalles);
@@ -236,8 +255,139 @@
                     echo('</div>'); 
                     ?>
                 </td>
-                <td class="cuatro2">
-                    <b>Descripción de la falla:</b> <?php echo $row3["descripcion"]?>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="des">
+        <tbody>
+            <tr>
+                <td>
+                    <b>Descripción de la falla: </b> <br><br> <?php echo $row3["descripcion"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="pie1">
+        c.c.p. Área Solicitante 
+    </p>
+    <br>
+    <p class="pie2">
+        Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
+    </p>
+    <div style="page-break-after:always;"></div><!--Salto de página en HTML-->
+    <table>
+        <thead>
+            <tr>
+                <td colspan="3" class= "uno">
+                    <b>T E C N O L Ó G I C O&nbsp;&nbsp; N A C I O N A L&nbsp;&nbsp; D E &nbsp;&nbsp;M É X I C O</b>
+                    <br>
+                    I N S T I T U T O &nbsp;&nbsp; T E C N O L Ó G I C O &nbsp;&nbsp; D E&nbsp;&nbsp;  C D. G U Z M Á N
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="uno1">
+                    <?php $nombreImagen1 = "../../src/img/itcg.png";
+                    $imagenBase641 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen1));
+                    echo ('<img src="'.$imagenBase641.'"  alt="" style="width: 60px;
+                    margin-left: 4px;
+                    ">');?>
+                </td>
+                <td class="uno3"><b>Nombre del documento:</b> Solicitud de Mantenimiento
+                    <br>
+                    Correctivo de equipo de cómputo o laboratorios del
+                    <br>
+                    ITCG
+                    <br>
+                    <b>Referencia de la norma:</b> ISO 9001:2015 7.1.3,7.1.4
+                </td>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><b>Código: ITCG-AD-PO-009-01</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Revisión:</b> 8</td>
+                            </tr>
+                            <tr>
+                                <td><b>Pág</b> 2 de 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="enunciado"><b >ORDEN DE TRABAJO DE MANTENIMIENTO PREVENTIVO Y/O CORRECTIVO DE EQUIPO</b></p>
+    <div class="tipo">
+        <?php 
+        if($row3['lugar'] == 'CÓMPUTO'){
+            echo('
+            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+        }else{
+            echo('
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+        }
+        ?>
+    </div>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td class= "dos1">
+                    <b>Folio: </b> <?php echo $folio?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td class= "dos2.2">
+                    <b>Mantenimiento:</b> 
+                    <br>
+                    
+                </td>
+                <td class= "dos2.2">
+                <?php 
+                    if($row3['mantenimiento'] == 'PREVENTIVO'){
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
+                    }else{
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
+                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
+                    }
+                    ?>
+                    
+                </td>
+                <td>
+                <?php 
+                    if($row3['tipo'] == 'INTERNO'){
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="INTERNO">INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
+                    }else{
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="INTERNO">INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
+                    }
+                    ?>
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
                 </td>
             </tr>
         </tbody>
@@ -247,7 +397,7 @@
         <tbody>
             <tr>
                 <td>
-                    <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
+                    <b>Fecha de realización: </b> <?php echo cambiaf_a_espanol($fecha2)?>
                 </td>
             </tr>
             <tr>
@@ -262,14 +412,15 @@
             </tr>
         </tbody>
     </table>
-    <br>
     <table>
         <tbody>
             <tr>
                 <td class="cinco1">
-                    <b>Verificado y liberado por: (nombre y firma)</b>
+                    <b>Verificado y Liberado por: (nombre y firma)</b>
                 </td>
                 <td>
+                    <b>Fecha:</b>
+                    <br>
                 </td>
             </tr>
             <tr>
@@ -277,21 +428,17 @@
                     <b>Aprobado por: (nombre y firma)</b>
                 </td>
                 <td>
+                    <b>Fecha:</b>
                 </td>
             </tr>
         </tbody>
     </table>
-    
+    <br>
+    <p class="pie2">
+        Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
+    </p>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 <?php
 $html =ob_get_clean();

@@ -109,7 +109,9 @@
                 $hojaActiva->setCellValue('E1','FINALIZADO');
                 $hojaActiva->getColumnDimension('F')->setWidth(15);
                 $hojaActiva->setCellValue('F1','CANCELADO');
-
+                $hojaActiva->getColumnDimension('H')->setWidth(20);
+                $hojaActiva->setCellValue('H1','SOLICITUDES TOTALES');
+                $hojaActiva->setCellValue('H2',$rowCT['contador']);
                 $fila = 2;
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryEIG ="SELECT COUNT(*) AS 'contador' FROM solicitudes AS s INNER JOIN users AS u ON s.idUser = u.idUser WHERE  s.idDpto = $_SESSION[idDpto] AND s.Estado = 'ESPERA' AND s.tipo = 'INTERNO' AND u.idDpto = $row[idDpto]";
@@ -166,7 +168,7 @@
                 ob_end_clean();    
                 // redirect output to client browser
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                header('Content-Disposition: attachment;filename="Interno.xlsx"');
+                header('Content-Disposition: attachment;filename="Estadístcias Dpto.xlsx"');
                 header('Cache-Control: max-age=0');
             }
 

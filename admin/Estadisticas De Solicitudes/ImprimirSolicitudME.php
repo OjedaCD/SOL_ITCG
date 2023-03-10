@@ -10,6 +10,9 @@
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
     
+    $queryFallaCP ="SELECT * FROM fallas WHERE idFalla <= 7";
+    $resultadoFallaCP= mysqli_query($db, $queryFallaCP);
+
     $queryFallaCP2 ="SELECT * FROM fallas WHERE idFalla > 7";
     $resultadoFallaCP2= mysqli_query($db, $queryFallaCP2);
 
@@ -68,7 +71,7 @@
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
-        font-size: 15px;
+        font-size: 16px;
     }
     td, th{
         border: 1px solid black;
@@ -99,11 +102,164 @@
     }
     .cinco1{
         width:  400px;
+        height: 50px;
     }
-
+    .pie1, .pie2{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+    }
+    .pie2{
+        text-align: center;
+    }
+    .tipo{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+    }
+    .enunciado{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+    }
+    
     </style>
 </head>
 <body>
+<table>
+        <thead>
+            <tr>
+                <td colspan="3" class= "uno">
+                    <b>T E C N O L Ó G I C O&nbsp;&nbsp; N A C I O N A L&nbsp;&nbsp; D E &nbsp;&nbsp;M É X I C O</b>
+                    <br>
+                    I N S T I T U T O &nbsp;&nbsp; T E C N O L Ó G I C O &nbsp;&nbsp; D E&nbsp;&nbsp;  C D. G U Z M Á N
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="uno1">
+                    <?php $nombreImagen1 = "../../src/img/itcg.png";
+                    $imagenBase641 = "data:image/png;base64," . base64_encode(file_get_contents($nombreImagen1));
+                    echo ('<img src="'.$imagenBase641.'"  alt="" style="width: 60px;
+                    margin-left: 4px;
+                    ">');?>
+                </td>
+                <td class="uno3"><b>Nombre del documento:</b>Solicitud de Mantenimiento
+                    <br>
+                    Correctivo
+                    <br>
+                    <b>Referencia de la norma:</b> ISO 9001:2015 7.1.3,7.1.4
+                </td>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><b>Código: ITCG-AD-PO-001-02</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>Revisión:</b> 9</td>
+                            </tr>
+                            <tr>
+                                <td><b>Pág</b> 1 de 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="enunciado"><b >Departamento de Mantenimiento de Equipo</b></p>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td class= "dos1">
+                    <b>Folio: </b> <?php echo $folio?>
+                </td>
+                <td class= "dos2">
+                    <b>Área Solicitante:</b> <?php echo $row2['nomDpto']?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Nombre y firma del Solicitante: </b> <?php echo $row["nomUsuario"]." ".$row["apellidoUsuario"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+            <tr>
+                <td class= "dos3">
+                    <b>Fecha de elaboración: </b> <?php echo cambiaf_a_espanol($fecha1)?>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Descripción del servicio solicitdo o falla a reparar: </b> 
+                    <?php 
+                    $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
+                    $resultadoDetalles =  mysqli_query($db, $queryDetalles);
+                    $detalles = array();
+
+                    foreach ($resultadoDetalles as $key => $value) {
+                        array_push($detalles,$value["idFalla"]);
+                    }
+                    $Marcado = ' checked="checked"';
+                    echo('<div class="fallas" ">');
+                    while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){
+                        echo('<input type = "checkbox" style = "margin-left: 2rem" disabled name ="checkbox[]"');
+                        if($detalles){
+                            foreach ($detalles as $key => $checkboxSel) {
+                                $valorX  = array_shift($detalles);
+                                if ($valorX == $falla['idFalla']){
+                                    echo($Marcado);
+                                }else{
+                                    array_push($detalles, $valorX);
+                                }
+                            }
+                        }
+                        echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                    }
+                    echo('</div>'); 
+                    ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="des">
+        <tbody>
+            <tr>
+                <td>
+                    <b>Descripción de la falla: </b> <br><br> <?php echo $row3["descripcion"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="pie1">
+        c.c.p. Área Solicitante 
+    </p>
+    <br>
+    <p class="pie2">
+        Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
+    </p>
+    <div style="page-break-after:always;"></div><!--Salto de página en HTML-->
     <table>
         <thead>
             <tr>
@@ -135,10 +291,10 @@
                                 <td><b>Código: ITCG-AD-PO-001-04</b></td>
                             </tr>
                             <tr>
-                                <td><b>Revisión:</b> 8</td>
+                                <td><b>Revisión:</b> 9</td>
                             </tr>
                             <tr>
-                                <td><b>Pág</b> 1 de 1</td>
+                                <td><b>Pág</b> 2 de 2</td>
                             </tr>
                         </tbody>
                     </table>
@@ -153,88 +309,48 @@
                 <td class= "dos1">
                     <b>Folio: </b> <?php echo $folio?>
                 </td>
-                <td class= "dos2">
-                    <b>Área Solicitante:</b> <?php echo $row2['nomDpto']?>
-                </td>
             </tr>
         </tbody>
     </table>
     <table>
         <tbody>
             <tr>
-                <td class= "dos3">
-                    <b>Fecha de elaboración: </b> <?php echo cambiaf_a_espanol($fecha1)?>
+                <td class= "dos2.2">
+                    <b>Mantenimiento:</b> 
+                    <br>
+                    
                 </td>
-                <td class= "dos4">
-                    <b>Fecha de realización:</b> <?php echo cambiaf_a_espanol($fecha2)?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td class= "tres1">
-                    <b>Mantenimiento: </b> <?php echo $row3['mantenimiento']?>
-                    <?php echo $row3['tipo']?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    <b>Nombre del Solicitante: </b> <?php echo $row["nomUsuario"]." ".$row["apellidoUsuario"]?>
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    <b>Correo del Solicitante:</b> <?php echo $row["email"]?>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    <b>Clasificación de la falla a reparar: </b> 
-                    <?php 
-                    $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
-                    $resultadoDetalles =  mysqli_query($db, $queryDetalles);
-                    $detalles = array();
-
-                    foreach ($resultadoDetalles as $key => $value) {
-                        array_push($detalles,$value["idFalla"]);
+                <td class= "dos2.2">
+                <?php 
+                    if($row3['mantenimiento'] == 'PREVENTIVO'){
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
+                    }else{
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
+                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
                     }
-                    $Marcado = ' checked="checked"';
-                    echo('<div class="fallas" ">');
-                    while($falla = mysqli_fetch_assoc($resultadoFallaCP2)){
-                        echo('<input type = "checkbox" style = "margin-left: 2rem" disabled name ="checkbox[]"');
-                        if($detalles){
-                            foreach ($detalles as $key => $checkboxSel) {
-                                $valorX  = array_shift($detalles);
-                                if ($valorX == $falla['idFalla']){
-                                    echo($Marcado);
-                                }else{
-                                    array_push($detalles, $valorX);
-                                }
-                            }
-                        }
-                        echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                    ?>
+                    
+                </td>
+                <td>
+                <?php 
+                    if($row3['tipo'] == 'INTERNO'){
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="INTERNO">INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
+                    }else{
+                        echo('
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="INTERNO">INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
                     }
-                    echo('</div>'); 
                     ?>
                 </td>
-                <td class="cuatro2">
-                    <b>Descripción de la falla:</b> <?php echo $row3["descripcion"]?>
-                </td>
+                
             </tr>
         </tbody>
     </table>
-    <br>
     <table>
         <tbody>
             <tr>
@@ -242,26 +358,37 @@
                     <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
                 </td>
             </tr>
-            <tr>
-                <td >
-                    <b>Observaciones:</b> <?php echo $row3["observacion"]?>
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    <b>Materiales utilizados:</b> <?php echo $row3["materiales"]?>
-                </td>
-            </tr>
         </tbody>
     </table>
     <br>
     <table>
         <tbody>
             <tr>
+                <td>
+                    <b>Fecha de realización: </b> <?php echo cambiaf_a_espanol($fecha2)?>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <b>Observaciones: </b> <?php echo $row3["observacion"]?>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <b>Materiales y Herramientas utilizados:</b> <?php echo $row3["materiales"]?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
                 <td class="cinco1">
-                    <b>Recibe de conformidad (nombre y firma)</b>
+                    <b>Recibe de conformidad: (nombre y firma)</b>
                 </td>
                 <td>
+                    <b>Fecha:</b>
+                    <br>
                 </td>
             </tr>
             <tr>
@@ -269,21 +396,17 @@
                     <b>Cierra orden de trabajo realizado: (nombre y firma)</b>
                 </td>
                 <td>
+                    <b>Fecha:</b>
                 </td>
             </tr>
         </tbody>
     </table>
-    
+    <br>
+    <p class="pie2">
+        Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
+    </p>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 <?php
 $html =ob_get_clean();
