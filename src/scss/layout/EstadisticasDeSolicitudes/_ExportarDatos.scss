@@ -5,27 +5,18 @@
         align-items: center;
         text-align: center;
         justify-content: center;
-        margin-left: 20%;
         gap: 5rem;
-        width: 60%;
+        width: 100%;
         .btnChoseG{
-            width: 100%;
+            width: 25%;
             padding: 1rem;
             background-color: $verde;
             color: white;
             border-radius: 0.8rem;
             cursor: pointer;
         }
-        .btnChoseI{
-            width: 100%;
-            padding: 1rem;
-            background-color: $verde;
-            color: white;
-            border-radius: 0.8rem;
-            cursor: pointer;
-        }
-        .btnChoseE{
-            width: 100%;
+        .btnChoseD{
+            width: 25%;
             padding: 1rem;
             background-color: $verde;
             color: white;
