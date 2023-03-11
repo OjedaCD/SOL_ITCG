@@ -24,7 +24,7 @@
   $resultadoCI= mysqli_query($db, $queryCI);
 
   $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
-  $resultadoCT= mysqli_query($db, $queryCT);
+  $resultadoCT = mysqli_query($db, $queryCT);
 
   $rowEI = mysqli_fetch_assoc($resultadoEI);
   $rowAI = mysqli_fetch_assoc($resultadoAI);

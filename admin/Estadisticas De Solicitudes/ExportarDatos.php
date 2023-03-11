@@ -10,51 +10,30 @@
     inlcuirTemplate('header');
     $db =conectarDB();
 
-    $queryEI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' AND tipo = 'INTERNO'";
+    $queryEI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' ";
     $resultadoEI= mysqli_query($db, $queryEI);
 
-    $queryAI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'INTERNO'";
+    $queryAI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' ";
     $resultadoAI= mysqli_query($db, $queryAI);
 
-    $queryRI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'INTERNO'";
+    $queryRI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' ";
     $resultadoRI= mysqli_query($db, $queryRI);
 
-    $queryFI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'INTERNO'";
+    $queryFI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'";
     $resultadoFI= mysqli_query($db, $queryFI);
 
-    $queryCI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'AND tipo = 'INTERNO'";
+    $queryCI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'";
     $resultadoCI= mysqli_query($db, $queryCI);
 
+    $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
+    $resultadoCT = mysqli_query($db, $queryCT);
+  
     $rowEI = mysqli_fetch_assoc($resultadoEI);
     $rowAI = mysqli_fetch_assoc($resultadoAI);
     $rowRI = mysqli_fetch_assoc($resultadoRI);
     $rowFI = mysqli_fetch_assoc($resultadoFI);
     $rowCI = mysqli_fetch_assoc($resultadoCI);
 
-
-    $queryEE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ESPERA' AND tipo = 'EXTERNO'";
-    $resultadoEE= mysqli_query($db, $queryEE);
-
-    $queryAE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND tipo = 'EXTERNO'";
-    $resultadoAE= mysqli_query($db, $queryAE);
-
-    $queryRE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'RECHAZADO' AND tipo = 'EXTERNO'";
-    $resultadoRE= mysqli_query($db, $queryRE);
-
-    $queryFE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'FINALIZADO'AND tipo = 'EXTERNO'";
-    $resultadoFE= mysqli_query($db, $queryFE);
-
-    $queryCE = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'AND tipo = 'EXTERNO'";
-    $resultadoCE= mysqli_query($db, $queryCE);
-    
-    $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
-    $resultadoCT= mysqli_query($db, $queryCT);
-
-    $rowEE = mysqli_fetch_assoc($resultadoEE);
-    $rowAE = mysqli_fetch_assoc($resultadoAE);
-    $rowRE = mysqli_fetch_assoc($resultadoRE);
-    $rowFE = mysqli_fetch_assoc($resultadoFE);
-    $rowCE = mysqli_fetch_assoc($resultadoCE);
     $rowCT = mysqli_fetch_assoc($resultadoCT);
 
     if ($_SERVER['REQUEST_METHOD']==="POST" ){

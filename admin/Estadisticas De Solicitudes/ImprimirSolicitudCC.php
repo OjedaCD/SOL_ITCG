@@ -259,6 +259,7 @@
         </tbody>
     </table>
     <br>
+    <?php if($row3['Estado'] != "CANCELADO"):?>
     <table class="des">
         <tbody>
             <tr>
@@ -437,6 +438,31 @@
     <p class="pie2">
         Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
     </p>
+    <?php endif;?>
+    
+    <?php if($row3['Estado'] == "CANCELADO"):?>
+        <table class="des">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Descripción de la falla: </b> <br><br> <?php echo $row3["descripcion"]?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Razones de cancelación: </b> <br><br> <?php echo $row3["observacion"]?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="pie1">
+            c.c.p. Área Solicitante 
+        </p>
+        <br>
+        <p class="pie2">
+            Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
+        </p>
+    <?php endif;?>
 </body>
 </html>
 

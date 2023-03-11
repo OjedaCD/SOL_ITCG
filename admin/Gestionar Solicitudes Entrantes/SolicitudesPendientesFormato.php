@@ -143,7 +143,13 @@
                     }
                     
                     echo('<div class="descripcion">
-                            <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
+                    ');
+                    if($_SESSION['idDpto'] == 20){
+                        echo ('<label for="descripcion">Descripción de la falla:</label>');
+                    }else{
+                        echo ('<label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>');
+                    }
+                    echo('
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                         </div>'); 
 

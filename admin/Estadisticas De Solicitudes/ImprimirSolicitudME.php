@@ -243,6 +243,7 @@
         </tbody>
     </table>
     <br>
+    <?php if($row3['Estado'] != "CANCELADO"):?>
     <table class="des">
         <tbody>
             <tr>
@@ -309,6 +310,9 @@
                 <td class= "dos1">
                     <b>Folio: </b> <?php echo $folio?>
                 </td>
+                <td >
+                    Asigna orden de trabajo:
+                </td>
             </tr>
         </tbody>
     </table>
@@ -318,20 +322,6 @@
                 <td class= "dos2.2">
                     <b>Mantenimiento:</b> 
                     <br>
-                    
-                </td>
-                <td class= "dos2.2">
-                <?php 
-                    if($row3['mantenimiento'] == 'PREVENTIVO'){
-                        echo('
-                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
-                    }else{
-                        echo('
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
-                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
-                    }
-                    ?>
                     
                 </td>
                 <td>
@@ -356,6 +346,11 @@
             <tr>
                 <td>
                     <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tipo de trabajo / servicio a realizar:
                 </td>
             </tr>
         </tbody>
@@ -405,6 +400,31 @@
     <p class="pie2">
         Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
     </p>
+    <?php endif;?>
+    
+    <?php if($row3['Estado'] == "CANCELADO"):?>
+        <table class="des">
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Descripción de la falla: </b> <br><br> <?php echo $row3["descripcion"]?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Razones de cancelación: </b> <br><br> <?php echo $row3["observacion"]?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="pie1">
+            c.c.p. Área Solicitante 
+        </p>
+        <br>
+        <p class="pie2">
+            Toda copia en PAPEL es un <b>"Documento No Controlado"</b> a exepción del original
+        </p>
+    <?php endif;?>
 </body>
 </html>
 

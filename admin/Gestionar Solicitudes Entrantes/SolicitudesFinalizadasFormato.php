@@ -153,7 +153,13 @@
                     $aux1 = mysqli_fetch_assoc($resultadoDes);
                     foreach ($aux1 as $key => $value) {
                         echo('<div class="descripcion">
-                            <label for="descripcion">Descripción del servicio solicitado o falla a reparar del Solicitante:</label>
+                        ');
+                    if($_SESSION['idDpto'] == 20){
+                        echo ('<label for="descripcion">Descripción de la falla:</label>');
+                    }else{
+                        echo ('<label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>');
+                    }
+                    echo('
                             <textarea id ="descripcion" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." disabled>')."".trim($value);
                     echo('</textarea>
                     </div>');
