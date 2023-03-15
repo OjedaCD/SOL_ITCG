@@ -23,7 +23,7 @@
   $queryCI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'";
   $resultadoCI= mysqli_query($db, $queryCI);
 
-  $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
+  $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado != 'CANCELADO'";
   $resultadoCT = mysqli_query($db, $queryCT);
 
   $rowEI = mysqli_fetch_assoc($resultadoEI);
@@ -88,7 +88,7 @@
                         <th>RECHAZADO</th>
                         <th>FINALIZADO</th>
                         <th>CANCELADO</th>
-                        <th>TOTALES</th>
+                        <th>RECIBIDAS</th>
                         
                         </tr>'); 
                             echo('

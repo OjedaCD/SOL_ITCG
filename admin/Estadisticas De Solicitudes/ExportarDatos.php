@@ -25,7 +25,7 @@
     $queryCI = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'CANCELADO'";
     $resultadoCI= mysqli_query($db, $queryCI);
 
-    $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto]";
+    $queryCT = "SELECT COUNT(*) AS 'contador' FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado != 'CANCELADO'";
     $resultadoCT = mysqli_query($db, $queryCT);
   
     $rowEI = mysqli_fetch_assoc($resultadoEI);
@@ -35,7 +35,9 @@
     $rowCI = mysqli_fetch_assoc($resultadoCI);
 
     $rowCT = mysqli_fetch_assoc($resultadoCT);
-
+    date_default_timezone_set("America/Mexico_City");
+    $fecha = date('Y-m-d');
+    
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
             $btn= $_POST['btn'];
             $excel= new Spreadsheet();
@@ -55,7 +57,7 @@
                 $hojaActiva->getColumnDimension('F')->setWidth(15);
                 $hojaActiva->setCellValue('F1','CANCELADO');
                 $hojaActiva->getColumnDimension('G')->setWidth(15);
-                $hojaActiva->setCellValue('G1','TOTAL');
+                $hojaActiva->setCellValue('G1','RECIBIDAS');
                 
                 $hojaActiva->setCellValue('A2','SOLICITUDES');
                 $hojaActiva->setCellValue('B2',$rowEI['contador']);
@@ -65,17 +67,17 @@
                 $hojaActiva->setCellValue('F2',$rowCI['contador']);
                 $hojaActiva->setCellValue('G2',$rowCT['contador']);
 
-                ob_end_clean();    
+                ob_end_clean(); 
                 // redirect output to client browser
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                header('Content-Disposition: attachment;filename="Estadísticas.xlsx"');
+                header('Content-Disposition: attachment;filename="Estadísticas '.$fecha.'.xlsx"');
                 header('Cache-Control: max-age=0');
             }elseif($btn == "Estadísticas Por Dpto"){
                 
                 $query ="SELECT * FROM departamentos";
                 $resultado = mysqli_query($db, $query);
 
-                $hojaActiva->setTitle("Departamento Interno");
+                $hojaActiva->setTitle("Departamento");
                 $hojaActiva->getColumnDimension('A')->setWidth(55);
                 $hojaActiva->setCellValue('A1','DEPARTAMENTO');
                 $hojaActiva->getColumnDimension('B')->setWidth(15);
@@ -89,7 +91,7 @@
                 $hojaActiva->getColumnDimension('F')->setWidth(15);
                 $hojaActiva->setCellValue('F1','CANCELADO');
                 $hojaActiva->getColumnDimension('H')->setWidth(20);
-                $hojaActiva->setCellValue('H1','SOLICITUDES TOTALES');
+                $hojaActiva->setCellValue('H1','RECIBIDAS');
                 $hojaActiva->setCellValue('H2',$rowCT['contador']);
                 $fila = 2;
                 while ($row = mysqli_fetch_array($resultado)){
@@ -147,7 +149,7 @@
                 ob_end_clean();    
                 // redirect output to client browser
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                header('Content-Disposition: attachment;filename="Estadístcias Dpto.xlsx"');
+                header('Content-Disposition: attachment;filename="Estadístcias Dpto '.$fecha.'.xlsx"');
                 header('Cache-Control: max-age=0');
             }
 

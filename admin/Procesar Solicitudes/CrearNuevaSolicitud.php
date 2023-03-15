@@ -35,7 +35,7 @@
         $estado = "ESPERA";
         $tipo = "INTERNO";
         $validacion = 0;
-        $mantenimiento = "PREVENTIVO";
+        $mantenimiento = "CORRECTIVO";
         $lugar = "CÓMPUTO";
         
         date_default_timezone_set("America/Mexico_City");

@@ -101,8 +101,8 @@
         width:  200px;
     }
     .cinco1{
-        width:  400px;
-        height: 50px;
+        width:  600px;
+        height: 60px;
     }
     .pie1, .pie2{
         font-family: Arial, Helvetica, sans-serif;
@@ -416,19 +416,19 @@
     <table>
         <tbody>
             <tr>
-                <td class="cinco1">
+                <td valign="top" class="cinco1">
                     <b>Verificado y Liberado por: (nombre y firma)</b>
                 </td>
-                <td>
+                <td valign="top">
                     <b>Fecha:</b>
                     <br>
                 </td>
             </tr>
             <tr>
-                <td class="cinco1">
+                <td valign="top" class="cinco1">
                     <b>Aprobado por: (nombre y firma)</b>
                 </td>
-                <td>
+                <td valign="top">
                     <b>Fecha:</b>
                 </td>
             </tr>

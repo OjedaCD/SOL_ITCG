@@ -238,22 +238,21 @@
                                 echo('
                                 <select name="mantenimiento" id="mantenimiento" required >');
                                 if(!empty($aux2['mantenimiento'])){
-                                    if($aux2['mantenimiento'] == "PREVENTIVO"){
+                                    if($aux2['mantenimiento'] == "CORRECTIVO"){
                                         echo('                                
-                                        <option selected="selected" value="'.$aux2['mantenimiento'].'">PREVENTIVO</option>
-                                        <option value="CORRECTIVO">CORRECTIVO</option>
-                                        </select></div>');
-                                        
-                                    }elseif($aux2['mantenimiento'] == "CORRECTIVO"){
-                                        echo('                                
-                                        <option value="PREVENTIVO">PREVENTIVO</option>
                                         <option selected="selected" value="'.$aux2['mantenimiento'].'">CORRECTIVO</option>
+                                        <option value="PREVENTIVO">PREVENTIVO</option>
+                                        </select></div>');
+                                    }elseif($aux2['mantenimiento'] == "PREVENTIVO"){
+                                        echo('  
+                                        <option value="CORRECTIVO">CORRECTIVO</option>                              
+                                        <option selected="selected" value="'.$aux2['mantenimiento'].'">PREVENTIVO</option>
                                         </select></div>');
                                     }
                                 }else{
-                                    echo('                                
+                                    echo('  
+                                        <option value="CORRECTIVO">CORRECTIVO</option>                              
                                         <option value="PREVENTIVO">PREVENTIVO</option>
-                                        <option value="CORRECTIVO">CORRECTIVO</option>
                                         </select></div>');
                                 }
                                 echo('
