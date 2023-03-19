@@ -179,12 +179,12 @@
         <?php 
         if($row3['lugar'] == 'CÓMPUTO'){
             echo('
-            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
-            <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="CÓMPUTO"> CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO"> LABORATORIO</label><br>');
         }else{
             echo('
-            <label class = "cbtext"><input type="checkbox" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
-            <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="CÓMPUTO"> CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="LABORATORIO"> LABORATORIO</label><br>');
         }
         ?>
     </div>
@@ -250,7 +250,7 @@
                                 }
                             }
                         }
-                        echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                        echo('value="'.$falla['idFalla'].'"><label>'." ".$falla['nomFalla'].'</label><br>');
                     }
                     echo('</div>'); 
                     ?>
@@ -326,12 +326,12 @@
         <?php 
         if($row3['lugar'] == 'CÓMPUTO'){
             echo('
-            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
-            <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value=" CÓMPUTO">CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO"> LABORATORIO</label><br>');
         }else{
             echo('
-            <label class = "cbtext"><input type="checkbox" id="cbox1" value="CÓMPUTO">CÓMPUTO</label><br>
-            <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="LABORATORIO">LABORATORIO</label><br>');
+            <label class = "cbtext"><input type="checkbox" id="cbox1" value="CÓMPUTO"> CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="LABORATORIO"> LABORATORIO</label><br>');
         }
         ?>
     </div>
@@ -357,12 +357,12 @@
                 <?php 
                     if($row3['mantenimiento'] == 'PREVENTIVO'){
                         echo('
-                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="PREVENTIVO"> PREVENTIVO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="CORRECTIVO"> CORRECTIVO</label><br>');
                     }else{
                         echo('
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="PREVENTIVO">PREVENTIVO</label><br>
-                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="CORRECTIVO">CORRECTIVO</label><br>');
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="PREVENTIVO"> PREVENTIVO</label><br>
+                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="CORRECTIVO"> CORRECTIVO</label><br>');
                     }
                     ?>
                     
@@ -371,8 +371,8 @@
                 <?php 
                     if($row3['tipo'] == 'INTERNO'){
                         echo('
-                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="INTERNO">INTERNO</label><br>
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="INTERNO"> INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="EXTERNO"> EXTERNO</label><br>');
                     }else{
                         echo('
                         <label class = "cbtext"><input type="checkbox" id="cbox1" value="INTERNO">INTERNO</label><br>

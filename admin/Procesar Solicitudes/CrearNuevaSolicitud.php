@@ -52,9 +52,10 @@
             }
 
             if($area == 20){
-                $folio = "CC".$area.$idSol.$Year;
+                $folio = $Year.$area."CC".$idSol;
             }elseif($area == 21){
-                $folio = "ME".$area.$idSol.$Year;
+                $folio = $Year.$area."ME".$idSol;
+                
             }
             foreach ($falla as $key => $fallas) {
                 $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
@@ -152,9 +153,9 @@
                                         $value += 1;
                                     }  
                                     if($area == 20){
-                                        $aux = "CC".$area.$value.$Year;
+                                        $aux = $Year.$area."CC".$value;
                                     }elseif($area == 21){
-                                        $aux = "ME".$area.$value.$Year;
+                                        $aux = $Year.$area."ME".$value;
                                     }
                                     echo ('
                                     <div class="folio">

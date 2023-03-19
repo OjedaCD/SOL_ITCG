@@ -134,7 +134,7 @@
                         if($row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO"|| $row['Estado'] == "CANCELADO" || intval($row['validacion']) == 0 && $row['Estado'] == "ACEPTADO"){
                             echo('
                         <tr class="espera">
-                            <th>'.substr("$row[folio]", 4,-4).'</th>
+                            <th>'.substr("$row[folio]", 8).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>

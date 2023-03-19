@@ -85,7 +85,7 @@
                     echo('<form method="GET" action ="SolicitudesEnProcesoFormato.php">
                         <input name = "'.$row['folio'].'" type="hidden">
                     <tr>
-                        <th>'.substr("$row[folio]", 4,-4).'</th>
+                        <th>'.substr("$row[folio]", 8).'</th>
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>

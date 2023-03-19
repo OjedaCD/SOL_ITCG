@@ -19,6 +19,8 @@
         $btn= $_POST['btn'];
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
+        $email = $_POST['email'];
+        $descripcion = $_POST['descripcion'];
         
         if ($_SESSION['idDpto'] == 20){
             $mantenimiento = $_POST['mantenimiento'];
@@ -28,9 +30,26 @@
             $lugar = "";
         }
         if($btn == "Aceptar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
-            $resultadoA=mysqli_query($db, $queryA);
+            
             $ban = true;
+            try {
+                $para = $email;
+                $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA';
+                $mensaje = 'Se te dará servicio en breve a tu solicitud de : '.$descripcion;
+                $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'Content-type: text/html; charset=UTF-8' . "\r\n".
+                    'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+                mail($para, $titulo, $mensaje, $cabeceras);
+                $ban = true;
+                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
+                $resultadoA=mysqli_query($db, $queryA);
+                //Aquí ira el código para enviar el email cuando se suba al servidor
+            } catch (Exception $e) {
+                $ban = false;
+                echo $e;
+            }
+    
         }elseif($btn == "Actualizar Comentario"){
             $queryAC = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoAC=mysqli_query($db, $queryAC);
@@ -83,7 +102,7 @@
                 echo('<form method="GET" action ="SolicitudesPendientesFormato.php">
                     <input name = "'.$row['folio'].'" type="hidden">
                     <tr>
-                        <th>'.substr("$row[folio]", 4,-4).'</th>
+                        <th>'.substr("$row[folio]", 8).'</th>
                         <th>'.substr("$row3[nomDpto]", 0,26).'</th>
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>

@@ -234,7 +234,7 @@
                                 }
                             }
                         }
-                        echo('value="'.$falla['idFalla'].'"><label>'.$falla['nomFalla'].'</label><br>');
+                        echo('value="'.$falla['idFalla'].'"><label>'." ".$falla['nomFalla'].'</label><br>');
                     }
                     echo('</div>'); 
                     ?>
@@ -328,12 +328,12 @@
                 <?php 
                     if($row3['tipo'] == 'INTERNO'){
                         echo('
-                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="INTERNO">INTERNO</label><br>
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
+                        <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value="INTERNO"> INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="EXTERNO"> EXTERNO</label><br>');
                     }else{
                         echo('
-                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="INTERNO">INTERNO</label><br>
-                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="EXTERNO">EXTERNO</label><br>');
+                        <label class = "cbtext"><input type="checkbox" id="cbox1" value="INTERNO"> INTERNO</label><br>
+                        <label class = "cbtext"><input type="checkbox"checked="checked" id="cbox1" value="EXTERNO"> EXTERNO</label><br>');
                     }
                     ?>
                 </td>

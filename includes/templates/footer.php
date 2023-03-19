@@ -7,7 +7,7 @@
                     <p>Av Tecnoloógico #100</p>
                     <p><span>Tel:</span> 341 575 2050</p>
                 </div>
-                <p class="derechos">Todos los Derechos Reservados &copy;</p>
+                <p class="derechos">Todos los Derechos Reservados &copy;  <?php echo date('Y'); ?></p>
             </div>
         </section>
     </footer>

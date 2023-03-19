@@ -63,6 +63,7 @@
                     <div class="email">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" value = "'.$row["email"].'" pattern="[A-Za-z 0-9]+" disabled>           
+                        <input type="hidden" name="email" value="'.$row["email"].'" >
                     </div>');
                     echo('
                     <div class="nombreUser">
@@ -151,6 +152,7 @@
                     }
                     echo('
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
+                            <input type="hidden" name="descripcion" value="'.$row3['descripcion'].'" >
                         </div>'); 
 
                     $queryOb= "SELECT * FROM solicitudes WHERE folio = '{$folio}' ";
