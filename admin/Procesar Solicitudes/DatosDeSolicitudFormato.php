@@ -33,7 +33,7 @@
                     $folio = $fl;
                     $query = "SELECT folio FROM solicitudes";
                     $resultado = mysqli_query($db, $query);
-                    $ngg = substr($folio, 0, 2);
+                    $ngg = substr($folio, 6, 2);
                     if ($ngg == "CC"){
                         echo('<form method="POST" action ="SolicitudesCC.php">');
                     }else {
@@ -105,7 +105,7 @@
                                 <label for="opciones">Clasificación de la falla a reparar:</label>
                             </div>');
                         
-                        $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
+                        $queryDetalles = "SELECT idFalla FROM detalles WHERE folio = '$row3[folio]' ";
                         $resultadoDetalles =  mysqli_query($db, $queryDetalles);
                         $detalles = array();
 

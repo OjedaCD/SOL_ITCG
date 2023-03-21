@@ -38,7 +38,7 @@
         display: flex;
         align-content: center;
         justify-content: center;
-        margin-top: 2rem;
+        margin-top: 4rem;
         gap: 15rem;
         .btnRS{
            
@@ -76,12 +76,19 @@
         
     }
     .opcionesSel{
+        .asignado{
+            input{
+                width: 100%;
+                background-color: $azulMarino;
+                color: black;
+            }
+        }
         label{
             width: 25%;
             display: inline;
         }
         margin-left: 9%;
-        .prioridad, .tipo, .lugar{
+        .prioridad, .tipo, .lugar, .asignado{
             display: flex;
             justify-content: left;
             gap: 2rem;

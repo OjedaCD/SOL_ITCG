@@ -9,8 +9,7 @@
    
     $db = conectarDB();
 
-    $queryIdSol = "SELECT MAX(idSolicitud)+1 FROM solicitudes ";
-    $resultadoIdSol =mysqli_query($db, $queryIdSol);
+    
 
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
@@ -24,7 +23,7 @@
     $ban2 = null;
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
         
-        $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
+        
         $id = $_POST['tipoForm'];
         $falla =$_POST['checkbox'];
         $descripcion = $_POST['descripcion']; 
@@ -41,37 +40,64 @@
         date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
         $Year = date("Y");
-    
-        foreach($idSolicitud as $idSol){
-            $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
-            $resultadoLlave0 = mysqli_query($db, $query0);
-        
-            if($idSol< 1){
-                $idSol += 1;
-                
-            }
 
-            if($area == 20){
-                $folio = $Year.$area."CC".$idSol;
-            }elseif($area == 21){
-                $folio = $Year.$area."ME".$idSol;
-                
+        $queryIdSolCC = "SELECT MAX(idSolicitudCC)+1 FROM solicitudes WHERE idDpto = 20 ";
+        $resultadoIdSolCC =mysqli_query($db, $queryIdSolCC);
+        $idSolicitudCC = mysqli_fetch_assoc($resultadoIdSolCC);//Guarda el id de la solicitud
+
+        $queryIdSolME = "SELECT MAX(idSolicitudME)+1 FROM solicitudes WHERE idDpto = 21 ";
+        $resultadoIdSolME =mysqli_query($db, $queryIdSolME);
+        $idSolicitudME = mysqli_fetch_assoc($resultadoIdSolME);//Guarda el id de la solicitud
+
+        $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
+        $resultadoLlave0 = mysqli_query($db, $query0);
+        $folio;
+        if($area == 20){//Centro de Cómputo 
+            foreach($idSolicitudCC as $idSolCC){
+                if($idSolCC< 1){
+                    $idSolCC += 1;
+                }
+                foreach($idSolicitudME as $idSolME){
+                    $folio = $Year.$area."CC".$idSolCC;
+                    if($idSolME > 0){
+                        $idSolME -= 1;
+                    }
+                    $querySol = "INSERT INTO solicitudes (idSolicitudCC, idSolicitudME, idUser, idDpto, folio, fecha, tipo, mantenimiento, lugar, descripcion, observacion, Etapa, Prioridad, Estado, validacion) 
+                    VALUES ('{$idSolCC}','{$idSolME}','{$id}','{$area}','{$folio}', '{$fecha}','{$tipo}','{$mantenimiento}','{$lugar}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}','{$validacion}')";
+                    $resultadoUs =mysqli_query($db, $querySol);
+                }
             }
-            foreach ($falla as $key => $fallas) {
-                $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
-                $resultadoFalla =mysqli_query($db, $queryFalla);
-            }
-            $querySol = "INSERT INTO solicitudes (idSolicitud, idUser, idDpto, folio, fecha, tipo, mantenimiento, lugar, descripcion, observacion, Etapa, Prioridad, Estado, validacion) 
-            VALUES ('{$idSol}','{$id}','{$area}','{$folio}', '{$fecha}','{$tipo}','{$mantenimiento}','{$lugar}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}','{$validacion}')";
-            $resultadoUs =mysqli_query($db, $querySol);
-            if($resultadoUs && $resultadoFalla){
-                $ban3 = true;
-            }else{
-                $ban3 = false;
-            }
-            $query1 = "SET FOREIGN_KEY_CHECKS=1";
-            $resultadoLlave0 = mysqli_query($db, $query1);
         }
+        if ($area == 21){//Mantenimiento de Equipo
+            foreach($idSolicitudME as $idSolME){
+                if($idSolME< 1){
+                    $idSolME += 1;
+                }
+                foreach($idSolicitudCC as $idSolCC){
+                    $folio = $Year.$area."ME".$idSolME;
+                    if($idSolCC > 0){
+                        $idSolCC -= 1;
+                    }
+                    $querySol = "INSERT INTO solicitudes (idSolicitudCC, idSolicitudME, idUser, idDpto, folio, fecha, tipo, mantenimiento, lugar, descripcion, observacion, Etapa, Prioridad, Estado, validacion) 
+                    VALUES ('{$idSolCC}','{$idSolME}','{$id}','{$area}','{$folio}', '{$fecha}','{$tipo}','{$mantenimiento}','{$lugar}','{$descripcion}','{$observacion}','{$etapa}','{$prioridad}','{$estado}','{$validacion}')";
+                    $resultadoUs =mysqli_query($db, $querySol);
+                }
+            }
+        }      
+
+        foreach ($falla as $key => $fallas) {
+            $queryFalla = "INSERT INTO detalles (folio, idFalla) VALUES ('{$folio}','{$fallas}')";
+            $resultadoFalla =mysqli_query($db, $queryFalla);
+        }
+        
+        if($resultadoUs && $resultadoFalla){
+            $ban3 = true;
+        }else{
+            $ban3 = false;
+        }
+
+        $query1 = "SET FOREIGN_KEY_CHECKS=1";
+        $resultadoLlave0 = mysqli_query($db, $query1);
     }
 ?>
 <main class="CrearNuevaSolicitud">
@@ -146,6 +172,13 @@
                                 $resultadoDpto = mysqli_query($db, $queryDpto);
                                 $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                                 
+                                if($area == 20){//Centro de Cómputo 
+                                    $queryIdSol = "SELECT MAX(idSolicitudCC)+1 FROM solicitudes WHERE idDpto = 20 ";
+                                    $resultadoIdSol =mysqli_query($db, $queryIdSol);
+                                }else{//Mantenimiento de Equipo
+                                    $queryIdSol = "SELECT MAX(idSolicitudME)+1 FROM solicitudes WHERE idDpto = 21 ";
+                                    $resultadoIdSol =mysqli_query($db, $queryIdSol);
+                                }
                                 $idSolicitud = mysqli_fetch_assoc($resultadoIdSol);
                                 $Year = date("Y");
                                 foreach($idSolicitud as $value){

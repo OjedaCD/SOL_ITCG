@@ -21,35 +21,29 @@
         date_default_timezone_set("America/Mexico_City");
         $fecha = date('Y-m-d');
 
-        $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = '{$folio}'";
-        $resultadoIdSol =mysqli_query($db, $queryIdSol);
-        $aux3 = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
+        $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
+        $resultadoLlave0 = mysqli_query($db, $query0);
 
-        foreach ($aux3 as $key => $idSol) {
-            
-            $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
-            $resultadoLlave0 = mysqli_query($db, $query0);
-    
-            $queryBorrar ="DELETE FROM detalles WHERE idSolicitud = '{$idSol}' ";
-            $resultadoBorrar= mysqli_query($db, $queryBorrar);
+        $queryBorrar ="DELETE FROM detalles WHERE folio = '{$folio}' ";
+        $resultadoBorrar= mysqli_query($db, $queryBorrar);
 
-            $query1 = "SET FOREIGN_KEY_CHECKS=1";
-            $resultadoLlave0 = mysqli_query($db, $query1);
+        $query1 = "SET FOREIGN_KEY_CHECKS=1";
+        $resultadoLlave0 = mysqli_query($db, $query1);
 
-            foreach ($falla as $key => $fallas) {
-                $queryFalla = "INSERT INTO detalles (idSolicitud, idFalla) VALUES ('{$idSol}','{$fallas}')";
-                $resultadoFalla =mysqli_query($db, $queryFalla);
-            }
-            $querySol = "UPDATE solicitudes SET `folio`='$folio', `fecha`='$fecha', `descripcion`='$descripcion'
-            WHERE idSolicitud = '$idSol'";
-            $resultadoUs =mysqli_query($db, $querySol);
+        foreach ($falla as $key => $fallas) {
+            $queryFalla = "INSERT INTO detalles (folio, idFalla) VALUES ('{$folio}','{$fallas}')";
+            $resultadoFalla =mysqli_query($db, $queryFalla);
+        }
+        $querySol = "UPDATE solicitudes SET `folio`='$folio', `fecha`='$fecha', `descripcion`='$descripcion'
+        WHERE folio = '{$folio}'";
+        $resultadoUs =mysqli_query($db, $querySol);
 
-            if($resultadoUs && $resultadoFalla && $resultadoBorrar){
-                $banM = true;
-            }else{
-                $banM = false;
-            }
-        } 
+        if($resultadoUs && $resultadoFalla && $resultadoBorrar){
+            $banM = true;
+        }else{
+            $banM = false;
+        }
+        
     }
 
     if ($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['cancelar'])){
@@ -59,41 +53,32 @@
         $dpto = $_POST['dpto'];
         $observacion = $_POST['observacion'];
         $idDpto = $_POST['idDpto'];
-        $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = '{$folio}'";
-        $resultadoIdSol =mysqli_query($db, $queryIdSol);
-        $aux3 = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
-        
-        foreach ($aux3 as $key => $idSol) {
-            $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
-            $resultadoLlave0 = mysqli_query($db, $query0);
-            date_default_timezone_set("America/Mexico_City");
-            $fecha = date('Y-m-d');
-            try {
-                $banC = true;
-                $querySol = "UPDATE solicitudes SET fechaFin ='{$fecha}', observacion = '{$observacion}', Estado ='CANCELADO' , Etapa = '3FINALIZADO', validacion = 1 WHERE idSolicitud = '$idSol'";
-                $resultadoUs =mysqli_query($db, $querySol);
-                //Aquí ira el código para enviar el email cuando se suba al servidor
-            } catch (Exception $e) {
-                $banC = false;
-            }
-            $query1 = "SET FOREIGN_KEY_CHECKS=1";
-            $resultadoLlave0 = mysqli_query($db, $query1);
+
+        $query0 = "SET FOREIGN_KEY_CHECKS=0";// Se desactivan el chequeo de las llaves foraneas
+        $resultadoLlave0 = mysqli_query($db, $query0);
+        date_default_timezone_set("America/Mexico_City");
+        $fecha = date('Y-m-d');
+        try {
+            $banC = true;
+            $querySol = "UPDATE solicitudes SET fechaFin ='{$fecha}', observacion = '{$observacion}', Estado ='CANCELADO' , Etapa = '3FINALIZADO', validacion = 1 WHERE folio = '{$folio}'";
+            $resultadoUs =mysqli_query($db, $querySol);
+            //Aquí ira el código para enviar el email cuando se suba al servidor
+        } catch (Exception $e) {
+            $banC = false;
         }
+        $query1 = "SET FOREIGN_KEY_CHECKS=1";
+        $resultadoLlave0 = mysqli_query($db, $query1);
+        
     }
     if ($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['validar']) ){
         $folio = $_POST['tipoForm2'];
-        $queryIdSol = "SELECT s.idSolicitud FROM solicitudes as s WHERE s.folio = '{$folio}'";
-        $resultadoIdSol =mysqli_query($db, $queryIdSol);
-        $aux3 = mysqli_fetch_assoc($resultadoIdSol);//Guarda el id de la solicitud
-        foreach ($aux3 as $key => $idSol) {
-            $querySol = "UPDATE solicitudes SET validacion = 1 WHERE idSolicitud = '$idSol'";
-            $resultadoUs =mysqli_query($db, $querySol);
-            if($resultadoUs){
-                $banV = true;
-            }else{
-                $banV = False;
-            }
-        } 
+        $querySol = "UPDATE solicitudes SET validacion = 1 WHERE folio = '{$folio}'";
+        $resultadoUs =mysqli_query($db, $querySol);
+        if($resultadoUs){
+            $banV = true;
+        }else{
+            $banV = False;
+        }
     }
 
 ?>

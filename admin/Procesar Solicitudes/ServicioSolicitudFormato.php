@@ -33,7 +33,7 @@
                     $folio = $fl;
                     $query = "SELECT folio FROM solicitudes";
                     $resultado = mysqli_query($db, $query);
-                    $ngg = substr($folio, 0, 2);
+                    $ngg = substr($folio, 6, 2);
                     if ($ngg == "CC"){
                         echo('<form method="POST" action ="SolicitudesCC.php">
                         <input type="hidden" name ="validar" value="validar">');
@@ -56,7 +56,7 @@
                         $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                         $row = mysqli_fetch_assoc($resultadoDatos);
                         
-                        $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
+                        $queryDpto ="SELECT * FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                         $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                         $row3 = mysqli_fetch_assoc($resultadoDpto);
                         
@@ -102,7 +102,7 @@
                                 <label for="opciones">Clasificación de la falla a reparar:</label>
                             </div>');
                         
-                        $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
+                        $queryDetalles = "SELECT idFalla FROM detalles WHERE folio = '$row3[folio]' ";
                         $resultadoDetalles =  mysqli_query($db, $queryDetalles);
                         $detalles = array();
 

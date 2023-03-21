@@ -20,6 +20,7 @@
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
         $email = $_POST['email'];
+        $asignado = $_POST['asignado'];
         $descripcion = $_POST['descripcion'];
         
         if ($_SESSION['idDpto'] == 20){
@@ -31,7 +32,6 @@
         }
         if($btn == "Aceptar Solicitud"){
             
-            $ban = true;
             try {
                 $para = $email;
                 $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA';
@@ -58,6 +58,24 @@
             $queryR = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
+        }elseif ($btn == "Asignar Personal"){
+            try {
+                $para = $asignado;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento';
+                $mensaje = 'El solicitante requiere de: '.$descripcion;
+                $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'Content-type: text/html; charset=UTF-8' . "\r\n".
+                    'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+                mail($para, $titulo, $mensaje, $cabeceras);
+                $ban = true;
+                $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
+                $resultadoA=mysqli_query($db, $queryA);
+                //Aquí ira el código para enviar el email cuando se suba al servidor
+            } catch (Exception $e) {
+                $ban = false;
+                echo $e;
+            }
         }
     }
 

@@ -213,7 +213,7 @@
                 <td>
                     <b>Descripción del servicio solicitdo o falla a reparar: </b> 
                     <?php 
-                    $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
+                    $queryDetalles = "SELECT idFalla FROM detalles WHERE folio = '$row3[folio]' ";
                     $resultadoDetalles =  mysqli_query($db, $queryDetalles);
                     $detalles = array();
 

@@ -17,14 +17,14 @@
  $resultadoSolP  = mysqli_query($db, $querySolP);
  $pendiente = array();
  foreach ($resultadoSolP as $key => $value) {
-    array_push($pendiente ,$value["idSolicitud"]);
+    array_push($pendiente ,$value["folio"]);
  }
 
  $querySolPr = ("SELECT * FROM `solicitudes` WHERE Etapa = '2PROCESO' AND idDpto = $_SESSION[idDpto] ORDER BY Prioridad ASC");
  $resultadoSolPr  = mysqli_query($db, $querySolPr);
  $proceso = array();
  foreach ($resultadoSolPr as $key => $value) {
-    array_push($proceso,$value["idSolicitud"]);
+    array_push($proceso,$value["folio"]);
  }
 
 
@@ -32,7 +32,7 @@
  $resultadoSolF  = mysqli_query($db, $querySolF);
  $finalizado= array();
  foreach ($resultadoSolF as $key => $value) {
-    array_push($finalizado,$value["idSolicitud"]);
+    array_push($finalizado,$value["folio"]);
  }
 
 
@@ -55,7 +55,7 @@
                     <div class="row sortable"  id="drop-items">
                         <?php 
                             foreach ($pendiente as $key => $value) {
-                                $query = "SELECT * FROM solicitudes where idSolicitud = $value";
+                                $query = "SELECT * FROM solicitudes where folio = '{$value}'";
                                 $resultado = mysqli_query($db, $query);
                                 $row= mysqli_fetch_assoc($resultado);
                                 $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
@@ -64,7 +64,7 @@
             
                                 
                                 echo('              
-                                <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
+                                <div class="col-md-6 col-lg-4" data-index="'.$row['folio'].'">
                                     <div class="');
                                     if($row['Prioridad'] == '1ALTA' ){
                                         $clase = 'drop__card1';
@@ -105,7 +105,7 @@
                     <div class="row sortable"  id="drop-items">
                         <?php 
                             foreach ($proceso as $key => $value) {
-                                $query = "SELECT * FROM solicitudes where idSolicitud = $value";
+                                $query = "SELECT * FROM solicitudes where folio = '{$value}'";
                                 $resultado = mysqli_query($db, $query);
                                 $row= mysqli_fetch_assoc($resultado);
                                 $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
@@ -114,7 +114,7 @@
                 
                                 
                                 echo('              
-                                <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
+                                <div class="col-md-6 col-lg-4" data-index="'.$row['folio'].'">
                                     <div class="');
                                     if($row['Prioridad'] == '1ALTA' ){
                                         $clase = 'drop__card1';
@@ -154,7 +154,7 @@
                     <div class="row sortable"  id="drop-items">
                         <?php 
                             foreach ($finalizado as $key => $value) {
-                                $query = "SELECT * FROM solicitudes where idSolicitud = $value";
+                                $query = "SELECT * FROM solicitudes where folio = '{$value}'";
                                 $resultado = mysqli_query($db, $query);
                                 $row= mysqli_fetch_assoc($resultado);
                                 $querySol = ("SELECT nomUsuario, apellidoUsuario FROM `users` WHERE idUser = $row[idUser]");
@@ -163,7 +163,7 @@
                 
                                 
                                 echo('              
-                                <div class="col-md-6 col-lg-4" data-index="'.$row['idSolicitud'].'">
+                                <div class="col-md-6 col-lg-4" data-index="'.$row['folio'].'">
                                     <div class="');
                                     if($row['Prioridad'] == '1ALTA' ){
                                         $clase = 'drop__card1';

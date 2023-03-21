@@ -50,7 +50,7 @@
                     $resultadoDpto = mysqli_query($db, $queryDpto);
                     $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                 
-                    $queryDpto ="SELECT s.idDpto, s.idSolicitud, s.descripcion, s.observacion, s.fecha FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
+                    $queryDpto ="SELECT * FROM solicitudes as s WHERE s.folio = '{$folio}'  ";
                     $resultadoDpto = mysqli_query($db, $queryDpto);//Departamento para imprimir los formularios
                     $row3 = mysqli_fetch_assoc($resultadoDpto);
                     
@@ -105,7 +105,7 @@
                         <label for="opciones">Clasificación de la falla a reparar:</label>
                     </div>');
                     
-                    $queryDetalles = "SELECT d.idFalla FROM detalles as d WHERE d.idSolicitud = $row3[idSolicitud] ";
+                    $queryDetalles = "SELECT idFalla FROM detalles WHERE folio = '$row3[folio]' ";
                     $resultadoDetalles =  mysqli_query($db, $queryDetalles);
                     $detalles = array();
 
