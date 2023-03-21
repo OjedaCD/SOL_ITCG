@@ -87,6 +87,14 @@
         </li>
         <?php endif;?>
 
+        <?php if($rol == 5):?>
+        <li><a href="/admin/Atender Solicitudes/Atender Solicitudes.php">Atender Solicitudes</a>
+            <ul>
+                <li><a href="/admin/Atender Solicitudes/SolicitudesMenu.php">Solicitudes Menú</a></li>
+            </ul>
+        </li>
+        <?php endif;?>
+
         <li><a href="">Opciones</a>
             <ul>
                 <li><?php if ($auth): ?>

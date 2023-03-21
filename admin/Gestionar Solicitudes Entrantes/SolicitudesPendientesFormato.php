@@ -275,8 +275,9 @@
                                         $queryA ="SELECT * FROM users WHERE idRole = 5 AND idDpto = 21";
                                     }
                                     $resultadoA= mysqli_query($db, $queryA);
+
                                     while($rowA = mysqli_fetch_assoc($resultadoA)){
-                                        if(!empty($row3['encargadoS'])){
+                                        if($rowA['email'] == $row3['encargadoS']){
                                             echo('<option selected = "selected" value="'.$rowA['email'].'">');
                                             echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
                                             echo ('</option>');

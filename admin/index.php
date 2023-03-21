@@ -33,6 +33,12 @@
                 Estadísticas De Solicitudes
             </a>
             <?php endif;?>
+            <?php if($_SESSION['idRole'] == '5'):?> 
+            <a href="/admin/Atender Solicitudes/Atender Solicitudes.php">
+                <ion-icon name="clipboard"></ion-icon>
+                Atender Solicitudes
+            </a>
+            <?php endif;?>
         </div>
     </section>
 </main>
