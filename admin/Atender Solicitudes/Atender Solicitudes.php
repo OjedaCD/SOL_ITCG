@@ -5,10 +5,10 @@
     }
     inlcuirTemplate('header');
 ?>
-<main class="ProcesarSolicitudes">
+<main class="AtenderSolicitud">
     <section class="w80">
-        <h1>Procesar Solicitudes Menú</h1>
-        <div class="PS">
+        <h1>Atender Solicitudes Menú</h1>
+        <div class="AS">
             <a href="/admin/Atender Solicitudes/SolicitudesMenu.php">
                 <ion-icon name="list-outline"></ion-icon>
                 Solicitudes Menú

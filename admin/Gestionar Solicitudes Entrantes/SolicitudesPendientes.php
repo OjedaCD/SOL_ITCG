@@ -55,7 +55,7 @@
             $resultadoAC=mysqli_query($db, $queryAC);
             $ban2 = true;
         }elseif($btn == "Rechazar Solicitud"){
-            $queryR = "UPDATE solicitudes SET `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
         }elseif ($btn == "Asignar Personal"){
@@ -69,7 +69,7 @@
                     'X-Mailer: PHP/' . phpversion();
                 mail($para, $titulo, $mensaje, $cabeceras);
                 $ban = true;
-                $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
+                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE', `encargadoS`='$asignado'WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {

@@ -1,0 +1,116 @@
+.VerSolicitudMenu{
+    
+    margin-top: 4rem;
+
+    .tabla {
+        margin: 0rem auto;
+        text-align: left;
+        padding: 0rem;
+        border-spacing: 1px;
+        width: 100%;
+        border-width: .5rem;
+        border-radius: 0rem 0rem 1rem 1rem;
+        --overflow: hidden;
+        .rechazado{
+            transition: all .5s;
+            th {
+                font-weight: normal;
+                font-size: 2rem;
+            }
+            &:nth-child(odd) {
+                background-color:  #ff6961;
+            }
+            &:nth-child(even) {
+                background-color:  #ff6961;
+            }
+            &:hover {
+                background-color: $azulMarino;
+                transition: all .5s;
+                color: white;
+                --transform: scale(1.1);
+                cursor: pointer;
+            }
+            .pen{
+                width: 100%;
+                background-color: #f70400d7;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+        }
+        .validado{
+            transition: all .5s;
+            th {
+                font-weight: normal;
+                font-size: 2rem;
+            }
+            &:nth-child(odd) {
+                background-color:  #ffe180;
+            }
+            &:nth-child(even) {
+                background-color:  #ffe180;
+            }
+            &:hover {
+                background-color: $azulMarino;
+                transition: all .5s;
+                color: white;
+                --transform: scale(1.1);
+                cursor: pointer;
+            }
+            .pen{
+                width: 100%;
+                background-color: #fea506;
+                color: black;;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+        }
+        .espera {
+            transition: all .5s;
+            th {
+                font-weight: normal;
+                font-size: 2rem;
+            }
+            &:nth-child(odd) {
+                background-color: ghostwhite;
+            }
+            &:nth-child(even) {
+                background-color: rgb(240, 223, 223);
+            }
+            &:hover {
+                background-color: $azulMarino;
+                transition: all .5s;
+                color: white;
+                --transform: scale(1.1);
+                cursor: pointer;
+            }
+
+            
+            .pen{
+                width: 100%;
+                background-color: #f70400d7;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .pro{
+                width: 100%;
+                background-color: #fea506;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+            .fin{
+                width: 100%;
+                background-color: #66db66;
+                color: black;
+                border-radius: 0.8rem;
+                cursor: pointer;
+            }
+        }
+        
+    }
+}
+    
+
+

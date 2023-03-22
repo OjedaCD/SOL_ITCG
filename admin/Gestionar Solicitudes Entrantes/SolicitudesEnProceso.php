@@ -19,6 +19,9 @@
         $encargadoS = $_POST['encargadoS']?? null;
         $trabajo = $_POST['trabajo']?? null;
         $materiales = $_POST['materiales']?? null;
+        $asignado = $_POST['asignado'];
+        $descripcion = $_POST['descripcion'];
+
         if ($_SESSION['idDpto'] == 20){
             $mantenimiento = $_POST['mantenimiento'];
             $lugar = $_POST['lugar'];
@@ -31,7 +34,7 @@
         $fechaFin = date('Y-m-d');
 
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales', `fechaFin`='$fechaFin',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
@@ -39,9 +42,27 @@
             $resultadoA=mysqli_query($db, $queryA);
             $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){
-            $queryR = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', observacion = '{$observacion}',`tipo`='$tipo', validacion = 1, `Prioridad`='$prioridad', `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            $queryR = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', validacion = 1, `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
+        }elseif ($btn == "Asignar Personal"){
+            try {
+                $para = $asignado;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento';
+                $mensaje = 'El solicitante requiere de: '.$descripcion;
+                $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'Content-type: text/html; charset=UTF-8' . "\r\n".
+                    'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+                mail($para, $titulo, $mensaje, $cabeceras);
+                $ban = true;
+                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO', `encargadoS`='$asignado'WHERE folio = '$folio'";
+                $resultadoA=mysqli_query($db, $queryA);
+                //Aquí ira el código para enviar el email cuando se suba al servidor
+            } catch (Exception $e) {
+                $ban = false;
+                echo $e;
+            }
         }
 
     }

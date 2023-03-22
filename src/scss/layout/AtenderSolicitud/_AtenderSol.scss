@@ -1,0 +1,6 @@
+.AtenderSolicitud{
+    margin-top: 2rem;
+    .AS{
+        @include menu(1, 100%);// Es un mixin para la cantidad de modulos
+    }
+}

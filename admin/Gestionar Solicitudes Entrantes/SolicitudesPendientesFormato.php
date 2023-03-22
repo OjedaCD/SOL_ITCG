@@ -302,11 +302,18 @@
                             </div>
                             <div class="btnAC">
                                 <input type="submit" name = "btn" value="Actualizar Comentario">
-                            </div>
-                            <div class="btnAS">
+                            </div>');
+
+                            if(empty($row3['encargadoS'])){
+                                echo('<div class="btnAS">
+                                <input type="submit" disabled="disabled" name = "btn" value="Aceptar Solicitud">
+                            </div>');
+                            }else{
+                                echo('<div class="btnAS">
                                 <input type="submit" name = "btn" value="Aceptar Solicitud">
-                            </div>
-                        </div>
+                            </div>');
+                            }
+                        echo('</div>
                         <input type="hidden" name="tipoForm3" value="X" >
                         ');
                         

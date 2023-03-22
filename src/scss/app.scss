@@ -38,6 +38,11 @@
 @import 'layout/GestionarSolicitudesEntrantes/SolicitudesFinalizadasFormato';
 @import 'layout/GestionarSolicitudesEntrantes/TableroDeSolicitudes';
 
+//Atender Solicitudes 
+@import 'layout/AtenderSolicitud/AtenderSol';
+@import 'layout/AtenderSolicitud/VerSolicitudMenu';
+@import 'layout/AtenderSolicitud/SolicitudFormato';
+
 //Opciones
 @import 'layout/Opciones/nuevoProceso';
 @import 'layout/Opciones/respaldoBDD';

@@ -3,11 +3,10 @@
 
             <div class="datos">
                 <div class="direccion">
-                    <p class="black">Instituto Tecnológico de Ciudad Guzmán</p>
-                    <p>Av Tecnoloógico #100</p>
-                    <p><span>Tel:</span> 341 575 2050</p>
+                    <p class="black">Instituto Tecnológico de Ciudad Guzmán &copy;  <?php echo date('Y'); ?></p>
+                <br>
+                <br>
                 </div>
-                <p class="derechos">Todos los Derechos Reservados &copy;  <?php echo date('Y'); ?></p>
             </div>
         </section>
     </footer>

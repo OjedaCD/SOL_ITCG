@@ -15,12 +15,19 @@
     }
 
 ?>
-<main class="VerEstadoEtapaSolicitud">
+<main class="VerSolicitudMenu">
     <section class="w80">
-        <h1>Solicitudes Centro De Cómputo</h1>
+
+        
         <?php 
             $query ="SELECT * FROM solicitudes as s INNER JOIN users as u ON s.encargadoS = u.email WHERE u.idUser = $_SESSION[idUser] AND s.idDpto = 20 ORDER BY s.Etapa ASC, s.Fecha DESC";
             $resultado = mysqli_query($db, $query);
+
+            $queryName ="SELECT nomUsuario, apellidoUsuario FROM users WHERE idUser = $_SESSION[idUser]";
+            $resultadoName = mysqli_query($db, $queryName);
+            $aux = mysqli_fetch_assoc($resultadoName);
+
+            echo ("<h1>Solicitudes asignadas a ".$aux["nomUsuario"]." ".$aux["apellidoUsuario"]."</h1>");
             echo('
             <table class="tabla">
             <tr>
@@ -50,9 +57,9 @@
                             <th>'.$row['Estado'].'</th>
                             ');
                         if ($row['Etapa'] == "1PENDIENTE"){
-                                echo('<th><input class = "pen"type="submit" value="Cancelar Solicitud"></th>');        
+                                echo('<th><input class = "pen"type="submit" value="Orden de Trabajo"></th>');        
                             }if($row['Etapa'] == "2PROCESO"){
-                                echo('<th><input class = "pro"type="submit" value="Confirmar Servicio"></th>');  
+                                echo('<th><input class = "pro"type="submit" value="Orden de Trabajo"></th>');  
                             }if($row['Etapa'] == "3FINALIZADO"){
                                 echo('<th><input class = "fin"type="submit" value="Datos de Solicitud"></th>');  
                             }
