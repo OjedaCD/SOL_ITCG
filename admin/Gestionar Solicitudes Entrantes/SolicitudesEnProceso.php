@@ -17,8 +17,6 @@
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
         $encargadoS = $_POST['encargadoS']?? null;
-        $trabajo = $_POST['trabajo']?? null;
-        $materiales = $_POST['materiales']?? null;
         $asignado = $_POST['asignado'];
         $descripcion = $_POST['descripcion'];
 

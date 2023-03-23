@@ -11,7 +11,20 @@
     $ban = null;
 
     if ($_SERVER['REQUEST_METHOD']==="POST" ){
+        date_default_timezone_set("America/Mexico_City");
+        $fechaFin = date('Y-m-d');
 
+        $btn= $_POST['btn'];
+        $trabajo = $_POST['trabajo']?? null;
+        $materiales = $_POST['materiales']?? null;
+        $folio = $_POST['tipoForm2'];
+        if($btn == "Atender Solicitud"){
+            $queryA = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `materiales`='$materiales', `trabajo`='$trabajo' WHERE folio = '$folio'";
+            $resultadoA=mysqli_query($db, $queryA);
+            $ban = true;
+        }elseif($btn == "Cerrar Solicitud"){
+            $ban = null;
+        }
     }
 
 ?>
@@ -47,43 +60,24 @@
                     echo('<form method="GET" action ="SolicitudFormato.php">');
 
                     echo('
-                        <input name = "folio"value = "'.$row['folio'].'" type="hidden">');
-                        if($row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO"|| $row['Estado'] == "CANCELADO" || intval($row['validacion']) == 0 && $row['Estado'] == "ACEPTADO"){
-                            echo('
-                        <tr class="espera">
-                            <th>'.substr("$row[folio]", 8).'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,50).'</th>
-                            <th>'.$row['Estado'].'</th>
-                            ');
-                        if ($row['Etapa'] == "1PENDIENTE"){
-                                echo('<th><input class = "pen"type="submit" value="Orden de Trabajo"></th>');        
-                            }if($row['Etapa'] == "2PROCESO"){
-                                echo('<th><input class = "pro"type="submit" value="Orden de Trabajo"></th>');  
-                            }if($row['Etapa'] == "3FINALIZADO"){
-                                echo('<th><input class = "fin"type="submit" value="Datos de Solicitud"></th>');  
-                            }
-                        echo('
-                        </tr>');
-                        }elseif($row['Estado'] == "RECHAZADO"){
-                            echo('
-                        <tr class="rechazado">
-                            <th>'.substr("$row[folio]", 4,-4).'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,50).'</th>
-                            <th>'.$row['Estado'].'</th>
-                            <th><input class = "pen"type="submit" value="Modificar Solicitud"></th>
-                        </tr>');
-                        }elseif(intval($row['validacion']) == 1 && $row['Estado'] == "ACEPTADO"){
-                            echo('
-                        <tr class="validado">
-                            <th>'.substr("$row[folio]", 4,-4).'</th>
-                            <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,50).'</th>
-                            <th>'.$row['Estado'].'</th>
-                            <th><input class = "pen"type="submit" value="Confirmar Servicio"></th>
-                        </tr>');
+                    <input name = "folio"value = "'.$row['folio'].'" type="hidden">');
+                    echo('
+                    <tr class="espera">
+                        <th>'.substr("$row[folio]", 8).'</th>
+                        <th>'.$row['fecha'].'</th>
+                        <th>'.substr("$row[descripcion]", 0,50).'</th>
+                        <th>'.$row['Estado'].'</th>
+                        ');
+                    if ($row['Etapa'] == "1PENDIENTE"){
+                            echo('<th><input class = "pen"type="submit" value="Orden de Trabajo"></th>');        
+                        }if($row['Etapa'] == "2PROCESO"){
+                            echo('<th><input class = "pro"type="submit" value="Orden de Trabajo"></th>');  
+                        }if($row['Etapa'] == "3FINALIZADO"){
+                            echo('<th><input class = "fin"type="submit" value="Datos de Solicitud"></th>');  
                         }
+                    echo('
+                    </tr>');
+                        
                     echo('</form>');
                 }
                 echo('</table>');
@@ -93,9 +87,9 @@
 
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true) {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && !(isset($_POST['cn']))) {
         echo "<script>exito('Solicitud Atendida');</script>";
-    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false){
+    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && !(isset($_POST['cn']))){
         echo "<script>fracaso('Error! Solicitud no Atendida');</script>";
     }
 ?>

@@ -80,6 +80,7 @@
                             <input type="text" name="departamento" id="departamento" value = "'.$row2["nomDpto"].'" disabled>           
                     </div>');
                     $fecha1 = $row3['fecha'];
+                    $fecha2 = $row3['fechaFin'];
                     function cambiaf_a_espanol($fecha){
                         preg_match( '/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/', $fecha, $mifecha);
                         $lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1];
@@ -90,6 +91,13 @@
                         <label for="fecha">Fecha de elaboración</label>
                         <input id="fechaActual" name="fecha" type="text" value ="'.cambiaf_a_espanol($fecha1).'" disabled>
                     </div>');
+                    if($aux2['Etapa'] == "3FINALIZADO"){
+                        echo('
+                        <div class="fechaFin">
+                            <label for="fechaFin">Fecha de realización</label>
+                            <input id="fechaFin" name="fechaFin" type="text" value ="'.cambiaf_a_espanol($fecha2).'" disabled>
+                        </div>');
+                    }
                     echo('
                         <div class="opciones">
                             <label for="opciones">Clasificación de la falla a reparar:</label>
@@ -157,29 +165,50 @@
                     </div>');
                     }
 
-                    
                     echo('<hr><h1>Orden De Trabajo</h1>');
-                    echo('<div class="encargadoS">
-                    <label for="encargadoS">Coloque el nombre de las personas asignadas para atender la solicitud:</label>
-                    <textarea id ="encargadoS" maxlength="255" name ="encargadoS" required>')."".trim($aux2['encargadoS']);  
-                    echo('</textarea></div>');
 
-                    echo('<div class="trabajo">
-                    <label for="trabajo">Coloque el trabajo realizado:</label>
-                    <textarea id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
-                    echo('</textarea></div>');
+                    if($aux2['Etapa'] != "3FINALIZADO"){
+                        echo('<div class="trabajo">
+                        <label for="trabajo">Coloque el trabajo realizado:</label>
+                        <textarea id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
+                        echo('</textarea></div>');
 
-                    echo('<div class="materiales">
-                    <label for="materiales">Coloque los materiales utilizados:</label>
-                    <textarea id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
-                    echo('</textarea></div>');
-                    
-                    echo('
-                    <div class="btnCS">
-                        <input type="submit" value="Confirmar Servicio">
-                    </div>');
-                    
-                    
+                        echo('<div class="materiales">');
+                        if($_SESSION['idDpto'] == 20){
+                            echo('<label for="materiales">Materiales utilizados:</label>');
+                        }elseif($_SESSION['idDpto'] == 21){
+                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                        }
+                        echo('
+                        <textarea id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
+                        echo('</textarea></div>');
+
+                        echo('
+                        <div class="btnCS">
+                            <input name = "btn" type="submit" value="Atender Solicitud">
+                        </div>');
+                    }else{
+                        echo('<div class="trabajo">
+                        <label for="trabajo">Coloque el trabajo realizado:</label>
+                        <textarea disabled id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
+                        echo('</textarea></div>');
+
+                        echo('<div class="materiales">');
+                        if($_SESSION['idDpto'] == 20){
+                            echo('<label for="materiales">Materiales utilizados:</label>');
+                        }elseif($_SESSION['idDpto'] == 21){
+                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                        }
+                        echo('
+                        <textarea disabled id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
+                        echo('</textarea></div>');
+
+                        echo('
+                        <div class="btnCS">
+                            <input name = "btn" type="submit" value="Cerrar Solicitud">
+                            <input type="hidden" name="cn" value="cn" >
+                        </div>');
+                    }     
                 }
             ?>
         </form>

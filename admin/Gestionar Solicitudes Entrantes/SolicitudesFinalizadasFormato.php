@@ -182,18 +182,18 @@
                             }
                         }
                         if($row3['Estado'] != "CANCELADO"){
-                            echo('<hr><h1>Orden De Trabajo</h1>');
-
-                            $queryEn = "SELECT encargadoS FROM solicitudes WHERE folio = '{$folio}' ";
+                            echo('<hr><h1>Orden De Trabajo</h1>');                
+                            
+                            $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
                             $resultadoEn = mysqli_query($db, $queryEn);
                             $aux3 = mysqli_fetch_assoc($resultadoEn);
-                            foreach ($aux3 as $key => $value) {
-                                echo('<div class="encargadoS">
-                                    <label for="encargadoS">Nombres de las personas encargadas de atender la solicitud:</label>
-                                    <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($value);
+                       
+                            echo('<div class="encargadoS">
+                            <label for="encargadoS">Asignado a:</label>
+                            <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
                             echo('</textarea>
                             </div>');
-                            }
+                            
                             $queryTr = "SELECT trabajo FROM solicitudes WHERE folio = '{$folio}' ";
                             $resultadoTr = mysqli_query($db, $queryTr);
                             $aux4 = mysqli_fetch_assoc($resultadoTr);
@@ -208,9 +208,13 @@
                             $resultadoMa = mysqli_query($db, $queryMa);
                             $aux5 = mysqli_fetch_assoc($resultadoMa);
                             foreach ($aux5 as $key => $value) {
-                                echo('<div class="materiales">
-                                <label for="materiales">Materiales utilizados:</label>
-                                <textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  
+                                echo('<div class="materiales">');
+                                if($_SESSION['idDpto'] == 20){
+                                    echo('<label for="materiales">Materiales utilizados:</label>');
+                                }elseif($_SESSION['idDpto'] == 21){
+                                    echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                                }
+                                echo('<textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  
                                 echo('</textarea></div>');
                             }
                         }

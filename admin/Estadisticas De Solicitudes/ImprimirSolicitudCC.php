@@ -166,7 +166,15 @@
                                 <td><b>Revisión:</b> 8</td>
                             </tr>
                             <tr>
-                                <td><b>Pág</b> 1 de 2</td>
+                                <td><b>Pág</b> 1 de 
+                                <?php 
+                                    if($row3['Estado'] == "CANCELADO"){
+                                        echo ('1');
+                                    }else{
+                                        echo ('2');
+                                    }
+                                ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -326,7 +334,7 @@
         <?php 
         if($row3['lugar'] == 'CÓMPUTO'){
             echo('
-            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value=" CÓMPUTO">CÓMPUTO</label><br>
+            <label class = "cbtext"><input type="checkbox" checked="checked" id="cbox1" value=" CÓMPUTO"> CÓMPUTO</label><br>
             <label class = "cbtext"><input type="checkbox" id="cbox1" value="LABORATORIO"> LABORATORIO</label><br>');
         }else{
             echo('
@@ -388,7 +396,13 @@
         <tbody>
             <tr>
                 <td>
-                    <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
+                    <b>Asignado a: </b> 
+                    <?php 
+                        $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
+                        $resultadoEn = mysqli_query($db, $queryEn);
+                        $aux3 = mysqli_fetch_assoc($resultadoEn);
+                        echo($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                    ?>
                 </td>
             </tr>
         </tbody>

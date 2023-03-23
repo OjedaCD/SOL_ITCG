@@ -164,7 +164,15 @@
                                 <td><b>Revisión:</b> 9</td>
                             </tr>
                             <tr>
-                                <td><b>Pág</b> 1 de 2</td>
+                            <td><b>Pág</b> 1 de 
+                                <?php 
+                                    if($row3['Estado'] == "CANCELADO"){
+                                        echo ('1');
+                                    }else{
+                                        echo ('2');
+                                    }
+                                ?>
+                                </td>   
                             </tr>
                         </tbody>
                     </table>
@@ -311,7 +319,13 @@
                     <b>Folio: </b> <?php echo $folio?>
                 </td>
                 <td >
-                    Asigna orden de trabajo:
+                    <b>Asignado a: </b> 
+                    <?php 
+                        $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
+                        $resultadoEn = mysqli_query($db, $queryEn);
+                        $aux3 = mysqli_fetch_assoc($resultadoEn);
+                        echo($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                    ?>
                 </td>
             </tr>
         </tbody>
@@ -343,11 +357,6 @@
     </table>
     <table>
         <tbody>
-            <tr>
-                <td>
-                    <b>Asignado a: </b> <?php echo $row3["encargadoS"]?>
-                </td>
-            </tr>
             <tr>
                 <td>
                     Tipo de trabajo / servicio a realizar:
