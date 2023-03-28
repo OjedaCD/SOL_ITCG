@@ -165,7 +165,7 @@
                     </div>');
                     }
 
-                    $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
+                        $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
                         $resultadoOb = mysqli_query($db, $queryOb);
                         $aux1 = mysqli_fetch_assoc($resultadoOb);
                         foreach ($aux1 as $key => $value) {

@@ -164,12 +164,11 @@
                     echo('</textarea>
                     </div>');
                     }
-
-                    echo('<hr><h1>Orden De Trabajo</h1>');
-
+                    
                     if($aux2['Etapa'] != "3FINALIZADO"){
+                        echo('<hr><h1>Orden De Trabajo</h1>');
                         echo('<div class="trabajo">
-                        <label for="trabajo">Coloque el trabajo realizado:</label>
+                        <label for="trabajo">Trabajo realizado:</label>
                         <textarea id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
                         echo('</textarea></div>');
 
@@ -188,28 +187,46 @@
                             <input name = "btn" type="submit" value="Atender Solicitud">
                         </div>');
                     }else{
-                        echo('<div class="trabajo">
-                        <label for="trabajo">Coloque el trabajo realizado:</label>
-                        <textarea disabled id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
-                        echo('</textarea></div>');
+                        if($aux2['Estado'] != "CANCELADO"){
+                            echo('<div class="trabajo">
+                            <label for="trabajo">Trabajo realizado:</label>
+                            <textarea disabled id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
+                            echo('</textarea></div>');
 
-                        echo('<div class="materiales">');
-                        if($_SESSION['idDpto'] == 20){
-                            echo('<label for="materiales">Materiales utilizados:</label>');
-                        }elseif($_SESSION['idDpto'] == 21){
-                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                            echo('<div class="materiales">');
+                            if($_SESSION['idDpto'] == 20){
+                                echo('<label for="materiales">Materiales utilizados:</label>');
+                            }elseif($_SESSION['idDpto'] == 21){
+                                echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                            }
+                            echo('
+                            <textarea disabled id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
+                            echo('</textarea></div>');
+
+                        }else{
+                            $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
+                            $resultadoOb = mysqli_query($db, $queryOb);
+                            $aux1 = mysqli_fetch_assoc($resultadoOb);
+                            foreach ($aux1 as $key => $value) {
+                                if(strlen("".trim($value)) != 0){
+                                    echo('<div class="observacion">');
+                                    echo('<label for="observacion">Razones de cancelación:</label>');                            echo('<textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                                    echo('</textarea>
+                                    </div>');
+                                }
+                            }
                         }
-                        echo('
-                        <textarea disabled id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
-                        echo('</textarea></div>');
-
+                        
                         echo('
                         <div class="btnCS">
                             <input name = "btn" type="submit" value="Cerrar Solicitud">
                             <input type="hidden" name="cn" value="cn" >
                         </div>');
-                    }     
+                        
+                    }
+                      
                 }
+            
             ?>
         </form>
     </section>

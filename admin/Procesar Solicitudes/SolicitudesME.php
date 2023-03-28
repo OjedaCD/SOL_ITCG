@@ -137,7 +137,7 @@
                         }elseif($row['Estado'] == "RECHAZADO"){
                             echo('
                         <tr class="rechazado">
-                            <th>'.substr("$row[folio]", 4,-4).'</th>
+                            <th>'.substr("$row[folio]", 8).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
@@ -146,7 +146,7 @@
                         }elseif(intval($row['validacion']) == 1 && $row['Estado'] == "ACEPTADO"){
                             echo('
                         <tr class="validado">
-                            <th>'.substr("$row[folio]", 4,-4).'</th>
+                            <th>'.substr("$row[folio]",8).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
