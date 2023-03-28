@@ -20,27 +20,30 @@
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
         $email = $_POST['email'];
-        $asignado = $_POST['asignado'];
         $descripcion = $_POST['descripcion'];
         
         if ($_SESSION['idDpto'] == 20){
             $mantenimiento = $_POST['mantenimiento'];
             $lugar = $_POST['lugar'];
+            $asignado = $_POST['asignado'];
         }else{
             $mantenimiento = "";
             $lugar = "";
+            $asignado = "";
         }
         if($btn == "Aceptar Solicitud"){
             
             try {
-                $para = $email;
-                $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA';
-                $mensaje = 'Se te dará servicio en breve a tu solicitud de : '.$descripcion;
-                $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
-                    'Content-type: text/html; charset=UTF-8' . "\r\n".
-                    'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
-                mail($para, $titulo, $mensaje, $cabeceras);
+                if($_SESSION['idDpto'] == 20){
+                    $para = $email;
+                    $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA';
+                    $mensaje = 'Se te dará servicio en breve a tu solicitud de : '.$descripcion;
+                    $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                        'Content-type: text/html; charset=UTF-8' . "\r\n".
+                        'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                        'X-Mailer: PHP/' . phpversion();
+                    mail($para, $titulo, $mensaje, $cabeceras);
+                }
                 $ban = true;
                 $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);

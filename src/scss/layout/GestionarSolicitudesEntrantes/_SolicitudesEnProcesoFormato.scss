@@ -32,8 +32,11 @@
             gap: 2rem;
         }
     }
-
-    .descripcion, .observacion{
+    hr{
+        height: 1rem;
+        background-color: black;
+    }
+    .descripcion, .observacion,.trabajo, .materiales, .encargadoS{
         align-content: center;
         justify-content: center;
         text-align: center;

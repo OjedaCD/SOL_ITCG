@@ -16,27 +16,37 @@
         $observacion = $_POST['observacion'];
         $prioridad = $_POST['prioridad'];
         $tipo = $_POST['tipo'];
-        $encargadoS = $_POST['encargadoS']?? null;
-        $asignado = $_POST['asignado'];
         $descripcion = $_POST['descripcion'];
 
         if ($_SESSION['idDpto'] == 20){
             $mantenimiento = $_POST['mantenimiento'];
             $lugar = $_POST['lugar'];
-        }else{
+            $asignado = $_POST['asignado'];
+        }elseif($_SESSION['idDpto'] == 21){
             $mantenimiento = "";
             $lugar = "";
+            $asignado = "";
+            $encargadoS = $_POST['encargadoS']?? null;
+            $trabajo = $_POST['trabajo']?? null;
+            $materiales = $_POST['materiales']?? null;
         }
-
         date_default_timezone_set("America/Mexico_City");
         $fechaFin = date('Y-m-d');
 
         if($btn == "Finalizar Solicitud"){
-            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            if($_SESSION['idDpto'] == 21){
+                $queryA = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales',`mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            }elseif($_SESSION['idDpto'] == 20){
+                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+            }
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
         }elseif($btn == "Actualizar Comentario"){
-            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
+            if($_SESSION['idDpto'] == 21){
+                $queryA = "UPDATE solicitudes SET `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales',`mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
+            }elseif($_SESSION['idDpto'] == 20){
+                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
+            }
             $resultadoA=mysqli_query($db, $queryA);
             $ban2 = true;
         }elseif($btn == "Cancelar Solicitud"){

@@ -161,9 +161,35 @@
                     
                     if($_SESSION['idRole'] != 4){
                         echo('<div class="observacion">
-                        <label for="observacion">Coloque los comentarios pertinentes, o las razones de cancelación de la solicitud:</label>
+                        <label for="observacion">Coloque los comentarios, observaciones, o las razones de cancelación de la solicitud:</label>
                         <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
+                        
+                        if($aux2['validacion'] != 1){
+                            $requerido = "";
+                        }else{
+                            $requerido = "required";
+                        }
+                        if($_SESSION['idDpto'] == 21){
+
+                            echo('<hr><h1>Orden De Trabajo</h1>');
+                            
+                            echo('<div class="encargadoS">
+                            <label for="encargadoS">Asignado a:</label>
+                            <textarea id ="encargadoS" maxlength="255" name ="encargadoS" '.$requerido.'>')."".trim($aux2['encargadoS']);  
+                            echo('</textarea></div>');
+
+                            echo('<div class="trabajo">
+                            <label for="trabajo">Trabajo realizado:</label>
+                            <textarea id ="trabajo" maxlength="255" name ="trabajo" '.$requerido.'>')."".trim($aux2['trabajo']);  
+                            echo('</textarea></div>');
+
+                            echo('<div class="materiales">');
+                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                            echo('
+                            <textarea id ="materiales" maxlength="255" name ="materiales" '.$requerido.'>')."".trim($aux2['materiales']);  
+                            echo('</textarea></div>');
+                        }
                         echo('
                         <div class= "opcionesSel">
                             <div class="prioridad">
@@ -264,35 +290,34 @@
                             }else{
                                 echo('</div>');
                             }
-                            echo('
-                            <div class="asignado">
-                                <label for="asignado">Asignado a</label>
-                                <select name="asignado" id="asignado" required>
-                                    <option value=""disabled selected>--Persona Asignada--</option>');
-                                    if($_SESSION['idDpto'] == 20){
-                                        $queryA ="SELECT * FROM users WHERE idRole = 5 AND idDpto = 20";
-                                    }elseif($_SESSION['idDpto'] == 21){
-                                        $queryA ="SELECT * FROM users WHERE idRole = 5 AND idDpto = 21";
-                                    }
-                                    $resultadoA= mysqli_query($db, $queryA);
-
-                                    while($rowA = mysqli_fetch_assoc($resultadoA)){
-                                        if($rowA['email'] == $row3['encargadoS']){
-                                            echo('<option selected = "selected" value="'.$rowA['email'].'">');
-                                            echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
-                                            echo ('</option>');
-                                        }else{
-                                            echo('<option value="'.$rowA['email'].'">');
-                                            echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
-                                            echo ('</option>');
-                                        }    
-                                    }
+                            if($_SESSION['idDpto'] == 20){
                                 echo('
-                                </select> 
-                                <div class="btnAP">
-                                    <input type="submit" name = "btn"  value="Asignar Personal">
-                                </div>
-                            </div>'); 
+                                <div class="asignado">
+                                    <label for="asignado">Asignado a</label>
+                                    <select name="asignado" id="asignado" required>
+                                        <option value=""disabled selected>--Persona Asignada--</option>');
+                                        $queryA ="SELECT * FROM users WHERE idRole = 5 AND idDpto = 20";
+                                        $resultadoA= mysqli_query($db, $queryA);
+
+                                        while($rowA = mysqli_fetch_assoc($resultadoA)){
+                                            if($rowA['email'] == $row3['encargadoS']){
+                                                echo('<option selected = "selected" value="'.$rowA['email'].'">');
+                                                echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
+                                                echo ('</option>');
+                                            }else{
+                                                echo('<option value="'.$rowA['email'].'">');
+                                                echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
+                                                echo ('</option>');
+                                            }    
+                                        }
+                                    echo('
+                                    </select> 
+                                    <div class="btnAP">
+                                        <input type="submit" name = "btn"  value="Asignar Personal">
+                                    </div>
+                                </div>'); 
+                                }
+                                
                         echo('</div>');
 
                         echo('
@@ -311,7 +336,7 @@
                             echo('
                             <div class="btnFSo">
                                 ');
-                                if($aux2['validacion'] == 0 || empty($row3['encargadoS'])){
+                                if($aux2['validacion'] == 0|| empty($row3['encargadoS']) && $_SESSION['idDpto'] == 20){
                                     echo('<input type="submit" disabled="disabled" name = "btn"  value="Finalizar Solicitud">');
                                 }else{
                                     echo('<input type="submit" name = "btn"  value="Finalizar Solicitud">');

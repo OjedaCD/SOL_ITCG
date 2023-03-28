@@ -220,6 +220,8 @@
             <tr>
                 <td>
                     <b>Descripción del servicio solicitdo o falla a reparar: </b> 
+                    <br>
+                    <br>
                     <?php 
                     $queryDetalles = "SELECT idFalla FROM detalles WHERE folio = '$row3[folio]' ";
                     $resultadoDetalles =  mysqli_query($db, $queryDetalles);
@@ -321,10 +323,7 @@
                 <td >
                     <b>Asignado a: </b> 
                     <?php 
-                        $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
-                        $resultadoEn = mysqli_query($db, $queryEn);
-                        $aux3 = mysqli_fetch_assoc($resultadoEn);
-                        echo($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                        echo($row3["encargadoS"]);
                     ?>
                 </td>
             </tr>
@@ -352,15 +351,6 @@
                     ?>
                 </td>
                 
-            </tr>
-        </tbody>
-    </table>
-    <table>
-        <tbody>
-            <tr>
-                <td>
-                    Tipo de trabajo / servicio a realizar:
-                </td>
             </tr>
         </tbody>
     </table>

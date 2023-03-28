@@ -187,12 +187,20 @@
                             $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
                             $resultadoEn = mysqli_query($db, $queryEn);
                             $aux3 = mysqli_fetch_assoc($resultadoEn);
-                       
-                            echo('<div class="encargadoS">
-                            <label for="encargadoS">Asignado a:</label>
-                            <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
-                            echo('</textarea>
-                            </div>');
+                            if($row3['idDpto'] == 20){
+                                echo('<div class="encargadoS">
+                                <label for="encargadoS">Asignado a:</label>
+                                <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                                echo('</textarea>
+                                </div>');
+                            }elseif($row3['idDpto'] == 21){
+                                echo('<div class="encargadoS">
+                                <label for="encargadoS">Asignado a:</label>
+                                <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($row3['encargadoS']);
+                                echo('</textarea>
+                                </div>');
+                            }
+                            
                             
                             $queryTr = "SELECT trabajo FROM solicitudes WHERE folio = '{$folio}' ";
                             $resultadoTr = mysqli_query($db, $queryTr);
