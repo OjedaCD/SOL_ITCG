@@ -162,7 +162,7 @@
                     if($_SESSION['idRole'] != 4){
                         echo('<div class="observacion">
                         <label for="observacion">Coloque los comentarios, observaciones, o las razones de cancelación de la solicitud:</label>
-                        <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
+                        <textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
                         
                         if($aux2['validacion'] != 1){
@@ -176,18 +176,18 @@
                             
                             echo('<div class="encargadoS">
                             <label for="encargadoS">Asignado a:</label>
-                            <textarea id ="encargadoS" maxlength="255" name ="encargadoS" '.$requerido.'>')."".trim($aux2['encargadoS']);  
+                            <textarea id ="encargadoS" maxlength="1000" name ="encargadoS" '.$requerido.'>')."".trim($aux2['encargadoS']);  
                             echo('</textarea></div>');
 
                             echo('<div class="trabajo">
                             <label for="trabajo">Trabajo realizado:</label>
-                            <textarea id ="trabajo" maxlength="255" name ="trabajo" '.$requerido.'>')."".trim($aux2['trabajo']);  
+                            <textarea id ="trabajo" maxlength="1000" name ="trabajo" '.$requerido.'>')."".trim($aux2['trabajo']);  
                             echo('</textarea></div>');
 
                             echo('<div class="materiales">');
                             echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
                             echo('
-                            <textarea id ="materiales" maxlength="255" name ="materiales" '.$requerido.'>')."".trim($aux2['materiales']);  
+                            <textarea id ="materiales" maxlength="1000" name ="materiales" '.$requerido.'>')."".trim($aux2['materiales']);  
                             echo('</textarea></div>');
                         }
                         echo('
@@ -336,7 +336,7 @@
                             echo('
                             <div class="btnFSo">
                                 ');
-                                if($aux2['validacion'] == 0|| empty($row3['encargadoS']) && $_SESSION['idDpto'] == 20){
+                                if($aux2['validacion'] == 0|| strlen("".trim($row3['trabajo'])) == 0  && strlen("".trim($row3['materiales'])) == 0 || empty($row3['encargadoS']) && $_SESSION['idDpto'] == 20){
                                     echo('<input type="submit" disabled="disabled" name = "btn"  value="Finalizar Solicitud">');
                                 }else{
                                     echo('<input type="submit" name = "btn"  value="Finalizar Solicitud">');

@@ -61,6 +61,9 @@ header{
     display: flex;
     justify-content: center;
     background-color: $azulMarino;
+    ion-icon {
+        pointer-events: none;
+    }
     .usuario{
         height: 6rem;
         width: 6rem;

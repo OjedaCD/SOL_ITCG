@@ -97,7 +97,7 @@
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>PROCESO</th>
+                <th>VER SOLICITUD</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -119,10 +119,10 @@
                         <th>'.substr("$name", 0,15).'</th>
                         <th>'.$row['fecha'].'</th>
                         <th>'.substr("$row[descripcion]", 0,30).'</th>');
-                        if($row['validacion'] == 1){
-                            echo('<th><input class = "si"type="submit" value="Ver Solicitud"></th>');  
-                        }if($row['validacion'] == 0){
-                            echo('<th><input class = "no"type="submit" value="Ver Solicitud"></th>');  
+                        if($row['validacion'] == 1 && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
+                            echo('<th><input class = "si"type="submit" value="Finalizar"></th>');  
+                        }else{
+                            echo('<th><input class = "no"type="submit" value="Aceptada"></th>');  
                         }
                         echo('
                     </tr>

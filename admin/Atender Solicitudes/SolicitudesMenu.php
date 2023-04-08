@@ -18,7 +18,7 @@
         $trabajo = $_POST['trabajo']?? null;
         $materiales = $_POST['materiales']?? null;
         $folio = $_POST['tipoForm2'];
-        if($btn == "Atender Solicitud"){
+        if($btn == "Atender Orden"){
             $queryA = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `materiales`='$materiales', `trabajo`='$trabajo' WHERE folio = '$folio'";
             $resultadoA=mysqli_query($db, $queryA);
             $ban = true;
@@ -48,7 +48,7 @@
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
                 <th>ESTADO</th>
-                <th>OPCIONES</th>
+                <th>ORDEN DE TRABAJO</th>
             </tr>'); 
                 
                 while ($row = mysqli_fetch_array($resultado)){
@@ -61,41 +61,41 @@
 
                     echo('
                     <input name = "folio"value = "'.$row['folio'].'" type="hidden">');
-                    if($row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO"|| $row['Estado'] == "CANCELADO" || intval($row['validacion']) == 0 && $row['Estado'] == "ACEPTADO" || strlen("".trim($row['trabajo'])) == 0 || strlen("".trim($row['materiales'])) == 0){
+                    if($row['Estado'] == "RECHAZADO" && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0|| $row['Estado'] == "ESPERA" && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){      
                         echo('
-                    <tr class="espera">
-                        <th>'.substr("$row[folio]", 8).'</th>
-                        <th>'.$row['fecha'].'</th>
-                        <th>'.substr("$row[descripcion]", 0,50).'</th>
-                        <th>'.$row['Estado'].'</th>
-                        ');
-                    if ($row['Etapa'] == "1PENDIENTE"){
-                            echo('<th><input class = "pen"type="submit" value="Orden de Trabajo"></th>');        
-                        }if($row['Etapa'] == "2PROCESO"){
-                            echo('<th><input class = "pro"type="submit" value="Orden de Trabajo"></th>');  
-                        }if($row['Etapa'] == "3FINALIZADO"){
-                            echo('<th><input class = "fin"type="submit" value="Datos de Solicitud"></th>');  
-                        }
-                    }elseif($row['Estado'] == "RECHAZADO" || $row['Estado'] == "ESPERA" && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
-                            
-                            echo('
                         <tr class="rechazado">
                             <th>'.substr("$row[folio]", 8).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
-                            <th><input class = "pen"type="submit" value="Orden de Trabajo"></th>
+                            <th><input class = "pen"type="submit" value="Modificar Orden"></th>
                         </tr>');
-                        }elseif( $row['Estado'] == "ACEPTADO"&& strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
-                            echo('
+                    }elseif($row['Estado'] == "ACEPTADO" && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
+                        echo('
                         <tr class="validado">
                             <th>'.substr("$row[folio]", 8).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,50).'</th>
                             <th>'.$row['Estado'].'</th>
-                            <th><input class = "pen"type="submit" value="Orden de Trabajo"></th>
+                            <th><input class = "pen"type="submit" value="Modificar Orden"></th>
                         </tr>');
+                    }elseif($row['Estado'] == "CANCELADO" || $row['Estado'] == "ESPERA" || $row['Estado'] == "FINALIZADO" || $row['Estado'] == "ACEPTADO" || $row['Estado'] == "RECHAZADO" ){
+                        echo('
+                        <tr class="espera">
+                            <th>'.substr("$row[folio]", 8).'</th>
+                            <th>'.$row['fecha'].'</th>
+                            <th>'.substr("$row[descripcion]", 0,50).'</th>
+                            <th>'.$row['Estado'].'</th>
+                            ');
+                        if ($row['Etapa'] == "1PENDIENTE"){
+                            echo('<th><input class = "pen"type="submit" value="Llenar Orden"></th>');        
                         }
+                        if($row['Etapa'] == "2PROCESO"){
+                            echo('<th><input class = "pro"type="submit" value="Llenar Orden"></th>');  
+                        }if($row['Etapa'] == "3FINALIZADO"){
+                            echo('<th><input class = "fin"type="submit" value="Datos de Solicitud"></th>');  
+                        }
+                    }
                     echo('
                     </tr>');
                         
@@ -109,9 +109,9 @@
 <?php 
     inlcuirTemplate('footer');
     if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && !(isset($_POST['cn']))) {
-        echo "<script>exito('Solicitud Atendida');</script>";
+        echo "<script>exito('Orden Atendida');</script>";
     }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && !(isset($_POST['cn']))){
-        echo "<script>fracaso('Error! Solicitud no Atendida');</script>";
+        echo "<script>fracaso('Error! Orden no Atendida');</script>";
     }
 ?>
 

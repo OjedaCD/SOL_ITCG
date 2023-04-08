@@ -115,13 +115,6 @@
                     <?php endwhile;?>  
                 </select>         
             </div>
-            <div class="emailS">
-                <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" required  maxlength="25" pattern="[A-Za-z 0-9.]+">           
-           </div>
-           <div class="emailD">
-                <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
-           </div>
            <div class="btnBus">
                 <input type="submit" value="Generar Formulario">
             </div>
@@ -145,9 +138,8 @@
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET" && isset($_GET['tipoForm'])) {
                     //Obtengo los datos del form
-                    $email = $_GET['emailS']?? null;;
+                    $email = $_SESSION['email'];
                     $area = $_GET['area']?? null;;
-                    $email = "".trim($email)."@cdguzman.tecnm.mx";
                     
                     
                     $query = "SELECT * FROM users";
@@ -247,7 +239,7 @@
                                 echo('
                                 <div class="descripcion">
                                     <label for="descripcion">Descripción del servicio solicitado o falla a reparar:</label>
-                                    <textarea id ="descripcion" maxlength="255" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required></textarea>
+                                    <textarea id ="descripcion" maxlength="1000" name ="descripcion" placeholder="Ingresa la descripción lo más detallada posible, en caso de no hacerlo tu solicitud será rechazada. Debe de contener la descripción del servicio solicitado o reparación de fallas identificadas en los equipos, y su ubicación precisa dentro del ITCG." required></textarea>
                                 </div>'); 
 
                                 echo('

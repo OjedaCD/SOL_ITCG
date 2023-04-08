@@ -168,7 +168,7 @@
                         echo('
                         <div class="observacion">
                             <label for="observacion">Razones de la concelación:</label>
-                            <textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud" required></textarea>
+                            <textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Ingresa las razones de la cancelación de tu solicitud" required></textarea>
                         </div>'); 
 
                         echo('

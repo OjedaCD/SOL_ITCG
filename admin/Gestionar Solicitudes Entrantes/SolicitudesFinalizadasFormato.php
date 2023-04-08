@@ -176,7 +176,7 @@
                                 }else{
                                     echo('<label for="observacion">Razones de cancelación:</label>');
                                 }
-                                echo('<textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                                echo('<textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
                                 echo('</textarea>
                                 </div>');
                             }
@@ -208,7 +208,7 @@
                             foreach ($aux4 as $key => $value) {
                                 echo('<div class="trabajo">
                                 <label for="trabajo">Trabajo realizado:</label>
-                                <textarea id ="trabajo" maxlength="255" name ="trabajo" disabled> ')."".trim($value);  
+                                <textarea id ="trabajo" maxlength="1000" name ="trabajo" disabled> ')."".trim($value);  
                                 echo('</textarea></div>');
                             }
     
@@ -222,7 +222,7 @@
                                 }elseif($_SESSION['idDpto'] == 21){
                                     echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
                                 }
-                                echo('<textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  
+                                echo('<textarea id ="materiales" maxlength="1000" name ="materiales" disabled> ')."".trim($value);  
                                 echo('</textarea></div>');
                             }
                         }

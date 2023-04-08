@@ -36,9 +36,12 @@
     $rol = $_SESSION['idRole'];
 ?>
 <div class="header">
+
     <div class="usuario" >
     <a href="/admin/Opciones/VerCuenta.php">
-        <ion-icon name="person-circle" ></ion-icon>
+        <span title="<?php echo $_SESSION['nombre']?>">
+            <ion-icon name="person-circle"></ion-icon>
+        </span>
     </a>    
     </div>
     <ul class="nav">

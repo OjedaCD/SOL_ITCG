@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
                         // //llenar arreglo de sesion
                         $_SESSION['email'] = $usuario['email'];//Se identifica al usario en el sistema 
                         $_SESSION['login'] = true;
+                        $_SESSION['nombre'] = $usuario["nomUsuario"]." ".$usuario["apellidoUsuario"];
                         $_SESSION['idRole'] = $usuario['idRole'];
                         $_SESSION['idDpto'] = $usuario['idDpto'];
                         $_SESSION['idUser'] = $usuario['idUser'];//Aquí será el id

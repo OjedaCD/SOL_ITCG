@@ -30,7 +30,7 @@
                 <th>SOLICITANTE</th>
                 <th>FECHA-FIN</th>
                 <th>DESCRIPCIÓN</th>
-                <th>FINALIZADA</th>
+                <th>VER SOLICITUD</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -59,9 +59,9 @@
                             <th>'.$row['fechaFin'].'</th>
                             <th>'.substr("$row[descripcion]", 0,30).'</th>');
                             if($row['Estado'] == "FINALIZADO"){
-                                echo('<th><input class ="si" type="submit" value="Ver Solicitud"></th>');
+                                echo('<th><input class ="si" type="submit" value="Finalizada"></th>');
                             }else{
-                                echo('<th><input class ="no" type="submit" value="Ver Solicitud"></th>');
+                                echo('<th><input class ="no" type="submit" value="Cancelada"></th>');
                             }
                             echo('
                         </tr>

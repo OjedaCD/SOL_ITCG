@@ -23,7 +23,7 @@
 ?>
 <main class="SolicitudFormato">
     <section class="w80">
-        <h1>Atender Solicitud</h1>
+        <h1>Solicitud</h1>
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -41,7 +41,6 @@
                         }
                     }
 
-                    
                     $queryDatos= "SELECT u.email, u.nomUsuario, u.apellidoUsuario, u.idDpto FROM users as u WHERE u.idUser = $idU ";
                     $resultadoDatos =mysqli_query($db, $queryDatos);//Se obtienen los datos del usuario de usuarios y roles
                     $row = mysqli_fetch_assoc($resultadoDatos);
@@ -169,7 +168,7 @@
                         echo('<hr><h1>Orden De Trabajo</h1>');
                         echo('<div class="trabajo">
                         <label for="trabajo">Trabajo realizado:</label>
-                        <textarea id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
+                        <textarea id ="trabajo" maxlength="1000" name ="trabajo" required>')."".trim($aux2['trabajo']);  
                         echo('</textarea></div>');
 
                         echo('<div class="materiales">');
@@ -179,18 +178,18 @@
                             echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
                         }
                         echo('
-                        <textarea id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
+                        <textarea id ="materiales" maxlength="1000" name ="materiales" required>')."".trim($aux2['materiales']);  
                         echo('</textarea></div>');
 
                         echo('
                         <div class="btnCS">
-                            <input name = "btn" type="submit" value="Atender Solicitud">
+                            <input name = "btn" type="submit" value="Atender Orden">
                         </div>');
                     }else{
                         if($aux2['Estado'] != "CANCELADO"){
                             echo('<div class="trabajo">
                             <label for="trabajo">Trabajo realizado:</label>
-                            <textarea disabled id ="trabajo" maxlength="255" name ="trabajo" required>')."".trim($aux2['trabajo']);  
+                            <textarea disabled id ="trabajo" maxlength="1000" name ="trabajo" required>')."".trim($aux2['trabajo']);  
                             echo('</textarea></div>');
 
                             echo('<div class="materiales">');
@@ -200,7 +199,7 @@
                                 echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
                             }
                             echo('
-                            <textarea disabled id ="materiales" maxlength="255" name ="materiales" required>')."".trim($aux2['materiales']);  
+                            <textarea disabled id ="materiales" maxlength="1000" name ="materiales" required>')."".trim($aux2['materiales']);  
                             echo('</textarea></div>');
 
                         }else{
@@ -210,7 +209,8 @@
                             foreach ($aux1 as $key => $value) {
                                 if(strlen("".trim($value)) != 0){
                                     echo('<div class="observacion">');
-                                    echo('<label for="observacion">Razones de cancelación:</label>');                            echo('<textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
+                                    echo('<label for="observacion">Razones de cancelación:</label>');                            
+                                    echo('<textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
                                     echo('</textarea>
                                     </div>');
                                 }

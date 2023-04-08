@@ -105,7 +105,7 @@
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>PENDIENTE</th>
+                <th>VER SOLICITUD</th>
             </tr>'); 
             while ($row = mysqli_fetch_array($resultado)){
                 
@@ -130,9 +130,9 @@
                         <th>'.substr("$row[descripcion]", 0,30).'</th>
                         ');
                         if ($row['Estado'] != "RECHAZADO"){
-                            echo('<th><input class = "aceptado"type="submit" value="Ver Solicitud"></th>');
+                            echo('<th><input class = "aceptado"type="submit" value="Espera"></th>');
                         }else{
-                            echo('<th><input class = "rechazado"type="submit" value="Ver Solicitud"></th>');
+                            echo('<th><input class = "rechazado"type="submit" value="Rechazada"></th>');
                         }
                        echo('
                     </tr>
