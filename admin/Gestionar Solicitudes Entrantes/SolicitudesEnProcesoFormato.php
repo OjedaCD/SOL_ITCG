@@ -313,7 +313,7 @@
                                     echo('
                                     </select> 
                                     <div class="btnAP">
-                                        <input type="submit" name = "btn"  value="Asignar Personal">
+                                        <input type="submit" name = "btn"  value="Cambiar Personal">
                                     </div>
                                 </div>'); 
                                 }

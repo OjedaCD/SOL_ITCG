@@ -72,7 +72,7 @@
                     'X-Mailer: PHP/' . phpversion();
                 mail($para, $titulo, $mensaje, $cabeceras);
                 $ban = true;
-                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE', `encargadoS`='$asignado'WHERE folio = '$folio'";
+                $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
@@ -105,7 +105,7 @@
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>VER SOLICITUD</th>
+                <th>SOLICITUD</th>
             </tr>'); 
             while ($row = mysqli_fetch_array($resultado)){
                 
@@ -130,9 +130,13 @@
                         <th>'.substr("$row[descripcion]", 0,30).'</th>
                         ');
                         if ($row['Estado'] != "RECHAZADO"){
-                            echo('<th><input class = "aceptado"type="submit" value="Espera"></th>');
+                            if($_SESSION['idDpto'] == 21|| !empty($row['encargadoS']) && $_SESSION['idDpto'] == 20){
+                                echo('<th><input class = "aceptado"type="submit" value="En Espera"></th>');
+                            }elseif(empty($row['encargadoS']) && $_SESSION['idDpto'] == 20){
+                                echo('<th><input class = "aceptado"type="submit" value="Asignar Personal"></th>');
+                            }
                         }else{
-                            echo('<th><input class = "rechazado"type="submit" value="Rechazada"></th>');
+                            echo('<th><input class = "rechazado"type="submit" value="En Correción"></th>');
                         }
                        echo('
                     </tr>

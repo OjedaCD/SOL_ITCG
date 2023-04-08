@@ -30,7 +30,7 @@
                 <th>SOLICITANTE</th>
                 <th>FECHA-FIN</th>
                 <th>DESCRIPCIÓN</th>
-                <th>VER SOLICITUD</th>
+                <th>IMPRIMIR SOLICITUD</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u

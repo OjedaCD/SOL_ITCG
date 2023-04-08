@@ -75,14 +75,18 @@
         }
         
     }
-    .opcionesSel{
-        .asignado{
-            input{
-                width: 100%;
-                background-color: $azulMarino;
-                color: black;
-            }
+    .asignado{
+        display: flex;
+            justify-content: center;
+            gap: 2rem;
+        input{
+            width: 100%;
+            background-color: $azulMarino;
+            color: black;
         }
+    }
+    .opcionesSel{
+      
         label{
             width: 25%;
             display: inline;

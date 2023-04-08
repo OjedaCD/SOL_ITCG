@@ -154,173 +154,176 @@
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                             <input type="hidden" name="descripcion" value="'.$row3['descripcion'].'" >
                         </div>'); 
-
-                    $queryOb= "SELECT * FROM solicitudes WHERE folio = '{$folio}' ";
-                    $resultadoOb = mysqli_query($db, $queryOb);
-                    $aux2 = mysqli_fetch_assoc($resultadoOb);
-                    if($_SESSION['idRole'] != 4){
-                        echo('<div class="observacion">
-                        <label for="observacion">Coloque las observaciones o comentarios pertinentes a la solicitud:</label>
-                        <textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
-                        echo('</textarea></div>');
-                        
+                    if($_SESSION['idDpto'] == 20){
                         echo('
-                        <div class= "opcionesSel">
-                            <div class="prioridad">
-                            <label for="prioridad">Nivel de Prioridad</label>
-                            <select name="prioridad" id="prioridad" required >');
-                            if(!empty($aux2['Prioridad'])){
-                                if($aux2['Prioridad'] == "3BAJA"){
-                                    echo('                                
-                                    <option selected="selected" value="'.$aux2['Prioridad'].'">BAJA</option>
-                                    <option value="2MEDIA">MEDIA</option>
-                                    <option value="1ALTA">ALTA</option>
-                                    </select></div>');
-                                }elseif($aux2['Prioridad'] == "2MEDIA"){
-                                    echo('                                
-                                    <option value="3BAJA">BAJA</option>
-                                    <option dedault selected="selected" value="'.$aux2['Prioridad'].'">MEDIA</option>
-                                    <option value="1ALTA">ALTA</option>
-                                    </select></div>');
-                                }elseif($aux2['Prioridad'] == "1ALTA"){
-                                    echo('                                
-                                    <option value="3BAJA">BAJA</option>
-                                    <option value="2MEDIA">MEDIA</option>
-                                    <option selected="selected" value="'.$aux2['Prioridad'].'">ALTA</option>
-                                    </select></div>');
+                        <div class="asignado">
+                            <label for="asignado">Asignado a</label>
+                            <select name="asignado" id="asignado" required>
+                                <option value=""disabled selected>--Persona Asignada--</option>');
+                                $queryA ="SELECT * FROM users WHERE idRole = 5 AND idDpto = 20";
+                                $resultadoA= mysqli_query($db, $queryA);
+
+                                while($rowA = mysqli_fetch_assoc($resultadoA)){
+                                    if($rowA['email'] == $row3['encargadoS']){
+                                        echo('<option selected = "selected" value="'.$rowA['email'].'">');
+                                        echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
+                                        echo ('</option>');
+                                    }else{
+                                        echo('<option value="'.$rowA['email'].'">');
+                                        echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
+                                        echo ('</option>');
+                                    }    
                                 }
-                            }else{
-                                echo('                                
-                                    <option value="3BAJA">BAJA</option>
-                                    <option value="2MEDIA">MEDIA</option>
-                                    <option value="1ALTA">ALTA</option>
-                                    </select></div>');
-                            }
                             echo('
-                            <div class="tipo">
-                            <label for="tipo">Tipo de mantenimiento</label>
-                            <select name="tipo" id="tipo" required >');
-                            if(!empty($aux2['tipo'])){
-                                if($aux2['tipo'] == "INTERNO"){
-                                    echo('                                
-                                    <option selected="selected" value="'.$aux2['tipo'].'">INTERNO</option>
-                                    <option value="EXTERNO">EXTERNO</option>
-                                    </select>');
-                                }elseif($aux2['tipo'] == "EXTERNO"){
-                                    echo('                                
-                                    <option value="INTERNO">INTERNO</option>
-                                    <option selected="selected" value="'.$aux2['tipo'].'">EXTERNO</option>
-                                    </select>');
-                                }
-                            }else{
-                                echo('                                
-                                    <option value="INTERNO">INTERNO</option>
-                                    <option value="EXTERNO">EXTERNO</option>
-                                    </select>');
-                            }
-                            if($_SESSION['idDpto']== 20){
-                                echo('
-                                <select name="mantenimiento" id="mantenimiento" required >');
-                                if(!empty($aux2['mantenimiento'])){
-                                    if($aux2['mantenimiento'] == "CORRECTIVO"){
-                                        echo('                                
-                                        <option selected="selected" value="'.$aux2['mantenimiento'].'">CORRECTIVO</option>
-                                        <option value="PREVENTIVO">PREVENTIVO</option>
-                                        </select></div>');
-                                    }elseif($aux2['mantenimiento'] == "PREVENTIVO"){
-                                        echo('  
-                                        <option value="CORRECTIVO">CORRECTIVO</option>                              
-                                        <option selected="selected" value="'.$aux2['mantenimiento'].'">PREVENTIVO</option>
-                                        </select></div>');
-                                    }
-                                }else{
-                                    echo('  
-                                        <option value="CORRECTIVO">CORRECTIVO</option>                              
-                                        <option value="PREVENTIVO">PREVENTIVO</option>
-                                        </select></div>');
-                                }
-                                echo('
-                                <div class="lugar">
-                                <label for="lugar">Lugar de mantenimiento</label>
-                                <select name="lugar" id="lugar" required >');
-                                if(!empty($aux2['lugar'])){
-                                    if($aux2['lugar'] == "CÓMPUTO"){
-                                        echo('                                
-                                        <option selected="selected" value="'.$aux2['lugar'].'">CÓMPUTO</option>
-                                        <option value="LABORATORIO">LABORATORIO</option>
-                                        </select></div>');
-                                    }elseif($aux2['lugar'] == "LABORATORIO"){
-                                        echo('                                
-                                        <option value="CÓMPUTO">CÓMPUTO</option>
-                                        <option dedault selected="selected" value="'.$aux2['lugar'].'">LABORATORIO</option>
-                                        </select></div>');
-                                    }
-                                }else{
-                                    echo('                              
-                                        <option value="CÓMPUTO">CÓMPUTO</option>
-                                        <option value="LABORATORIO">LABORATORIO</option>
-                                        </select></div>');
-                                }
-                            }else{
-                                echo('</div>');
-                            }
-                            if($_SESSION['idDpto'] == 20){
-                                echo('
-                                <div class="asignado">
-                                    <label for="asignado">Asignado a</label>
-                                    <select name="asignado" id="asignado" required>
-                                        <option value=""disabled selected>--Persona Asignada--</option>');
-                                        $queryA ="SELECT * FROM users WHERE idRole = 5 AND idDpto = 20";
-                                        $resultadoA= mysqli_query($db, $queryA);
-
-                                        while($rowA = mysqli_fetch_assoc($resultadoA)){
-                                            if($rowA['email'] == $row3['encargadoS']){
-                                                echo('<option selected = "selected" value="'.$rowA['email'].'">');
-                                                echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
-                                                echo ('</option>');
-                                            }else{
-                                                echo('<option value="'.$rowA['email'].'">');
-                                                echo ($rowA["nomUsuario"]." ".$rowA["apellidoUsuario"]);
-                                                echo ('</option>');
-                                            }    
-                                        }
-                                    echo('
-                                    </select> 
-                                    <div class="btnAP">
-                                        <input type="submit" name = "btn"  value="Asignar Personal">
-                                    </div>
-                                </div>'); 
-                            }
-                        echo('</div>');
-
-                        echo('
-                        <div class = "Botones">
-                            <div class="btnRS">
-                                <input type="submit" name = "btn"  value="Rechazar Solicitud">
+                            </select> 
+                            <div class="btnAP">
+                                <input type="submit" name = "btn"  value="Asignar Personal">
                             </div>
-                            <div class="btnAC">
-                                <input type="submit" name = "btn" value="Actualizar Comentario">
-                            </div>');
+                        </div>'); 
+                    }
+                    
+                    if(!empty($row3['encargadoS'])|| $_SESSION['idDpto'] == 21){
+                        $queryOb= "SELECT * FROM solicitudes WHERE folio = '{$folio}' ";
+                        $resultadoOb = mysqli_query($db, $queryOb);
+                        $aux2 = mysqli_fetch_assoc($resultadoOb);
+                        if($_SESSION['idRole'] != 4){
+                            echo('<div class="observacion">
+                            <label for="observacion">Coloque las observaciones o comentarios pertinentes a la solicitud:</label>
+                            <textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
+                            echo('</textarea></div>');
+                            
+                            echo('
+                            <div class= "opcionesSel">
+                                <div class="prioridad">
+                                <label for="prioridad">Nivel de Prioridad</label>
+                                <select name="prioridad" id="prioridad" required >');
+                                if(!empty($aux2['Prioridad'])){
+                                    if($aux2['Prioridad'] == "3BAJA"){
+                                        echo('                                
+                                        <option selected="selected" value="'.$aux2['Prioridad'].'">BAJA</option>
+                                        <option value="2MEDIA">MEDIA</option>
+                                        <option value="1ALTA">ALTA</option>
+                                        </select></div>');
+                                    }elseif($aux2['Prioridad'] == "2MEDIA"){
+                                        echo('                                
+                                        <option value="3BAJA">BAJA</option>
+                                        <option dedault selected="selected" value="'.$aux2['Prioridad'].'">MEDIA</option>
+                                        <option value="1ALTA">ALTA</option>
+                                        </select></div>');
+                                    }elseif($aux2['Prioridad'] == "1ALTA"){
+                                        echo('                                
+                                        <option value="3BAJA">BAJA</option>
+                                        <option value="2MEDIA">MEDIA</option>
+                                        <option selected="selected" value="'.$aux2['Prioridad'].'">ALTA</option>
+                                        </select></div>');
+                                    }
+                                }else{
+                                    echo('                                
+                                        <option value="3BAJA">BAJA</option>
+                                        <option value="2MEDIA">MEDIA</option>
+                                        <option value="1ALTA">ALTA</option>
+                                        </select></div>');
+                                }
+                                echo('
+                                <div class="tipo">
+                                <label for="tipo">Tipo de mantenimiento</label>
+                                <select name="tipo" id="tipo" required >');
+                                if(!empty($aux2['tipo'])){
+                                    if($aux2['tipo'] == "INTERNO"){
+                                        echo('                                
+                                        <option selected="selected" value="'.$aux2['tipo'].'">INTERNO</option>
+                                        <option value="EXTERNO">EXTERNO</option>
+                                        </select>');
+                                    }elseif($aux2['tipo'] == "EXTERNO"){
+                                        echo('                                
+                                        <option value="INTERNO">INTERNO</option>
+                                        <option selected="selected" value="'.$aux2['tipo'].'">EXTERNO</option>
+                                        </select>');
+                                    }
+                                }else{
+                                    echo('                                
+                                        <option value="INTERNO">INTERNO</option>
+                                        <option value="EXTERNO">EXTERNO</option>
+                                        </select>');
+                                }
+                                if($_SESSION['idDpto']== 20){
+                                    echo('
+                                    <select name="mantenimiento" id="mantenimiento" required >');
+                                    if(!empty($aux2['mantenimiento'])){
+                                        if($aux2['mantenimiento'] == "CORRECTIVO"){
+                                            echo('                                
+                                            <option selected="selected" value="'.$aux2['mantenimiento'].'">CORRECTIVO</option>
+                                            <option value="PREVENTIVO">PREVENTIVO</option>
+                                            </select></div>');
+                                        }elseif($aux2['mantenimiento'] == "PREVENTIVO"){
+                                            echo('  
+                                            <option value="CORRECTIVO">CORRECTIVO</option>                              
+                                            <option selected="selected" value="'.$aux2['mantenimiento'].'">PREVENTIVO</option>
+                                            </select></div>');
+                                        }
+                                    }else{
+                                        echo('  
+                                            <option value="CORRECTIVO">CORRECTIVO</option>                              
+                                            <option value="PREVENTIVO">PREVENTIVO</option>
+                                            </select></div>');
+                                    }
+                                    echo('
+                                    <div class="lugar">
+                                    <label for="lugar">Lugar de mantenimiento</label>
+                                    <select name="lugar" id="lugar" required >');
+                                    if(!empty($aux2['lugar'])){
+                                        if($aux2['lugar'] == "CÓMPUTO"){
+                                            echo('                                
+                                            <option selected="selected" value="'.$aux2['lugar'].'">CÓMPUTO</option>
+                                            <option value="LABORATORIO">LABORATORIO</option>
+                                            </select></div>');
+                                        }elseif($aux2['lugar'] == "LABORATORIO"){
+                                            echo('                                
+                                            <option value="CÓMPUTO">CÓMPUTO</option>
+                                            <option dedault selected="selected" value="'.$aux2['lugar'].'">LABORATORIO</option>
+                                            </select></div>');
+                                        }
+                                    }else{
+                                        echo('                              
+                                            <option value="CÓMPUTO">CÓMPUTO</option>
+                                            <option value="LABORATORIO">LABORATORIO</option>
+                                            </select></div>');
+                                    }
+                                }else{
+                                    echo('</div>');
+                                }
 
-                            if(empty($row3['encargadoS']) && $_SESSION['idDpto'] == 20){
-                                echo('<div class="btnAS">
-                                <input type="submit" disabled="disabled" name = "btn" value="Aceptar Solicitud">
-                            </div>');
-                            }else{
-                                echo('<div class="btnAS">
-                                <input type="submit" name = "btn" value="Aceptar Solicitud">
-                            </div>');
-                            }
-                        echo('</div>
-                        <input type="hidden" name="tipoForm3" value="X" >
-                        ');
-                        
-                    }else{
-                        echo('
-                        <div class="btnCS">
-                            <input type="submit" name = "btn" value="Cerrar Solicitud">
-                        </div>
-                        ');
+                            echo('</div>');
+
+                            echo('
+                            <div class = "Botones">
+                                <div class="btnRS">
+                                    <input type="submit" name = "btn"  value="Rechazar Solicitud">
+                                </div>
+                                <div class="btnAC">
+                                    <input type="submit" name = "btn" value="Actualizar Comentario">
+                                </div>');
+
+                                if(empty($row3['encargadoS']) && $_SESSION['idDpto'] == 20){
+                                    echo('<div class="btnAS">
+                                    <input type="submit" disabled="disabled" name = "btn" value="Aceptar Solicitud">
+                                </div>');
+                                }else{
+                                    echo('<div class="btnAS">
+                                    <input type="submit" name = "btn" value="Aceptar Solicitud">
+                                </div>');
+                                }
+                            echo('</div>
+                            <input type="hidden" name="tipoForm3" value="X" >
+                            ');
+                            
+                        }else{
+                            echo('
+                            <div class="btnCS">
+                                <input type="submit" name = "btn" value="Cerrar Solicitud">
+                            </div>
+                            ');
+                        }
                     }
                     
                    

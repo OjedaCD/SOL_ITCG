@@ -83,9 +83,14 @@
                                                 <h1 class="drop__date">'.$row['fecha'].'</h1>
                                                 <input name = "'.$row['folio'].'" type="hidden">');
                                                 if ($row['Estado'] != "RECHAZADO"){
-                                                    echo('<th><input class = "aceptado"type="submit" value="Ver Solicitud"></th>');
+
+                                                    if($_SESSION['idDpto'] == 21|| !empty($row['encargadoS']) && $_SESSION['idDpto'] == 20){
+                                                        echo('<th><input class = "aceptado"type="submit" value="En Espera"></th>');
+                                                    }elseif(empty($row['encargadoS']) && $_SESSION['idDpto'] == 20){
+                                                        echo('<th><input class = "aceptado"type="submit" value="Asignar Personal"></th>');
+                                                    }
                                                 }else{
-                                                    echo('<th><input class = "rechazado"type="submit" value="Ver Solicitud"></th>');
+                                                    echo('<th><input class = "rechazado"type="submit" value="En Correción"></th>');
                                                 }
                                                 echo('
                                             </div>
@@ -132,10 +137,12 @@
                                                 <span class="drop__description">'.$row['descripcion'].'</span>
                                                 <h1 class="drop__date">'.$row['fecha'].'</h1>
                                                 <input name = "'.$row['folio'].'" type="hidden">');
-                                                if($row['validacion'] == 1){
-                                                    echo('<th><input class = "si"type="submit" value="Ver Solicitud"></th>');  
-                                                }if($row['validacion'] == 0){
-                                                    echo('<th><input class = "no"type="submit" value="Ver Solicitud"></th>');  
+                                                if($row['validacion'] == 1 && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
+                                                    echo('<th><input class = "si"type="submit" value="Finalizar Proceso"></th>');  
+                                                }elseif(empty($row['encargadoS']) && $_SESSION['idDpto'] == 21|| empty($row['trabajo']) && $_SESSION['idDpto'] == 21||empty($row['materiales']) && $_SESSION['idDpto'] == 21){
+                                                    echo('<th><input class = "no"type="submit" value="Orden De Trabajo"></th>');
+                                                }else{
+                                                    echo('<th><input class = "no"type="submit" value="En Proceso"></th>');  
                                                 }
                                                 echo('
                                             </div>
@@ -185,9 +192,9 @@
                                                 <h1 class="drop__date">'.$row['fecha'].'</h1>
                                                 <input name = "'.$row['folio'].'" type="hidden">');
                                                 if($row['Estado'] == "FINALIZADO"){
-                                                    echo('<th><input class ="si" type="submit" value="Ver Solicitud"></th>');
+                                                    echo('<th><input class ="si" type="submit" value="Finalizada"></th>');
                                                 }else{
-                                                    echo('<th><input class ="no" type="submit" value="Ver Solicitud"></th>');
+                                                    echo('<th><input class ="no" type="submit" value="Cancelada"></th>');
                                                 }
                                                 echo('
                                             </div>

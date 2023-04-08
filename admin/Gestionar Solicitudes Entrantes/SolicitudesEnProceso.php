@@ -53,7 +53,7 @@
             $queryR = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', validacion = 1, `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
             $ban = false;
-        }elseif ($btn == "Asignar Personal"){
+        }elseif ($btn == "Cambiar Personal"){
             try {
                 $para = $asignado;
                 $titulo = 'Se te ha asignado una solicitud de mantenimiento';
@@ -64,7 +64,7 @@
                     'X-Mailer: PHP/' . phpversion();
                 mail($para, $titulo, $mensaje, $cabeceras);
                 $ban = true;
-                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO', `encargadoS`='$asignado'WHERE folio = '$folio'";
+                $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
@@ -97,7 +97,7 @@
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
-                <th>VER SOLICITUD</th>
+                <th>SOLICITUD</th>
                 </tr>'); 
                 while ($row = mysqli_fetch_array($resultado)){
                     $queryId ="SELECT u.nomUsuario, u.apellidoUsuario FROM users as u
@@ -120,9 +120,11 @@
                         <th>'.$row['fecha'].'</th>
                         <th>'.substr("$row[descripcion]", 0,30).'</th>');
                         if($row['validacion'] == 1 && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
-                            echo('<th><input class = "si"type="submit" value="Finalizar"></th>');  
+                            echo('<th><input class = "si"type="submit" value="Finalizar Proceso"></th>');  
+                        }elseif(empty($row['encargadoS']) && $_SESSION['idDpto'] == 21|| empty($row['trabajo']) && $_SESSION['idDpto'] == 21||empty($row['materiales']) && $_SESSION['idDpto'] == 21){
+                            echo('<th><input class = "no"type="submit" value="Orden De Trabajo"></th>');
                         }else{
-                            echo('<th><input class = "no"type="submit" value="Aceptada"></th>');  
+                            echo('<th><input class = "no"type="submit" value="En Proceso"></th>');  
                         }
                         echo('
                     </tr>
