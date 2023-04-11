@@ -10,8 +10,9 @@
 
     $queryDep ="SELECT * FROM departamentos WHERE idDpto = 20 OR idDpto = 21";
     $resultadoDep= mysqli_query($db, $queryDep);
-    $ban = null;
-    $ban2 = null;
+    $banAR = null;
+    $banC = null;
+    $banP = null;
     if($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['tipoForm3'])){
         
         $folio = $_POST['tipoForm2'];
@@ -32,7 +33,6 @@
             $asignado = "";
         }
         if($btn == "Aceptar Solicitud"){
-            
             try {
                 if($_SESSION['idDpto'] == 20){
                     $para = $email;
@@ -44,24 +44,25 @@
                         'X-Mailer: PHP/' . phpversion();
                     mail($para, $titulo, $mensaje, $cabeceras);
                 }
-                $ban = true;
+                $banAR = true;
                 $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
-                $ban = false;
+                $banAR = false;
                 echo $e;
             }
     
         }elseif($btn == "Actualizar Comentario"){
             $queryAC = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoAC=mysqli_query($db, $queryAC);
-            $ban2 = true;
+            $banC = true;
         }elseif($btn == "Rechazar Solicitud"){
             $queryR = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `observacion`='$observacion', `tipo`='$tipo', `Prioridad`='$prioridad', `Estado`='RECHAZADO', `Etapa`='1PENDIENTE' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
-            $ban = false;
+            $banAR = false;
         }elseif ($btn == "Asignar Personal"){
+            $banP = true;
             try {
                 $para = $asignado;
                 $titulo = 'Se te ha asignado una solicitud de mantenimiento';
@@ -71,18 +72,47 @@
                     'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
                 mail($para, $titulo, $mensaje, $cabeceras);
-                $ban = true;
+                
                 $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
-                $ban = false;
+                $banP = false;
+                echo $e;
+            }
+        }
+    }elseif($_SERVER['REQUEST_METHOD']==="POST" ){
+        $folio = $_POST['tipoForm2'];
+        $descripcion = $_POST['descripcion'];
+        $btn= $_POST['btn'];
+        
+        if ($_SESSION['idDpto'] == 20){
+            $asignado = $_POST['asignado'];
+        }else{
+            $asignado = "";
+        }
+        if ($btn == "Asignar Personal"){ 
+            $banP = true;
+            try {
+                $para = $asignado;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento';
+                $mensaje = 'El solicitante requiere de: '.$descripcion;
+                $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'Content-type: text/html; charset=UTF-8' . "\r\n".
+                    'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+                mail($para, $titulo, $mensaje, $cabeceras);
+                
+                $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
+                $resultadoA=mysqli_query($db, $queryA);
+                //Aquí ira el código para enviar el email cuando se suba al servidor
+            } catch (Exception $e) {
+                $banP = false;
                 echo $e;
             }
         }
     }
-
-    
+ 
 ?>
 <main class="SolicitudesPendientes">
     <section class="w80">
@@ -95,7 +125,7 @@
             }
         ?>
         <?php
-            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = '1PENDIENTE' ORDER BY Estado ASC , fecha ASC, Prioridad ASC";
+            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = '1PENDIENTE' ORDER BY Estado ASC , fecha ASC, Prioridad ASC, encargadoS ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
@@ -149,15 +179,19 @@
 
 <?php 
     inlcuirTemplate('footer');
-    
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && isset($_POST['tipoForm3'])) {
+
+    if ($_SERVER['REQUEST_METHOD'] ==="POST" && $banAR && $banC == null && $banP == null  ) {
         echo "<script>exito('Solicitud Aceptada');</script>";
-    }
-    if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && isset($_POST['tipoForm3'])){
+    }elseif($_SERVER['REQUEST_METHOD'] ==="POST" && !$banAR && $banC == null && $banP == null ){
         echo "<script>fracaso('Solicitud Rechazada');</script>";
-    }
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true && isset($_POST['tipoForm3'])) {
+    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banC && $banAR == null && $banP == null ) {
         echo "<script>exito('Comentario Actualizado');</script>";
+    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banP && $banC == null && $banAR == null) {
+        echo "<script>exito('Personal Asignado');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && !$banP && $banC == null && $banAR == null){
+        echo "<script>fracaso('Personal No Asignado');</script>";
     }
+    
+    
 ?>
 

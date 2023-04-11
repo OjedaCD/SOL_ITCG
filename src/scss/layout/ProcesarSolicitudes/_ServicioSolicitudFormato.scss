@@ -14,7 +14,25 @@
             width: 60%;
         }
     }
-    .descripcion, .observacion,.encargadoS{
+    .opcionesSel{
+        label{
+            width: 25%;
+            display: inline;
+        }
+        margin-left: 9%;
+        .prioridad, .tipo, .lugar{
+            display: flex;
+            justify-content: left;
+            gap: 2rem;
+            margin-top: 2rem;
+            
+        }
+    }
+    hr{
+        height: 1rem;
+        background-color: black;
+    }
+    .descripcion, .observacion,.encargadoS, .trabajo, .materiales{
         align-content: center;
         justify-content: center;
         text-align: center;

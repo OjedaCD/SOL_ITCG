@@ -325,6 +325,20 @@
                             ');
                         }
                     }
+                    if($_SESSION['idDpto'] == 20 && !empty($row3['encargadoS']) && !empty($row3['trabajo'])&& !empty($row3['materiales'])){
+                        echo('<br><hr><h1>Orden De Trabajo</h1>');
+                        echo('<div class="trabajo">
+                        <label for="trabajo">Trabajo realizado:</label>
+                        <textarea id ="trabajo" maxlength="1000" name ="trabajo" required disabled>')."".trim($row3['trabajo']);  
+                        echo('</textarea></div>');
+
+                        
+                        echo('<div class="materiales">');
+                        echo('<label for="materiales">Materiales utilizados:</label>');
+                        echo('
+                        <textarea id ="materiales" maxlength="1000" name ="materiales" disabled>')."".trim($row3['materiales']);  
+                        echo('</textarea></div>');
+                    }
                     
                    
                 }

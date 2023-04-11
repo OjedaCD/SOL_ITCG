@@ -165,31 +165,8 @@
                         <textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
                         
-                        if($aux2['validacion'] != 1){
-                            $requerido = "";
-                        }else{
-                            $requerido = "required";
-                        }
-                        if($_SESSION['idDpto'] == 21){
-
-                            echo('<hr><h1>Orden De Trabajo</h1>');
-                            
-                            echo('<div class="encargadoS">
-                            <label for="encargadoS">Asignado a:</label>
-                            <textarea id ="encargadoS" maxlength="1000" name ="encargadoS" '.$requerido.'>')."".trim($aux2['encargadoS']);  
-                            echo('</textarea></div>');
-
-                            echo('<div class="trabajo">
-                            <label for="trabajo">Trabajo realizado:</label>
-                            <textarea id ="trabajo" maxlength="1000" name ="trabajo" '.$requerido.'>')."".trim($aux2['trabajo']);  
-                            echo('</textarea></div>');
-
-                            echo('<div class="materiales">');
-                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
-                            echo('
-                            <textarea id ="materiales" maxlength="1000" name ="materiales" '.$requerido.'>')."".trim($aux2['materiales']);  
-                            echo('</textarea></div>');
-                        }
+                        
+                        
                         echo('
                         <div class= "opcionesSel">
                             <div class="prioridad">
@@ -345,14 +322,59 @@
                             </div>
                             <input type="hidden" name="tipoForm3" value="X" >
                         </div>                 
-                        '); 
+                        ');
+                        if($aux2['validacion'] != 1 ){
+                            $requerido = "";
+                        }else{
+                            $requerido = "required";
+                        }
+                        if($_SESSION['idDpto'] == 20){
+                            $disabled = "disabled";
+                        }else{
+                            $disabled = "";
+                        }
+
+                        
+                        if($_SESSION['idDpto'] == 21|| $_SESSION['idDpto'] == 20 && !empty($row3['encargadoS']) && !empty($row3['trabajo'])&& !empty($row3['materiales'])){
+
+                            echo('<br><hr><h1>Orden De Trabajo</h1>');
+                            $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
+                            $resultadoEn = mysqli_query($db, $queryEn);
+                            $aux3 = mysqli_fetch_assoc($resultadoEn);
+                            if($row3['idDpto'] == 20){
+                                echo('<div class="encargadoS">
+                                <label for="encargadoS">Asignado a:</label>
+                                <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" '.$requerido." ".$disabled.'>')."".trim($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                                echo('</textarea>
+                                </div>');
+                            }else{
+                                echo('<div class="encargadoS">
+                                <label for="encargadoS">Asignado a:</label>
+                                <textarea id ="encargadoS" maxlength="1000" name ="encargadoS" '.$requerido." ".$disabled.'>')."".trim($aux2['encargadoS']);  
+                                echo('</textarea></div>');
+                            }
+
+                            
+    
+                            echo('<div class="trabajo">
+                            <label for="trabajo">Trabajo realizado:</label>
+                            <textarea id ="trabajo" maxlength="1000" name ="trabajo" '.$requerido." ".$disabled.'>')."".trim($aux2['trabajo']);  
+                            echo('</textarea></div>');
+    
+                            echo('<div class="materiales">');
+                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                            echo('
+                            <textarea id ="materiales" maxlength="1000" name ="materiales" '.$requerido." ".$disabled.'>')."".trim($aux2['materiales']);  
+                            echo('</textarea></div>');
+                        } 
                     }else{
                         echo('
                         <div class="btnCS">
                             <input type="submit" name = "btn" value="Cerrar Solicitud">
                         </div>
                         ');
-                    }  
+                    }
+                     
                 }
             ?>
         </form>

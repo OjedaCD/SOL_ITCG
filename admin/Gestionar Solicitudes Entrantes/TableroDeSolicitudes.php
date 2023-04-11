@@ -141,6 +141,8 @@
                                                     echo('<th><input class = "si"type="submit" value="Finalizar Proceso"></th>');  
                                                 }elseif(empty($row['encargadoS']) && $_SESSION['idDpto'] == 21|| empty($row['trabajo']) && $_SESSION['idDpto'] == 21||empty($row['materiales']) && $_SESSION['idDpto'] == 21){
                                                     echo('<th><input class = "no"type="submit" value="Orden De Trabajo"></th>');
+                                                }elseif($row['validacion'] != 1 && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
+                                                    echo('<th><input class = "si"type="submit" value="En proceso"></th>');
                                                 }else{
                                                     echo('<th><input class = "no"type="submit" value="En Proceso"></th>');  
                                                 }
@@ -209,8 +211,6 @@
             </div>
         </div>
         
-
-
             <script type="text/javascript" charset="utf-8" src="/build/js/jquery-3.3.1.min.js"></script>
             <script type="text/javascript" charset="utf-8" src="/build/js/jquery-ui.min.js"></script>
             <script type="text/javascript">

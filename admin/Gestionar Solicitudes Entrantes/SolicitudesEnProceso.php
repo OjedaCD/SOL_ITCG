@@ -7,8 +7,10 @@
     
     inlcuirTemplate('header');
     $db =conectarDB();
-    $ban = null;
-    $ban2 = null;
+    $banAC = null;
+    $banC = null;
+    $banP = null;
+
     if($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['tipoForm3'])){
         
         $folio = $_POST['tipoForm2'];
@@ -40,7 +42,7 @@
                 $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             }
             $resultadoA=mysqli_query($db, $queryA);
-            $ban = true;
+            $banAC = true;
         }elseif($btn == "Actualizar Comentario"){
             if($_SESSION['idDpto'] == 21){
                 $queryA = "UPDATE solicitudes SET `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales',`mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
@@ -48,11 +50,11 @@
                 $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
             }
             $resultadoA=mysqli_query($db, $queryA);
-            $ban2 = true;
+            $banC = true;
         }elseif($btn == "Cancelar Solicitud"){
             $queryR = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', validacion = 1, `Estado`='CANCELADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             $resultadoR=mysqli_query($db, $queryR);
-            $ban = false;
+            $banAC = false;
         }elseif ($btn == "Cambiar Personal"){
             try {
                 $para = $asignado;
@@ -63,12 +65,12 @@
                     'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
                 mail($para, $titulo, $mensaje, $cabeceras);
-                $ban = true;
+                $banP = true;
                 $queryA = "UPDATE solicitudes SET `encargadoS`='$asignado'WHERE folio = '$folio'";
                 $resultadoA=mysqli_query($db, $queryA);
                 //Aquí ira el código para enviar el email cuando se suba al servidor
             } catch (Exception $e) {
-                $ban = false;
+                $banP = false;
                 echo $e;
             }
         }
@@ -87,7 +89,7 @@
             }
         ?>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO'";
+            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO' ORDER BY Estado ASC,encargadoS ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
@@ -123,6 +125,8 @@
                             echo('<th><input class = "si"type="submit" value="Finalizar Proceso"></th>');  
                         }elseif(empty($row['encargadoS']) && $_SESSION['idDpto'] == 21|| empty($row['trabajo']) && $_SESSION['idDpto'] == 21||empty($row['materiales']) && $_SESSION['idDpto'] == 21){
                             echo('<th><input class = "no"type="submit" value="Orden De Trabajo"></th>');
+                        }elseif($row['validacion'] != 1 && strlen("".trim($row['trabajo'])) != 0  && strlen("".trim($row['materiales'])) != 0){
+                            echo('<th><input class = "si"type="submit" value="En proceso"></th>');
                         }else{
                             echo('<th><input class = "no"type="submit" value="En Proceso"></th>');  
                         }
@@ -137,13 +141,19 @@
 
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && isset($_POST['tipoForm2']) && isset($_POST['tipoForm3'])) {
+    if ($_SERVER['REQUEST_METHOD'] ==="POST" && $banAC && $banC == null && $banP == null  ) {
         echo "<script>exito('Solicitud Finalizada');</script>";
-    }if($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && isset($_POST['tipoForm2']) && isset($_POST['tipoForm3'])){
+    }elseif($_SERVER['REQUEST_METHOD'] ==="POST" && !$banAC && $banC == null && $banP == null ){
         echo "<script>fracaso('Solicitud Cancelada');</script>";
-    }
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban2 == true && isset($_POST['tipoForm3'])) {
+    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banC && $banAC == null && $banP == null ) {
         echo "<script>exito('Comentario Actualizado');</script>";
+    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banP && $banC == null && $banAC == null) {
+        echo "<script>exito('Personal Asignado');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && !$banP && $banC == null && $banAC == null){
+        echo "<script>fracaso('Personal No Asignado');</script>";
     }
+
+
+    
 ?>
 

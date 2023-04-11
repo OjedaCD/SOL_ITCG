@@ -221,6 +221,39 @@
                             }
                         }
                         echo('
+                        <div class= "opcionesSel">
+                            <div class="prioridad">
+                                <label for="prioridad">Nivel de Prioridad</label>
+                                <select name="prioridad" id="prioridad" disabled > 
+                                <option selected="selected" value="'.$row3['Prioridad'].'">'.substr("$row3[Prioridad]", 1).'</option>
+                                </select></div>');
+                                
+
+                            echo('
+                            <div class="tipo">
+                            <label for="tipo">Tipo de mantenimiento</label>
+                            <select name="tipo" id="tipo" disabled >
+                            <option selected="selected" value="'.$row3['tipo'].'">'.$row3['tipo'].'</option>
+                            </select>');
+
+                            if(substr("$row3[folio]",6, 2) == "CC"){
+                                echo('
+                                <select name="mantenimiento" id="mantenimiento" disabled >
+                                <option selected="selected" value="'.$row3['mantenimiento'].'">'.$row3['mantenimiento'].'</option>
+                                </select></div>');
+
+                                echo('
+                                <div class="lugar">
+                                <label for="lugar">Lugar de mantenimiento</label>
+                                <select name="lugar" id="lugar"  disabled >
+                                <option selected="selected" value="'.$row3['lugar'].'">'.$row3['lugar'].'</option>
+                                </select></div>');
+                                
+                            }else{
+                                echo('</div>');
+                            }
+
+                        echo('
                         <div class="btnCS">
                             <input type="submit" value="Cerrar Solicitud">
                         </div>');

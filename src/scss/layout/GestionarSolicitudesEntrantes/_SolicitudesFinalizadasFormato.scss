@@ -38,7 +38,20 @@
         }
     }
     
-
+    .opcionesSel{
+        label{
+            width: 25%;
+            display: inline;
+        }
+        margin-left: 9%;
+        .prioridad, .tipo, .lugar{
+            display: flex;
+            justify-content: left;
+            gap: 2rem;
+            margin-top: 2rem;
+            
+        }
+    }
     .email, .nombreUser,.folio,.fecha, .departamento,.fechaFin{
         display: flex;
         justify-content: center;
