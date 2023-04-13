@@ -34,7 +34,8 @@
         try {
             $para = $_POST['email'];
             $titulo = 'Se ha generado una nueva contraseña para tu cuenta del sistema de solicitudes SOL_ITCG';
-            $mensaje = 'La nueva contraseña es: '.$aux2;
+            $mensaje = 'La nueva contraseña es: '.$aux2."\nn".
+            'Este este correo es generado automáticamente, no es necesario contestar';
             $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                 'Content-type: text/html; charset=UTF-8' . "\r\n".
                 'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
@@ -70,7 +71,7 @@
            <input type="hidden" name="tipoForm" value="bandera">
         </form>
 
-        <form method="POST">
+        <form method="POST" id="nuevaCon">
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET" && isset($_GET['tipoForm'])) {
                     //Obtengo los datos del form
@@ -117,15 +118,19 @@
                                 <label for="rolUsuario">Rol de Usuario</label>
                                 <input type="text" name="rolUsuario" id="rolUsuario" value = "'.$row["nomRole"].'" disabled>           
                             </div>');
-                            echo('
+                            ?> 
+                            
                             <div class="btnRC">
-                                <input type="submit" value="Generar Nueva Contraseña">
-                            </div>');
+                                <input type="button" class="button" value="Generar Nueva Contraseña" onclick="nuevaContraseña ('#nuevaCon', '<?php echo($row['nomUsuario']);?>', '<?php echo($row['email']);?>');">
+                            </div>
+                            <?php
                             break;
                         }else{
                             $ban = false;
                         }
+                        
                     }
+                    
                 }
             ?>
             

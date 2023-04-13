@@ -1,5 +1,5 @@
 .RestablecerContraseña{
-    
+    display: flex;
     margin-top: 2rem;
     .buscarUs{
         display: flex;
@@ -55,13 +55,18 @@
         display: inline;
     }
 
-    .btnRC{
+    .btnRC{ 
+        width: 100%;
+        align-items: center;
+        align-content: center;
+        align-self: auto;
         position: relative;
-        float: right;
-        left: -23%;
-        top: 2rem;
-        input{
-            width: 100%;
+        
+        .button{
+            position: absolute;
+            
+            width: 30%;
+            margin-left: 44.5%;
             background-color: $azulVariante;
             color: $blanco;
         }

@@ -33,6 +33,22 @@ function borrarDatos (formulario){
             form.submit();
         }});
 }
+function nuevaContraseña (formulario, user, correo){
+    const resulta = Swal.fire({
+        title: '¿Cambiar contraseña de ' + user + '?',
+        text: "La contraseña se cambiará y enviará al correo " + correo,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: 'Si Eliminar'
+    }).then((resulta) => {
+        if(resulta.isConfirmed){
+            const form = document.querySelector(formulario);
+            console.log(form);
+            form.submit();
+        }});
+}
+
 function fracaso(mensaje) {
     Swal.fire({
         position: 'center',

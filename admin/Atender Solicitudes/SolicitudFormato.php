@@ -164,8 +164,21 @@
                     </div>');
                     }
                     
+                    
+                    
                     if($aux2['Etapa'] != "3FINALIZADO"){
                         echo('<hr><h1>Orden De Trabajo</h1>');
+                        
+                        $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
+                        $resultadoEn = mysqli_query($db, $queryEn);
+                        $aux3 = mysqli_fetch_assoc($resultadoEn);
+                
+                        echo('<div class="encargadoS">
+                        <label for="encargadoS">Asignado a:</label>
+                        <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                        echo('</textarea>
+                        </div>');
+
                         echo('<div class="trabajo">
                         <label for="trabajo">Trabajo realizado:</label>
                         <textarea id ="trabajo" maxlength="1000" name ="trabajo" required>')."".trim($aux2['trabajo']);  
@@ -187,6 +200,17 @@
                         </div>');
                     }else{
                         if($aux2['Estado'] != "CANCELADO"){
+                            echo('<hr><h1>Orden De Trabajo</h1>');
+                            $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
+                            $resultadoEn = mysqli_query($db, $queryEn);
+                            $aux3 = mysqli_fetch_assoc($resultadoEn);
+                    
+                            echo('<div class="encargadoS">
+                            <label for="encargadoS">Asignado a:</label>
+                            <textarea id ="encargadoS" name ="encargadoS" placeholder="Aquí aparecerán los nombres de las personas encargadas de atender las solicitud" disabled>')."".trim($aux3["nomUsuario"]." ".$aux3["apellidoUsuario"]);
+                            echo('</textarea>
+                            </div>');
+
                             echo('<div class="trabajo">
                             <label for="trabajo">Trabajo realizado:</label>
                             <textarea disabled id ="trabajo" maxlength="1000" name ="trabajo" required>')."".trim($aux2['trabajo']);  
@@ -202,6 +226,7 @@
                             <textarea disabled id ="materiales" maxlength="1000" name ="materiales" required>')."".trim($aux2['materiales']);  
                             echo('</textarea></div>');
 
+                            
                         }else{
                             $queryOb= "SELECT observacion FROM solicitudes WHERE folio = '{$folio}' ";
                             $resultadoOb = mysqli_query($db, $queryOb);
@@ -216,7 +241,41 @@
                                 }
                             }
                         }
-                        
+            
+
+                        echo('
+                        <div class= "opcionesSel">
+                            <div class="prioridad">
+                                <label for="prioridad">Nivel de Prioridad</label>
+                                <select name="prioridad" id="prioridad" disabled > 
+                                <option selected="selected" value="'.$row3['Prioridad'].'">'.substr("$row3[Prioridad]", 1).'</option>
+                                </select></div>');
+                                
+
+                            echo('
+                            <div class="tipo">
+                            <label for="tipo">Tipo de mantenimiento</label>
+                            <select name="tipo" id="tipo" disabled >
+                            <option selected="selected" value="'.$row3['tipo'].'">'.$row3['tipo'].'</option>
+                            </select>');
+
+                            if(substr("$row3[folio]",6, 2) == "CC"){
+                                echo('
+                                <select name="mantenimiento" id="mantenimiento" disabled >
+                                <option selected="selected" value="'.$row3['mantenimiento'].'">'.$row3['mantenimiento'].'</option>
+                                </select></div>');
+
+                                echo('
+                                <div class="lugar">
+                                <label for="lugar">Lugar de mantenimiento</label>
+                                <select name="lugar" id="lugar"  disabled >
+                                <option selected="selected" value="'.$row3['lugar'].'">'.$row3['lugar'].'</option>
+                                </select></div>');
+                                
+                            }else{
+                                echo('</div>');
+                            }
+
                         echo('
                         <div class="btnCS">
                             <input name = "btn" type="submit" value="Cerrar Solicitud">
