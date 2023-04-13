@@ -24,7 +24,8 @@
         try {
             $para = $_POST['email'];
             $titulo = 'El estado de tu cuenta del sistema de solicitudes SOL_ITCG se encuetra '.$edoUsuario;
-            $mensaje = 'Razones del cambio de estado: '. $razon;
+            $mensaje = 'Razones del cambio de estado: '."\n".'<b>'. $razon.".'<\b>'\n".
+            'Este correo es generado automáticamente, no es necesario responder';
             $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                 'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();

@@ -32,12 +32,27 @@
             $lugar = "";
             $asignado = "";
         }
+        $queryPer ="SELECT nomUsuario, apellidoUsuario FROM users WHERE email = '$asignado'";
+        $resultadoPer= mysqli_query($db, $queryPer);
+        $persona = mysqli_fetch_assoc($resultadoPer);
+
         if($btn == "Aceptar Solicitud"){
             try {
                 if($_SESSION['idDpto'] == 20){
                     $para = $email;
-                    $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA';
-                    $mensaje = 'Se te dará servicio en breve a tu solicitud de : '.$descripcion;
+                    $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA'."\n".'FOLIO: '.'<b>'.$folio.'<\b>' ;
+                    $mensaje = '<b>'.$persona['nomUsuario']." ".$persona['apellidoUsuario'].'<\b>'.' dará servicio en breve a tu solicitud de : '."\n".'<b>'.$descripcion.'<\b>'."\n".
+                    'Este correo es generado automáticamente, no es necesario responder';
+                    $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                        'Content-type: text/html; charset=UTF-8' . "\r\n".
+                        'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                        'X-Mailer: PHP/' . phpversion();
+                    mail($para, $titulo, $mensaje, $cabeceras);
+                }elseif($_SESSION['idDpto'] == 21){
+                    $para = $email;
+                    $titulo = 'Tu solicitud de mantenimiento ha sido ACEPTADA'."\n".'FOLIO: '.'<b>'.$folio.'<\b>' ;
+                    $mensaje = 'Se te dará servicio en breve a tu solicitud de : '."\n".'<b>'.$descripcion.'<\b>'."\n".
+                    'Este correo es generado automáticamente, no es necesario responder';
                     $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                         'Content-type: text/html; charset=UTF-8' . "\r\n".
                         'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
@@ -65,8 +80,9 @@
             $banP = true;
             try {
                 $para = $asignado;
-                $titulo = 'Se te ha asignado una solicitud de mantenimiento';
-                $mensaje = 'El solicitante requiere de: '.$descripcion;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento'."\n".'FOLIO: '.'<b>'.$folio.'<\b>' ;
+                $mensaje = 'El solicitante requiere de: '."\nn".$descripcion."\nn".
+                'Este correo es generado automáticamente, no es necesario responder';
                 $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                     'Content-type: text/html; charset=UTF-8' . "\r\n".
                     'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
@@ -95,8 +111,9 @@
             $banP = true;
             try {
                 $para = $asignado;
-                $titulo = 'Se te ha asignado una solicitud de mantenimiento';
-                $mensaje = 'El solicitante requiere de: '.$descripcion;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento'."\n".'FOLIO: '.'<b>'.$folio.'<\b>' ;
+                $mensaje = 'El solicitante requiere de: '."\n".$descripcion."\n".
+                'Este correo es generado automáticamente, no es necesario responder';
                 $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                     'Content-type: text/html; charset=UTF-8' . "\r\n".
                     'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
@@ -125,7 +142,7 @@
             }
         ?>
         <?php
-            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = '1PENDIENTE' ORDER BY Estado ASC , fecha ASC, Prioridad ASC, encargadoS ASC";
+            $query ="SELECT * FROM solicitudes WHERE (Estado = 'ESPERA' OR Estado = 'RECHAZADO') AND idDpto = $_SESSION[idDpto] AND Etapa = '1PENDIENTE' ORDER BY Estado ASC , fecha ASC, Prioridad ASC";
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">

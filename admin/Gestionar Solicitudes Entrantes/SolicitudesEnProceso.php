@@ -58,8 +58,9 @@
         }elseif ($btn == "Cambiar Personal"){
             try {
                 $para = $asignado;
-                $titulo = 'Se te ha asignado una solicitud de mantenimiento';
-                $mensaje = 'El solicitante requiere de: '.$descripcion;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento'."\n".'FOLIO: '.'<b>'.$folio.'<\b>' ;
+                $mensaje = 'El solicitante requiere de: '."\n".$descripcion."\n".
+                'Este correo es generado automáticamente, no es necesario responder';
                 $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                     'Content-type: text/html; charset=UTF-8' . "\r\n".
                     'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
@@ -83,13 +84,15 @@
         <?php 
             if($_SESSION['idDpto'] == 20 ){
                 echo('<h1>Solicitudes En Proceso Centro De Cómputo</h1>');
+                $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO' ORDER BY validacion DESC, idSolicitudCC ASC";
             }
             if($_SESSION['idDpto'] == 21 ){
                 echo('<h1>Solicitudes En Proceso Mantenimiento  De Equipo</h1>');
+                $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO' ORDER BY validacion DESC, idSolicitudME ASC";
             }
         ?>
         <?php 
-            $query ="SELECT * FROM solicitudes WHERE idDpto = $_SESSION[idDpto] AND Estado = 'ACEPTADO' AND Etapa = '2PROCESO' ORDER BY Estado ASC,encargadoS ASC";
+            
             $resultado = mysqli_query($db, $query);
             echo('
             <table class="tabla">
