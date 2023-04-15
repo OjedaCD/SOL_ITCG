@@ -63,7 +63,11 @@
                         $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                         
                         
-                        echo ('<div class="folio">
+                        echo ('<details>
+                        <summary>
+                        Solicitud
+                        </summary> 
+                            <div class="folio">
                                     <label for="folio">Folio</label>
                                     <input type="text" name="'.$folio.'" id="folio" value="'.$folio.'" disabled>           
                         </div>');  
@@ -180,11 +184,14 @@
                                 }
                                 echo('<textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
                                 echo('</textarea>
-                                </div>');
+                                </div></details>');
                             }
                         }
                         if($row3['Estado'] != "CANCELADO"){
-                            echo('<hr><h1>Orden De Trabajo</h1>');
+                            echo('<details>
+                            <summary>
+                            Orden De Trabajo
+                            </summary>');
 
                             if(substr("$row3[folio]",6, 2) == "ME"){
                                 echo('<div class="encargadoS">
@@ -228,7 +235,10 @@
                                 echo('</textarea></div>');
                             }
                         }
-                        echo('
+                        echo('</details><details>
+                        <summary>
+                        Parámetros De Solicitud
+                        </summary>
                         <div class= "opcionesSel">
                             <div class="prioridad">
                                 <label for="prioridad">Nivel de Prioridad</label>
@@ -261,7 +271,7 @@
                                 echo('</div>');
                             }
 
-                        echo('
+                        echo('</details>
                         <div class="btnCS">
                             <input type="submit" value="Cerrar Solicitud">
                         </div>');

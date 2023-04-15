@@ -25,6 +25,10 @@
         <h1>Solicitud En Proceso</h1>
 
         <form method="POST" action ="SolicitudesEnProceso.php">
+        <details>
+                <summary>
+                    Solicitud
+                </summary>
             <?php 
                 if ($_SERVER['REQUEST_METHOD']==="GET") {
                     //Obtengo los datos del form
@@ -160,7 +164,12 @@
 
                     
                     if($_SESSION['idRole'] != 4){
-                        echo('<div class="observacion">
+                        echo('</details>
+                        <details>
+                <summary>
+                    Parámetros De Solicitud
+                        </summary>
+                        <div class="observacion">
                         <label for="observacion">Coloque los comentarios, observaciones, o las razones de cancelación de la solicitud:</label>
                         <textarea id ="observacion" maxlength="1000" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA."> ')."".trim($aux2['observacion']);  
                         echo('</textarea></div>');
@@ -295,7 +304,7 @@
                                 </div>'); 
                                 }
                                 
-                        echo('</div>');
+                        echo('</div> ');
 
                         echo('
                         <div class = "Botones">');
@@ -337,7 +346,13 @@
                         
                         if($_SESSION['idDpto'] == 21|| $_SESSION['idDpto'] == 20 && !empty($row3['encargadoS']) && !empty($row3['trabajo'])&& !empty($row3['materiales'])){
 
-                            echo('<br><hr><h1>Orden De Trabajo</h1>');
+                            echo('<br>
+                            </details>
+                            <details>
+                            <summary>
+                            Orden De Trabajo
+                            </summary>
+                            ');
                             $queryEn = "SELECT u.nomUsuario, u.apellidoUsuario FROM users as u INNER JOIN solicitudes as s ON u.email = s.encargadoS WHERE s.folio = '{$folio}' ";
                             $resultadoEn = mysqli_query($db, $queryEn);
                             $aux3 = mysqli_fetch_assoc($resultadoEn);
@@ -366,11 +381,23 @@
                             echo('
                             <textarea id ="materiales" maxlength="1000" name ="materiales" '.$requerido." ".$disabled.'>')."".trim($aux2['materiales']);  
                             echo('</textarea></div>');
+                            if($_SESSION['idDpto'] == 21){
+                                echo('
+                                <div class="btnOR">
+                                    <input type="submit" name = "btn" value="Atender Orden">
+                                </div></details>
+                                ');
+                            }
                         } 
                     }else{
                         echo('
+                        </details>
                         <div class="btnCS">
-                            <input type="submit" name = "btn" value="Cerrar Solicitud">
+                        <a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesEnProceso.php">
+                        <input type="button" name = "btn" value="Cerrar Solicitud">
+                        </a>
+                               
+                            
                         </div>
                         ');
                     }

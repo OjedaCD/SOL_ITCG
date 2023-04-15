@@ -1,5 +1,43 @@
 .DatosDeSolicitudFormato{
-    
+    details {
+        user-select: none;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+
+    }
+    summary{
+
+        margin-bottom: 1rem;
+        padding: 1rem;
+        cursor: pointer;
+        outline: none;
+        background: #306dc0;
+        border-radius: 1rem 1rem 1rem 1rem;
+        font-size: 2rem;
+        width: 30rem;
+        height: 2.7rem;
+    }
+    summary:hover{
+        background: rgb(255,255,255);
+        background: radial-gradient(circle, rgba(255,255,255,0.938813025210084) 0%, rgba(48,121,192,1) 91%, rgba(48,109,192,1) 100%);    }
+    details[open] summary~*{
+        animation: salto .8s ease-in-out;
+    }
+    @keyframes salto {
+        0%{
+            opacity: 0;
+            margin-left: -10px;
+        }
+        100%{
+            opacity: 1;
+            margin-left: 0;
+        }
+    }
+
     margin-top: 4rem;
 
     .opcionesSel{
@@ -27,10 +65,7 @@
             width: 60%;
         }
     }
-    hr{
-        height: 1rem;
-        background-color: black;
-    }
+
     .descripcion, .observacion,.encargadoS, .trabajo, .materiales{
         align-content: center;
         justify-content: center;

@@ -54,7 +54,10 @@
                     $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                     
                     
-                    echo ('<div class="folio">
+                    echo ('<details>
+                    <summary>
+                        Solicitud
+                    </summary><div class="folio">
                                 <label for="folio">Folio</label>
                                 <input type="text" name="'.$folio.'" id="folio" value="'.$folio.'" disabled>           
                     </div>');  
@@ -154,7 +157,7 @@
                             <textarea id ="descripcion" name ="descripcion" placeholder="'.$row3['descripcion'].'" disabled></textarea>
                             <input type="hidden" name="descripcion" value="'.$row3['descripcion'].'" >
                         </div>'); 
-                    if($_SESSION['idDpto'] == 20){
+                    if($_SESSION['idDpto'] == 20 && $_SESSION['idRole'] != 4){
                         echo('
                         <div class="asignado">
                             <label for="asignado">Asignado a</label>
@@ -174,15 +177,27 @@
                                         echo ('</option>');
                                     }    
                                 }
+                            
+                            
                             echo('
                             </select> 
                             <div class="btnAP">
                                 <input type="submit" name = "btn"  value="Asignar Personal">
                             </div>
                         </div>'); 
+                            
                     }
-                    
-                    if(!empty($row3['encargadoS'])|| $_SESSION['idDpto'] == 21){
+                echo('</details>');
+            
+            if($_SESSION['idRole'] != 4){
+                if(!empty($row3['encargadoS'])|| $_SESSION['idDpto'] == 21 ){
+                    echo ('
+                    <details>
+                <summary>
+                    Parámetros De Solicitud
+                        </summary>
+                    ');
+
                         $queryOb= "SELECT * FROM solicitudes WHERE folio = '{$folio}' ";
                         $resultadoOb = mysqli_query($db, $queryOb);
                         $aux2 = mysqli_fetch_assoc($resultadoOb);
@@ -324,9 +339,13 @@
                             </div>
                             ');
                         }
-                    }
+                    
                     if($_SESSION['idDpto'] == 20 && !empty($row3['encargadoS']) && !empty($row3['trabajo'])&& !empty($row3['materiales'])){
-                        echo('<br><hr><h1>Orden De Trabajo</h1>');
+                        echo('</details><details>
+                        <summary>
+                    Orden De Trabajo
+                        </summary>
+                        <br>');
                         echo('<div class="trabajo">
                         <label for="trabajo">Trabajo realizado:</label>
                         <textarea id ="trabajo" maxlength="1000" name ="trabajo" required disabled>')."".trim($row3['trabajo']);  
@@ -337,10 +356,22 @@
                         echo('<label for="materiales">Materiales utilizados:</label>');
                         echo('
                         <textarea id ="materiales" maxlength="1000" name ="materiales" disabled>')."".trim($row3['materiales']);  
-                        echo('</textarea></div>');
+                        echo('</textarea></div>
+                        </details>');
                     }
-                    
-                   
+                }
+                }else{
+                    echo('
+                    </details>
+                    <div class="btnCS">
+                    <a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesPendientes.php">
+                    <input type="button" name = "btn" value="Cerrar Solicitud">
+                    </a>
+                           
+                        
+                    </div>
+                    ');
+                }
                 }
             ?>
         </form>

@@ -65,7 +65,8 @@
                         $row2 = mysqli_fetch_assoc($resultadoDpto);//departamento al que pertenece el usuario
                         
                         
-                        echo ('<div class="folio">
+                        echo ('
+                        <div class="folio">
                                     <label for="folio">Folio</label>
                                     <input type="text" name="'.$folio.'" id="folio" value="'.$folio.'" disabled>           
                         </div>');
@@ -177,7 +178,10 @@
                         }
 
                         if($row3['Estado'] != "CANCELADO"){
-                            echo('<hr><h1>Orden De Trabajo</h1>');
+                            echo('<details>
+                            <summary>
+                                Orden De Trabajo
+                            </summary>');
                             if(substr("$row3[folio]",6, 2) == "ME"){
                                 echo('<div class="encargadoS">
                                 <label for="encargadoS">Asignado a:</label>
@@ -221,7 +225,10 @@
                                 echo('</textarea></div>');
                             }
                         }
-                        echo('
+                        echo('</details><details>
+                        <summary>
+                            Parámetros De Solicitud
+                        </summary>
                         <div class= "opcionesSel">
                             <div class="prioridad">
                                 <label for="prioridad">Nivel de Prioridad</label>
@@ -253,7 +260,7 @@
                             }else{
                                 echo('</div>');
                             }
-                        echo('
+                        echo('</details>
                         <div class="btnCS">
                             <input type="submit" value="Confirmar Servicio">
                         </div>');

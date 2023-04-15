@@ -10,6 +10,7 @@
     $banAC = null;
     $banC = null;
     $banP = null;
+    $banO = null;
 
     if($_SERVER['REQUEST_METHOD']==="POST" && isset($_POST['tipoForm3'])){
         
@@ -34,7 +35,7 @@
         }
         date_default_timezone_set("America/Mexico_City");
         $fechaFin = date('Y-m-d');
-
+        
         if($btn == "Finalizar Solicitud"){
             if($_SESSION['idDpto'] == 21){
                 $queryA = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales',`mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
@@ -44,11 +45,8 @@
             $resultadoA=mysqli_query($db, $queryA);
             $banAC = true;
         }elseif($btn == "Actualizar Comentario"){
-            if($_SESSION['idDpto'] == 21){
-                $queryA = "UPDATE solicitudes SET `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales',`mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
-            }elseif($_SESSION['idDpto'] == 20){
-                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
-            }
+            $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion', `Estado`='ACEPTADO', `Etapa`='2PROCESO' WHERE folio = '$folio'";
+            
             $resultadoA=mysqli_query($db, $queryA);
             $banC = true;
         }elseif($btn == "Cancelar Solicitud"){
@@ -74,6 +72,10 @@
                 $banP = false;
                 echo $e;
             }
+        }elseif ($btn == "Atender Orden"){
+            $queryA = "UPDATE solicitudes SET `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales' WHERE folio = '$folio'";
+            $resultadoA=mysqli_query($db, $queryA);
+            $banO = true;
         }
 
     }
@@ -144,16 +146,18 @@
 
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] ==="POST" && $banAC && $banC == null && $banP == null  ) {
+    if ($_SERVER['REQUEST_METHOD'] ==="POST" && $banAC && $banC == null && $banP == null && $banO == null ) {
         echo "<script>exito('Solicitud Finalizada');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] ==="POST" && !$banAC && $banC == null && $banP == null ){
+    }elseif($_SERVER['REQUEST_METHOD'] ==="POST" && !$banAC && $banC == null && $banP == null && $banO == null ){
         echo "<script>fracaso('Solicitud Cancelada');</script>";
-    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banC && $banAC == null && $banP == null ) {
+    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banC && $banAC == null && $banP == null && $banO == null ) {
         echo "<script>exito('Comentario Actualizado');</script>";
-    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banP && $banC == null && $banAC == null) {
+    }elseif ($_SERVER['REQUEST_METHOD'] === "POST" && $banP && $banC == null && $banAC == null && $banO == null) {
         echo "<script>exito('Personal Asignado');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && !$banP && $banC == null && $banAC == null){
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && !$banP && $banC == null && $banAC == null && $banO == null){
         echo "<script>fracaso('Personal No Asignado');</script>";
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $banO && $banC == null && $banAC == null && $banP == null){
+        echo "<script>exito('Orden Atendida');</script>";
     }
 
 
