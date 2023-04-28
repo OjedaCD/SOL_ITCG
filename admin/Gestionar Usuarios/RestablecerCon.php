@@ -34,11 +34,11 @@
         try {
             $para = $_POST['email'];
             $titulo = 'Se ha generado una nueva contraseña para tu cuenta del sistema de solicitudes SOL_ITCG';
-            $mensaje = 'La nueva contraseña es: '.'<b>'.$aux2.'<\b>'."\n".
+            $mensaje = 'La nueva contraseña es: '.$aux2."\n".
             'Este correo es generado automáticamente, no es necesario responder';
             $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
-                'Content-type: text/html; charset=UTF-8' . "\r\n".
-                'Reply-To: centro.de.computo@cdguzmasn.tecnm.mx' . "\r\n" .
+                'Content-Type: text/plain; charset=UTF-8' . "\r\n" .
+                'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
                 
             mail($para, $titulo, $mensaje, $cabeceras);

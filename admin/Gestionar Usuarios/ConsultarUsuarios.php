@@ -47,7 +47,7 @@
             <!--Dependiendo de la opción mostrada y el input hidden aquí presento o el usuario o la lista-->
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input required type="text" name="emailS" id="emailS" required maxlength="25" pattern="[A-Za-z 0-9.]+">           
+                <input required type="text" name="emailS" id="emailS" required maxlength="30" oninput="validateInput(event)">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
@@ -137,9 +137,6 @@
                                 echo ('<div class="table__item">'.$row4["telefono"].'</div>');
                                 echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
                                 echo ('<div class="table__item">'.$row4["edoUser"].'</div>');
-                                $ban = true;
-                            }else{
-                                $ban = false;
                             }
                         }
                         echo "<br>";
@@ -169,6 +166,7 @@
 
                     $queryDpto2 = ("SELECT u.edoUser, u.email, u.nomUsuario, u.apellidoUsuario, u.telefono, r.nomRole FROM users as u INNER JOIN roles as r ON u.idRole = r.idRole INNER JOIN departamentos as d ON d.idDpto = u.idDpto WHERE d.idDpto = $departamento ORDER BY u.apellidoUsuario DESC");                       
                     $resultadoDpto2 =mysqli_query($db, $queryDpto2);
+                    $ban = false;
                     while($row4 = mysqli_fetch_assoc($resultadoDpto2)){
                         if($row4['email']) { 
                             echo ('<div class="table__item">'.$row4["email"].'</div>');
@@ -177,8 +175,6 @@
                             echo ('<div class="table__item">'.$row4["nomRole"].'</div>');
                             echo ('<div class="table__item">'.$row4["edoUser"].'</div>');
                             $ban = true;
-                        }else{
-                            $ban = false;
                         }
                     }
                 }?>
@@ -188,13 +184,13 @@
 </main>
 <?php 
     inlcuirTemplate('footer');
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && $_POST['tipoForm']=="correo") {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $ban && $_POST['tipoForm']=="correo") {
         echo "<script>exito('Usuario Encontrado');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && $_POST['tipoForm']=="correo"){
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && !$ban  && $_POST['tipoForm']=="correo"){
         echo "<script>fracaso('Error! El email no existe');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == true && $_POST['tipoForm']=="departamento"){
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban && $_POST['tipoForm']=="departamento"){
         echo "<script>exito('Usuarios Encontrados');</script>";
-    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && $ban == false && $_POST['tipoForm']=="departamento"){
+    }elseif($_SERVER['REQUEST_METHOD'] === "POST" && !$ban && $_POST['tipoForm']=="departamento"){
         echo "<script>fracaso('Error! No hay usuarios registrados');</script>";
     }
 ?>

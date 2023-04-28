@@ -24,9 +24,10 @@
         try {
             $para = $_POST['email'];
             $titulo = 'El estado de tu cuenta del sistema de solicitudes SOL_ITCG se encuetra '.$edoUsuario;
-            $mensaje = 'Razones del cambio de estado: '."\n".'<b>'. $razon.".'<\b>'\n".
+            $mensaje = 'Razones del cambio de estado: '."\n". $razon."\n".
             'Este correo es generado automáticamente, no es necesario responder';
             $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
+                'Content-Type: text/plain; charset=UTF-8' . "\r\n" .
                 'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
             mail($para, $titulo, $mensaje, $cabeceras);
@@ -49,7 +50,7 @@
         <form method="GET" class="buscarUs" >
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" required  maxlength="25" pattern="[A-Za-z 0-9.]+" required>           
+                <input type="text" name="emailS" id="emailS" required  required maxlength="30" oninput="validateInput(event)">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           

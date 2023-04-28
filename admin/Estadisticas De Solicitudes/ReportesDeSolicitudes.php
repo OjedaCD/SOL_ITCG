@@ -52,7 +52,6 @@
         <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart1);
-        google.charts.setOnLoadCallback(drawChart2);
         function drawChart1() {
             var data = google.visualization.arrayToDataTable([
             ['Estado', 'Número de solicitudes'],

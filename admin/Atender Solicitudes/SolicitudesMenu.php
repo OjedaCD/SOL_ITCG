@@ -44,7 +44,7 @@
             echo('
             <table class="tabla">
             <tr>
-                <th>NUM</th>
+                <th>FOLIO</th>
                 <th>FECHA</th>
                 <th>DESCRIPCIÓN</th>
                 <th>ESTADO</th>

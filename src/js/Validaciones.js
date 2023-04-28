@@ -4,12 +4,18 @@ function ValidaNumeros() {
    }
 
 
+   function validateInput(event) {
+    const regex = /^[A-Za-z0-9.]*$/;
+    const input = event.target.value;
+    if (!regex.test(input)) {
+      event.target.value = input.replace(/[^A-Za-z0-9.]/g, '');
+    }
+  }
 
 
 var espacios = 0;
 var puntos = 0;
 
-var nombre = document.getElementById("nombre").value;
 var apellidoP = document.getElementById("apellidoP");
 
 var tecladoAnterior ="";

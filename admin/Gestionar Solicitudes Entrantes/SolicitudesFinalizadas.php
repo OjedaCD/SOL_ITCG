@@ -25,7 +25,7 @@
             echo('
             <table class="tabla">
             <tr>
-                <th>NUM</th>
+                <th>FOLIO</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA-FIN</th>

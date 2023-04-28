@@ -40,7 +40,7 @@
             if($_SESSION['idDpto'] == 21){
                 $queryA = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `encargadoS`='$encargadoS', `trabajo`='$trabajo', `materiales`='$materiales',`mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             }elseif($_SESSION['idDpto'] == 20){
-                $queryA = "UPDATE solicitudes SET `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
+                $queryA = "UPDATE solicitudes SET fechaFin ='{$fechaFin}', `mantenimiento`='$mantenimiento', `lugar`='$lugar', `tipo`='$tipo', `Prioridad`='$prioridad', `observacion`='$observacion',`Estado`='FINALIZADO', Etapa = '3FINALIZADO' WHERE folio = '$folio'";
             }
             $resultadoA=mysqli_query($db, $queryA);
             $banAC = true;
@@ -56,11 +56,11 @@
         }elseif ($btn == "Cambiar Personal"){
             try {
                 $para = $asignado;
-                $titulo = 'Se te ha asignado una solicitud de mantenimiento'."\n".'FOLIO: '.'<b>'.$folio.'<\b>' ;
+                $titulo = 'Se te ha asignado una solicitud de mantenimiento'."\n".'FOLIO: '.$folio ;
                 $mensaje = 'El solicitante requiere de: '."\n".$descripcion."\n".
                 'Este correo es generado automáticamente, no es necesario responder';
                 $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
-                    'Content-type: text/html; charset=UTF-8' . "\r\n".
+                    'Content-Type: text/plain; charset=UTF-8' . "\r\n" .
                     'Reply-To: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
                 mail($para, $titulo, $mensaje, $cabeceras);
@@ -99,7 +99,7 @@
             echo('
             <table class="tabla">
             <tr>
-                <th>NUM</th>
+                <th>FOLIO</th>
                 <th>DEPARTAMENTO</th>
                 <th>SOLICITANTE</th>
                 <th>FECHA</th>

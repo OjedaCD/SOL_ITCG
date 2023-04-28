@@ -260,10 +260,22 @@
                             }else{
                                 echo('</div>');
                             }
-                        echo('</details>
-                        <div class="btnCS">
-                            <input type="submit" value="Confirmar Servicio">
-                        </div>');
+                            echo('</details>
+                            <div class="btnCS">
+                            ');
+                            if(empty($row3['trabajo'])){
+                                
+                                echo('<span title=" Usted podrá confirmar cuando se coloque el trabajo relizado en la orden de trabajo">
+                            <input id="bt1CS" type="submit" disabled value="Confirmar Servicio" >
+                            </span>
+                            </div>');
+                            }else{
+                                echo('<span title="Presione el botón para confirmar el servicio">
+                            <input id="bt1CS" type="submit" value="Confirmar Servicio" >
+                            </div>');
+                            }
+                            
+                            
                     
                     }
                 }

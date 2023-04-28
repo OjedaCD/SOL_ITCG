@@ -54,7 +54,7 @@
             
             <div class="emailS">
                 <label for="emailS">Email</label>
-                <input type="text" name="emailS" id="emailS" required  maxlength="25" pattern="[A-Za-z 0-9.]+">           
+                <input type="text" name="emailS" id="emailS" required  required maxlength="30" oninput="validateInput(event)">           
            </div>
            <div class="emailD">
                 <input disabled type="text" name="emailD" id="emailD"  placeholder="@cdguzman.tecnm.mx" value="@cdguzman.tecnm.mx" pattern=".+@cdguzman.tecnm.mx">           
