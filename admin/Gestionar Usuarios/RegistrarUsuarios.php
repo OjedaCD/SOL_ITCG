@@ -80,15 +80,15 @@
             
             <div class="nombreUser">
                 <label for="nombre">Nombre</label>
-                <input required type="text" name="nombre" id="nombre"  maxlength="60"  pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespacios(event)">           
+                <input required type="text" name="nombre" id="nombre"  maxlength="60"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required onkeypress= "return letrasYespacios(event)">           
             </div>
             <div class="apellidoP">
                 <label for="apellido">Primer Apellido</label>
-                <input required type="text" name="apellidoP" id="apellidoP"maxlength="30"  pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespacios(event)">           
+                <input required type="text" name="apellidoP" id="apellidoP"maxlength="30"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required onkeypress= "return letrasYespacios(event)">           
             </div>
             <div class="apellidoS">
                 <label for="apellido">Segundo Apellido</label>
-                <input required type="text" name="apellidoS" id="apellidoS"maxlength="30"  pattern="[A-Za-z áéíóí]+" required  onkeypress= "return letrasYespacios(event)">           
+                <input required type="text" name="apellidoS" id="apellidoS"maxlength="30"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required  onkeypress= "return letrasYespacios(event)">           
             </div>
             <div class="tel">
                 <label for="tel">Teléfono</label>

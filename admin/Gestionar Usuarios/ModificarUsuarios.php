@@ -83,19 +83,19 @@
                             echo ('
                             <div class="email">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value = "'.substr($row["email"], 0, -18).'" required maxlength="25" pattern="[A-Za-z 0-9.]+" >           
+                                <input type="text" name="email" id="email" value = "'.substr($row["email"], 0, -18).'" required maxlength="30" oninput="validateInput(event)" >           
                                 <input type="hidden" name="tipoForm2" value="'.$row["idUser"].'">
                             </div>');
                         
                             echo('
                             <div class="nombreUser">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" maxlength="60" pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespaciosModificar(event)" >           
+                                <input type="text" name="nombre" id="nombre" value = "'.$row["nomUsuario"].'" maxlength="60" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required onkeypress= "return letrasYespaciosModificar(event)" >           
                             </div>');
                             echo('
                             <div class="apellidoUser">
                                 <label for="apellidos">Apellidos</label>
-                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" maxlength="60" pattern="[A-Za-z áéíóí]+" required onkeypress= "return letrasYespaciosModificar(event)">           
+                                <input type="text" name="apellidos" id="apellidos" value = "'.$row["apellidoUsuario"].'" maxlength="60" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required onkeypress= "return letrasYespaciosModificar(event)">           
                             </div>');
                              
                             echo('
