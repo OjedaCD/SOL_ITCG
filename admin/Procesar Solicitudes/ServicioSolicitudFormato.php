@@ -216,9 +216,9 @@
                             $aux5 = mysqli_fetch_assoc($resultadoMa);
                             foreach ($aux5 as $key => $value) {
                                 echo('<div class="materiales">');
-                                if($_SESSION['idDpto'] == 20){
+                                if($row3['idDpto'] == 20){
                                     echo('<label for="materiales">Materiales utilizados:</label>');
-                                }elseif($_SESSION['idDpto'] == 21){
+                                }elseif($row3['idDpto'] == 21){
                                     echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
                                 }
                                 echo('<textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  
@@ -261,22 +261,21 @@
                                 echo('</div>');
                             }
                             echo('</details>
-                            <div class="btnCS">
+                            
                             ');
                             if(empty($row3['trabajo'])){
                                 
-                                echo('<span title=" Usted podrá confirmar cuando se coloque el trabajo relizado en la orden de trabajo">
+                                echo('<div class="btnCS">
+                                <span title=" Usted podrá confirmar cuando se coloque el trabajo relizado en la orden de trabajo">
                             <input id="bt1CS" type="submit" disabled value="Confirmar Servicio" >
                             </span>
                             </div>');
                             }else{
-                                echo('<span title="Presione el botón para confirmar el servicio">
-                            <input id="bt1CS" type="submit" value="Confirmar Servicio" >
+                                echo('<div class="btnCS">
+                                <span title="Presione el botón para confirmar el servicio">
+                            <input id="bt1CS" type="submit" value="Confirmar Servicio" style="color: yellow;" >
                             </div>');
                             }
-                            
-                            
-                    
                     }
                 }
             ?>

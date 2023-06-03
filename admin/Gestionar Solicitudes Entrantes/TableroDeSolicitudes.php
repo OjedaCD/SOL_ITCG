@@ -245,31 +245,8 @@ foreach ($resultadoSolF as $key => $value) {
             </div>
         </div>
 
-        <script type="text/javascript" charset="utf-8" src="/build/js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="/build/js/jquery-ui.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.sortable').sortable({
-                    update: function(event, ui) {
-                        $(this).children().each(function(index) {
-                            if ($(this).attr('data-position') != (index + 1)) {
-                                $(this).attr('data-position', (index + 1)).addClass('updated');
 
-                            }
-                        });
-                        guardandoPosiciones();
-                    }
-                });
-            });
 
-            function guardandoPosiciones() {
-                var positions = [];
-                $('.updated').each(function() {
-                    positions.push([$(this).attr('data-index'), $(this).attr('data-position')]);
-                    $(this).removeClass('updated');
-                });
-            }
-        </script>
 
     </section>
 </main>

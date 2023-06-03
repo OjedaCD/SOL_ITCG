@@ -16,7 +16,7 @@ use function PHPSTORM_META\map;
         $resultadoSol = mysqli_query($db,$querySol); 
 
         if ($resultadoSol  && $resultadoDet) {
-            header('location: /admin/index.php'); 
+            header('location: /sol_itcg/admin/index.php'); 
             die();
         }
     }

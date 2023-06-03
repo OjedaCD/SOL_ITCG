@@ -9,7 +9,7 @@
     <section class="w80">
         <h1>Atender Solicitudes Menú</h1>
         <div class="AS">
-            <a href="/admin/Atender Solicitudes/SolicitudesMenu.php">
+            <a href="/sol_itcg/admin/Atender Solicitudes/SolicitudesMenu.php">
                 <ion-icon name="list-outline"></ion-icon>
                 Solicitudes Menú
             </a>

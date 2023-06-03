@@ -184,9 +184,10 @@
                                 }
                                 echo('<textarea id ="observacion" maxlength="255" name ="observacion" placeholder="Aquí aparecerán las correcciones pertinentes para que su solicitud sea válida, en caso de ser RECHAZADA." disabled> ')."".trim($value);  
                                 echo('</textarea>
-                                </div></details>');
+                                </div>');
                             }
                         }
+                        echo ('</details>');
                         if($row3['Estado'] != "CANCELADO"){
                             echo('<details>
                             <summary>
@@ -226,9 +227,9 @@
                             $aux5 = mysqli_fetch_assoc($resultadoMa);
                             foreach ($aux5 as $key => $value) {
                                 echo('<div class="materiales">');
-                                if($_SESSION['idDpto'] == 20){
+                                if($row3['idDpto'] == 20){
                                     echo('<label for="materiales">Materiales utilizados:</label>');
-                                }elseif($_SESSION['idDpto'] == 21){
+                                }elseif($row3['idDpto'] == 21){
                                     echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
                                 }
                                 echo('<textarea id ="materiales" maxlength="255" name ="materiales" disabled> ')."".trim($value);  

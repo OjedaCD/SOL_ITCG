@@ -81,7 +81,7 @@
             try {
                 $para = $asignado;
                 $titulo = 'Se te ha asignado una solicitud de mantenimiento'."\n".'FOLIO: '.$folio;
-                $mensaje = 'El solicitante requiere de: '."\nn".$descripcion."\nn".
+                $mensaje = 'El solicitante requiere de: '."\n".$descripcion."\n".
                 'Este correo es generado automáticamente, no es necesario responder';
                 $cabeceras = 'From: centro.de.computo@cdguzman.tecnm.mx' . "\r\n" .
                 'Content-Type: text/plain; charset=UTF-8' . "\r\n" .

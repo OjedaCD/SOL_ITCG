@@ -11,10 +11,10 @@
         
         include('RespaldoTools.php');
  
-        $arrayDbConf['host'] = 'localhost:3306';
-        $arrayDbConf['user'] = 'root';
-        $arrayDbConf['pass'] = '';
-        $arrayDbConf['name'] = 'sol_itcg';
+        $arrayDbConf['host'] = 'localhost';
+        $arrayDbConf['user'] = 'sigacitc_sol_itcg';
+        $arrayDbConf['pass'] = 'Solitcg2022';
+        $arrayDbConf['name'] = 'sigacitc_sol_itcg';
         try {
             $bck = new MySqlBackupLite($arrayDbConf);
             $bck->backUp();

@@ -364,7 +364,7 @@
                     echo('
                     </details>
                     <div class="btnCS">
-                    <a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesPendientes.php">
+                    <a href="/sol_itcg/admin/Gestionar Solicitudes Entrantes/SolicitudesPendientes.php">
                     <input type="button" name = "btn" value="Cerrar Solicitud">
                     </a>
                            

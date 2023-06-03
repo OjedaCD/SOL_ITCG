@@ -377,7 +377,11 @@
                             echo('</textarea></div>');
     
                             echo('<div class="materiales">');
-                            echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                            if($row3['idDpto'] == 20){
+                                echo('<label for="materiales">Materiales utilizados:</label>');
+                            }elseif($row3['idDpto'] == 21){
+                                echo('<label for="materiales">Materiales y Herramientas utilizados:</label>');
+                            }
                             echo('
                             <textarea id ="materiales" maxlength="1000" name ="materiales" '.$requerido." ".$disabled.'>')."".trim($aux2['materiales']);  
                             echo('</textarea></div>');
@@ -393,7 +397,7 @@
                         echo('
                         </details>
                         <div class="btnCS">
-                        <a href="/admin/Gestionar Solicitudes Entrantes/SolicitudesEnProceso.php">
+                        <a href="/sol_itcg/admin/Gestionar Solicitudes Entrantes/SolicitudesEnProceso.php">
                         <input type="button" name = "btn" value="Cerrar Solicitud">
                         </a>
                                

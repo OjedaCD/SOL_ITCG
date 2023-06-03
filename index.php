@@ -58,17 +58,17 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./build/css/app.css">
+    <link rel="stylesheet" href="/sol_itcg/build/css/app.css">
     <title>SOL_ITCG</title>
 </head>
 <header>   
     <div class="logos">
         <div class="logosin">
-            <img class="sep" src="/build/img/sep.webp" alt="Logo SEP">
+            <img class="sep" src="/sol_itcg/build/img/sep.webp" alt="Logo SEP">
             <div class="v-line1"></div>
-            <img class="tecnm" src="/build/img/tecnm.webp" alt="Logo Tecnm">
+            <img class="tecnm" src="/sol_itcg/build/img/tecnm.webp" alt="Logo Tecnm">
             <div class="v-line2"></div>
-            <img class="itcg" src="/build/img/itcg.webp" alt="Logo ITCG">
+            <img class="itcg" src="/sol_itcg/build/img/itcg.webp" alt="Logo ITCG">
         </div>
     </div>  
 </header>
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD']=== 'POST') {
 
 <!--Como aquí aún no llamamos a los templates necesitamos llamar a las funciones Script
 y SCSS desde este archivo-->
-<script src="./build/css/app.css"></script>
+<script src="/sol_itcg/build/css/app.css"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

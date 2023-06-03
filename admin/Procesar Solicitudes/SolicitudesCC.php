@@ -122,8 +122,12 @@
                             <th>'.substr("$row[folio]", 8).'</th>
                             <th>'.$row['fecha'].'</th>
                             <th>'.substr("$row[descripcion]", 0,50).'</th>
-                            <th>'.$row['Estado'].'</th>
                             ');
+                            if(!empty($row['trabajo']) && $row['Estado'] == "ACEPTADO"){
+                                echo('<th style="color: yellow; font-weight: bold; text-shadow: 1px 1px black;">'.$row['Estado'].'</th>');
+                            }else{
+                                echo('<th>'.$row['Estado'].'</th>');
+                            }
                         if ($row['Etapa'] == "1PENDIENTE"){
                                 echo('<th><input class = "pen"type="submit" value="Cancelar Solicitud"></th>');        
                             }if($row['Etapa'] == "2PROCESO"){
@@ -147,8 +151,13 @@
                         <tr class="validado">
                             <th>'.substr("$row[folio]", 8).'</th>
                             <th>'.$row['fecha'].'</th>
-                            <th>'.substr("$row[descripcion]", 0,50).'</th>
-                            <th>'.$row['Estado'].'</th>
+                            <th>'.substr("$row[descripcion]", 0,50).'</th>');
+                            if(!empty($row['trabajo'])){
+                                echo('<th style="color: yellow; font-weight: bold; text-shadow: 1px 1px black;">'.$row['Estado'].'</th>');
+                            }else{
+                                echo('<th>'.$row['Estado'].'</th>');
+                            }
+                            echo('
                             <th><input class = "pen"type="submit" value="Confirmar Servicio"></th>
                         </tr>');
                         }
