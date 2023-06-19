@@ -1,4 +1,4 @@
 # SOL_ITCG
 
 ------------
-###  **El sistema se encuentra en la rama “nueva” dentro de este repositorio**
+###  **La versión más actual del sistema se encuentra en la rama “nueva” dentro de este repositorio**
